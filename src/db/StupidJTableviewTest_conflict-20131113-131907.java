@@ -7,7 +7,8 @@ public class StupidJTableviewTest {
 	 */
 	public static void main(String[] args) {
 		try {
-			new JTableview("SELECT * FROM *");
+			new JTableview("SELECT * FROM Customer");
+			System.out.println("OK!");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println(e);

@@ -52,8 +52,8 @@ public class JTableview {
 		String sDbDriver = null, sDbUrl = null, sUsr = "", sPwd = "";
 		// set access data for database connection
 		sDbDriver = "com.mysql.jdbc.Driver";
-		sDbUrl = "jdbc:mysql://localhost:3306/studienarbeit";
-		sUsr = "root";
+		sDbUrl = "jdbc:mysql://localhost:3306/hotelverwaltung";
+		sUsr = "hm";
 		sPwd = "init";
 		try {
 			// select fitting database driver and connect
