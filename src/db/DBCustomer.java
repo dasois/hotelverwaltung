@@ -9,7 +9,7 @@ import app.Customer;
  *
  */
 public interface DBCustomer {
-	JTableview getAll();
+	Customer[] getAll(); // lieber array wegen schichtentrennung
 	int create(Customer cust);
 	boolean update(int customerId, Customer cust);
 	boolean delete(int customerId);
