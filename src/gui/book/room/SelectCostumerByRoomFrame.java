@@ -55,7 +55,7 @@ public class SelectCostumerByRoomFrame extends AbstractFrame{
 		header.setOpaque(true);
 		header.setHorizontalAlignment(SwingConstants.CENTER);
 		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));
-		
+
 		list = new JList<>(new CustomerControlImp().getAll());
 		list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
@@ -98,14 +98,10 @@ public class SelectCostumerByRoomFrame extends AbstractFrame{
 			}
 		});
 		book.addActionListener(new ActionListener(){
-			
+
 			public void actionPerformed(ActionEvent e) {
 				for(BookingRoom b: selectedRooms){
-					b.setCustomer(list.getSelectedValue());
-					Calendar startDate = sf.getStartDate();
-					Calendar endDate = sf.getEndDate();
-					
-					b.setBookingDate(date);
+					b.setCustomer(list.getSelectedValue());			
 				}
 				fs2.switchFrame();
 			}	

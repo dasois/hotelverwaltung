@@ -139,7 +139,8 @@ public class CreateServiceFrame extends AbstractFrame{
 				else{
 					ServiceControlInterface controller = new ServiceControlImp();
 					Service tmp = new Service(name.getText(),Double.parseDouble(price.getText()));
-					controller.create(tmp);
+					tmp.setServiceId(controller.create(tmp));
+					mf.addProtocolLine("Service:\n"+tmp.toString()+"\nwurde in der Datenbank angelegt\n");
 					fs.switchFrame();
 				}
 				

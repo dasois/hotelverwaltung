@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
+import app.ServiceControlImp;
 import app.entities.Service;
 import gui.AbstractFrame;
 import gui.FrameSwitcher;
@@ -54,7 +55,7 @@ public class SelectServiceFrame extends AbstractFrame{
 		header.setHorizontalAlignment(SwingConstants.CENTER);
 		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));
 
-		list = new JList<>();
+		list = new JList<>(new ServiceControlImp().getAll());
 		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		list.setVisibleRowCount(-1);
@@ -90,7 +91,7 @@ public class SelectServiceFrame extends AbstractFrame{
 	@Override
 	protected void setupInteractions() {
 		final FrameSwitcher fs = new FrameSwitchImpl(this,ssf);
-		SelectRoomByServiceFrame scf = new SelectRoomByServiceFrame(mf,this);
+		SelectRoomByServiceFrame scf = new SelectRoomByServiceFrame(mf,this,ssf);
 		scf.init();
 		scf.setVisible(false);
 		final FrameSwitcher fs2 = new FrameSwitchImpl(this,scf);

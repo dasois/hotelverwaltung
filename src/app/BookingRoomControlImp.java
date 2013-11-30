@@ -1,5 +1,7 @@
 package app;
 
+import gui.SimpleTime;
+
 import java.util.Calendar;
 
 import db.DBBookingRoom;
@@ -15,9 +17,13 @@ public class BookingRoomControlImp implements BookingRoomControlInterface{
 	}
 
 	@Override
-	public BookingRoom[] getFreeRoom(Calendar startDate, Calendar endDate) {
+	public BookingRoom[] getFreeRoom(SimpleTime startDate, SimpleTime endDate) {
 		DBBookingRoom tmp = new DBBookingRoomimp();		
 		return tmp.getFreeRoom(startDate, endDate);
+	}
+	public BookingRoom[] getBookedRoom(SimpleTime boookedDate) {
+		DBBookingRoom tmp = new DBBookingRoomimp();		
+		return tmp.getBookedRoom(boookedDate);
 	}
 
 	@Override

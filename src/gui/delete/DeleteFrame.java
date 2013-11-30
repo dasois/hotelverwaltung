@@ -115,8 +115,9 @@ public class DeleteFrame<T> extends AbstractFrame{
 					createWidgetSecondView();
 				}
 				else{
-					DeleteControlInterface<T> controller = new DeleteControlImp<>();
+					DeleteControlInterface<T> controller = new DeleteControlImp<>();		
 					controller.deleteEntitie(list.getSelectedValue());
+					mf.addProtocolLine("--Löschen--\n"+list.getSelectedValue().toString()+"\nwurde in der Datenbank gelöscht\n");
 					fs.switchFrame();
 				}
 			}	

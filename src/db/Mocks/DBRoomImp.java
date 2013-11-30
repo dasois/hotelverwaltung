@@ -25,8 +25,9 @@ public class DBRoomImp implements DBRoom{
 
 	@Override
 	public HotelRoom[] getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		HotelRoom[] h = new HotelRoom[1];
+		h[0] = new HotelRoom(true,2,45,4);
+		return h;
 	}
 
 }

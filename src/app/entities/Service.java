@@ -38,4 +38,7 @@ public class Service {
 	public void setServiceId(int serviceId) {
 		this.serviceId = serviceId;
 	}
+	public String toString(){
+		return "Dienstleistung: "+nameOfService+"\nPreis: "+price+"\nDatenbankID: "+serviceId;
+	}
 }

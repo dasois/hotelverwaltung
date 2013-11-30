@@ -104,7 +104,7 @@ public class FreeRoomsFrame extends AbstractFrame{
 		book.addActionListener(new ActionListener(){
 			
 			public void actionPerformed(ActionEvent e) {
-				BookingRoom[] tmp = (BookingRoom[]) list.getSelectedValuesList().toArray();
+				BookingRoom[] tmp = (BookingRoom[])list.getSelectedValuesList().toArray();
 				SelectCostumerByRoomFrame scf = new SelectCostumerByRoomFrame(mf,frf,tmp,sf);
 				scf.init();
 				scf.setVisible(false);

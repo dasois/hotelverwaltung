@@ -135,7 +135,8 @@ public class CreateRoomFrame extends AbstractFrame{
 				else{
 					RoomControlInterface controller = new RoomControlImp();						
 					HotelRoom tmp = new HotelRoom(doubleRoomCheck.isSelected(),controller.getAll().length+1,Double.parseDouble(price.getText()));		
-					controller.create(tmp);
+					tmp.setRoomId(controller.create(tmp));
+					mf.addProtocolLine("Zimmer:\n"+tmp.toString()+"\nwurde in der Datenbank angelegt\n");
 					fs.switchFrame();
 				}				
 			}	

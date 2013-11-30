@@ -1,30 +1,28 @@
 package app.entities;
 
-import java.util.Calendar;
-import java.util.Date;
+import gui.SimpleTime;
 
 public class Customer {
 	private Title title;
 	private String name;
 	private String address;
-	private final Calendar birthday;
-	private Date date;
+	private final SimpleTime birthday;
 	private int customerId;
-	public Customer(Title t, String n, String a, Calendar b,Date d,int id){
+	public Customer(Title t, String n, String a, SimpleTime b,int id){
 		title = t;
 		name = n;
 		address = a;
 		birthday = b;
-		date = d;
+
 		setCustomerId(id);
 	}
-	public Customer(Title t, String n, String a, Calendar b){
+	public Customer(Title t, String n, String a, SimpleTime b){
 		title = t;
 		name = n;
 		address = a;
 		birthday = b;
-		date = new Date();
 	}
+	
 	public Title getTitle() {
 		return title;
 	}
@@ -49,21 +47,16 @@ public class Customer {
 		this.address = address;
 	}
 
-	public Calendar getBirthday() {
+	public SimpleTime getBirthday() {
 		return birthday;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
 	}
 	public int getCustomerId() {
 		return customerId;
 	}
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
+	}
+	public String toString(){
+		return " -Kunde:" +title+" " + name+"\n -Adresse: "+address+"\n -Geburstag: "+ birthday+"\n -DatenbankID: "+ customerId; 
 	}
 }

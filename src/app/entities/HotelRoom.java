@@ -45,4 +45,13 @@ public class HotelRoom {
 	public void setRoomId(int roomId) {
 		this.roomId = roomId;
 	}
+	public String toString(){
+		String decision;
+		if(doubleRoom){
+			decision = "ja";
+		}else
+			decision = "nein";
+			
+		return "DoppelZimmer: "+decision+"\nZimmernummer: "+roomNumber+"\nPreis: "+price+"\nDatenbankID: " + roomId ; 
+	}
 }

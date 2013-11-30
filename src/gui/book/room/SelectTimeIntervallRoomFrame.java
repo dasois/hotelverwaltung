@@ -3,6 +3,7 @@ package gui.book.room;
 import gui.AbstractFrame;
 import gui.DatePicker;
 import gui.FrameSwitcher;
+import gui.SimpleTime;
 import gui.VerwaltungMainFrame;
 
 import java.awt.BorderLayout;
@@ -133,10 +134,10 @@ public class SelectTimeIntervallRoomFrame extends AbstractFrame{
 			}
 		});
 	}
-	public Calendar getStartDate(){
+	public SimpleTime getStartDate(){
 		return startDatePicker.getSelections();
 	}
-	public Calendar getEndDate(){
+	public SimpleTime getEndDate(){
 		return startDatePicker.getSelections();
 	}
 }

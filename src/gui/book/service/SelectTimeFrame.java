@@ -3,6 +3,7 @@ package gui.book.service;
 import gui.AbstractFrame;
 import gui.DatePicker;
 import gui.FrameSwitcher;
+import gui.SimpleTime;
 import gui.VerwaltungMainFrame;
 
 import java.awt.BorderLayout;
@@ -32,7 +33,7 @@ public class SelectTimeFrame extends AbstractFrame{
 	private JLabel date;
 	private JPanel boxdleftPanel;
 	private JPanel centerPanel;
-	private DatePicker startDatePicker;
+	private DatePicker datePicker;
 	private JPanel boxdCenterPanel;
 	private JPanel southPanel;
 	protected JButton search;
@@ -61,14 +62,14 @@ public class SelectTimeFrame extends AbstractFrame{
 		centerPanel = new JPanel();	
 		centerPanel.setLayout(new GridLayout(1,1,10,10));
 
-		startDatePicker = new DatePicker();
+		datePicker = new DatePicker();
 		boxdCenterPanel = new JPanel();	
 		boxdCenterPanel.setLayout(new BoxLayout(boxdCenterPanel,BoxLayout.PAGE_AXIS));
 
 		southPanel = new JPanel();
 		southPanel.setLayout(new GridLayout(1,2,10,10));
 
-		search = new JButton("Suchen");
+		search = new JButton("Wählen");
 		search.setPreferredSize(new Dimension(20, 30));
 		search.setActionCommand("Search");
 
@@ -87,7 +88,7 @@ public class SelectTimeFrame extends AbstractFrame{
 		boxdleftPanel.add(leftPanel);
 		boxdleftPanel.add(Box.createVerticalGlue());
 		getContentPane().add(BorderLayout.WEST,boxdleftPanel);
-		centerPanel.add(startDatePicker);
+		centerPanel.add(datePicker);
 		boxdCenterPanel.add(centerPanel);
 		boxdCenterPanel.add(Box.createVerticalGlue());
 		getContentPane().add(BorderLayout.CENTER,boxdCenterPanel);
@@ -118,6 +119,8 @@ public class SelectTimeFrame extends AbstractFrame{
 			}
 		});
 	}
-	
+	public SimpleTime getDate(){
+		return datePicker.getSelections();
+	}
 
 }

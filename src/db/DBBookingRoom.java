@@ -3,6 +3,8 @@
  */
 package db;
 
+import gui.SimpleTime;
+
 import java.util.Calendar;
 
 import app.entities.BookingRoom;
@@ -14,8 +16,10 @@ import app.entities.BookingRoom;
  */
 public interface DBBookingRoom {
 	BookingRoom[] getAll();
-	BookingRoom[] getFreeRoom(Calendar startDate, Calendar endDate);
+	BookingRoom[] getFreeRoom(SimpleTime startDate, SimpleTime endDate);
+	BookingRoom[] getBookedRoom(SimpleTime boookedDate);
 	int create(BookingRoom br);
 	boolean update(int BookingRoomId, BookingRoom br);
 	boolean delete(int BookingRoomId);
+	
 }

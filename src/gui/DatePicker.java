@@ -19,7 +19,7 @@ public class DatePicker extends JPanel implements ActionListener{
 
 	private JComboBox<Integer> month;
 	private JComboBox<Integer> day;
-	private ComboBoxModel dayModel[] = new ComboBoxModel[3];
+	private ComboBoxModel<Integer> dayModel[] = new ComboBoxModel[3];
 
 	public DatePicker() {
 		Date d = new Date(System.currentTimeMillis());
@@ -63,9 +63,8 @@ public class DatePicker extends JPanel implements ActionListener{
 		month.setEnabled(b);
 		year.setEnabled(b);
 	}
-	public Calendar getSelections(){
-		Calendar tmp = new GregorianCalendar();
-		tmp.set((Integer)year.getSelectedItem(), (Integer)month.getSelectedItem(), (Integer)day.getSelectedItem());
+	public SimpleTime getSelections(){
+		SimpleTime tmp = new SimpleTime((Integer)day.getSelectedItem(), (Integer)month.getSelectedItem(),(Integer)year.getSelectedItem());
 		return tmp;		
 	}
 }

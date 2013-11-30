@@ -7,8 +7,9 @@ public class DBServiceImp implements DBService{
 
 	@Override
 	public Service[] getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Service[] s = new Service[1];
+		s[0] = new Service("massage",25.3);
+		return s;
 	}
 
 	@Override

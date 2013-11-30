@@ -13,6 +13,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JDialog;
 import javax.swing.JList;
 
+import app.CustomerControlImp;
+import app.RoomControlImp;
+import app.ServiceControlImp;
 import app.entities.Customer;
 import app.entities.HotelRoom;
 import app.entities.Service;
@@ -35,11 +38,16 @@ public class MainButtonHandler implements ActionListener {
 					new JDialog(cf);
 										
 				}
-				else{
+				else if(action =="Löschen"){
 					gui.setEnabled(false);
-					DeleteFrame<Customer> dcf = new DeleteFrame<Customer>(gui,"Kunde Entfernen",new JList<Customer>());
+					DeleteFrame<Customer> dcf = new DeleteFrame<Customer>(gui,"Kunde Entfernen",new JList<Customer>(new CustomerControlImp().getAll()));
 					dcf.init();
 					new JDialog(dcf);
+				}else{
+					gui.setEnabled(false);
+					ShowCustomerFrame scf = new ShowCustomerFrame(gui);
+					scf.init();
+					new JDialog(scf);
 				}
 			}
 			else if(khd=="Zimmer"){
@@ -58,7 +66,7 @@ public class MainButtonHandler implements ActionListener {
 				}
 				else{
 					gui.setEnabled(false);
-					DeleteFrame<HotelRoom> drf = new DeleteFrame<HotelRoom>(gui,"Zimmer Entfernen",new JList<HotelRoom>());
+					DeleteFrame<HotelRoom> drf = new DeleteFrame<HotelRoom>(gui,"Zimmer Entfernen",new JList<HotelRoom>(new RoomControlImp().getAll()));
 					drf.init();
 					new JDialog(drf);
 				}
@@ -79,7 +87,7 @@ public class MainButtonHandler implements ActionListener {
 				}
 				else{
 					gui.setEnabled(false);
-					DeleteFrame<Service> dsf = new DeleteFrame<Service>(gui,"Service Entfernen",new JList<Service>());
+					DeleteFrame<Service> dsf = new DeleteFrame<Service>(gui,"Service Entfernen",new JList<Service>(new ServiceControlImp().getAll()));
 					dsf.init();
 					new JDialog(dsf);
 				}

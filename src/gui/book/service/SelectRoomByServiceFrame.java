@@ -22,7 +22,10 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
+import app.BookingRoomControlImp;
+import app.ServiceControlImp;
 import app.entities.HotelRoom;
+import app.entities.Service;
 
 public class SelectRoomByServiceFrame extends AbstractFrame{
 	private JLabel header;
@@ -34,10 +37,12 @@ public class SelectRoomByServiceFrame extends AbstractFrame{
 	private JPanel boxdsouthPanel;
 	private VerwaltungMainFrame mf;
 	private SelectServiceFrame ssf;
+	private SelectTimeFrame ssf2;
 	public SelectRoomByServiceFrame(VerwaltungMainFrame mf,
-			SelectServiceFrame ssf) {
+			SelectServiceFrame ssf, SelectTimeFrame ssf2) {
 		this.mf = mf;
 		this.ssf = ssf;
+		this.ssf2 = ssf2;
 	}
 	protected void createWidget() {
 		header = new JLabel("Zimmer wählen");
@@ -48,7 +53,7 @@ public class SelectRoomByServiceFrame extends AbstractFrame{
 		header.setHorizontalAlignment(SwingConstants.CENTER);
 		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));
 
-		list = new JList<>();
+		list = new JList<HotelRoom>(new BookingRoomControlImp().getBookedRoom(ssf2.getDate()));
 		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		list.setVisibleRowCount(-1);

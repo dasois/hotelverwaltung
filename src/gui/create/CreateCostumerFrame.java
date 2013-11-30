@@ -86,7 +86,8 @@ public class CreateCostumerFrame extends AbstractFrame{
 				else{
 					Customer tmp = new Customer((Title)titleSelection.getSelectedItem(),customerNameInput.getText(),addressInput.getText(),birthdayPicker.getSelections());
 					CustomerControlInterface tmp2 = new CustomerControlImp();
-					tmp2.create(tmp);
+					tmp.setCustomerId(tmp2.create(tmp));
+					mf.addProtocolLine("Kunde:\n"+tmp.toString()+"\nwurde in der Datenbank angelegt\n");
 					fs.switchFrame();
 				}
 			}	

@@ -1,20 +1,23 @@
 package db.Mocks;
 
+import gui.SimpleTime;
 import app.entities.Customer;
+import app.entities.Title;
 import db.DBCustomer;
 
 public class DBCustomerImp implements DBCustomer{
 
 	@Override
 	public Customer[] getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Customer[] c = new Customer[1];
+		c[0] = new Customer(Title.Dr,"Herbert","strasse5",new SimpleTime(5,29,1990));
+		return c;
 	}
 
 	@Override
 	public int create(Customer cust) {
 		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 	@Override

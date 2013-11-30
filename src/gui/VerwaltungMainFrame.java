@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Writer;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -19,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 public class VerwaltungMainFrame extends AbstractFrame{
@@ -28,9 +30,8 @@ public class VerwaltungMainFrame extends AbstractFrame{
 	JComboBox<String> khd;
 	JComboBox<String> actions;
 	private ComboBoxModel<String> model[];
-
 	private JButton action;
-	private JTable db;
+	private JTextArea protocol;
 	private JScrollPane scrollTable;
 	private JPanel boxdleftPanel;
 
@@ -42,13 +43,16 @@ public class VerwaltungMainFrame extends AbstractFrame{
 		header.setOpaque(true);
 		header.setHorizontalAlignment(SwingConstants.CENTER);
 		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));	
-
+		
 		leftPanel = new JPanel();
 		leftPanel.setLayout(new GridLayout(3,1,10,10));
 		action = new JButton("Aktion");
 		action.setActionCommand("action");
-		db = new JTable(100,4);
-		scrollTable = new JScrollPane(db);
+		
+		protocol = new JTextArea(15, 60);
+		protocol.setEditable(false);
+		protocol.setText("Login erfolgreich");
+		scrollTable = new JScrollPane(protocol);
 		khd = new JComboBox<String>(new String[]{"Kunden","Zimmer","Leistung"});
 
 		actions = new JComboBox<String>();
@@ -97,5 +101,8 @@ public class VerwaltungMainFrame extends AbstractFrame{
 	public static void main(String[] args) {
 		VerwaltungMainFrame li = new VerwaltungMainFrame();
 		li.init();
+	}
+	public void addProtocolLine(String s){
+		protocol.setText(protocol.getText()+"\n"+s);
 	}
 }

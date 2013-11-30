@@ -1,5 +1,7 @@
 package db.Mocks;
 
+import gui.SimpleTime;
+
 import java.util.Calendar;
 
 import app.entities.BookingRoom;
@@ -14,7 +16,7 @@ public class DBBookingRoomimp implements DBBookingRoom{
 	}
 
 	@Override
-	public BookingRoom[] getFreeRoom(Calendar startDate, Calendar endDate) {
+	public BookingRoom[] getFreeRoom(SimpleTime startDate, SimpleTime endDate) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -35,6 +37,12 @@ public class DBBookingRoomimp implements DBBookingRoom{
 	public boolean delete(int BookingRoomId) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public BookingRoom[] getBookedRoom(SimpleTime boookedDate) {
+		
+		return null;
 	}
 
 }
