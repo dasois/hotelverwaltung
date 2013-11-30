@@ -1,18 +1,10 @@
-/**
- * 
- */
-package db;
+package app;
 
 import java.util.Calendar;
 
 import app.entities.BookingRoom;
 
-
-/**
- * @author david
- *
- */
-public interface DBBookingRoom {
+public interface BookingRoomControlInterface {
 	BookingRoom[] getAll();
 	BookingRoom[] getFreeRoom(Calendar startDate, Calendar endDate);
 	int create(BookingRoom br);

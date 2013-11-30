@@ -13,9 +13,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JDialog;
 import javax.swing.JList;
 
-import app.Costumer;
-import app.HotelRoom;
-import app.Service;
+import app.entities.Customer;
+import app.entities.HotelRoom;
+import app.entities.Service;
 
 public class MainButtonHandler implements ActionListener {
 	private VerwaltungMainFrame gui;
@@ -37,7 +37,7 @@ public class MainButtonHandler implements ActionListener {
 				}
 				else{
 					gui.setEnabled(false);
-					DeleteFrame<Costumer> dcf = new DeleteFrame<Costumer>(gui,"Kunde Entfernen",new JList<Costumer>());
+					DeleteFrame<Customer> dcf = new DeleteFrame<Customer>(gui,"Kunde Entfernen",new JList<Customer>());
 					dcf.init();
 					new JDialog(dcf);
 				}

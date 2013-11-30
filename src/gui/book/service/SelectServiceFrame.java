@@ -18,7 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
-import app.Service;
+import app.entities.Service;
 import gui.AbstractFrame;
 import gui.FrameSwitcher;
 import gui.VerwaltungMainFrame;

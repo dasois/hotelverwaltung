@@ -22,7 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
-import app.HotelRoom;
+import app.entities.HotelRoom;
 
 public class SelectRoomByServiceFrame extends AbstractFrame{
 	private JLabel header;

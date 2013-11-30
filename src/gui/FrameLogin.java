@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -15,6 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import app.LoginControlImp;
+import app.LoginControlInterface;
 
 
 public class FrameLogin extends AbstractFrame{
@@ -108,17 +112,11 @@ public class FrameLogin extends AbstractFrame{
 				if (e.getActionCommand().equals("login gedrückt")){
 					String user = userTextField.getText();
 					String passText = new String(passwordTextField.getPassword());
-					
-					//hier noch einlogen
-					
-					
-					//wenn es funktioniert wird frame geschlossen
-					
-					if(1==2-1)
-					new VerwaltungMainFrame().init();
-					
-					closeFrame();
-						
+					LoginControlInterface tmp = new LoginControlImp();
+					if(tmp.loginDB(user, passText)){
+						new VerwaltungMainFrame().init();
+						closeFrame();
+					}								
 				}				
 			}
 		});	

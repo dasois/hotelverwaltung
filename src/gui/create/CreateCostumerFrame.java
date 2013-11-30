@@ -18,6 +18,10 @@ import java.text.SimpleDateFormat;
 
 
 
+
+
+
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -29,7 +33,10 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import app.Title;
+import app.CustomerControlImp;
+import app.CustomerControlInterface;
+import app.entities.Customer;
+import app.entities.Title;
 
 
 
@@ -50,7 +57,7 @@ public class CreateCostumerFrame extends AbstractFrame{
 	private JPanel centerPanel;	
 	private JPanel boxdCenterPanel;
 	private JComboBox<Title> titleSelection;
-	private JTextField costumerNameInput;
+	private JTextField customerNameInput;
 	private JTextField addressInput;
 	private DatePicker birthdayPicker;
 	private JPanel southPanel;
@@ -74,12 +81,12 @@ public class CreateCostumerFrame extends AbstractFrame{
 
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand()=="Create"){
-					closeFrame();
-					createWidgetSecondView();
-					openFrame();
+					createWidgetSecondView();			
 				}
 				else{
-					//costumer anlegen
+					Customer tmp = new Customer((Title)titleSelection.getSelectedItem(),customerNameInput.getText(),addressInput.getText(),birthdayPicker.getSelections());
+					CustomerControlInterface tmp2 = new CustomerControlImp();
+					tmp2.create(tmp);
 					fs.switchFrame();
 				}
 			}	
@@ -118,8 +125,8 @@ public class CreateCostumerFrame extends AbstractFrame{
 
 		titleSelection = new JComboBox<Title>(Title.values());
 
-		costumerNameInput =  new JTextField();
-		costumerNameInput.setFont(header.getFont().deriveFont(Font.BOLD , 20));
+		customerNameInput =  new JTextField();
+		customerNameInput.setFont(header.getFont().deriveFont(Font.BOLD , 20));
 		addressInput =  new JTextField();
 		addressInput.setFont(header.getFont().deriveFont(Font.BOLD , 20));
 		birthdayPicker = new DatePicker();
@@ -156,7 +163,7 @@ public class CreateCostumerFrame extends AbstractFrame{
 		boxdleftPanel.add(Box.createVerticalGlue());
 		getContentPane().add(BorderLayout.WEST,boxdleftPanel);
 		centerPanel.add(titleSelection);
-		centerPanel.add(costumerNameInput);
+		centerPanel.add(customerNameInput);
 		centerPanel.add(addressInput);
 		centerPanel.add(birthdayPicker);
 		boxdCenterPanel.add(centerPanel);
@@ -172,7 +179,7 @@ public class CreateCostumerFrame extends AbstractFrame{
 	}
 
 	private void createWidgetSecondView(){
-		costumerNameInput.setEditable(false);
+		customerNameInput.setEditable(false);
 		addressInput.setEditable(false);
 		birthdayPicker.setEnabled(false);
 		titleSelection.setEnabled(false);
@@ -182,7 +189,7 @@ public class CreateCostumerFrame extends AbstractFrame{
 		cancel.setActionCommand("Revise");
 	}
 	private void createWidgetFirstView(){
-		costumerNameInput.setEditable(true);
+		customerNameInput.setEditable(true);
 		addressInput.setEditable(true);
 		birthdayPicker.setEnabled(true);
 		titleSelection.setEnabled(true);

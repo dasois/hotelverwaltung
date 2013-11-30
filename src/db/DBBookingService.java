@@ -2,14 +2,15 @@
  * 
  */
 package db;
-import app.BookingService;
+
+import app.entities.BookingService;
 
 /**
  * @author david
  *
  */
 public interface DBBookingService {
-	JTableview getAll();
+	BookingService[] getAll();
 	int create(BookingService bs);
 	boolean update(int BookingServiceId, BookingService bs);
 	boolean delete(int BookingServiceId);

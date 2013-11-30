@@ -11,6 +11,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -22,23 +24,28 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
-import app.Costumer;
+import app.CustomerControlImp;
+import app.entities.BookingRoom;
+import app.entities.Customer;
 
 public class SelectCostumerByRoomFrame extends AbstractFrame{
 
 	private VerwaltungMainFrame mf;
 	private FreeRoomsFrame frf;
 	private JLabel header;
-	private JList<Costumer> list;
+	private JList<Customer> list;
 	private JScrollPane listScroller;
 	private JPanel southPanel;
 	protected JButton book;
 	protected JButton stepback;
 	private JPanel boxdsouthPanel;
-	public SelectCostumerByRoomFrame(VerwaltungMainFrame mf,
-			FreeRoomsFrame frf) {
+	private BookingRoom[] selectedRooms;
+	private SelectTimeIntervallRoomFrame sf;
+	public SelectCostumerByRoomFrame(VerwaltungMainFrame mf,FreeRoomsFrame frf, BookingRoom[] selectedRooms, SelectTimeIntervallRoomFrame sf) {
 		this.mf = mf;
 		this.frf = frf;
+		this.selectedRooms = selectedRooms;
+		this.sf = sf;
 	}
 	protected void createWidget() {
 		header = new JLabel("Kunde wählen");
@@ -48,9 +55,9 @@ public class SelectCostumerByRoomFrame extends AbstractFrame{
 		header.setOpaque(true);
 		header.setHorizontalAlignment(SwingConstants.CENTER);
 		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));
-
-		list = new JList<>();
-		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		
+		list = new JList<>(new CustomerControlImp().getAll());
+		list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		list.setVisibleRowCount(-1);
 		listScroller = new JScrollPane(list);
@@ -91,8 +98,15 @@ public class SelectCostumerByRoomFrame extends AbstractFrame{
 			}
 		});
 		book.addActionListener(new ActionListener(){
-
+			
 			public void actionPerformed(ActionEvent e) {
+				for(BookingRoom b: selectedRooms){
+					b.setCustomer(list.getSelectedValue());
+					Calendar startDate = sf.getStartDate();
+					Calendar endDate = sf.getEndDate();
+					
+					b.setBookingDate(date);
+				}
 				fs2.switchFrame();
 			}	
 		});

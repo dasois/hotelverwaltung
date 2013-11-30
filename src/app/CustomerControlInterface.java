@@ -1,14 +1,8 @@
-/**
- * 
- */
-package db;
+package app;
+
 import app.entities.Customer;
 
-/**
- * @author david
- *
- */
-public interface DBCustomer {
+public interface CustomerControlInterface {
 	Customer[] getAll(); // lieber array wegen schichtentrennung
 	int create(Customer cust);
 	boolean update(int customerId, Customer cust);

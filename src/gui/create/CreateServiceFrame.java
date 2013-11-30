@@ -12,6 +12,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -20,6 +21,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import app.ServiceControlImp;
+import app.ServiceControlInterface;
+import app.entities.Service;
 
 public class CreateServiceFrame extends AbstractFrame{
 	private JLabel header;
@@ -132,7 +137,9 @@ public class CreateServiceFrame extends AbstractFrame{
 				if(e.getActionCommand()=="Create")
 					createWidgetSecondView();
 				else{
-					//anlegen vom Zimmer
+					ServiceControlInterface controller = new ServiceControlImp();
+					Service tmp = new Service(name.getText(),Double.parseDouble(price.getText()));
+					controller.create(tmp);
 					fs.switchFrame();
 				}
 				

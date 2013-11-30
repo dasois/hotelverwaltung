@@ -18,7 +18,10 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
-import app.HotelRoom;
+import app.BookingRoomControlImp;
+import app.BookingRoomControlInterface;
+import app.entities.BookingRoom;
+import app.entities.HotelRoom;
 import gui.AbstractFrame;
 import gui.FrameSwitcher;
 import gui.AbstractFrame.FrameSwitchImpl;
@@ -27,7 +30,7 @@ import gui.VerwaltungMainFrame;
 public class FreeRoomsFrame extends AbstractFrame{
 
 	private JLabel header;
-	private JList<HotelRoom> list;
+	private JList<BookingRoom> list;
 	private JScrollPane listScroller;
 	private JPanel southPanel;
 	private JButton book;
@@ -35,12 +38,16 @@ public class FreeRoomsFrame extends AbstractFrame{
 	private JPanel boxdsouthPanel;
 	private VerwaltungMainFrame mf;
 	private SelectTimeIntervallRoomFrame sf;
-
+	private BookingRoom[] freeRooms;
+	
 	public FreeRoomsFrame(VerwaltungMainFrame mf,SelectTimeIntervallRoomFrame sf) {
 		this.mf = mf;
 		this.sf = sf;
+		BookingRoomControlInterface tmp = new BookingRoomControlImp();
+		freeRooms = tmp.getFreeRoom(sf.getStartDate(), sf.getEndDate());
 	}
-	@Override
+	
+
 	protected void createWidget() {
 		header = new JLabel("Freie Zimmer");
 		header.setPreferredSize(new Dimension(400,40));
@@ -50,7 +57,8 @@ public class FreeRoomsFrame extends AbstractFrame{
 		header.setHorizontalAlignment(SwingConstants.CENTER);
 		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));
 		
-		list = new JList<>();
+		
+		list = new JList<>(freeRooms);
 		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		list.setVisibleRowCount(-1);
@@ -85,10 +93,8 @@ public class FreeRoomsFrame extends AbstractFrame{
 	
 	protected void setupInteractions() {
 		final FrameSwitcher fs = new FrameSwitchImpl(this,sf);
-		SelectCostumerByRoomFrame scf = new SelectCostumerByRoomFrame(mf,this);
-		scf.init();
-		scf.setVisible(false);
-		final FrameSwitcher fs2 = new FrameSwitchImpl(this,scf);
+		final FreeRoomsFrame frf = this;
+		
 		stepback.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
@@ -96,8 +102,13 @@ public class FreeRoomsFrame extends AbstractFrame{
 			}
 		});
 		book.addActionListener(new ActionListener(){
-
+			
 			public void actionPerformed(ActionEvent e) {
+				BookingRoom[] tmp = (BookingRoom[]) list.getSelectedValuesList().toArray();
+				SelectCostumerByRoomFrame scf = new SelectCostumerByRoomFrame(mf,frf,tmp,sf);
+				scf.init();
+				scf.setVisible(false);
+				FrameSwitcher fs2 = new FrameSwitchImpl(frf,scf);
 				fs2.switchFrame();
 			}	
 		});

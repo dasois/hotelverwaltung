@@ -26,8 +26,8 @@ public class VerwaltungMainFrame extends AbstractFrame{
 	private JLabel header;
 	private JPanel leftPanel;
 	JComboBox<String> khd;
-	JComboBox actions;
-	private ComboBoxModel model[];
+	JComboBox<String> actions;
+	private ComboBoxModel<String> model[];
 
 	private JButton action;
 	private JTable db;
@@ -51,11 +51,11 @@ public class VerwaltungMainFrame extends AbstractFrame{
 		scrollTable = new JScrollPane(db);
 		khd = new JComboBox<String>(new String[]{"Kunden","Zimmer","Leistung"});
 
-		actions = new JComboBox<Object>();
+		actions = new JComboBox<String>();
 		model = new ComboBoxModel[2];
-		model[0] = new DefaultComboBoxModel<Object>(
+		model[0] = new DefaultComboBoxModel<String>(
 				new String[]{"Erstellen", "Löschen","Anzeigen"});
-		model[1] = new DefaultComboBoxModel<Object>(
+		model[1] = new DefaultComboBoxModel<String>(
 				new String[]{"Erstellen","Buchen","Löschen"});
 		actions.setModel(model[0]);
 

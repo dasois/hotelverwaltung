@@ -1,16 +1,7 @@
-/**
- * 
- */
-package db;
-
+package app;
 import app.entities.HotelRoom;
 
-
-/**
- * @author david
- *
- */
-public interface DBRoom {
+public interface RoomControlInterface {
 	HotelRoom[] getAll();
 	int create(HotelRoom room);
 	boolean update(int RoomId, HotelRoom room);

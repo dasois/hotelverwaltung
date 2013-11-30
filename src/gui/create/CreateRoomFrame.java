@@ -3,7 +3,6 @@ package gui.create;
 import gui.AbstractFrame;
 import gui.FrameSwitcher;
 import gui.VerwaltungMainFrame;
-import gui.AbstractFrame.FrameSwitchImpl;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -12,6 +11,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -21,6 +21,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import app.RoomControlImp;
+import app.RoomControlInterface;
+import app.entities.HotelRoom;
 
 public class CreateRoomFrame extends AbstractFrame{
 	private JLabel header;
@@ -129,7 +133,9 @@ public class CreateRoomFrame extends AbstractFrame{
 				if(e.getActionCommand()=="Create")
 					createWidgetSecondView();
 				else{
-					//anlegen vom Zimmer
+					RoomControlInterface controller = new RoomControlImp();						
+					HotelRoom tmp = new HotelRoom(doubleRoomCheck.isSelected(),controller.getAll().length+1,Double.parseDouble(price.getText()));		
+					controller.create(tmp);
 					fs.switchFrame();
 				}				
 			}	

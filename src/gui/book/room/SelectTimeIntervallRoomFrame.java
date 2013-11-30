@@ -12,6 +12,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -20,15 +21,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import app.BookingRoomControlImp;
+import app.BookingRoomControlInterface;
+import app.entities.BookingRoom;
+
 
 
 public class SelectTimeIntervallRoomFrame extends AbstractFrame{
 
 	private VerwaltungMainFrame mf;
-
-	public SelectTimeIntervallRoomFrame(VerwaltungMainFrame mf) {
-		this.mf = mf;
-	}
 	private JLabel header;
 	private JPanel leftPanel;
 	private JLabel startDate;
@@ -43,6 +44,9 @@ public class SelectTimeIntervallRoomFrame extends AbstractFrame{
 	protected JButton cancel;
 	private JPanel boxdsouthPanel;
 	
+	public SelectTimeIntervallRoomFrame(VerwaltungMainFrame mf) {
+		this.mf = mf;
+	}	
 
 	protected void createWidget() {
 		header = new JLabel("Zimmer Buchen");
@@ -111,24 +115,28 @@ public class SelectTimeIntervallRoomFrame extends AbstractFrame{
 	protected void setupInteractions() {
 		final FrameSwitcher fs = new FrameSwitchImpl(this,mf);
 		
-		FreeRoomsFrame ff = new FreeRoomsFrame(mf,this);
-		ff.init();
-		ff.setVisible(false);
-		final FrameSwitcher fs2 = new FrameSwitchImpl(this,ff);
+		final SelectTimeIntervallRoomFrame srf = this;
+		
 		cancel.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
 					fs.switchFrame();
 			}			
 		});
-		final SelectTimeIntervallRoomFrame sf = this;
 		search.addActionListener(new ActionListener(){
-
-			public void actionPerformed(ActionEvent e) {		
+			public void actionPerformed(ActionEvent e) {
+				FreeRoomsFrame ff = new FreeRoomsFrame(mf,srf);
+				ff.init();
+				ff.setVisible(false);
+				FrameSwitcher fs2 = new FrameSwitchImpl(srf,ff);
 					fs2.switchFrame();
 			}
 		});
 	}
-	
-
+	public Calendar getStartDate(){
+		return startDatePicker.getSelections();
+	}
+	public Calendar getEndDate(){
+		return startDatePicker.getSelections();
+	}
 }

@@ -19,6 +19,15 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 
+
+
+
+import app.CustomerControlImp;
+import app.CustomerControlInterface;
+import app.DeleteControlImp;
+import app.DeleteControlInterface;
+import app.entities.Customer;
+import app.entities.Title;
 import gui.AbstractFrame;
 import gui.FrameSwitcher;
 import gui.VerwaltungMainFrame;
@@ -103,12 +112,12 @@ public class DeleteFrame<T> extends AbstractFrame{
 
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand()=="Delete"){
-					closeFrame();
 					createWidgetSecondView();
-					openFrame();
 				}
 				else{
-
+					DeleteControlInterface<T> controller = new DeleteControlImp<>();
+					controller.deleteEntitie(list.getSelectedValue());
+					fs.switchFrame();
 				}
 			}	
 		});

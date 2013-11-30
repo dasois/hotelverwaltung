@@ -1,14 +1,8 @@
-/**
- * 
- */
-package db;
+package app;
+
 import app.entities.Service;
 
-/**
- * @author david
- *
- */
-public interface DBService {
+public interface ServiceControlInterface {
 	Service[] getAll();
 	int create(Service srv);
 	boolean update(int ServiceId, Service srv);

@@ -4,7 +4,10 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -59,6 +62,11 @@ public class DatePicker extends JPanel implements ActionListener{
 		day.setEnabled(b);
 		month.setEnabled(b);
 		year.setEnabled(b);
+	}
+	public Calendar getSelections(){
+		Calendar tmp = new GregorianCalendar();
+		tmp.set((Integer)year.getSelectedItem(), (Integer)month.getSelectedItem(), (Integer)day.getSelectedItem());
+		return tmp;		
 	}
 }
 
