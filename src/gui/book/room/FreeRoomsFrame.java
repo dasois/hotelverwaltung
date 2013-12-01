@@ -30,7 +30,7 @@ import gui.VerwaltungMainFrame;
 public class FreeRoomsFrame extends AbstractFrame{
 
 	private JLabel header;
-	private JList<BookingRoom> list;
+	private JList<HotelRoom> list;
 	private JScrollPane listScroller;
 	private JPanel southPanel;
 	private JButton book;
@@ -38,7 +38,7 @@ public class FreeRoomsFrame extends AbstractFrame{
 	private JPanel boxdsouthPanel;
 	private VerwaltungMainFrame mf;
 	private SelectTimeIntervallRoomFrame sf;
-	private BookingRoom[] freeRooms;
+	private HotelRoom[] freeRooms;
 	
 	public FreeRoomsFrame(VerwaltungMainFrame mf,SelectTimeIntervallRoomFrame sf) {
 		this.mf = mf;
@@ -104,7 +104,7 @@ public class FreeRoomsFrame extends AbstractFrame{
 		book.addActionListener(new ActionListener(){
 			
 			public void actionPerformed(ActionEvent e) {
-				BookingRoom[] tmp = (BookingRoom[])list.getSelectedValuesList().toArray();
+				HotelRoom[] tmp = list.getSelectedValuesList().toArray(new HotelRoom[0]);
 				SelectCostumerByRoomFrame scf = new SelectCostumerByRoomFrame(mf,frf,tmp,sf);
 				scf.init();
 				scf.setVisible(false);

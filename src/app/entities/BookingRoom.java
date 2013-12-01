@@ -1,31 +1,46 @@
 package app.entities;
 
-import java.util.Date;
+import gui.SimpleTime;
 
-public class BookingRoom extends HotelRoom{
-	private Date bookingdate;
+public class BookingRoom {
+	private SimpleTime bookingdate[];
 	private Customer customer;
+	private HotelRoom hotelRoom[];
 	
-	public BookingRoom(boolean d, int z, double p, int id,Date date,Customer c) {
-		super(d, z, p, id);
-		customer = c;
-		bookingdate = date;
+	public BookingRoom(SimpleTime bookingdate[],Customer customer,HotelRoom[] hotelRoom){
+		this.setBookingdate(bookingdate);
+		this.setCustomer(customer);
+		this.setHotelRoom(hotelRoom);
 	}
-	public BookingRoom(boolean d, int z, double p, int id,Date date) {
-		super(d, z, p, id);
-		bookingdate = date;
-	}
-	
-	public Date getBookingDate(){
+
+	public SimpleTime[] getBookingdate() {
 		return bookingdate;
 	}
-	public void setBookingDate(Date date){
-		bookingdate = date;
+
+	public void setBookingdate(SimpleTime bookingdate[]) {
+		this.bookingdate = bookingdate;
 	}
+
 	public Customer getCustomer() {
 		return customer;
 	}
+
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	public HotelRoom[] getHotelRoom() {
+		return hotelRoom;
+	}
+
+	public void setHotelRoom(HotelRoom hotelRoom[]) {
+		this.hotelRoom = hotelRoom;
+	}
+	public String toString(){
+		String rooms= "";
+		for(HotelRoom h:hotelRoom){
+			rooms = rooms + h.getRoomNumber()+" ";
+		}
+		return customer.getTitle()+" "+customer.getName()+" Zimmer: " +rooms+" gebucht von "+bookingdate[0]+" bis " +bookingdate[bookingdate.length-1]; 
 	}
 }

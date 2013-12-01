@@ -41,6 +41,8 @@ public class CreateRoomFrame extends AbstractFrame{
 	private JPanel southPanel;
 	private JPanel boxdsouthPanel;
 	VerwaltungMainFrame mf;
+	private JTextField roomNumber;
+	private JLabel roomNumb;
 	
 	public CreateRoomFrame(VerwaltungMainFrame mf) {
 		this.mf = mf;
@@ -57,8 +59,9 @@ public class CreateRoomFrame extends AbstractFrame{
 		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));
 
 		leftPanel = new JPanel();
-		leftPanel.setLayout(new GridLayout(2,1,10,10));
-
+		leftPanel.setLayout(new GridLayout(3,1,10,10));
+		roomNumb = new JLabel("Zimmernummer ");
+		roomNumb.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 20));
 		roomPrice = new JLabel("Price ");
 		roomPrice.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 20));
 
@@ -69,8 +72,9 @@ public class CreateRoomFrame extends AbstractFrame{
 		boxdleftPanel.setLayout(new BoxLayout(boxdleftPanel,BoxLayout.PAGE_AXIS));	
 
 		centerPanel = new JPanel();	
-		centerPanel.setLayout(new GridLayout(2,1,10,10));
-
+		centerPanel.setLayout(new GridLayout(3,1,10,10));
+		
+		roomNumber = new JTextField();
 		price = new JTextField();
 		doubleRoomCheck = new JCheckBox();
 		boxdCenterPanel = new JPanel();	
@@ -94,12 +98,14 @@ public class CreateRoomFrame extends AbstractFrame{
 	protected void addWidget() {
 		getContentPane().setLayout(new BorderLayout(5,5));
 		getContentPane().add(BorderLayout.NORTH,header);
+		leftPanel.add(roomNumb);
 		leftPanel.add(roomPrice);
 		leftPanel.add(doubleRoom);
 		leftPanel.setPreferredSize(leftPanel.getPreferredSize());
 		boxdleftPanel.add(leftPanel);
 		boxdleftPanel.add(Box.createVerticalGlue());
 		getContentPane().add(BorderLayout.WEST,boxdleftPanel);
+		centerPanel.add(roomNumber);
 		centerPanel.add(price);
 		centerPanel.add(doubleRoomCheck);
 		boxdCenterPanel.add(centerPanel);
@@ -134,7 +140,7 @@ public class CreateRoomFrame extends AbstractFrame{
 					createWidgetSecondView();
 				else{
 					RoomControlInterface controller = new RoomControlImp();						
-					HotelRoom tmp = new HotelRoom(doubleRoomCheck.isSelected(),controller.getAll().length+1,Double.parseDouble(price.getText()));		
+					HotelRoom tmp = new HotelRoom(Integer.parseInt(roomNumber.getText()), doubleRoomCheck.isSelected(),controller.getAll().length+1,Integer.parseInt(price.getText()));		
 					tmp.setRoomId(controller.create(tmp));
 					mf.addProtocolLine("Zimmer:\n"+tmp.toString()+"\nwurde in der Datenbank angelegt\n");
 					fs.switchFrame();
@@ -145,6 +151,7 @@ public class CreateRoomFrame extends AbstractFrame{
 
 
 	private void createWidgetSecondView(){
+		roomNumber.setEditable(false);
 		price.setEditable(false);
 		doubleRoomCheck.setEnabled(false);
 		create.setText("Korrekt");		
@@ -153,6 +160,7 @@ public class CreateRoomFrame extends AbstractFrame{
 		cancel.setActionCommand("Revise");
 	}
 	private void createWidgetFirstView(){
+		roomNumber.setEditable(true);
 		price.setEditable(true);
 		doubleRoomCheck.setEnabled(true);
 		create.setText("Anlegen");		

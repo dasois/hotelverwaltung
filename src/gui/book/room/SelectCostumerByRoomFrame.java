@@ -24,9 +24,12 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
+import app.BookingRoomControlImp;
+import app.BookingRoomControlInterface;
 import app.CustomerControlImp;
 import app.entities.BookingRoom;
 import app.entities.Customer;
+import app.entities.HotelRoom;
 
 public class SelectCostumerByRoomFrame extends AbstractFrame{
 
@@ -39,9 +42,9 @@ public class SelectCostumerByRoomFrame extends AbstractFrame{
 	protected JButton book;
 	protected JButton stepback;
 	private JPanel boxdsouthPanel;
-	private BookingRoom[] selectedRooms;
+	private HotelRoom[] selectedRooms;
 	private SelectTimeIntervallRoomFrame sf;
-	public SelectCostumerByRoomFrame(VerwaltungMainFrame mf,FreeRoomsFrame frf, BookingRoom[] selectedRooms, SelectTimeIntervallRoomFrame sf) {
+	public SelectCostumerByRoomFrame(VerwaltungMainFrame mf,FreeRoomsFrame frf, HotelRoom[] selectedRooms, SelectTimeIntervallRoomFrame sf) {
 		this.mf = mf;
 		this.frf = frf;
 		this.selectedRooms = selectedRooms;
@@ -100,9 +103,10 @@ public class SelectCostumerByRoomFrame extends AbstractFrame{
 		book.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
-				for(BookingRoom b: selectedRooms){
-					b.setCustomer(list.getSelectedValue());			
-				}
+				BookingRoom tmp = new BookingRoom(sf.getTimeInterval(), list.getSelectedValue(), selectedRooms);
+				BookingRoomControlInterface controller = new BookingRoomControlImp();
+				controller.create(tmp);
+				mf.addProtocolLine("Buchung:\n"+tmp.toString()+"\nwurde in der Datenbank angelegt\n");
 				fs2.switchFrame();
 			}	
 		});

@@ -13,6 +13,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.swing.Box;
@@ -139,5 +140,15 @@ public class SelectTimeIntervallRoomFrame extends AbstractFrame{
 	}
 	public SimpleTime getEndDate(){
 		return startDatePicker.getSelections();
+	}
+	public SimpleTime[] getTimeInterval(){
+		ArrayList<SimpleTime> time = new ArrayList<SimpleTime>();
+		time.add(getStartDate());
+		SimpleTime tmp = getStartDate();
+		while(!tmp.equals(getEndDate())){
+			tmp = tmp.getNextDay();
+			time.add(tmp);
+		}
+		return time.toArray(new SimpleTime[0]);
 	}
 }

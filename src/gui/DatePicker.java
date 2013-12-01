@@ -4,9 +4,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
@@ -16,9 +14,8 @@ import javax.swing.JPanel;
 public class DatePicker extends JPanel implements ActionListener{
 	private final JComboBox<Integer> year;
 
-
-	private JComboBox<Integer> month;
 	private JComboBox<Integer> day;
+	private JComboBox<Integer> month;	
 	private ComboBoxModel<Integer> dayModel[] = new ComboBoxModel[3];
 
 	public DatePicker() {
@@ -31,9 +28,9 @@ public class DatePicker extends JPanel implements ActionListener{
 			temp[i] = i+1;
 
 		}
-		dayModel[0] = new DefaultComboBoxModel(Arrays.copyOfRange(temp, 0, 28));
-		dayModel[1] = new DefaultComboBoxModel(Arrays.copyOfRange(temp, 0, 30));
-		dayModel[2] = new DefaultComboBoxModel(temp);
+		dayModel[0] = new DefaultComboBoxModel<Integer>(Arrays.copyOfRange(temp, 0, 28));
+		dayModel[1] = new DefaultComboBoxModel<Integer>(Arrays.copyOfRange(temp, 0, 30));
+		dayModel[2] = new DefaultComboBoxModel<Integer>(temp);
 		day.setModel(dayModel[2]);
 		setLayout(new GridLayout(1,3,10,10));
 		add(day);
@@ -55,17 +52,27 @@ public class DatePicker extends JPanel implements ActionListener{
 		else{
 			day.setModel(dayModel[1]);	
 		}
-
-
 	}
+	
 	public void setEnabled(boolean b){
 		day.setEnabled(b);
 		month.setEnabled(b);
 		year.setEnabled(b);
 	}
+
+	public boolean equals(Object obj) {
+		if(this==obj){
+			return true;
+		}else if(obj instanceof DatePicker){
+			DatePicker that = (DatePicker)obj;
+			return this.getSelections()==that.getSelections();
+		}else{
+			return false;
+		}	
+	}
+		
 	public SimpleTime getSelections(){
 		SimpleTime tmp = new SimpleTime((Integer)day.getSelectedItem(), (Integer)month.getSelectedItem(),(Integer)year.getSelectedItem());
 		return tmp;		
 	}
 }
-

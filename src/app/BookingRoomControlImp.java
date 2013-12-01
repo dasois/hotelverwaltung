@@ -1,12 +1,12 @@
 package app;
 
+import javax.swing.ListModel;
+
 import gui.SimpleTime;
-
-import java.util.Calendar;
-
 import db.DBBookingRoom;
 import db.Mocks.DBBookingRoomimp;
 import app.entities.BookingRoom;
+import app.entities.HotelRoom;
 
 public class BookingRoomControlImp implements BookingRoomControlInterface{
 
@@ -17,11 +17,11 @@ public class BookingRoomControlImp implements BookingRoomControlInterface{
 	}
 
 	@Override
-	public BookingRoom[] getFreeRoom(SimpleTime startDate, SimpleTime endDate) {
+	public HotelRoom[] getFreeRoom(SimpleTime startDate, SimpleTime endDate) {
 		DBBookingRoom tmp = new DBBookingRoomimp();		
 		return tmp.getFreeRoom(startDate, endDate);
 	}
-	public BookingRoom[] getBookedRoom(SimpleTime boookedDate) {
+	public HotelRoom[] getBookedRoom(SimpleTime boookedDate) {
 		DBBookingRoom tmp = new DBBookingRoomimp();		
 		return tmp.getBookedRoom(boookedDate);
 	}

@@ -5,18 +5,16 @@ public class HotelRoom {
 	private int roomNumber;
 	private double price;
 	private int roomId;
-	public HotelRoom(boolean d,int z,double p,int id){
-		doubleRoom = d;
-		roomNumber = z;
-
+	public HotelRoom(int rN,boolean b,double p,int d){
+		roomNumber = rN;
+		doubleRoom = b;
 		price = p;
-		roomId = id;
+		roomId = d;
 	}
 
-	public HotelRoom(boolean selected, int i, double p) {
-		doubleRoom = selected;
-		roomNumber = i;
-
+	public HotelRoom(int rN,boolean b,double p) {
+		roomNumber = rN;
+		doubleRoom = b;
 		price = p;
 	}
 

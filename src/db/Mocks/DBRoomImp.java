@@ -26,8 +26,7 @@ public class DBRoomImp implements DBRoom{
 	@Override
 	public HotelRoom[] getAll() {
 		HotelRoom[] h = new HotelRoom[1];
-		h[0] = new HotelRoom(true,2,45,4);
+		h[0] = new HotelRoom(1,false,5.5,13);
 		return h;
 	}
-
 }

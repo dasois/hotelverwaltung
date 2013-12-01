@@ -1,10 +1,8 @@
 package db.Mocks;
 
 import gui.SimpleTime;
-
-import java.util.Calendar;
-
 import app.entities.BookingRoom;
+import app.entities.HotelRoom;
 import db.DBBookingRoom;
 
 public class DBBookingRoomimp implements DBBookingRoom{
@@ -16,9 +14,12 @@ public class DBBookingRoomimp implements DBBookingRoom{
 	}
 
 	@Override
-	public BookingRoom[] getFreeRoom(SimpleTime startDate, SimpleTime endDate) {
-		// TODO Auto-generated method stub
-		return null;
+	public HotelRoom[] getFreeRoom(SimpleTime startDate, SimpleTime endDate) {
+		
+		HotelRoom[] h = new HotelRoom[1];
+		h[0] = new HotelRoom(1,false,5.5,13);
+		
+		return h;
 	}
 
 	@Override
@@ -40,9 +41,11 @@ public class DBBookingRoomimp implements DBBookingRoom{
 	}
 
 	@Override
-	public BookingRoom[] getBookedRoom(SimpleTime boookedDate) {
+	public HotelRoom[] getBookedRoom(SimpleTime boookedDate) {
+		HotelRoom[] h = new HotelRoom[1];
+		h[0] = new HotelRoom(1,false,5.5,13);
 		
-		return null;
+		return h;
 	}
 
 }
