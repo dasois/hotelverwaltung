@@ -23,8 +23,8 @@ public class Room implements DBRoom{
 	}
 	@Override
 	public int create(Room room) throws SQLException {
-		DBIface.executeQuery("Insert into Room values ("+room.getRid()+","+room.getPrice()+","+room.isDoubleRoom()+")");
-		this.setRid(DBIface.executeQuery("SELECT LAST_INSERT_ID();").getInt(1));
+		ResultSet rs = DBIface.executeQuery("Insert into Room values ("+room.getRid()+","+room.getPrice()+","+room.isDoubleRoom()+")");
+		this.setRid(rs.getInt(1));
 		return this.getRid();
 	}
 	@Override

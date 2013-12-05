@@ -43,8 +43,8 @@ public class BookingService implements DBBookingService {
 
 	@Override
 	public int create(BookingService bs) throws SQLException {
-		DBIface.executeQuery("Insert into Booking_Service values ("+bs.getBsid()+","+bs.getDate()+","+bs.getService().getSid()+","+bs.getBookingRoom().getBrid()+")");
-		this.setBsid(DBIface.executeQuery("SELECT LAST_INSERT_ID();").getInt(1));
+		ResultSet rs = DBIface.executeQuery("Insert into Booking_Service values ("+bs.getBsid()+","+bs.getDate()+","+bs.getService().getSid()+","+bs.getBookingRoom().getBrid()+")");
+		this.setBsid(rs.getInt(1));
 		return this.getBsid();
 	}
 

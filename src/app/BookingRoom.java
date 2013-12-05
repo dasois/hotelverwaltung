@@ -40,8 +40,8 @@ public class BookingRoom implements DBBookingRoom{
 
 	@Override
 	public int create(BookingRoom br) throws SQLException {
-		DBIface.executeQuery("Insert into Booking_Room values ("+br.getBrid()+","+br.getDate()+","+br.room.getRid()+","+br.getCustomer().getId()+")");
-		this.setBrid(DBIface.executeQuery("SELECT LAST_INSERT_ID();").getInt(1));
+		ResultSet rs = DBIface.executeQuery("Insert into Booking_Room values ("+br.getBrid()+","+br.getDate()+","+br.room.getRid()+","+br.getCustomer().getId()+")");
+		this.setBrid(rs.getInt(1));
 		return this.getBrid();
 	}
 	

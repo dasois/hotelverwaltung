@@ -23,8 +23,8 @@ public class Service implements DBService{
 	}
 	@Override
 	public int create(Service srv) throws SQLException {
-		DBIface.executeQuery("Insert into Service values ("+srv.getSid()+","+srv.getType()+","+srv.getPrice()+")");
-		this.setSid(DBIface.executeQuery("SELECT LAST_INSERT_ID();").getInt(1));
+		ResultSet rs = DBIface.executeQuery("Insert into Service values ("+srv.getSid()+","+srv.getType()+","+srv.getPrice()+")");
+		this.setSid(rs.getInt(1));
 		return this.getSid();
 	}
 	@Override

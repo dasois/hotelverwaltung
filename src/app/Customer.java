@@ -43,8 +43,9 @@ public class Customer implements DBCustomer{
 	}
 	@Override
 	public int create(Customer cust) throws SQLException {
-		DBIface.executeQuery("Insert into Customer values ("+cust.getId()+","+cust.getfName()+","+cust.getlName()+","+cust.getAddress()+","+cust.getBirthdate()+")");
-		return cust.id;
+		ResultSet rs = DBIface.executeQuery("Insert into Customer values ("+cust.getId()+","+cust.getfName()+","+cust.getlName()+","+cust.getAddress()+","+cust.getBirthdate()+")");
+		this.setId(rs.getInt(1));
+		return this.getId();
 	}
 	@Override
 	public boolean update(int newCustomerId, Customer cust) throws SQLException {

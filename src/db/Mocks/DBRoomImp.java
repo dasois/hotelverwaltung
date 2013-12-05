@@ -1,6 +1,5 @@
 package db.Mocks;
 
-import app.entities.HotelRoom;
 import db.DBRoom;
 
 public class DBRoomImp implements DBRoom{

@@ -1,8 +1,6 @@
 package db.Mocks;
 
-import gui.SimpleTime;
-import app.entities.BookingRoom;
-import app.entities.HotelRoom;
+import app.BookingRoom;
 import db.DBBookingRoom;
 
 public class DBBookingRoomimp implements DBBookingRoom{

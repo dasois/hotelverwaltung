@@ -1,8 +1,6 @@
 package db.Mocks;
 
-import gui.SimpleTime;
-import app.entities.Customer;
-import app.entities.Title;
+import app.Customer;
 import db.DBCustomer;
 
 public class DBCustomerImp implements DBCustomer{

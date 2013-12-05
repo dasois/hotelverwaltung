@@ -1,6 +1,5 @@
 package db.Mocks;
 
-import app.entities.Service;
 import db.DBService;
 
 public class DBServiceImp implements DBService{

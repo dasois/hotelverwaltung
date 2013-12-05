@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -76,7 +77,7 @@ public class FrameLogin extends AbstractFrame{
 		//button
 		btnlogin = new JButton("Login");
 		btnlogin.setPreferredSize(new Dimension(20, 30));
-		btnlogin.setActionCommand("login gedrückt");
+		btnlogin.setActionCommand("login gedrï¿½ckt");
 		//button
 
 
@@ -109,13 +110,18 @@ public class FrameLogin extends AbstractFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (e.getActionCommand().equals("login gedrückt")){
+				if (e.getActionCommand().equals("login gedrï¿½ckt")){
 					String user = userTextField.getText();
 					String passText = new String(passwordTextField.getPassword());
 					LoginControlInterface tmp = new LoginControlImp();
-					if(tmp.loginDB(user, passText)){
-						new VerwaltungMainFrame().init();
-						closeFrame();
+					try {
+						if(tmp.loginDB(user, passText)){
+							new VerwaltungMainFrame().init();
+							closeFrame();
+						}
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}								
 				}				
 			}
