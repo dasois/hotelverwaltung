@@ -2,15 +2,18 @@
  * 
  */
 package db;
-import app.entities.Customer;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import app.Customer;
 
 /**
  * @author david
  *
  */
 public interface DBCustomer {
-	Customer[] getAll(); // lieber array wegen schichtentrennung
-	int create(Customer cust);
-	boolean update(int customerId, Customer cust);
-	boolean delete(int customerId);
+	ResultSet getAll() throws SQLException;
+	int create(Customer cust) throws SQLException;
+	boolean update(int newCustomerId, Customer cust) throws SQLException;
+	boolean delete(int customerId) throws SQLException;
 }

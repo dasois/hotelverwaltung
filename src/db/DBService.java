@@ -2,15 +2,18 @@
  * 
  */
 package db;
-import app.entities.Service;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import app.Service;
 
 /**
  * @author david
  *
  */
 public interface DBService {
-	Service[] getAll();
-	int create(Service srv);
-	boolean update(int ServiceId, Service srv);
-	boolean delete(int ServiceId);
+	ResultSet getAll() throws SQLException;
+	int create(Service srv) throws SQLException;
+	boolean update(int newServiceId, Service srv) throws SQLException;
+	boolean delete(int serviceId) throws SQLException;
 }

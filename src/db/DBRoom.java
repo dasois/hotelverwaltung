@@ -2,17 +2,18 @@
  * 
  */
 package db;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-import app.entities.HotelRoom;
-
+import app.Room;
 
 /**
  * @author david
  *
  */
 public interface DBRoom {
-	HotelRoom[] getAll();
-	int create(HotelRoom room);
-	boolean update(int RoomId, HotelRoom room);
-	boolean delete(int RoomId);
+	ResultSet getAll() throws SQLException;
+	int create(Room room) throws SQLException;
+	boolean update(int newRoomId, Room room) throws SQLException;
+	boolean delete(int roomId) throws SQLException;
 }

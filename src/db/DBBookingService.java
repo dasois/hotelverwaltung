@@ -2,16 +2,18 @@
  * 
  */
 package db;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-import app.entities.BookingService;
+import app.BookingService;
 
 /**
  * @author david
  *
  */
 public interface DBBookingService {
-	BookingService[] getAll();
-	int create(BookingService bs);
-	boolean update(int BookingServiceId, BookingService bs);
-	boolean delete(int BookingServiceId);
+	ResultSet getAll() throws SQLException;
+	int create(BookingService bs) throws SQLException;
+	boolean update(int newBookingServiceId, BookingService bs) throws SQLException;
+	boolean delete(int bookingServiceId) throws SQLException;
 }
