@@ -14,6 +14,6 @@ import app.BookingService;
 public interface DBBookingService {
 	ResultSet getAll() throws SQLException;
 	int create(BookingService bs) throws SQLException;
-	boolean update(int newBookingServiceId, BookingService bs) throws SQLException;
+	boolean update() throws SQLException;
 	boolean delete(int bookingServiceId) throws SQLException;
 }

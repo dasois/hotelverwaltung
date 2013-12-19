@@ -24,19 +24,20 @@ public class Room implements DBRoom{
 	@Override
 	public int create(Room room) throws SQLException {
 		ResultSet rs = DBIface.executeQuery("Insert into Room values ("+room.getRid()+","+room.getPrice()+","+room.isDoubleRoom()+")");
-		this.setRid(rs.getInt(1));
+		if (rs.next()) {
+			this.setRid(rs.getInt(1));
+		}
 		return this.getRid();
 	}
 	@Override
-	public boolean update(int newRoomId, Room room) throws SQLException {
+	public boolean update() throws SQLException {
 		DBIface.executeQuery(
 				"Update Room set "+
-						"RID = "+newRoomId+
-						",Price = "+room.getPrice()+
-						",isDoubleRoom = "+room.isDoubleRoom()+
-						" Where RID = "+room.getRid()
+						"Price = "+this.getPrice()+
+						",isDoubleRoom = "+this.isDoubleRoom()+
+						" Where RID = "+this.getRid()
 			);
-			if (DBIface.executeQuery("SELECT COUNT(*) from Room where rid = "+newRoomId).getInt(1)==1){
+			if (DBIface.executeQuery("SELECT COUNT(*) from Room where rid = "+this.getRid()).getInt(1)==1){
 				return true;
 			}
 			return false;

@@ -14,6 +14,6 @@ import app.Service;
 public interface DBService {
 	ResultSet getAll() throws SQLException;
 	int create(Service srv) throws SQLException;
-	boolean update(int newServiceId, Service srv) throws SQLException;
+	boolean update() throws SQLException;
 	boolean delete(int serviceId) throws SQLException;
 }

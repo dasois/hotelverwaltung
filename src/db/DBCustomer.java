@@ -14,6 +14,6 @@ import app.Customer;
 public interface DBCustomer {
 	ResultSet getAll() throws SQLException;
 	int create(Customer cust) throws SQLException;
-	boolean update(int newCustomerId, Customer cust) throws SQLException;
+	boolean update() throws SQLException;
 	boolean delete(int customerId) throws SQLException;
 }
