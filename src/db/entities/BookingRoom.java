@@ -1,7 +1,7 @@
 /**
  * 
  */
-package app;
+package db.entities;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,8 +26,7 @@ public class BookingRoom implements DBBookingRoom{
 	 * @param bookedRoom: Room which is being booked
 	 * @param customer: Customer who is booking the room
 	 */
-	public BookingRoom(int brid, Date date, Room room, Customer customer) {
-		this.brid = brid;
+	public BookingRoom(Date date, Room room, Customer customer) {
 		this.date = date;
 		this.room = room;
 		this.customer = customer;
@@ -39,48 +38,45 @@ public class BookingRoom implements DBBookingRoom{
 	}
 
 	@Override
-	public int create(BookingRoom br) throws SQLException {
-		ResultSet rs = DBIface.executeQuery("Insert into Booking_Room values ("+br.getBrid()+","+br.getDate()+","+br.room.getRid()+","+br.getCustomer().getId()+")");
-		this.setBrid(rs.getInt(1));
+	public int create() throws SQLException {
+		ResultSet rs = DBIface.executeQuery("Insert into Booking_Room values ("+this.getBrid()+",\""+this.getDate().toString()+"\","+this.getRoom().getRid()+","+this.getCustomer().getId()+")");
+		if (rs.next()) {
+			this.brid = rs.getInt(1); }
 		return this.getBrid();
 	}
 	
 	@Override
-	public boolean update(int newBrId, BookingRoom br) throws SQLException {
+	public boolean update() throws SQLException {
 		DBIface.executeQuery(
 			"Update Booking_Room set "+
-					"BRID = "+newBrId+
-					",Date = "+br.getDate()+
-					",RID = "+br.getRoom().getRid()+
-					",CID = "+br.getCustomer().getId()+
-					" Where BRID = "+br.getBrid()
+					"Date = \""+this.getDate()+
+					"\",RID = "+this.getRoom().getRid()+
+					",CID = "+this.getCustomer().getId()+
+					" Where BRID = "+this.getBrid()
 		);
-		if (DBIface.executeQuery("SELECT COUNT(*) from Booking_Room where id = "+newBrId).getInt(1)==1){
+		ResultSet rs = DBIface.executeQuery("SELECT COUNT(*) from Booking_Room where id = "+this.getBrid());
+		rs.next();
+		if (rs.getInt(1)==1){
 			return true;
 		}
 		return false;
 	}
 	@Override
-	public boolean delete(int brId) throws SQLException {
-		DBIface.executeQuery("DELETE from Booking_Room where BRID = "+brId);
-		if (DBIface.executeQuery("SELECT COUNT(*) from Booking_Room where BRID = "+brId).getInt(1)==0){
+	public boolean delete() throws SQLException {
+		DBIface.executeQuery("DELETE from Booking_Room where BRID = "+this.getBrid());
+		ResultSet rs = DBIface.executeQuery("SELECT COUNT(*) from Booking_Room where BRID = "+this.getBrid());
+		rs.next();
+		if (rs.getInt(1)==0){
 			return true;
 		}
 		return false;
 	}
 
 	/**
-	 * @return the brid
+	 * @return the ID of the booking
 	 */
 	public int getBrid() {
 		return brid;
-	}
-
-	/**
-	 * @param brid the brid to set
-	 */
-	public void setBrid(int brid) {
-		this.brid = brid;
 	}
 
 	/**

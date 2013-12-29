@@ -15,7 +15,7 @@ public class ServiceControlImp implements ServiceControlInterface{
 	@Override
 	public int create(Service srv) {
 		DBService tmp = new DBServiceImp();
-		return tmp.create(srv);
+		return tmp.create();
 	}
 
 	@Override
@@ -27,6 +27,6 @@ public class ServiceControlImp implements ServiceControlInterface{
 	@Override
 	public boolean delete(int ServiceId) {
 		DBService tmp = new DBServiceImp();
-		return tmp.delete(ServiceId);
+		return tmp.delete();
 	}
 }

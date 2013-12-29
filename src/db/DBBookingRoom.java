@@ -5,7 +5,7 @@ package db;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import app.BookingRoom;
+
 
 /**
  * @author david
@@ -13,7 +13,7 @@ import app.BookingRoom;
  */
 public interface DBBookingRoom {
 	ResultSet getAll() throws SQLException;
-	int create(BookingRoom br) throws SQLException;
+	int create() throws SQLException;
 	boolean update() throws SQLException;
-	boolean delete(int bookingRoomId) throws SQLException;
+	boolean delete() throws SQLException;
 }

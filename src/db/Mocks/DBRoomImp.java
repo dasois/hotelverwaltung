@@ -17,7 +17,7 @@ public class DBRoomImp implements DBRoom{
 	}
 
 	@Override
-	public boolean delete(int RoomId) {
+	public boolean delete() {
 		// TODO Auto-generated method stub
 		return false;
 	}

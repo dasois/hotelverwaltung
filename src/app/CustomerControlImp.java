@@ -15,7 +15,7 @@ public class CustomerControlImp implements CustomerControlInterface{
 	@Override
 	public int create(Customer cust) {
 		DBCustomer tmp = new DBCustomerImp();
-		return tmp.create(cust);
+		return tmp.create();
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class CustomerControlImp implements CustomerControlInterface{
 	@Override
 	public boolean delete(int customerId) {
 		DBCustomer tmp = new DBCustomerImp();
-		return tmp.delete(customerId); 
+		return tmp.delete(); 
 	}
 	
 }

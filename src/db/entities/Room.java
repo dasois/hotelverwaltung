@@ -1,7 +1,7 @@
 /**
  * 
  */
-package app;
+package db.entities;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -22,10 +22,10 @@ public class Room implements DBRoom{
 		return DBIface.executeQuery("SELECT * from Room");
 	}
 	@Override
-	public int create(Room room) throws SQLException {
-		ResultSet rs = DBIface.executeQuery("Insert into Room values ("+room.getRid()+","+room.getPrice()+","+room.isDoubleRoom()+")");
+	public int create() throws SQLException {
+		ResultSet rs = DBIface.executeQuery("Insert into Room values ("+this.getRid()+","+this.getPrice()+","+this.isDoubleRoom()+")");
 		if (rs.next()) {
-			this.setRid(rs.getInt(1));
+			this.rid = rs.getInt(1);
 		}
 		return this.getRid();
 	}
@@ -37,15 +37,19 @@ public class Room implements DBRoom{
 						",isDoubleRoom = "+this.isDoubleRoom()+
 						" Where RID = "+this.getRid()
 			);
-			if (DBIface.executeQuery("SELECT COUNT(*) from Room where rid = "+this.getRid()).getInt(1)==1){
+		ResultSet rs = DBIface.executeQuery("SELECT COUNT(*) from Room where rid = "+this.getRid());
+		rs.next();
+			if (rs.getInt(1)==1){
 				return true;
 			}
 			return false;
 	}
 	@Override
-	public boolean delete(int rid) throws SQLException {
-		DBIface.executeQuery("DELETE from Room where RID = "+rid);
-		if (DBIface.executeQuery("SELECT COUNT(*) from Room where RID = "+rid).getInt(1)==0){
+	public boolean delete() throws SQLException {
+		DBIface.executeQuery("DELETE from Room where RID = "+this.getRid());
+		ResultSet rs = DBIface.executeQuery("SELECT COUNT(*) from Room where RID = "+this.getRid());
+		rs.next();
+		if (rs.getInt(1)==0){
 			return true;
 		}
 		return false;
@@ -55,12 +59,6 @@ public class Room implements DBRoom{
 	 */
 	public int getRid() {
 		return rid;
-	}
-	/**
-	 * @param rid the id to set
-	 */
-	public void setRid(int rid) {
-		this.rid = rid;
 	}
 	/**
 	 * @return the price

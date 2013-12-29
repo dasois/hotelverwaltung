@@ -5,7 +5,7 @@ package db;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import app.Customer;
+
 
 /**
  * @author david
@@ -13,7 +13,7 @@ import app.Customer;
  */
 public interface DBCustomer {
 	ResultSet getAll() throws SQLException;
-	int create(Customer cust) throws SQLException;
+	int create() throws SQLException;
 	boolean update() throws SQLException;
-	boolean delete(int customerId) throws SQLException;
+	boolean delete() throws SQLException;
 }

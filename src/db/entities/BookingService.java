@@ -1,7 +1,7 @@
 /**
  * 
  */
-package app;
+package db.entities;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -27,9 +27,8 @@ public class BookingService implements DBBookingService {
 	 * @param service: Service which is being booked
 	 * @param bookingRoom: Corresponding room-booking
 	 */
-	public BookingService(int bsid, Date date, Service service,
+	public BookingService(Date date, Service service,
 			BookingRoom bookingRoom) {
-		this.bsid = bsid;
 		this.date = date;
 		this.service = service;
 		this.bookingRoom = bookingRoom;
@@ -42,50 +41,47 @@ public class BookingService implements DBBookingService {
 
 
 	@Override
-	public int create(BookingService bs) throws SQLException {
-		ResultSet rs = DBIface.executeQuery("Insert into Booking_Service values ("+bs.getBsid()+","+bs.getDate()+","+bs.getService().getSid()+","+bs.getBookingRoom().getBrid()+")");
-		this.setBsid(rs.getInt(1));
+	public int create() throws SQLException {
+		ResultSet rs = DBIface.executeQuery("Insert into Booking_Service values ("+this.getBsid()+",\""+this.getDate()+"\","+this.getService().getSid()+","+this.getBookingRoom().getBrid()+")");
+		if (rs.last()) {
+			this.bsid = rs.getInt(1);
+		}
 		return this.getBsid();
 	}
 
 	@Override
-	public boolean update(int newBookingServiceId, BookingService bs)
-			throws SQLException {
+	public boolean update() throws SQLException {
 		DBIface.executeQuery(
 				"Update Booking_Service set "+
-						"BSID = "+newBookingServiceId+
-						",Date = "+bs.getDate()+
-						",SID = "+bs.getService().getSid()+
-						",BRID = "+bs.getBookingRoom().getBrid()+
-						" Where BSID = "+bs.getBsid()
+						"Date = "+this.getDate()+
+						",SID = "+this.getService().getSid()+
+						",BRID = "+this.getBookingRoom().getBrid()+
+						" Where BSID = "+this.getBsid()
 			);
-			if (DBIface.executeQuery("SELECT COUNT(*) from Booking_Service where id = "+newBookingServiceId).getInt(1)==1){
+		ResultSet rs = DBIface.executeQuery("SELECT COUNT(*) from Booking_Service where BSID = "+this.getBsid());
+		rs.next();
+			if (rs.getInt(1)==1){
 				return true;
 			}
 			return false;
 	}
 
 	@Override
-	public boolean delete(int bookingServiceId) throws SQLException {
-		DBIface.executeQuery("DELETE from Booking_Service where BSID = "+bookingServiceId);
-		if (DBIface.executeQuery("SELECT COUNT(*) from Booking_Service where BSID = "+bookingServiceId).getInt(1)==0){
+	public boolean delete() throws SQLException {
+		DBIface.executeQuery("DELETE from Booking_Service where BSID = "+this.getBsid());
+		ResultSet rs = DBIface.executeQuery("SELECT COUNT(*) from Booking_Service where BSID = "+this.getBsid());
+		rs.next();
+		if (rs.getInt(1)==0){
 			return true;
 		}
 		return false;
 	}
 
 	/**
-	 * @return the bsid
+	 * @return the ID of the booking
 	 */
 	public int getBsid() {
 		return bsid;
-	}
-
-	/**
-	 * @param bsid the bsid to set
-	 */
-	public void setBsid(int bsid) {
-		this.bsid = bsid;
 	}
 
 	/**

@@ -14,7 +14,7 @@ public class RoomControlImp implements RoomControlInterface{
 	@Override
 	public int create(HotelRoom room) {
 		DBRoom tmp = new DBRoomImp();
-		return tmp.create(room);
+		return tmp.create();
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class RoomControlImp implements RoomControlInterface{
 	@Override
 	public boolean delete(int RoomId) {
 		DBRoom tmp = new DBRoomImp();
-		return tmp.delete(RoomId);
+		return tmp.delete();
 	}
 
 }

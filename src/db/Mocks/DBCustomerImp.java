@@ -1,7 +1,7 @@
 package db.Mocks;
 
-import app.Customer;
 import db.DBCustomer;
+import db.entities.Customer;
 
 public class DBCustomerImp implements DBCustomer{
 
@@ -13,7 +13,7 @@ public class DBCustomerImp implements DBCustomer{
 	}
 
 	@Override
-	public int create(Customer cust) {
+	public int create() {
 		// TODO Auto-generated method stub
 		return 1;
 	}
@@ -25,7 +25,7 @@ public class DBCustomerImp implements DBCustomer{
 	}
 
 	@Override
-	public boolean delete(int customerId) {
+	public boolean delete() {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -24,7 +24,7 @@ public class DBServiceImp implements DBService{
 	}
 
 	@Override
-	public boolean delete(int ServiceId) {
+	public boolean delete() {
 		// TODO Auto-generated method stub
 		return false;
 	}

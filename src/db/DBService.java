@@ -5,7 +5,6 @@ package db;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import app.Service;
 
 /**
  * @author david
@@ -13,7 +12,7 @@ import app.Service;
  */
 public interface DBService {
 	ResultSet getAll() throws SQLException;
-	int create(Service srv) throws SQLException;
+	int create() throws SQLException;
 	boolean update() throws SQLException;
-	boolean delete(int serviceId) throws SQLException;
+	boolean delete() throws SQLException;
 }

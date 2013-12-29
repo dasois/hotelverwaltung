@@ -1,10 +1,10 @@
 /**
  * 
  */
-package app;
+package db.entities;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+import java.sql.Date;
 
 import db.DBCustomer;
 import db.DBIface;
@@ -28,9 +28,8 @@ public class Customer implements DBCustomer{
 	 * @param address: Customer's address, use syntax like: "Lothstr. xy, 80abc München"
 	 * @param birthdate: Customer's date of birth
 	 */
-	public Customer(int id, String fName, String lName, String address,
+	public Customer(String fName, String lName, String address,
 			Date birthdate) {
-		this.id = id;
 		this.fName = fName;
 		this.lName = lName;
 		this.address = address;
@@ -42,32 +41,37 @@ public class Customer implements DBCustomer{
 		return DBIface.executeQuery("SELECT * from Customer");
 	}
 	@Override
-	public int create(Customer cust) throws SQLException {
-		ResultSet rs = DBIface.executeQuery("Insert into Customer values ("+cust.getId()+","+cust.getfName()+","+cust.getlName()+","+cust.getAddress()+","+cust.getBirthdate()+")");
-		this.setId(rs.getInt(1));
+	public int create() throws SQLException {
+		ResultSet rs = DBIface.executeQuery("Insert into Customer values ("+this.getId()+",\""+this.getfName()+"\",\""+this.getlName()+"\",\""+this.getAddress()+"\",\""+this.getBirthdate().toString()+"\")");
+		if (rs.next()) {
+			this.id = rs.getInt(1);
+		}
 		return this.getId();
 	}
 	@Override
-	public boolean update(int newCustomerId, Customer cust) throws SQLException {
+	public boolean update() throws SQLException {
 		DBIface.executeQuery(
 			"Update Customer set "+
-					"ID = "+cust.getId()+
-					",FName = "+cust.getfName()+
-					",LName = "+cust.getlName()+
-					",Address = "+cust.getAddress()+
-					",BDate = "+cust.getBirthdate().toString()+
-					" Where ID = "+newCustomerId
+					"FName = \""+this.getfName()+
+					"\",LName = \""+this.getlName()+
+					"\",Address = \""+this.getAddress()+
+					"\",BDate = \""+this.getBirthdate().toString()+
+					"\" Where ID = "+this.getId()
 		);
-		if (DBIface.executeQuery("SELECT COUNT(*) from Customer where id = "+newCustomerId).getInt(1)==1){
+		ResultSet rs = DBIface.executeQuery("SELECT COUNT(*) from Customer where id = "+this.getId());
+		rs.next();
+		if (rs.getInt(1)==1){
 			return true;
 		}
 		return false;
 	}
 	
 	@Override
-	public boolean delete(int customerId) throws SQLException {
-		DBIface.executeQuery("DELETE from Customer where id = "+customerId);
-		if (DBIface.executeQuery("SELECT COUNT(*) from Customer where id = "+customerId).getInt(1)==0){
+	public boolean delete() throws SQLException {
+		DBIface.executeQuery("DELETE from Customer where id = "+this.getId());
+		ResultSet rs = DBIface.executeQuery("SELECT COUNT(*) from Customer where id = "+this.getId());
+		rs.next();
+		if (rs.getInt(1)==0){
 			return true;
 		}
 		return false;
@@ -78,12 +82,6 @@ public class Customer implements DBCustomer{
 	 */
 	public int getId() {
 		return id;
-	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
 	}
 	/**
 	 * @return the fName

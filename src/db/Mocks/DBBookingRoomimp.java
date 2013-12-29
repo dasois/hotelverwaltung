@@ -1,7 +1,7 @@
 package db.Mocks;
 
-import app.BookingRoom;
 import db.DBBookingRoom;
+import db.entities.BookingRoom;
 
 public class DBBookingRoomimp implements DBBookingRoom{
 
@@ -21,7 +21,7 @@ public class DBBookingRoomimp implements DBBookingRoom{
 	}
 
 	@Override
-	public int create(BookingRoom br) {
+	public int create() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -33,7 +33,7 @@ public class DBBookingRoomimp implements DBBookingRoom{
 	}
 
 	@Override
-	public boolean delete(int BookingRoomId) {
+	public boolean delete() {
 		// TODO Auto-generated method stub
 		return false;
 	}

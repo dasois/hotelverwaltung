@@ -8,6 +8,8 @@ USE `hotelverwaltung` ;
 -- -----------------------------------------------------
 -- Table `hotelverwaltung`.`Room`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `hotelverwaltung`.`Room` ;
+
 CREATE  TABLE IF NOT EXISTS `hotelverwaltung`.`Room` (
   `RID` INT NOT NULL AUTO_INCREMENT ,
   `Price` DECIMAL(5,2) NOT NULL ,
@@ -19,6 +21,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `hotelverwaltung`.`Service`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `hotelverwaltung`.`Service` ;
+
 CREATE  TABLE IF NOT EXISTS `hotelverwaltung`.`Service` (
   `SID` INT NOT NULL AUTO_INCREMENT ,
   `Type` VARCHAR(45) NOT NULL ,
@@ -30,6 +34,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `hotelverwaltung`.`Customer`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `hotelverwaltung`.`Customer` ;
+
 CREATE  TABLE IF NOT EXISTS `hotelverwaltung`.`Customer` (
   `ID` INT NOT NULL AUTO_INCREMENT ,
   `FName` VARCHAR(45) NOT NULL ,
@@ -43,6 +49,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `hotelverwaltung`.`Booking_Room`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `hotelverwaltung`.`Booking_Room` ;
+
 CREATE  TABLE IF NOT EXISTS `hotelverwaltung`.`Booking_Room` (
   `BRID` INT NOT NULL AUTO_INCREMENT ,
   `Date` DATE NOT NULL ,
@@ -55,19 +63,21 @@ CREATE  TABLE IF NOT EXISTS `hotelverwaltung`.`Booking_Room` (
   CONSTRAINT `fk_Room`
     FOREIGN KEY (`RID` )
     REFERENCES `hotelverwaltung`.`Room` (`RID` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Customer`
     FOREIGN KEY (`CID` )
     REFERENCES `hotelverwaltung`.`Customer` (`ID` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `hotelverwaltung`.`Booking_Service`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `hotelverwaltung`.`Booking_Service` ;
+
 CREATE  TABLE IF NOT EXISTS `hotelverwaltung`.`Booking_Service` (
   `BSID` INT NOT NULL AUTO_INCREMENT ,
   `Date` DATE NOT NULL ,
@@ -79,13 +89,13 @@ CREATE  TABLE IF NOT EXISTS `hotelverwaltung`.`Booking_Service` (
   CONSTRAINT `SID`
     FOREIGN KEY (`SID` )
     REFERENCES `hotelverwaltung`.`Service` (`SID` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Booking_Room`
     FOREIGN KEY (`BRID` )
     REFERENCES `hotelverwaltung`.`Booking_Room` (`BRID` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 

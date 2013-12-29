@@ -29,7 +29,7 @@ public class BookingRoomControlImp implements BookingRoomControlInterface{
 	@Override
 	public int create(BookingRoom br) {
 		DBBookingRoom tmp = new DBBookingRoomimp();		
-		return tmp.create(br);
+		return tmp.create();
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class BookingRoomControlImp implements BookingRoomControlInterface{
 	@Override
 	public boolean delete(int BookingRoomId) {
 		DBBookingRoom tmp = new DBBookingRoomimp();		
-		return tmp.delete(BookingRoomId);
+		return tmp.delete();
 	}
 
 }

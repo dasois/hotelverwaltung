@@ -1,7 +1,7 @@
 /**
  * 
  */
-package app;
+package db.entities;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -17,34 +17,48 @@ public class Service implements DBService{
 	private String type;
 	private double price;
 	
+	/**
+	 * @param type
+	 * @param price
+	 */
+	public Service(String type, double price) {
+		this.type = type;
+		this.price = price;
+	}
+	
 	@Override
 	public ResultSet getAll() throws SQLException {
 		return DBIface.executeQuery("SELECT * from Service");
 	}
 	@Override
-	public int create(Service srv) throws SQLException {
-		ResultSet rs = DBIface.executeQuery("Insert into Service values ("+srv.getSid()+","+srv.getType()+","+srv.getPrice()+")");
-		this.setSid(rs.getInt(1));
+	public int create() throws SQLException {
+		ResultSet rs = DBIface.executeQuery("Insert into Service values ("+this.getSid()+", \""+this.getType()+"\","+this.getPrice()+")");
+		if (rs.next()) {
+			this.sid = rs.getInt(1);
+		}
 		return this.getSid();
 	}
 	@Override
-	public boolean update(int newServiceId, Service srv) throws SQLException {
+	public boolean update() throws SQLException {
 		DBIface.executeQuery(
 				"Update Service set "+
-						"SID = "+newServiceId+
-						",Type = "+srv.getType()+
-						",Price = "+srv.getPrice()+
-						" Where SID = "+srv.getSid()
+						"Type = \""+this.getType()+"\""+
+						",Price = "+this.getPrice()+
+						" Where SID = "+this.getSid()
 			);
-			if (DBIface.executeQuery("SELECT COUNT(*) from Service where sid = "+newServiceId).getInt(1)==1){
+		ResultSet rs = DBIface.executeQuery("SELECT COUNT(*) from Service where sid = "+this.getSid());
+		rs.next();
+			if (rs.getInt(1)==1){
 				return true;
 			}
 			return false;
 	}
 	@Override
-	public boolean delete(int serviceId) throws SQLException {
-		DBIface.executeQuery("DELETE from Service where SID = "+serviceId);
-		if (DBIface.executeQuery("SELECT COUNT(*) from Service where SID = "+serviceId).getInt(1)==0){
+	public boolean delete() throws SQLException {
+		DBIface.executeQuery("DELETE from Service where SID = "+this.getSid());
+		ResultSet rs = DBIface.executeQuery("SELECT COUNT(*) from Service where SID = "+this.getSid());
+		rs.next();
+		if (rs.getInt(1)==0){
 			return true;
 		}
 		return false;
@@ -54,12 +68,6 @@ public class Service implements DBService{
 	 */
 	public int getSid() {
 		return sid;
-	}
-	/**
-	 * @param sid the sid to set
-	 */
-	public void setSid(int sid) {
-		this.sid = sid;
 	}
 	/**
 	 * @return the type
