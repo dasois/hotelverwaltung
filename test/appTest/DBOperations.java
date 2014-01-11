@@ -30,6 +30,8 @@ public class DBOperations {
 	@Test
 	public void test() throws SQLException {
 		try {
+			//Anmelden
+			db.DBIface.loginDB();
 			//Create Room
 			Room room = new Room();
 			room.setDoubleRoom(false);

@@ -120,4 +120,11 @@ public class BookingRoom implements DBBookingRoom{
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
+
+	/**
+	 * @param brid the brid to set
+	 */
+	public void setBrid(int brid) {
+		this.brid = brid;
+	}
 }

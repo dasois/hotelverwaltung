@@ -131,4 +131,11 @@ public class Customer implements DBCustomer{
 	public void setBirthdate(Date birthdate) {
 		this.birthdate = birthdate;
 	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
 }

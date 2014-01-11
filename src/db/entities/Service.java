@@ -93,6 +93,13 @@ public class Service implements DBService{
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
+	/**
+	 * @param sid the sid to set
+	 */
+	public void setSid(int sid) {
+		this.sid = sid;
+	}
 	
 	
 }

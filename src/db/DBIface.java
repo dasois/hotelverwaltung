@@ -16,7 +16,7 @@ public class DBIface {
 	/*
 	 * Login to Database using the Default Connection Parameters
 	 */
-	static boolean loginDB() throws SQLException {
+	public static boolean loginDB() throws SQLException {
 		return DBIface.loginDB(DBIface.sUsr, DBIface.sPwd);
 	}
 

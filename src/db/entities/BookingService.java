@@ -126,4 +126,11 @@ public class BookingService implements DBBookingService {
 		this.bookingRoom = bookingRoom;
 	}
 
+	/**
+	 * @param bsid the bsid to set
+	 */
+	public void setBsid(int bsid) {
+		this.bsid = bsid;
+	}
+
 }

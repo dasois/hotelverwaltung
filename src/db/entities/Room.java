@@ -84,4 +84,10 @@ public class Room implements DBRoom{
 	public void setDoubleRoom(boolean isDoubleRoom) {
 		this.isDoubleRoom = isDoubleRoom;
 	}
+	/**
+	 * @param rid the rid to set
+	 */
+	public void setRid(int rid) {
+		this.rid = rid;
+	}
 }
