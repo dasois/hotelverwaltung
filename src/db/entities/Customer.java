@@ -29,12 +29,22 @@ public class Customer implements DBCustomer{
 	 * @param birthdate: Customer's date of birth
 	 */
 	public Customer(String fName, String lName, String address,
+			Date date) {
+		this.fName = fName;
+		this.lName = lName;
+		this.address = address;
+		this.birthdate = date;
+	}
+	public Customer(int id,String fName, String lName, String address,
 			Date birthdate) {
+		this.id = id;
 		this.fName = fName;
 		this.lName = lName;
 		this.address = address;
 		this.birthdate = birthdate;
 	}
+	public Customer(){}
+	public Customer(int id){this.id = id;}
 	
 	@Override
 	public ResultSet getAll() throws SQLException {

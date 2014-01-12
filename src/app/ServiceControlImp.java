@@ -1,32 +1,42 @@
 package app;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
+
 import db.DBService;
-import db.Mocks.DBServiceImp;
-import app.entities.Service;
+import db.entities.Service;
+
 
 public class ServiceControlImp implements ServiceControlInterface{
 
 	@Override
-	public Service[] getAll() {
-		DBService tmp = new DBServiceImp();
-		return tmp.getAll();
+	public Vector<Service> getAll() throws SQLException {
+
+		ResultSet resultset = new Service().getAll();
+		Vector<Service> temp = new Vector<Service>();
+		while (resultset.next()) {
+			Service c = new Service(Integer.parseInt(resultset.getString(1)),resultset.getString(2),Double.parseDouble(resultset.getString(3)));		
+			temp.add(c);
+		}
+		return temp;	
+	}
+
+
+	@Override
+	public int create(Service srv) throws SQLException {	
+		return srv.create();
 	}
 
 	@Override
-	public int create(Service srv) {
-		DBService tmp = new DBServiceImp();
-		return tmp.create();
+	public boolean update(Service srv) throws SQLException {
+
+		return srv.update();
 	}
 
 	@Override
-	public boolean update(int ServiceId, Service srv) {
-		DBService tmp = new DBServiceImp();
-		return tmp.update(ServiceId, srv);
-	}
-
-	@Override
-	public boolean delete(int ServiceId) {
-		DBService tmp = new DBServiceImp();
+	public boolean delete(int ServiceId) throws SQLException {
+		DBService tmp = new Service(ServiceId);
 		return tmp.delete();
 	}
 }

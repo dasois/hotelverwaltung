@@ -24,7 +24,6 @@ import javax.swing.SwingConstants;
 
 import app.RoomControlImp;
 import app.RoomControlInterface;
-import app.entities.HotelRoom;
 
 public class CreateRoomFrame extends AbstractFrame{
 	private JLabel header;
@@ -140,7 +139,7 @@ public class CreateRoomFrame extends AbstractFrame{
 					createWidgetSecondView();
 				else{
 					RoomControlInterface controller = new RoomControlImp();						
-					HotelRoom tmp = new HotelRoom(Integer.parseInt(roomNumber.getText()), doubleRoomCheck.isSelected(),controller.getAll().length+1,Integer.parseInt(price.getText()));		
+					Room tmp = new Room(Integer.parseInt(roomNumber.getText()), doubleRoomCheck.isSelected(),controller.getAll().length+1,Integer.parseInt(price.getText()));		
 					tmp.setRoomId(controller.create(tmp));
 					mf.addProtocolLine("Zimmer:\n"+tmp.toString()+"\nwurde in der Datenbank angelegt\n");
 					fs.switchFrame();

@@ -13,29 +13,20 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-
-
-
-
-
-
-
+import java.sql.SQLException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import db.entities.Customer;
 import app.CustomerControlImp;
 import app.CustomerControlInterface;
-import app.entities.Customer;
 import app.entities.Title;
 
 
@@ -84,9 +75,16 @@ public class CreateCostumerFrame extends AbstractFrame{
 					createWidgetSecondView();			
 				}
 				else{
-					Customer tmp = new Customer((Title)titleSelection.getSelectedItem(),customerNameInput.getText(),addressInput.getText(),birthdayPicker.getSelections());
+					Customer tmp = new Customer(((Title)titleSelection.getSelectedItem()).toString(),customerNameInput.getText(),addressInput.getText(),birthdayPicker.getSelections());
 					CustomerControlInterface tmp2 = new CustomerControlImp();
-					tmp.setCustomerId(tmp2.create(tmp));
+					
+					//TODO exception handling
+					try {
+						tmp.setId(tmp2.create(tmp));
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+					
 					mf.addProtocolLine("Kunde:\n"+tmp.toString()+"\nwurde in der Datenbank angelegt\n");
 					fs.switchFrame();
 				}
@@ -130,7 +128,7 @@ public class CreateCostumerFrame extends AbstractFrame{
 		customerNameInput.setFont(header.getFont().deriveFont(Font.BOLD , 20));
 		addressInput =  new JTextField();
 		addressInput.setFont(header.getFont().deriveFont(Font.BOLD , 20));
-		birthdayPicker = new DatePicker();
+		birthdayPicker = new DatePicker(false);
 		birthdayPicker.setFont(header.getFont().deriveFont(Font.BOLD , 20));
 
 		boxdCenterPanel = new JPanel();	

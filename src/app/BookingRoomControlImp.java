@@ -1,46 +1,49 @@
 package app;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.swing.ListModel;
 
 import gui.SimpleTime;
 import db.DBBookingRoom;
-import db.Mocks.DBBookingRoomimp;
-import app.entities.BookingRoom;
-import app.entities.HotelRoom;
+import db.entities.BookingRoom;
+import db.entities.Room;
+
 
 public class BookingRoomControlImp implements BookingRoomControlInterface{
 
 	@Override
-	public BookingRoom[] getAll() {
-		DBBookingRoom tmp = new DBBookingRoomimp();		
+	public ResultSet getAll() throws SQLException {
+		DBBookingRoom tmp = new BookingRoom();		
 		return tmp.getAll();
 	}
 
 	@Override
-	public HotelRoom[] getFreeRoom(SimpleTime startDate, SimpleTime endDate) {
-		DBBookingRoom tmp = new DBBookingRoomimp();		
+	public ResultSet getFreeRoom(SimpleTime startDate, SimpleTime endDate) {
+		DBBookingRoom tmp = new BookingRoom();		
 		return tmp.getFreeRoom(startDate, endDate);
 	}
-	public HotelRoom[] getBookedRoom(SimpleTime boookedDate) {
-		DBBookingRoom tmp = new DBBookingRoomimp();		
+	public ResultSet getBookedRoom(SimpleTime boookedDate) {
+		DBBookingRoom tmp = new BookingRoom();		
 		return tmp.getBookedRoom(boookedDate);
 	}
 
 	@Override
-	public int create(BookingRoom br) {
-		DBBookingRoom tmp = new DBBookingRoomimp();		
+	public int create(BookingRoom br) throws SQLException {
+		DBBookingRoom tmp = new BookingRoom();		
 		return tmp.create();
 	}
 
 	@Override
-	public boolean update(int BookingRoomId, BookingRoom br) {
-		DBBookingRoom tmp = new DBBookingRoomimp();		
-		return tmp.update(BookingRoomId, br);
+	public boolean update(BookingRoom br) {
+			
+		return update(br);
 	}
 
 	@Override
-	public boolean delete(int BookingRoomId) {
-		DBBookingRoom tmp = new DBBookingRoomimp();		
+	public boolean delete(int BookingRoomId) throws SQLException {
+		DBBookingRoom tmp = new BookingRoom(BookingRoomId);		
 		return tmp.delete();
 	}
 

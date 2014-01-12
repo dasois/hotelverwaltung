@@ -18,8 +18,8 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
+import db.entities.Service;
 import app.ServiceControlImp;
-import app.entities.Service;
 import gui.AbstractFrame;
 import gui.FrameSwitcher;
 import gui.VerwaltungMainFrame;

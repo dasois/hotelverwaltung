@@ -25,6 +25,17 @@ public class Service implements DBService{
 		this.type = type;
 		this.price = price;
 	}
+	public Service(int sid,String type, double price) {
+		this.type = type;
+		this.price = price;
+		this.sid = sid;
+	}
+	public Service(){
+		
+	}
+	public Service(int sid){
+		this.sid = sid;
+	}
 	
 	@Override
 	public ResultSet getAll() throws SQLException {

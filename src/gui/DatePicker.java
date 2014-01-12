@@ -4,7 +4,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
-import java.util.Date;
+import java.sql.Date;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
@@ -18,9 +18,17 @@ public class DatePicker extends JPanel implements ActionListener{
 	private JComboBox<Integer> month;	
 	private ComboBoxModel<Integer> dayModel[] = new ComboBoxModel[3];
 
-	public DatePicker() {
+	public DatePicker(boolean present) {
 		Date d = new Date(System.currentTimeMillis());
+		if(present){
 		year = new JComboBox<Integer>(new Integer[]{d.getYear()+1900,d.getYear()+1901,d.getYear()+1902,d.getYear()+1903,d.getYear()+1904});
+		}
+		else{
+			Integer[] nums = new Integer[100];
+			for (int i = 0; i < nums.length; i++)
+			    nums[i] = d.getYear()+1800+i;
+			year = new JComboBox<Integer>(nums);
+		}
 		month = new JComboBox<Integer>(new Integer[]{1,2,3,4,5,6,7,8,9,10,11,12});
 		day = new JComboBox<Integer>();
 		Integer[] temp = new Integer[31];
@@ -70,9 +78,12 @@ public class DatePicker extends JPanel implements ActionListener{
 			return false;
 		}	
 	}
-		
-	public SimpleTime getSelections(){
-		SimpleTime tmp = new SimpleTime((Integer)day.getSelectedItem(), (Integer)month.getSelectedItem(),(Integer)year.getSelectedItem());
-		return tmp;		
-	}
+	public Date getSelections(){
+	
+		return new Date((Integer)year.getSelectedItem(),(Integer)month.getSelectedItem(),(Integer)day.getSelectedItem());	
+	}	
+//	public SimpleTime getSelections(){
+//		SimpleTime tmp = new SimpleTime((Integer)day.getSelectedItem(), (Integer)month.getSelectedItem(),(Integer)year.getSelectedItem());
+//		return tmp;		
+//	}
 }

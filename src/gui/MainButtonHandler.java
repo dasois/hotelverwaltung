@@ -9,16 +9,20 @@ import gui.delete.DeleteFrame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JDialog;
 import javax.swing.JList;
 
+import db.entities.Customer;
+import db.entities.Room;
+import db.entities.Service;
 import app.CustomerControlImp;
 import app.RoomControlImp;
 import app.ServiceControlImp;
-import app.entities.Customer;
-import app.entities.HotelRoom;
-import app.entities.Service;
+
+
+
 
 public class MainButtonHandler implements ActionListener {
 	private VerwaltungMainFrame gui;
@@ -40,9 +44,17 @@ public class MainButtonHandler implements ActionListener {
 				}
 				else if(action =="Löschen"){
 					gui.setEnabled(false);
-					DeleteFrame<Customer> dcf = new DeleteFrame<Customer>(gui,"Kunde Entfernen",new JList<Customer>(new CustomerControlImp().getAll()));
-					dcf.init();
-					new JDialog(dcf);
+					DeleteFrame<Customer> dcf;
+					//TODO sinnvolle exception
+					try {
+						dcf = new DeleteFrame<Customer>(gui,"Kunde Entfernen",new JList<Customer>(new CustomerControlImp().getAll()));
+						dcf.init();
+						new JDialog(dcf);
+					} catch (SQLException e1) {
+						
+						e1.printStackTrace();
+					}
+					
 				}else{
 					gui.setEnabled(false);
 					ShowCustomerFrame scf = new ShowCustomerFrame(gui);
@@ -66,9 +78,16 @@ public class MainButtonHandler implements ActionListener {
 				}
 				else{
 					gui.setEnabled(false);
-					DeleteFrame<HotelRoom> drf = new DeleteFrame<HotelRoom>(gui,"Zimmer Entfernen",new JList<HotelRoom>(new RoomControlImp().getAll()));
-					drf.init();
-					new JDialog(drf);
+					DeleteFrame<Room> drf;
+					//TODO sinnvolle Exception
+					try {
+						drf = new DeleteFrame<Room>(gui,"Zimmer Entfernen",new JList<Room>(new RoomControlImp().getAll()));
+						drf.init();
+						new JDialog(drf);
+					} catch (SQLException e1) {	
+						e1.printStackTrace();
+					}
+					
 				}
 			}
 			else if(khd=="Leistung"){
@@ -87,9 +106,15 @@ public class MainButtonHandler implements ActionListener {
 				}
 				else{
 					gui.setEnabled(false);
-					DeleteFrame<Service> dsf = new DeleteFrame<Service>(gui,"Service Entfernen",new JList<Service>(new ServiceControlImp().getAll()));
-					dsf.init();
-					new JDialog(dsf);
+					DeleteFrame<Service> dsf;
+					//TODO sinnvolle Exception
+					try {
+						dsf = new DeleteFrame<Service>(gui,"Service Entfernen",new JList<Service>(new ServiceControlImp().getAll()));
+						dsf.init();
+						new JDialog(dsf);
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
 				}
 			}
 		}

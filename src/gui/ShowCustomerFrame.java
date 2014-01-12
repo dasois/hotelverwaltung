@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -16,8 +18,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+
+import db.entities.Customer;
 import app.CustomerControlImp;
-import app.entities.Customer;
 
 public class ShowCustomerFrame extends AbstractFrame{
 	private VerwaltungMainFrame mf;
@@ -40,8 +43,13 @@ public class ShowCustomerFrame extends AbstractFrame{
 		header.setOpaque(true);
 		header.setHorizontalAlignment(SwingConstants.CENTER);
 		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));
-
-		list = new JList<Customer>(new CustomerControlImp().getAll());
+		//TODO sinnvolle exception
+		try {
+			list = new JList<Customer>(new CustomerControlImp().getAll());
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
 		list.setEnabled(false);	
 		list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		list.setVisibleRowCount(4);

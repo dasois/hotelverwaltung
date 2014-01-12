@@ -1,10 +1,16 @@
 package app;
 
-import app.entities.Customer;
+
+import java.sql.SQLException;
+import java.util.Vector;
+
+import db.entities.Customer;
+
+
 
 public interface CustomerControlInterface {
-	Customer[] getAll(); // lieber array wegen schichtentrennung
-	int create(Customer cust);
-	boolean update(int customerId, Customer cust);
-	boolean delete(int customerId);
+	Vector<Customer> getAll() throws SQLException;
+	int create(Customer cust) throws SQLException;
+	boolean update(Customer cust);
+	boolean delete(int customerId) throws SQLException;
 }

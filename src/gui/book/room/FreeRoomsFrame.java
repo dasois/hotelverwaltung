@@ -21,7 +21,6 @@ import javax.swing.SwingConstants;
 import app.BookingRoomControlImp;
 import app.BookingRoomControlInterface;
 import app.entities.BookingRoom;
-import app.entities.HotelRoom;
 import gui.AbstractFrame;
 import gui.FrameSwitcher;
 import gui.AbstractFrame.FrameSwitchImpl;
@@ -30,7 +29,7 @@ import gui.VerwaltungMainFrame;
 public class FreeRoomsFrame extends AbstractFrame{
 
 	private JLabel header;
-	private JList<HotelRoom> list;
+	private JList<Room> list;
 	private JScrollPane listScroller;
 	private JPanel southPanel;
 	private JButton book;
@@ -38,7 +37,7 @@ public class FreeRoomsFrame extends AbstractFrame{
 	private JPanel boxdsouthPanel;
 	private VerwaltungMainFrame mf;
 	private SelectTimeIntervallRoomFrame sf;
-	private HotelRoom[] freeRooms;
+	private Room[] freeRooms;
 	
 	public FreeRoomsFrame(VerwaltungMainFrame mf,SelectTimeIntervallRoomFrame sf) {
 		this.mf = mf;

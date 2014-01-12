@@ -12,6 +12,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.Date;
 
 import javax.swing.Box;
@@ -22,9 +23,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import db.entities.Service;
 import app.ServiceControlImp;
 import app.ServiceControlInterface;
-import app.entities.Service;
+
 
 public class CreateServiceFrame extends AbstractFrame{
 	private JLabel header;
@@ -139,7 +141,14 @@ public class CreateServiceFrame extends AbstractFrame{
 				else{
 					ServiceControlInterface controller = new ServiceControlImp();
 					Service tmp = new Service(name.getText(),Double.parseDouble(price.getText()));
-					tmp.setServiceId(controller.create(tmp));
+					
+					//TODO exceptionhandln
+					try {
+						tmp.setSid(controller.create(tmp));
+					} catch (SQLException e1) {
+						
+						e1.printStackTrace();
+					}
 					mf.addProtocolLine("Service:\n"+tmp.toString()+"\nwurde in der Datenbank angelegt\n");
 					fs.switchFrame();
 				}

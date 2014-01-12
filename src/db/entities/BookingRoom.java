@@ -31,7 +31,8 @@ public class BookingRoom implements DBBookingRoom{
 		this.room = room;
 		this.customer = customer;
 	}
-	
+	public BookingRoom(){}
+	public BookingRoom(int brid){this.brid = brid;}
 	@Override
 	public ResultSet getAll() throws SQLException {
 		return DBIface.executeQuery("SELECT * from Booking_Room");

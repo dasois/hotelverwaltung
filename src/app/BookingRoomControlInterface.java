@@ -1,14 +1,18 @@
 package app;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import db.entities.BookingRoom;
 import gui.SimpleTime;
-import app.entities.BookingRoom;
-import app.entities.HotelRoom;
+
+
 
 public interface BookingRoomControlInterface {
-	BookingRoom[] getAll();
-	HotelRoom[] getFreeRoom(SimpleTime startDate, SimpleTime endDate);
-	HotelRoom[] getBookedRoom(SimpleTime boookedDate);
-	int create(BookingRoom br);
-	boolean update(int BookingRoomId, BookingRoom br);
-	boolean delete(int BookingRoomId);
+	ResultSet getAll() throws SQLException;
+	ResultSet getFreeRoom(SimpleTime startDate, SimpleTime endDate);
+	ResultSet getBookedRoom(SimpleTime boookedDate);
+	int create(BookingRoom br) throws SQLException;
+	boolean delete(int BookingRoomId) throws SQLException;
+	boolean update(BookingRoom br);
 }

@@ -1,9 +1,14 @@
 package app;
-import app.entities.HotelRoom;
+
+
+import java.sql.SQLException;
+import java.util.Vector;
+import db.entities.Room;
+
 
 public interface RoomControlInterface {
-	HotelRoom[] getAll();
-	int create(HotelRoom room);
-	boolean update(int RoomId, HotelRoom room);
-	boolean delete(int RoomId);
+	Vector<Room> getAll() throws SQLException;
+	int create(Room room) throws SQLException;
+	boolean delete(int RoomId) throws SQLException;
+	boolean update(Room room) throws SQLException;
 }

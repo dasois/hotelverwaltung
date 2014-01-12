@@ -23,9 +23,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 import app.BookingRoomControlImp;
-import app.ServiceControlImp;
+
 import app.entities.HotelRoom;
-import app.entities.Service;
 
 public class SelectRoomByServiceFrame extends AbstractFrame{
 	private JLabel header;
