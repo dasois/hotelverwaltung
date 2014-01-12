@@ -11,6 +11,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class DatePicker extends JPanel implements ActionListener{
 	private final JComboBox<Integer> year;
 
@@ -78,6 +79,7 @@ public class DatePicker extends JPanel implements ActionListener{
 			return false;
 		}	
 	}
+	@SuppressWarnings("deprecation")
 	public Date getSelections(){
 	
 		return new Date((Integer)year.getSelectedItem(),(Integer)month.getSelectedItem(),(Integer)day.getSelectedItem());	

@@ -22,6 +22,7 @@ import app.LoginControlImp;
 import app.LoginControlInterface;
 
 
+@SuppressWarnings("serial")
 public class FrameLogin extends AbstractFrame{
 	private JLabel header;
 	private JPanel leftPanel;

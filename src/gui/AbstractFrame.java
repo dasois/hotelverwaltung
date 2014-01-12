@@ -3,6 +3,7 @@ package gui;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
+@SuppressWarnings("serial")
 public abstract class AbstractFrame extends JFrame{
 	public AbstractFrame() {
 		// wird dynamisch zum Betriebssystem erzeugt

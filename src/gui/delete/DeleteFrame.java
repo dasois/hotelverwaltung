@@ -19,21 +19,14 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
-
-
-
-
-
-import app.CustomerControlImp;
-import app.CustomerControlInterface;
 import app.DeleteControlImp;
 import app.DeleteControlInterface;
-import app.entities.Title;
 import gui.AbstractFrame;
 import gui.FrameSwitcher;
 import gui.VerwaltungMainFrame;
 
 
+@SuppressWarnings("serial")
 public class DeleteFrame<T> extends AbstractFrame{
 	private VerwaltungMainFrame mf;
 	private JLabel header;

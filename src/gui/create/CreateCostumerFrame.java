@@ -31,6 +31,7 @@ import app.entities.Title;
 
 
 
+@SuppressWarnings("serial")
 public class CreateCostumerFrame extends AbstractFrame{
 	private VerwaltungMainFrame mf;
 	public CreateCostumerFrame(VerwaltungMainFrame mf) {

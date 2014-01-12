@@ -23,6 +23,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
+@SuppressWarnings("serial")
 public class VerwaltungMainFrame extends AbstractFrame{
 
 	private JLabel header;

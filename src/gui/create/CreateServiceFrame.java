@@ -26,6 +26,7 @@ import app.ServiceControlImp;
 import app.ServiceControlInterface;
 
 
+@SuppressWarnings("serial")
 public class CreateServiceFrame extends AbstractFrame{
 	private JLabel header;
 	private JPanel leftPanel;

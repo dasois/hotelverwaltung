@@ -11,6 +11,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.Date;
 
 import javax.swing.Box;
@@ -26,6 +27,7 @@ import db.entities.Room;
 import app.RoomControlImp;
 import app.RoomControlInterface;
 
+@SuppressWarnings("serial")
 public class CreateRoomFrame extends AbstractFrame{
 	private JLabel header;
 	private JPanel leftPanel;
@@ -140,10 +142,16 @@ public class CreateRoomFrame extends AbstractFrame{
 					createWidgetSecondView();
 				else{
 					RoomControlInterface controller = new RoomControlImp();						
-					Room tmp = new Room(Integer.parseInt(roomNumber.getText()), doubleRoomCheck.isSelected(),controller.getAll().lastElement().getRid()+1,Integer.parseInt(price.getText()));		
-					tmp.setRid(controller.create(tmp));
-					mf.addProtocolLine("Zimmer:\n"+tmp.toString()+"\nwurde in der Datenbank angelegt\n");
-					fs.switchFrame();
+					Room tmp;
+					//TODO sinnvolle exception
+					try {
+						tmp = new Room(controller.getAll().lastElement().getRid()+1, Double.parseDouble(price.getText()),doubleRoomCheck.isSelected());
+						controller.create(tmp);
+						mf.addProtocolLine("Zimmer:\n"+tmp.toString()+"\nwurde in der Datenbank angelegt\n");
+						fs.switchFrame();
+					} catch (NumberFormatException | SQLException e1) {
+						e1.printStackTrace();
+					}						
 				}				
 			}	
 		});
