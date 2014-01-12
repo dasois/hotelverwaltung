@@ -1,5 +1,6 @@
 package app;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -20,11 +21,11 @@ public class BookingRoomControlImp implements BookingRoomControlInterface{
 	}
 
 	@Override
-	public ResultSet getFreeRoom(SimpleTime startDate, SimpleTime endDate) {
+	public ResultSet getFreeRoom(Date startDate, Date endDate) {
 		DBBookingRoom tmp = new BookingRoom();		
 		return tmp.getFreeRoom(startDate, endDate);
 	}
-	public ResultSet getBookedRoom(SimpleTime boookedDate) {
+	public ResultSet getBookedRoom(Date boookedDate) {
 		DBBookingRoom tmp = new BookingRoom();		
 		return tmp.getBookedRoom(boookedDate);
 	}
@@ -46,5 +47,4 @@ public class BookingRoomControlImp implements BookingRoomControlInterface{
 		DBBookingRoom tmp = new BookingRoom(BookingRoomId);		
 		return tmp.delete();
 	}
-
 }

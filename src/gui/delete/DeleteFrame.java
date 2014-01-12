@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -22,11 +23,11 @@ import javax.swing.SwingConstants;
 
 
 
+
 import app.CustomerControlImp;
 import app.CustomerControlInterface;
 import app.DeleteControlImp;
 import app.DeleteControlInterface;
-import app.entities.Customer;
 import app.entities.Title;
 import gui.AbstractFrame;
 import gui.FrameSwitcher;
@@ -64,10 +65,7 @@ public class DeleteFrame<T> extends AbstractFrame{
 		list.setVisibleRowCount(-1);
 		listScroller = new JScrollPane(list);
 		listScroller.setPreferredSize(new Dimension(250, 80));
-		
-		
-		
-		
+			
 		southPanel = new JPanel();
 		southPanel.setLayout(new GridLayout(1,2,10,10));
 
@@ -115,8 +113,13 @@ public class DeleteFrame<T> extends AbstractFrame{
 					createWidgetSecondView();
 				}
 				else{
-					DeleteControlInterface<T> controller = new DeleteControlImp<>();		
-					controller.deleteEntitie(list.getSelectedValue());
+					DeleteControlInterface<T> controller = new DeleteControlImp<>();	
+					//TODO sinnvolle exception
+					try {
+						controller.deleteEntitie(list.getSelectedValue());
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
 					mf.addProtocolLine("--Löschen--\n"+list.getSelectedValue().toString()+"\nwurde in der Datenbank gelöscht\n");
 					fs.switchFrame();
 				}

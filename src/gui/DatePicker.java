@@ -82,6 +82,10 @@ public class DatePicker extends JPanel implements ActionListener{
 	
 		return new Date((Integer)year.getSelectedItem(),(Integer)month.getSelectedItem(),(Integer)day.getSelectedItem());	
 	}	
+	public SimpleTime getSelectionSimpleTime(){
+		
+		return new SimpleTime((Integer)year.getSelectedItem(),(Integer)month.getSelectedItem(),(Integer)day.getSelectedItem());	
+	}
 //	public SimpleTime getSelections(){
 //		SimpleTime tmp = new SimpleTime((Integer)day.getSelectedItem(), (Integer)month.getSelectedItem(),(Integer)year.getSelectedItem());
 //		return tmp;		

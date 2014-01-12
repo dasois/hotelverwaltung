@@ -3,7 +3,6 @@ package gui.create;
 import gui.AbstractFrame;
 import gui.FrameSwitcher;
 import gui.VerwaltungMainFrame;
-import gui.AbstractFrame.FrameSwitchImpl;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -13,7 +12,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.Date;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -129,8 +127,7 @@ public class CreateServiceFrame extends AbstractFrame{
 					createWidgetFirstView();
 				else{
 					fs.switchFrame();
-				}
-				
+				}				
 			}	
 		});
 		create.addActionListener(new ActionListener(){
@@ -151,8 +148,7 @@ public class CreateServiceFrame extends AbstractFrame{
 					}
 					mf.addProtocolLine("Service:\n"+tmp.toString()+"\nwurde in der Datenbank angelegt\n");
 					fs.switchFrame();
-				}
-				
+				}			
 			}	
 		});
 	}

@@ -13,6 +13,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -25,7 +26,6 @@ import javax.swing.SwingConstants;
 
 import app.BookingRoomControlImp;
 import app.BookingRoomControlInterface;
-import app.entities.BookingRoom;
 
 
 
@@ -74,8 +74,8 @@ public class SelectTimeIntervallRoomFrame extends AbstractFrame{
 		centerPanel = new JPanel();	
 		centerPanel.setLayout(new GridLayout(2,1,10,10));
 
-		startDatePicker = new DatePicker();
-		endDatePicker = new DatePicker();
+		startDatePicker = new DatePicker(true);
+		endDatePicker = new DatePicker(true);
 
 		boxdCenterPanel = new JPanel();	
 		boxdCenterPanel.setLayout(new BoxLayout(boxdCenterPanel,BoxLayout.PAGE_AXIS));
@@ -136,10 +136,10 @@ public class SelectTimeIntervallRoomFrame extends AbstractFrame{
 		});
 	}
 	public SimpleTime getStartDate(){
-		return startDatePicker.getSelections();
+		return startDatePicker.getSelectionSimpleTime();
 	}
-	public SimpleTime getEndDate(){
-		return startDatePicker.getSelections();
+	public SimpleTime  getEndDate(){
+		return startDatePicker.getSelectionSimpleTime();
 	}
 	public SimpleTime[] getTimeInterval(){
 		ArrayList<SimpleTime> time = new ArrayList<SimpleTime>();

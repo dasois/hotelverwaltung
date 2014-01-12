@@ -3,7 +3,6 @@ package gui.book.service;
 import gui.AbstractFrame;
 import gui.DatePicker;
 import gui.FrameSwitcher;
-import gui.SimpleTime;
 import gui.VerwaltungMainFrame;
 
 import java.awt.BorderLayout;
@@ -13,6 +12,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -62,7 +62,7 @@ public class SelectTimeFrame extends AbstractFrame{
 		centerPanel = new JPanel();	
 		centerPanel.setLayout(new GridLayout(1,1,10,10));
 
-		datePicker = new DatePicker();
+		datePicker = new DatePicker(true);
 		boxdCenterPanel = new JPanel();	
 		boxdCenterPanel.setLayout(new BoxLayout(boxdCenterPanel,BoxLayout.PAGE_AXIS));
 
@@ -119,7 +119,7 @@ public class SelectTimeFrame extends AbstractFrame{
 			}
 		});
 	}
-	public SimpleTime getDate(){
+	public Date getDate(){
 		return datePicker.getSelections();
 	}
 

@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import db.entities.Room;
 import app.RoomControlImp;
 import app.RoomControlInterface;
 
@@ -139,8 +140,8 @@ public class CreateRoomFrame extends AbstractFrame{
 					createWidgetSecondView();
 				else{
 					RoomControlInterface controller = new RoomControlImp();						
-					Room tmp = new Room(Integer.parseInt(roomNumber.getText()), doubleRoomCheck.isSelected(),controller.getAll().length+1,Integer.parseInt(price.getText()));		
-					tmp.setRoomId(controller.create(tmp));
+					Room tmp = new Room(Integer.parseInt(roomNumber.getText()), doubleRoomCheck.isSelected(),controller.getAll().lastElement().getRid()+1,Integer.parseInt(price.getText()));		
+					tmp.setRid(controller.create(tmp));
 					mf.addProtocolLine("Zimmer:\n"+tmp.toString()+"\nwurde in der Datenbank angelegt\n");
 					fs.switchFrame();
 				}				

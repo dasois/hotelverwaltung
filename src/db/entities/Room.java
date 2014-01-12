@@ -22,6 +22,11 @@ public class Room implements DBRoom{
 		this.price = price;
 		this.isDoubleRoom = isDoubleRoom;
 	}
+	public Room (double price,boolean isDoubleRoom){
+
+		this.price = price;
+		this.isDoubleRoom = isDoubleRoom;
+	}
 	public Room(){}
 	@Override
 	public ResultSet getAll() throws SQLException {

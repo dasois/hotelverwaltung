@@ -22,13 +22,13 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
+import db.entities.Room;
 import app.BookingRoomControlImp;
 
-import app.entities.HotelRoom;
 
 public class SelectRoomByServiceFrame extends AbstractFrame{
 	private JLabel header;
-	private JList<HotelRoom> list;
+	private JList<Room> list;
 	private JScrollPane listScroller;
 	private JPanel southPanel;
 	private JButton book;
@@ -52,7 +52,7 @@ public class SelectRoomByServiceFrame extends AbstractFrame{
 		header.setHorizontalAlignment(SwingConstants.CENTER);
 		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));
 
-		list = new JList<HotelRoom>(new BookingRoomControlImp().getBookedRoom(ssf2.getDate()));
+		list = new JList<Room>(new BookingRoomControlImp().getBookedRoom(ssf2.getDate()));
 		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		list.setVisibleRowCount(-1);

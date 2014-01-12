@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -54,8 +55,12 @@ public class SelectServiceFrame extends AbstractFrame{
 		header.setOpaque(true);
 		header.setHorizontalAlignment(SwingConstants.CENTER);
 		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));
-
-		list = new JList<>(new ServiceControlImp().getAll());
+		//TODO sinnvolle excp
+		try {
+			list = new JList<>(new ServiceControlImp().getAll());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		list.setVisibleRowCount(-1);
