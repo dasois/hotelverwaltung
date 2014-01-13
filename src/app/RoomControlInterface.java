@@ -8,7 +8,7 @@ import db.entities.Room;
 
 public interface RoomControlInterface {
 	Vector<Room> getAll() throws SQLException;
-	int create(Room room) throws SQLException;
+	int create(double price, boolean isDoubleRoom ) throws SQLException;
 	boolean delete(int RoomId) throws SQLException;
 	boolean update(Room room) throws SQLException;
 }

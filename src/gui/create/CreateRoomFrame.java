@@ -43,8 +43,6 @@ public class CreateRoomFrame extends AbstractFrame{
 	private JPanel southPanel;
 	private JPanel boxdsouthPanel;
 	VerwaltungMainFrame mf;
-	private JTextField roomNumber;
-	private JLabel roomNumb;
 	
 	public CreateRoomFrame(VerwaltungMainFrame mf) {
 		this.mf = mf;
@@ -52,7 +50,7 @@ public class CreateRoomFrame extends AbstractFrame{
 
 	@Override
 	protected void createWidget() {
-		header = new JLabel("Zimmer hinzufügen");
+		header = new JLabel("Zimmer hinzufï¿½gen");
 		header.setPreferredSize(new Dimension(400,40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
@@ -62,8 +60,6 @@ public class CreateRoomFrame extends AbstractFrame{
 
 		leftPanel = new JPanel();
 		leftPanel.setLayout(new GridLayout(3,1,10,10));
-		roomNumb = new JLabel("Zimmernummer ");
-		roomNumb.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 20));
 		roomPrice = new JLabel("Price ");
 		roomPrice.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 20));
 
@@ -76,7 +72,6 @@ public class CreateRoomFrame extends AbstractFrame{
 		centerPanel = new JPanel();	
 		centerPanel.setLayout(new GridLayout(3,1,10,10));
 		
-		roomNumber = new JTextField();
 		price = new JTextField();
 		doubleRoomCheck = new JCheckBox();
 		boxdCenterPanel = new JPanel();	
@@ -100,14 +95,12 @@ public class CreateRoomFrame extends AbstractFrame{
 	protected void addWidget() {
 		getContentPane().setLayout(new BorderLayout(5,5));
 		getContentPane().add(BorderLayout.NORTH,header);
-		leftPanel.add(roomNumb);
 		leftPanel.add(roomPrice);
 		leftPanel.add(doubleRoom);
 		leftPanel.setPreferredSize(leftPanel.getPreferredSize());
 		boxdleftPanel.add(leftPanel);
 		boxdleftPanel.add(Box.createVerticalGlue());
 		getContentPane().add(BorderLayout.WEST,boxdleftPanel);
-		centerPanel.add(roomNumber);
 		centerPanel.add(price);
 		centerPanel.add(doubleRoomCheck);
 		boxdCenterPanel.add(centerPanel);
@@ -141,13 +134,11 @@ public class CreateRoomFrame extends AbstractFrame{
 				if(e.getActionCommand()=="Create")
 					createWidgetSecondView();
 				else{
-					RoomControlInterface controller = new RoomControlImp();						
-					Room tmp;
+					RoomControlInterface controller = new RoomControlImp();
 					//TODO sinnvolle exception
 					try {
-						tmp = new Room(controller.getAll().lastElement().getRid()+1, Double.parseDouble(price.getText()),doubleRoomCheck.isSelected());
-						controller.create(tmp);
-						mf.addProtocolLine("Zimmer:\n"+tmp.toString()+"\nwurde in der Datenbank angelegt\n");
+						int roomId = controller.create(Double.parseDouble(price.getText()),doubleRoomCheck.isSelected());
+						mf.addProtocolLine("Zimmer: "+roomId+" wurde in der Datenbank angelegt\n");
 						fs.switchFrame();
 					} catch (NumberFormatException | SQLException e1) {
 						e1.printStackTrace();
@@ -159,7 +150,6 @@ public class CreateRoomFrame extends AbstractFrame{
 
 
 	private void createWidgetSecondView(){
-		roomNumber.setEditable(false);
 		price.setEditable(false);
 		doubleRoomCheck.setEnabled(false);
 		create.setText("Korrekt");		
@@ -168,7 +158,6 @@ public class CreateRoomFrame extends AbstractFrame{
 		cancel.setActionCommand("Revise");
 	}
 	private void createWidgetFirstView(){
-		roomNumber.setEditable(true);
 		price.setEditable(true);
 		doubleRoomCheck.setEnabled(true);
 		create.setText("Anlegen");		

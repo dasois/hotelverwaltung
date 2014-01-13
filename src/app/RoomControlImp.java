@@ -21,9 +21,10 @@ public class RoomControlImp implements RoomControlInterface{
 		}
 
 	@Override
-	public int create(Room room) throws SQLException {
-		DBRoom tmp = new Room();
-		return tmp.create();
+	public int create(double price, boolean isDoubleRoom) throws SQLException {
+		DBRoom room = new Room(price, isDoubleRoom);
+		room.create();
+		return room.getRid();
 	}
 
 	@Override

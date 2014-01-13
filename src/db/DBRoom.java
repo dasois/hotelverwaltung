@@ -16,4 +16,5 @@ public interface DBRoom {
 	int create() throws SQLException;
 	boolean update() throws SQLException;
 	boolean delete() throws SQLException;
+	int getRid();
 }

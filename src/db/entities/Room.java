@@ -17,17 +17,19 @@ public class Room implements DBRoom{
 	private double price;
 	private boolean isDoubleRoom;
 	
-	public Room (int rid,double price,boolean isDoubleRoom){
+	public Room (int rid, double price, boolean isDoubleRoom){
 		this.rid = rid;
 		this.price = price;
 		this.isDoubleRoom = isDoubleRoom;
 	}
-	public Room (double price,boolean isDoubleRoom){
-
+	
+	public Room (double price, boolean isDoubleRoom){
 		this.price = price;
 		this.isDoubleRoom = isDoubleRoom;
 	}
+	
 	public Room(){}
+	
 	@Override
 	public ResultSet getAll() throws SQLException {
 		return DBIface.executeQuery("SELECT * from Room");
