@@ -47,7 +47,7 @@ public class ShowCustomerFrame extends AbstractFrame{
 		try {
 			list = new JList<Customer>(new CustomerControlImp().getAll());
 		} catch (SQLException e) {
-			
+			System.out.println("Exception bei Jlist<Customer>");
 			e.printStackTrace();
 		}
 		list.setEnabled(false);	
@@ -60,7 +60,7 @@ public class ShowCustomerFrame extends AbstractFrame{
 		southPanel.setLayout(new GridLayout(1,1,10,10));
 
 
-		cancel = new JButton("Zurück");
+		cancel = new JButton("Zurï¿½ck");
 		cancel.setPreferredSize(new Dimension(20, 30));
 		cancel.setActionCommand("Cancel");
 		boxdsouthPanel = new JPanel();	

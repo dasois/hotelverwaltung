@@ -111,6 +111,8 @@ public class Service implements DBService{
 	public void setSid(int sid) {
 		this.sid = sid;
 	}
-	
+	public String toString(){
+		return "SId: " + sid + " DName: "+ type + " Price: " + price;
+	}
 	
 }

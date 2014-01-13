@@ -21,7 +21,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import db.entities.Service;
 import app.ServiceControlImp;
 import app.ServiceControlInterface;
 
@@ -49,7 +48,7 @@ public class CreateServiceFrame extends AbstractFrame{
 	}
 
 	protected void createWidget() {
-		header = new JLabel("Dienstleistung hinzufügen");
+		header = new JLabel("Dienstleistung hinzufï¿½gen");
 		header.setPreferredSize(new Dimension(400,40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
@@ -138,16 +137,19 @@ public class CreateServiceFrame extends AbstractFrame{
 					createWidgetSecondView();
 				else{
 					ServiceControlInterface controller = new ServiceControlImp();
-					Service tmp = new Service(name.getText(),Double.parseDouble(price.getText()));
-					
-					//TODO exceptionhandln
+					//TODO
 					try {
-						tmp.setSid(controller.create(tmp));
+						int sid = controller.create(name.getText(),Double.parseDouble(price.getText()));
+						mf.addProtocolLine("Service:\n"+sid+"\nwurde in der Datenbank angelegt\n");
+
+					} catch (NumberFormatException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					} catch (SQLException e1) {
-						
+						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					mf.addProtocolLine("Service:\n"+tmp.toString()+"\nwurde in der Datenbank angelegt\n");
+					
 					fs.switchFrame();
 				}			
 			}	

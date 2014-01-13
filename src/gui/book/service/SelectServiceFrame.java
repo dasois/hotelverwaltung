@@ -24,8 +24,8 @@ import app.ServiceControlImp;
 import gui.AbstractFrame;
 import gui.FrameSwitcher;
 import gui.VerwaltungMainFrame;
-import gui.book.room.SelectCostumerByRoomFrame;
 
+@SuppressWarnings("serial")
 public class SelectServiceFrame extends AbstractFrame{
 
 	private JLabel header;
@@ -48,7 +48,7 @@ public class SelectServiceFrame extends AbstractFrame{
 
 	@Override
 	protected void createWidget() {
-		header = new JLabel("Dienstleistung wählen");
+		header = new JLabel("Dienstleistung wï¿½hlen");
 		header.setPreferredSize(new Dimension(400,40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
@@ -74,7 +74,7 @@ public class SelectServiceFrame extends AbstractFrame{
 		book.setPreferredSize(new Dimension(20, 30));
 		book.setActionCommand("Book");
 
-		stepback = new JButton("Zurück");
+		stepback = new JButton("Zurï¿½ck");
 		stepback.setPreferredSize(new Dimension(20, 30));
 		stepback.setActionCommand("Back");
 		boxdsouthPanel = new JPanel();	

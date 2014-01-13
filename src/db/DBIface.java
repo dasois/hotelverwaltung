@@ -10,7 +10,7 @@ public class DBIface {
 
 	private static String sDbDriver = "com.mysql.jdbc.Driver";
 	private static String sDbUrl = "jdbc:mysql://localhost:3306/hotelverwaltung";
-	private static String sUsr = "hm";
+	private static String sUsr = "root";
 	private static String sPwd = "init";
 
 	/*
@@ -31,8 +31,7 @@ public class DBIface {
 		try {
 			Class.forName(sDbDriver);
 			if (user!=""&&pwd!="") {
-				DriverManager.getConnection(DBIface.sDbUrl,
-						user, pwd);}
+				DriverManager.getConnection(DBIface.sDbUrl,	user, pwd);}
 			else {
 				DriverManager.getConnection(DBIface.sDbUrl,
 					DBIface.sUsr, DBIface.sPwd);}

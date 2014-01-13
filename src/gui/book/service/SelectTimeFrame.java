@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+@SuppressWarnings("serial")
 public class SelectTimeFrame extends AbstractFrame{
 
 	private VerwaltungMainFrame mf;
@@ -69,7 +70,7 @@ public class SelectTimeFrame extends AbstractFrame{
 		southPanel = new JPanel();
 		southPanel.setLayout(new GridLayout(1,2,10,10));
 
-		search = new JButton("Wählen");
+		search = new JButton("Wï¿½hlen");
 		search.setPreferredSize(new Dimension(20, 30));
 		search.setActionCommand("Search");
 
@@ -111,7 +112,7 @@ public class SelectTimeFrame extends AbstractFrame{
 					fs.switchFrame();
 			}			
 		});
-		final SelectTimeFrame sf = this;
+
 		search.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {		

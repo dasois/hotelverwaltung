@@ -4,7 +4,6 @@ import gui.AbstractFrame;
 import gui.DatePicker;
 import gui.FrameSwitcher;
 import gui.VerwaltungMainFrame;
-import gui.AbstractFrame.FrameSwitchImpl;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -23,8 +22,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
-import db.entities.Customer;
 import app.CustomerControlImp;
 import app.CustomerControlInterface;
 import app.entities.Title;
@@ -76,17 +73,18 @@ public class CreateCostumerFrame extends AbstractFrame{
 					createWidgetSecondView();			
 				}
 				else{
-					Customer tmp = new Customer(((Title)titleSelection.getSelectedItem()).toString(),customerNameInput.getText(),addressInput.getText(),birthdayPicker.getSelections());
-					CustomerControlInterface tmp2 = new CustomerControlImp();
 					
-					//TODO exception handling
+					CustomerControlInterface tmp = new CustomerControlImp();
+					//TODO sinnvoller exceptionhandler
 					try {
-						tmp.setId(tmp2.create(tmp));
+						int id = tmp.create(((Title)titleSelection.getSelectedItem()).toString(),
+								customerNameInput.getText(),addressInput.getText(),birthdayPicker.getSelections());
+						mf.addProtocolLine("Kunde mit Id:\n"+id+"\nwurde in der Datenbank angelegt\n");
+
 					} catch (SQLException e1) {
+	
 						e1.printStackTrace();
 					}
-					
-					mf.addProtocolLine("Kunde:\n"+tmp.toString()+"\nwurde in der Datenbank angelegt\n");
 					fs.switchFrame();
 				}
 			}	

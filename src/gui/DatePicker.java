@@ -3,8 +3,11 @@ package gui;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
@@ -79,10 +82,20 @@ public class DatePicker extends JPanel implements ActionListener{
 			return false;
 		}	
 	}
-	@SuppressWarnings("deprecation")
-	public Date getSelections(){
-	
-		return new Date((Integer)year.getSelectedItem(),(Integer)month.getSelectedItem(),(Integer)day.getSelectedItem());	
+	public java.sql.Date getSelections(){
+		String date = ""+(Integer)day.getSelectedItem()+"."+(Integer)month.getSelectedItem()+"."+(Integer)year.getSelectedItem();
+		Date datum;
+		java.sql.Date sqlDate = null;
+		DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+		try {
+			datum = formatter.parse(date);
+			sqlDate = new java.sql.Date(datum.getTime());
+			return sqlDate;
+		} catch (ParseException e) {
+			System.out.println("parseFehler");
+			e.printStackTrace();
+		}
+		return sqlDate;
 	}	
 	public SimpleTime getSelectionSimpleTime(){
 		

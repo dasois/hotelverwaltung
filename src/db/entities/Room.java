@@ -29,6 +29,9 @@ public class Room implements DBRoom{
 	}
 	
 	public Room(){}
+	public Room(int rid){
+		this.rid = rid;
+	}
 	
 	@Override
 	public ResultSet getAll() throws SQLException {
@@ -59,6 +62,7 @@ public class Room implements DBRoom{
 	}
 	@Override
 	public boolean delete() throws SQLException {
+		System.out.println("hier angekommen"+this.rid);
 		DBIface.executeQuery("DELETE from Room where RID = "+this.getRid());
 		ResultSet rs = DBIface.executeQuery("SELECT COUNT(*) from Room where RID = "+this.getRid());
 		rs.next();
@@ -102,5 +106,12 @@ public class Room implements DBRoom{
 	 */
 	public void setRid(int rid) {
 		this.rid = rid;
+	}
+	public String toString(){
+		if(isDoubleRoom)
+			return "Zimmer: "+ rid + "Price " +price+ "doppelzimmer? "+"ja";
+		else{
+			return "Zimmer: "+ rid + "Price " +price+ "doppelzimmer? "+"ja";
+		}
 	}
 }

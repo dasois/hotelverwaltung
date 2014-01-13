@@ -24,8 +24,9 @@ public class ServiceControlImp implements ServiceControlInterface{
 
 
 	@Override
-	public int create(Service srv) throws SQLException {	
-		return srv.create();
+	public int create(String type, double price) throws SQLException {
+		Service s = new Service (type,price);
+		return s.create();
 	}
 
 	@Override

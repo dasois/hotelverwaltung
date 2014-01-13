@@ -148,4 +148,7 @@ public class Customer implements DBCustomer{
 	public void setId(int id) {
 		this.id = id;
 	}
+	public String toString(){
+		return "CId: "+ id + " Name "+ fName+" "+lName+" Adresse: " +address+ " Geb: "+ birthdate;
+	}
 }

@@ -1,5 +1,6 @@
 package app;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -20,9 +21,10 @@ public class CustomerControlImp implements CustomerControlInterface{
 		return temp;
 	}
 
-	@Override
-	public int create(Customer cust) throws SQLException {
-		return cust.create();
+	public int create(String fName, String lName, String address,
+			Date date) throws SQLException {
+		DBCustomer c = new Customer(fName,lName,address,date);
+		return c.create();
 	}
 
 	@Override

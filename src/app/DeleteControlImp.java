@@ -6,7 +6,6 @@ import db.entities.Customer;
 import db.entities.Room;
 import db.entities.Service;
 
-
 public class DeleteControlImp<T> implements DeleteControlInterface<T>{
 
 	@Override
@@ -29,5 +28,4 @@ public class DeleteControlImp<T> implements DeleteControlInterface<T>{
 		}else
 			return false;
 	}
-	
 }
