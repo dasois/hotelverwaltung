@@ -31,13 +31,14 @@ public class BookingRoom implements DBBookingRoom{
 		this.room = room;
 		this.customer = customer;
 	}
-	public BookingRoom(){}
 	public BookingRoom(int brid){this.brid = brid;}
+	public BookingRoom(){}
+	
 	@Override
 	public ResultSet getAll() throws SQLException {
 		return DBIface.executeQuery("SELECT * from Booking_Room");
 	}
-
+	
 	@Override
 	public int create() throws SQLException {
 		ResultSet rs = DBIface.executeQuery("Insert into Booking_Room values ("+this.getBrid()+",\""+this.getDate().toString()+"\","+this.getRoom().getRid()+","+this.getCustomer().getId()+")");

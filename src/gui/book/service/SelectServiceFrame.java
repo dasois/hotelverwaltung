@@ -1,5 +1,9 @@
 package gui.book.service;
 
+import gui.AbstractFrame;
+import gui.FrameSwitcher;
+import gui.VerwaltungMainFrame;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -19,11 +23,8 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
-import db.entities.Service;
 import app.ServiceControlImp;
-import gui.AbstractFrame;
-import gui.FrameSwitcher;
-import gui.VerwaltungMainFrame;
+import db.entities.Service;
 
 @SuppressWarnings("serial")
 public class SelectServiceFrame extends AbstractFrame{

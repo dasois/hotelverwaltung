@@ -1,5 +1,9 @@
 package gui.delete;
 
+import gui.AbstractFrame;
+import gui.FrameSwitcher;
+import gui.VerwaltungMainFrame;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -21,9 +25,6 @@ import javax.swing.SwingConstants;
 
 import app.DeleteControlImp;
 import app.DeleteControlInterface;
-import gui.AbstractFrame;
-import gui.FrameSwitcher;
-import gui.VerwaltungMainFrame;
 
 
 @SuppressWarnings("serial")
@@ -62,7 +63,7 @@ public class DeleteFrame<T> extends AbstractFrame{
 		southPanel = new JPanel();
 		southPanel.setLayout(new GridLayout(1,2,10,10));
 
-		delete = new JButton("Löschen");
+		delete = new JButton("Lï¿½schen");
 		delete.setPreferredSize(new Dimension(20, 30));
 		delete.setActionCommand("Delete");
 
@@ -109,11 +110,11 @@ public class DeleteFrame<T> extends AbstractFrame{
 					DeleteControlInterface<T> controller = new DeleteControlImp<>();	
 					//TODO sinnvolle exception
 					try {
-						controller.deleteEntitie(list.getSelectedValue());
+						controller.deleteEntity(list.getSelectedValue());
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
-					mf.addProtocolLine("--Löschen--\n"+list.getSelectedValue().toString()+"\nwurde in der Datenbank gelöscht\n");
+					mf.addProtocolLine("--Lï¿½schen--\n"+list.getSelectedValue().toString()+"\nwurde in der Datenbank gelï¿½scht\n");
 					fs.switchFrame();
 				}
 			}	

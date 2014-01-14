@@ -16,11 +16,10 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
-import db.entities.Customer;
 import app.CustomerControlImp;
+import db.entities.Customer;
 
 public class ShowCustomerFrame extends AbstractFrame{
 	private VerwaltungMainFrame mf;

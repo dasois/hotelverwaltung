@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
 import app.CustomerControlImp;
 import app.CustomerControlInterface;
 import app.entities.Title;

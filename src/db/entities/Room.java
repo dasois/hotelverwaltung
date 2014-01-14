@@ -2,6 +2,7 @@
  * 
  */
 package db.entities;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -28,15 +29,23 @@ public class Room implements DBRoom{
 		this.isDoubleRoom = isDoubleRoom;
 	}
 	
-	public Room(){}
 	public Room(int rid){
 		this.rid = rid;
 	}
+	
+	public Room(){}
 	
 	@Override
 	public ResultSet getAll() throws SQLException {
 		return DBIface.executeQuery("SELECT * from Room");
 	}
+	
+	@Override
+	public ResultSet getFree(Date startDate, Date endDate) throws SQLException {
+		return DBIface.executeQuery("SELECT * from Room r " +
+				"WHERE NOT EXISTS ( SELECT * FROM Booking_Room WHERE (Date between \""+startDate+"\" and \""+endDate+"\") AND RID = r.RID)");
+	}
+	
 	@Override
 	public int create() throws SQLException {
 		ResultSet rs = DBIface.executeQuery("Insert into Room values ("+this.getRid()+","+this.getPrice()+","+this.isDoubleRoom()+")");

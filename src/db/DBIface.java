@@ -31,10 +31,9 @@ public class DBIface {
 		try {
 			Class.forName(sDbDriver);
 			if (user!=""&&pwd!="") {
-				DriverManager.getConnection(DBIface.sDbUrl,	user, pwd);}
-			else {
-				DriverManager.getConnection(DBIface.sDbUrl,
-					DBIface.sUsr, DBIface.sPwd);}
+				DBIface.sUsr = user; DBIface.sPwd = pwd;
+			}
+			DriverManager.getConnection(DBIface.sDbUrl, DBIface.sUsr, DBIface.sPwd);
 			//System.out.println(cn.toString());
 			return true;
 		} catch (ClassNotFoundException ex) {

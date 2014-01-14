@@ -22,8 +22,8 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
-import db.entities.Room;
 import app.BookingRoomControlImp;
+import db.entities.Room;
 
 
 @SuppressWarnings("serial")

@@ -14,12 +14,12 @@ import java.sql.SQLException;
 import javax.swing.JDialog;
 import javax.swing.JList;
 
-import db.entities.Customer;
-import db.entities.Room;
-import db.entities.Service;
 import app.CustomerControlImp;
 import app.RoomControlImp;
 import app.ServiceControlImp;
+import db.entities.Customer;
+import db.entities.Room;
+import db.entities.Service;
 
 
 
@@ -42,7 +42,7 @@ public class MainButtonHandler implements ActionListener {
 					new JDialog(cf);
 										
 				}
-				else if(action =="Löschen"){
+				else if(action =="Lï¿½schen"){
 					gui.setEnabled(false);
 					DeleteFrame<Customer> dcf;
 					//TODO sinnvolle exception

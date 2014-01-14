@@ -2,9 +2,9 @@
  * 
  */
 package db.entities;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Date;
 
 import db.DBCustomer;
 import db.DBIface;

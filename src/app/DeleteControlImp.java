@@ -9,23 +9,23 @@ import db.entities.Service;
 public class DeleteControlImp<T> implements DeleteControlInterface<T>{
 
 	@Override
-	public boolean deleteEntitie(T entitie) throws SQLException {
+	public boolean deleteEntity(T entity) throws SQLException {
 		
-		if(entitie instanceof Customer){		
+		if(entity instanceof Customer){		
 			CustomerControlInterface controller = new CustomerControlImp();
-			Customer tmp = (Customer)entitie;
+			Customer tmp = (Customer) entity;
 			return controller.delete(tmp.getId());
 		}
-		else if(entitie instanceof Room){
+		else if(entity instanceof Room){
 			RoomControlInterface controller = new RoomControlImp();
-			Room tmp = (Room)entitie;
+			Room tmp = (Room) entity;
 			return controller.delete(tmp.getRid());
 		}
-		else if(entitie instanceof Service){
+		else if(entity instanceof Service){
 			ServiceControlInterface controller = new ServiceControlImp();
-			Service tmp = (Service)entitie;
+			Service tmp = (Service) entity;
 			return controller.delete(tmp.getSid());
-		}else
+		} else
 			return false;
 	}
 }

@@ -11,8 +11,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
-import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -27,9 +25,8 @@ import javax.swing.SwingConstants;
 import app.BookingRoomControlImp;
 import app.BookingRoomControlInterface;
 import app.CustomerControlImp;
-import app.entities.BookingRoom;
-import app.entities.Customer;
-import app.entities.HotelRoom;
+import db.entities.BookingRoom;
+import db.entities.Customer;
 
 public class SelectCostumerByRoomFrame extends AbstractFrame{
 
@@ -51,7 +48,7 @@ public class SelectCostumerByRoomFrame extends AbstractFrame{
 		this.sf = sf;
 	}
 	protected void createWidget() {
-		header = new JLabel("Kunde wählen");
+		header = new JLabel("Kunde wï¿½hlen");
 		header.setPreferredSize(new Dimension(400,40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
@@ -73,7 +70,7 @@ public class SelectCostumerByRoomFrame extends AbstractFrame{
 		book.setPreferredSize(new Dimension(20, 30));
 		book.setActionCommand("Book");
 
-		stepback = new JButton("Zurück");
+		stepback = new JButton("Zurï¿½ck");
 		stepback.setPreferredSize(new Dimension(20, 30));
 		stepback.setActionCommand("Back");
 		boxdsouthPanel = new JPanel();	

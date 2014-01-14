@@ -1,15 +1,16 @@
 package app;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
+
 import db.DBRoom;
 import db.entities.Room;
 
 public class RoomControlImp implements RoomControlInterface{
 
-	public Vector<Room> getAll() throws SQLException {
-		
+	public Vector<Room> getAll() throws SQLException {	
 		ResultSet resultset = new Room().getAll();
 		Vector<Room> temp = new Vector<Room>();
 		while (resultset.next()) {
@@ -17,7 +18,14 @@ public class RoomControlImp implements RoomControlInterface{
 			temp.add(c);
 		    }
 		return temp;	
-		}
+	}
+	
+
+	@Override
+	public Vector<Room> getFreeRooms(Date startDate, Date endDate) throws SQLException {
+		ResultSet rs = new Room().getFree(startDate, endDate);
+		// TODO: implement
+	}
 
 	public int create(double price, boolean isDoubleRoom) throws SQLException {
 		DBRoom room = new Room(price, isDoubleRoom);

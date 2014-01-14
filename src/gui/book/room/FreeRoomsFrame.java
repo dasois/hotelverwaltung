@@ -1,5 +1,9 @@
 package gui.book.room;
 
+import gui.AbstractFrame;
+import gui.FrameSwitcher;
+import gui.VerwaltungMainFrame;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -20,11 +24,7 @@ import javax.swing.SwingConstants;
 
 import app.BookingRoomControlImp;
 import app.BookingRoomControlInterface;
-import app.entities.BookingRoom;
-import gui.AbstractFrame;
-import gui.FrameSwitcher;
-import gui.AbstractFrame.FrameSwitchImpl;
-import gui.VerwaltungMainFrame;
+import db.entities.Room;
 
 public class FreeRoomsFrame extends AbstractFrame{
 
@@ -71,7 +71,7 @@ public class FreeRoomsFrame extends AbstractFrame{
 		book.setPreferredSize(new Dimension(20, 30));
 		book.setActionCommand("Book");
 
-		stepback = new JButton("Zurück");
+		stepback = new JButton("Zurï¿½ck");
 		stepback.setPreferredSize(new Dimension(20, 30));
 		stepback.setActionCommand("Back");
 		boxdsouthPanel = new JPanel();	

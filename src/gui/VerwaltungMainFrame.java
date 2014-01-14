@@ -7,7 +7,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Writer;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -19,7 +18,6 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
@@ -59,9 +57,9 @@ public class VerwaltungMainFrame extends AbstractFrame{
 		actions = new JComboBox<String>();
 		model = new ComboBoxModel[2];
 		model[0] = new DefaultComboBoxModel<String>(
-				new String[]{"Erstellen", "Löschen","Anzeigen"});
+				new String[]{"Erstellen", "Lï¿½schen","Anzeigen"});
 		model[1] = new DefaultComboBoxModel<String>(
-				new String[]{"Erstellen","Buchen","Löschen"});
+				new String[]{"Erstellen","Buchen","Lï¿½schen"});
 		actions.setModel(model[0]);
 
 		boxdleftPanel = new JPanel();	
