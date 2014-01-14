@@ -19,6 +19,7 @@ public class Customer implements DBCustomer{
 	private String lName;
 	private String address;
 	private Date birthdate;
+	private String title;
 	
 
 	/**
@@ -29,19 +30,21 @@ public class Customer implements DBCustomer{
 	 * @param birthdate: Customer's date of birth
 	 */
 	public Customer(String fName, String lName, String address,
-			Date date) {
+			Date date, String title) {
 		this.fName = fName;
 		this.lName = lName;
 		this.address = address;
 		this.birthdate = date;
+		this.title = title;
 	}
-	public Customer(int id,String fName, String lName, String address,
-			Date birthdate) {
+	public Customer(int id, String fName, String lName, String address,
+			Date birthdate, String title) {
 		this.id = id;
 		this.fName = fName;
 		this.lName = lName;
 		this.address = address;
 		this.birthdate = birthdate;
+		this.title = title;
 	}
 	public Customer(){}
 	public Customer(int id){this.id = id;}
@@ -52,7 +55,7 @@ public class Customer implements DBCustomer{
 	}
 	@Override
 	public int create() throws SQLException {
-		ResultSet rs = DBIface.executeQuery("Insert into Customer values ("+this.getId()+",\""+this.getfName()+"\",\""+this.getlName()+"\",\""+this.getAddress()+"\",\""+this.getBirthdate().toString()+"\")");
+		ResultSet rs = DBIface.executeQuery("Insert into Customer values ("+this.getId()+",\""+this.getfName()+"\",\""+this.getlName()+"\",\""+this.getAddress()+"\",\""+this.getBirthdate().toString()+"\",\""+this.getTitle()+"\")");
 		if (rs.next()) {
 			this.id = rs.getInt(1);
 		}
@@ -66,6 +69,7 @@ public class Customer implements DBCustomer{
 					"\",LName = \""+this.getlName()+
 					"\",Address = \""+this.getAddress()+
 					"\",BDate = \""+this.getBirthdate().toString()+
+					"\",Title = \""+this.getTitle()+
 					"\" Where ID = "+this.getId()
 		);
 		ResultSet rs = DBIface.executeQuery("SELECT COUNT(*) from Customer where id = "+this.getId());
@@ -150,5 +154,17 @@ public class Customer implements DBCustomer{
 	}
 	public String toString(){
 		return "CId: "+ id + " Name "+ fName+" "+lName+" Adresse: " +address+ " Geb: "+ birthdate;
+	}
+	/**
+	 * @return the title
+	 */
+	public String getTitle() {
+		return title;
+	}
+	/**
+	 * @param title the title to set
+	 */
+	public void setTitle(String title) {
+		this.title = title;
 	}
 }

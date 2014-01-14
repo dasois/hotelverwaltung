@@ -107,10 +107,10 @@ public class DBOperations {
 			Assert.assertEquals(servicePrice, rs.getDouble(3));
 			System.out.println("Service("+rs.getInt(1)+", "+rs.getString(2)+", "+rs.getDouble(3)+")");
 			
-			//Create Customer
-			Customer customer = new Customer("Hans", "Meier", "Beispielstr. 123, 12345 Hintertupfing", Date.valueOf("1980-12-30"));
+			//Create customers
+			Customer customer = new Customer("Hans", "Meier", "Beispielstr. 123, 12345 Hintertupfing", Date.valueOf("1980-12-30"), "Herr");
 			customer.create();
-			Customer customer2 = new Customer("Hans", "Meier", "Beispielstr. 123, 12345 Hintertupfing", Date.valueOf("1960-12-30"));
+			Customer customer2 = new Customer("Hans", "Meier", "Beispielstr. 123, 12345 Hintertupfing", Date.valueOf("1960-12-30"), "Herr");
 			customer2.create();
 			
 			//Update customer
