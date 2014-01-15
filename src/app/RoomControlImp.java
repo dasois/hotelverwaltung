@@ -23,8 +23,13 @@ public class RoomControlImp implements RoomControlInterface{
 
 	@Override
 	public Vector<Room> getFreeRooms(Date startDate, Date endDate) throws SQLException {
-		ResultSet rs = new Room().getFree(startDate, endDate);
-		// TODO: implement
+		ResultSet resultset = new Room().getFree(startDate, endDate);
+		Vector<Room> temp = new Vector<Room>();
+		while (resultset.next()) {
+			Room c = new Room(Integer.parseInt(resultset.getString(1)),Double.parseDouble(resultset.getString(2)),Boolean.parseBoolean(resultset.getString(3)));		
+			temp.add(c);
+		    }
+		return temp;
 	}
 
 	public int create(double price, boolean isDoubleRoom) throws SQLException {

@@ -11,6 +11,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.Vector;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -24,6 +26,8 @@ import javax.swing.SwingConstants;
 
 import app.BookingRoomControlImp;
 import app.BookingRoomControlInterface;
+import app.RoomControlImp;
+import app.RoomControlInterface;
 import db.entities.Room;
 
 public class FreeRoomsFrame extends AbstractFrame{
@@ -37,13 +41,18 @@ public class FreeRoomsFrame extends AbstractFrame{
 	private JPanel boxdsouthPanel;
 	private VerwaltungMainFrame mf;
 	private SelectTimeIntervallRoomFrame sf;
-	private Room[] freeRooms;
+	private Vector<Room> freeRooms;
 	
 	public FreeRoomsFrame(VerwaltungMainFrame mf,SelectTimeIntervallRoomFrame sf) {
 		this.mf = mf;
 		this.sf = sf;
-		BookingRoomControlInterface tmp = new BookingRoomControlImp();
-		freeRooms = tmp.getFreeRoom(sf.getStartDate(), sf.getEndDate());
+		RoomControlInterface tmp = new RoomControlImp();
+		//TODO sinnvolle exception
+		try {
+			freeRooms = tmp.getFreeRooms(sf.getStartDate(), sf.getEndDate());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 
@@ -71,7 +80,7 @@ public class FreeRoomsFrame extends AbstractFrame{
 		book.setPreferredSize(new Dimension(20, 30));
 		book.setActionCommand("Book");
 
-		stepback = new JButton("Zurï¿½ck");
+		stepback = new JButton("Zurück");
 		stepback.setPreferredSize(new Dimension(20, 30));
 		stepback.setActionCommand("Back");
 		boxdsouthPanel = new JPanel();	
@@ -103,7 +112,7 @@ public class FreeRoomsFrame extends AbstractFrame{
 		book.addActionListener(new ActionListener(){
 			
 			public void actionPerformed(ActionEvent e) {
-				HotelRoom[] tmp = list.getSelectedValuesList().toArray(new HotelRoom[0]);
+				Room[] tmp = list.getSelectedValuesList().toArray(new Room[0]);
 				SelectCostumerByRoomFrame scf = new SelectCostumerByRoomFrame(mf,frf,tmp,sf);
 				scf.init();
 				scf.setVisible(false);

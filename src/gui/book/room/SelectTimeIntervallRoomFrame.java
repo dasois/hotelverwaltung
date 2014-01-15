@@ -3,7 +3,6 @@ package gui.book.room;
 import gui.AbstractFrame;
 import gui.DatePicker;
 import gui.FrameSwitcher;
-import gui.SimpleTime;
 import gui.VerwaltungMainFrame;
 
 import java.awt.BorderLayout;
@@ -13,7 +12,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.sql.Date;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -131,20 +130,10 @@ public class SelectTimeIntervallRoomFrame extends AbstractFrame{
 			}
 		});
 	}
-	public SimpleTime getStartDate(){
-		return startDatePicker.getSelectionSimpleTime();
+	public Date getStartDate(){
+		return startDatePicker.getSelections();
 	}
-	public SimpleTime  getEndDate(){
-		return startDatePicker.getSelectionSimpleTime();
-	}
-	public SimpleTime[] getTimeInterval(){
-		ArrayList<SimpleTime> time = new ArrayList<SimpleTime>();
-		time.add(getStartDate());
-		SimpleTime tmp = getStartDate();
-		while(!tmp.equals(getEndDate())){
-			tmp = tmp.getNextDay();
-			time.add(tmp);
-		}
-		return time.toArray(new SimpleTime[0]);
+	public Date  getEndDate(){
+		return startDatePicker.getSelections();
 	}
 }

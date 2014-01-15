@@ -48,7 +48,7 @@ public class CreateRoomFrame extends AbstractFrame{
 
 	@Override
 	protected void createWidget() {
-		header = new JLabel("Zimmer hinzufï¿½gen");
+		header = new JLabel("Zimmer hinzufügen");
 		header.setPreferredSize(new Dimension(400,40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
@@ -58,10 +58,10 @@ public class CreateRoomFrame extends AbstractFrame{
 
 		leftPanel = new JPanel();
 		leftPanel.setLayout(new GridLayout(3,1,10,10));
-		roomPrice = new JLabel("Price ");
+		roomPrice = new JLabel("Preis ");
 		roomPrice.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 20));
 
-		doubleRoom = new JLabel("double Room? ");
+		doubleRoom = new JLabel("Doppelzimmer? ");
 		doubleRoom.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 20));
 
 		boxdleftPanel = new JPanel();
@@ -136,10 +136,11 @@ public class CreateRoomFrame extends AbstractFrame{
 					//TODO sinnvolle exception
 					try {
 						int roomId = controller.create(Double.parseDouble(price.getText()),doubleRoomCheck.isSelected());
-						mf.addProtocolLine("Zimmer: "+roomId+" wurde in der Datenbank angelegt\n");
+						mf.addProtocolLine("Zimmer: "+roomId+" wurde mit dem Preis: "+Double.parseDouble(price.getText())
+								+"€ in der Datenbank angelegt\n");
 						fs.switchFrame();
 					} catch (NumberFormatException | SQLException e1) {
-						e1.printStackTrace();
+						mf.addProtocolLine("Es konnte kein Zimmer erstellt werden, rufen sie ihren Administrator");
 					}						
 				}				
 			}	

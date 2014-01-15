@@ -57,9 +57,9 @@ public class VerwaltungMainFrame extends AbstractFrame{
 		actions = new JComboBox<String>();
 		model = new ComboBoxModel[2];
 		model[0] = new DefaultComboBoxModel<String>(
-				new String[]{"Erstellen", "Lï¿½schen","Anzeigen"});
+				new String[]{"Erstellen", "Löschen","Anzeigen"});
 		model[1] = new DefaultComboBoxModel<String>(
-				new String[]{"Erstellen","Buchen","Lï¿½schen"});
+				new String[]{"Erstellen","Buchen","Löschen"});
 		actions.setModel(model[0]);
 
 		boxdleftPanel = new JPanel();	

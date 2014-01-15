@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
+import app.entities.Title;
 import db.DBCustomer;
 import db.entities.Customer;
 
@@ -15,7 +16,7 @@ public class CustomerControlImp implements CustomerControlInterface{
 		ResultSet resultset = new Customer().getAll();
 		Vector<Customer> temp = new Vector<Customer>();
 		while (resultset.next()) {
-			Customer c = new Customer(Integer.parseInt(resultset.getString(1)),resultset.getString(2),resultset.getString(3),resultset.getString(4),resultset.getDate(5));		
+			Customer c = new Customer(Integer.parseInt(resultset.getString(1)),resultset.getString(2),resultset.getString(3),resultset.getString(4),resultset.getDate(5),resultset.getString(6));		
 		    temp.add(c);
 		}
 		
@@ -23,8 +24,8 @@ public class CustomerControlImp implements CustomerControlInterface{
 	}
 
 	public int create(String fName, String lName, String address,
-			Date date) throws SQLException {
-		DBCustomer c = new Customer(fName,lName,address,date);
+			Date date,Title title) throws SQLException {
+		DBCustomer c = new Customer(fName,lName,address,date,title.toString());
 		return c.create();
 	}
 

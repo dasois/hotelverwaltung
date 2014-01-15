@@ -140,14 +140,12 @@ public class CreateServiceFrame extends AbstractFrame{
 					//TODO
 					try {
 						int sid = controller.create(name.getText(),Double.parseDouble(price.getText()));
-						mf.addProtocolLine("Service:\n"+sid+"\nwurde in der Datenbank angelegt\n");
+						mf.addProtocolLine("Service:\n"+sid+" "+name.getText()+" wurde in der Datenbank angelegt\n");
 
 					} catch (NumberFormatException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						mf.addProtocolLine("Der Eingegebene Preis kann nicht als Zahl gespeichert werden");
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						mf.addProtocolLine("Es konnte kein Kunde erstellt werden, rufen sie ihren Administrator");
 					}
 					
 					fs.switchFrame();

@@ -45,7 +45,7 @@ public class SelectRoomByServiceFrame extends AbstractFrame{
 		this.ssf2 = ssf2;
 	}
 	protected void createWidget() {
-		header = new JLabel("Zimmer wï¿½hlen");
+		header = new JLabel("Zimmer wählen");
 		header.setPreferredSize(new Dimension(400,40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
@@ -53,7 +53,7 @@ public class SelectRoomByServiceFrame extends AbstractFrame{
 		header.setHorizontalAlignment(SwingConstants.CENTER);
 		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));
 
-		list = new JList<Room>(new BookingRoomControlImp().getBookedRoom(ssf2.getDate()));
+		list = new JList<Room>(new BookingRoomControlImp().getAll());
 		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		list.setVisibleRowCount(-1);

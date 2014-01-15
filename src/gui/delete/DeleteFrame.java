@@ -63,7 +63,7 @@ public class DeleteFrame<T> extends AbstractFrame{
 		southPanel = new JPanel();
 		southPanel.setLayout(new GridLayout(1,2,10,10));
 
-		delete = new JButton("Lï¿½schen");
+		delete = new JButton("Löschen");
 		delete.setPreferredSize(new Dimension(20, 30));
 		delete.setActionCommand("Delete");
 
@@ -112,9 +112,9 @@ public class DeleteFrame<T> extends AbstractFrame{
 					try {
 						controller.deleteEntity(list.getSelectedValue());
 					} catch (SQLException e1) {
-						e1.printStackTrace();
+						mf.addProtocolLine("Es konnte nicht gelöscht werden, rufen sie ihren Administrator");
 					}
-					mf.addProtocolLine("--Lï¿½schen--\n"+list.getSelectedValue().toString()+"\nwurde in der Datenbank gelï¿½scht\n");
+					mf.addProtocolLine("--Löschen--\n"+list.getSelectedValue().toString()+"\nwurde in der Datenbank gelöscht\n");
 					fs.switchFrame();
 				}
 			}	

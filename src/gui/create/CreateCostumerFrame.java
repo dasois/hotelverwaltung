@@ -40,14 +40,16 @@ public class CreateCostumerFrame extends AbstractFrame{
 	private JPanel leftPanel;
 	private JPanel boxdleftPanel;
 	private JLabel title;
-	private JLabel costumer;
+	private JLabel costumerFirstN;
+	private JLabel costumerLastN;
 	private JLabel address;
 	private JLabel birthday;
 
 	private JPanel centerPanel;	
 	private JPanel boxdCenterPanel;
 	private JComboBox<Title> titleSelection;
-	private JTextField customerNameInput;
+	private JTextField customerFirstNameInput;
+	private JTextField customerLastNameInput;
 	private JTextField addressInput;
 	private DatePicker birthdayPicker;
 	private JPanel southPanel;
@@ -78,13 +80,14 @@ public class CreateCostumerFrame extends AbstractFrame{
 					CustomerControlInterface tmp = new CustomerControlImp();
 					//TODO sinnvoller exceptionhandler
 					try {
-						int id = tmp.create(((Title)titleSelection.getSelectedItem()).toString(),
-								customerNameInput.getText(),addressInput.getText(),birthdayPicker.getSelections());
+						int id = tmp.create(customerFirstNameInput.getText(),
+								customerLastNameInput.getText(),addressInput.getText(),birthdayPicker.getSelections(),
+								(Title)titleSelection.getSelectedItem());
 						mf.addProtocolLine("Kunde mit Id:\n"+id+"\nwurde in der Datenbank angelegt\n");
 
 					} catch (SQLException e1) {
 	
-						e1.printStackTrace();
+						mf.addProtocolLine("Es konnte kein Kunde erstellt werden, rufen sie ihren Administrator");
 					}
 					fs.switchFrame();
 				}
@@ -102,14 +105,17 @@ public class CreateCostumerFrame extends AbstractFrame{
 		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));
 
 		leftPanel = new JPanel();
-		leftPanel.setLayout(new GridLayout(4,1,10,10));
+		leftPanel.setLayout(new GridLayout(5,1,10,10));
 
 		title = new JLabel("Anrede ");
 		title.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 20));
 
-		costumer = new JLabel("Name ");
-		costumer.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 20));
-
+		costumerFirstN = new JLabel("Vorname ");
+		costumerFirstN.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 20));
+		
+		costumerLastN = new JLabel("Nachname ");
+		costumerLastN.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 20));
+		
 		address = new JLabel("Adresse ");
 		address.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 20));
 
@@ -120,12 +126,14 @@ public class CreateCostumerFrame extends AbstractFrame{
 		boxdleftPanel.setLayout(new BoxLayout(boxdleftPanel,BoxLayout.PAGE_AXIS));
 
 		centerPanel = new JPanel();	
-		centerPanel.setLayout(new GridLayout(4,1,10,10));
+		centerPanel.setLayout(new GridLayout(5,1,10,10));
 
 		titleSelection = new JComboBox<Title>(Title.values());
 
-		customerNameInput =  new JTextField();
-		customerNameInput.setFont(header.getFont().deriveFont(Font.BOLD , 20));
+		customerFirstNameInput =  new JTextField();
+		customerFirstNameInput.setFont(header.getFont().deriveFont(Font.BOLD , 20));
+		customerLastNameInput =  new JTextField();
+		customerLastNameInput.setFont(header.getFont().deriveFont(Font.BOLD , 20));
 		addressInput =  new JTextField();
 		addressInput.setFont(header.getFont().deriveFont(Font.BOLD , 20));
 		birthdayPicker = new DatePicker(false);
@@ -155,14 +163,16 @@ public class CreateCostumerFrame extends AbstractFrame{
 		getContentPane().setLayout(new BorderLayout(5,5));
 		getContentPane().add(BorderLayout.NORTH,header);
 		leftPanel.add(title);
-		leftPanel.add(costumer);
+		leftPanel.add(costumerFirstN);
+		leftPanel.add(costumerLastN);
 		leftPanel.add(address);
 		leftPanel.add(birthday);
 		boxdleftPanel.add(leftPanel);
 		boxdleftPanel.add(Box.createVerticalGlue());
 		getContentPane().add(BorderLayout.WEST,boxdleftPanel);
 		centerPanel.add(titleSelection);
-		centerPanel.add(customerNameInput);
+		centerPanel.add(customerFirstNameInput);
+		centerPanel.add(customerLastNameInput);
 		centerPanel.add(addressInput);
 		centerPanel.add(birthdayPicker);
 		boxdCenterPanel.add(centerPanel);
@@ -178,7 +188,7 @@ public class CreateCostumerFrame extends AbstractFrame{
 	}
 
 	private void createWidgetSecondView(){
-		customerNameInput.setEditable(false);
+		customerFirstNameInput.setEditable(false);
 		addressInput.setEditable(false);
 		birthdayPicker.setEnabled(false);
 		titleSelection.setEnabled(false);
@@ -188,7 +198,7 @@ public class CreateCostumerFrame extends AbstractFrame{
 		cancel.setActionCommand("Revise");
 	}
 	private void createWidgetFirstView(){
-		customerNameInput.setEditable(true);
+		customerFirstNameInput.setEditable(true);
 		addressInput.setEditable(true);
 		birthdayPicker.setEnabled(true);
 		titleSelection.setEnabled(true);

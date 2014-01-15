@@ -11,6 +11,9 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -27,6 +30,7 @@ import app.BookingRoomControlInterface;
 import app.CustomerControlImp;
 import db.entities.BookingRoom;
 import db.entities.Customer;
+import db.entities.Room;
 
 public class SelectCostumerByRoomFrame extends AbstractFrame{
 
@@ -39,24 +43,29 @@ public class SelectCostumerByRoomFrame extends AbstractFrame{
 	protected JButton book;
 	protected JButton stepback;
 	private JPanel boxdsouthPanel;
-	private HotelRoom[] selectedRooms;
+	private Room[] selectedRooms;
 	private SelectTimeIntervallRoomFrame sf;
-	public SelectCostumerByRoomFrame(VerwaltungMainFrame mf,FreeRoomsFrame frf, HotelRoom[] selectedRooms, SelectTimeIntervallRoomFrame sf) {
+	public SelectCostumerByRoomFrame(VerwaltungMainFrame mf,FreeRoomsFrame frf, Room[] selectedRooms, SelectTimeIntervallRoomFrame sf) {
 		this.mf = mf;
 		this.frf = frf;
 		this.selectedRooms = selectedRooms;
 		this.sf = sf;
 	}
 	protected void createWidget() {
-		header = new JLabel("Kunde wï¿½hlen");
+		header = new JLabel("Kunde wählen");
 		header.setPreferredSize(new Dimension(400,40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
 		header.setOpaque(true);
 		header.setHorizontalAlignment(SwingConstants.CENTER);
 		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));
-
-		list = new JList<>(new CustomerControlImp().getAll());
+		//TODO Sinnvolle exception
+		try {
+			list = new JList<>(new CustomerControlImp().getAll());
+		} catch (SQLException e) {
+			mf.addProtocolLine("Es konnte keine verbindung zur Datenbank hergestellt werden, rufen sie ihren Administrator");
+			e.printStackTrace();
+		}
 		list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		list.setVisibleRowCount(-1);
@@ -70,7 +79,7 @@ public class SelectCostumerByRoomFrame extends AbstractFrame{
 		book.setPreferredSize(new Dimension(20, 30));
 		book.setActionCommand("Book");
 
-		stepback = new JButton("Zurï¿½ck");
+		stepback = new JButton("Zurück");
 		stepback.setPreferredSize(new Dimension(20, 30));
 		stepback.setActionCommand("Back");
 		boxdsouthPanel = new JPanel();	
@@ -100,10 +109,24 @@ public class SelectCostumerByRoomFrame extends AbstractFrame{
 		book.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
-				BookingRoom tmp = new BookingRoom(sf.getTimeInterval(), list.getSelectedValue(), selectedRooms);
+				Calendar start = Calendar.getInstance();
+				start.setTime(sf.getStartDate());
+				Calendar end = Calendar.getInstance();
+				end.setTime(sf.getEndDate());
 				BookingRoomControlInterface controller = new BookingRoomControlImp();
-				controller.create(tmp);
-				mf.addProtocolLine("Buchung:\n"+tmp.toString()+"\nwurde in der Datenbank angelegt\n");
+				for (Date date = start.getTime(); !start.after(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
+				    for(Room r:selectedRooms){
+				    	try {
+							controller.create(new java.sql.Date(date.getTime()),r.getRid(),list.getSelectedValue().getId());
+							mf.addProtocolLine("Buchung von Zimmer: "+r.getRid()+" wurde in der Datenbank angelegt\n");
+						} catch (SQLException e1) {
+							mf.addProtocolLine("Buchung konnte nicht erstellt werden");
+							e1.printStackTrace();
+						}
+				    	
+				    }
+				}
+				
 				fs2.switchFrame();
 			}	
 		});

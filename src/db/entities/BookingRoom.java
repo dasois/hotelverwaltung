@@ -31,6 +31,11 @@ public class BookingRoom implements DBBookingRoom{
 		this.room = room;
 		this.customer = customer;
 	}
+	public BookingRoom(Date date, int roomId, int customerId) {
+		this.date = date;
+		this.room = new Room(roomId);
+		this.customer = new Customer(customerId);
+	}
 	public BookingRoom(int brid){this.brid = brid;}
 	public BookingRoom(){}
 	
