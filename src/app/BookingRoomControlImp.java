@@ -7,8 +7,6 @@ import java.util.Vector;
 
 import db.DBBookingRoom;
 import db.entities.BookingRoom;
-import db.entities.Customer;
-import db.entities.Room;
 
 
 public class BookingRoomControlImp implements BookingRoomControlInterface{
@@ -18,7 +16,7 @@ public class BookingRoomControlImp implements BookingRoomControlInterface{
 		ResultSet resultset = new BookingRoom().getAll();
 		Vector<BookingRoom> temp = new Vector<BookingRoom>();
 		while (resultset.next()) {
-			BookingRoom c = new BookingRoom(resultset.getDate(1),resultset.getInt(2),resultset.getInt(3));		
+			BookingRoom c = new BookingRoom(resultset.getDate(2),resultset.getInt(3),resultset.getInt(4));		
 		    temp.add(c);
 		}		
 		return temp;

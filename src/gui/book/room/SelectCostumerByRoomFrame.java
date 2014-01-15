@@ -28,10 +28,10 @@ import javax.swing.SwingConstants;
 import app.BookingRoomControlImp;
 import app.BookingRoomControlInterface;
 import app.CustomerControlImp;
-import db.entities.BookingRoom;
 import db.entities.Customer;
 import db.entities.Room;
 
+@SuppressWarnings("serial")
 public class SelectCostumerByRoomFrame extends AbstractFrame{
 
 	private VerwaltungMainFrame mf;
@@ -115,7 +115,11 @@ public class SelectCostumerByRoomFrame extends AbstractFrame{
 				end.setTime(sf.getEndDate());
 				BookingRoomControlInterface controller = new BookingRoomControlImp();
 				for (Date date = start.getTime(); !start.after(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
-				    for(Room r:selectedRooms){
+					
+					System.out.println(start.getTime());
+					System.out.println(end.getTime());
+					System.out.println("A");
+					for(Room r:selectedRooms){
 				    	try {
 							controller.create(new java.sql.Date(date.getTime()),r.getRid(),list.getSelectedValue().getId());
 							mf.addProtocolLine("Buchung von Zimmer: "+r.getRid()+" wurde in der Datenbank angelegt\n");

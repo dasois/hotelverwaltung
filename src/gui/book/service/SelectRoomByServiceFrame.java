@@ -11,6 +11,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -23,13 +24,13 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 import app.BookingRoomControlImp;
-import db.entities.Room;
+import db.entities.BookingRoom;
 
 
 @SuppressWarnings("serial")
 public class SelectRoomByServiceFrame extends AbstractFrame{
 	private JLabel header;
-	private JList<Room> list;
+	private JList<BookingRoom> list;
 	private JScrollPane listScroller;
 	private JPanel southPanel;
 	private JButton book;
@@ -53,10 +54,16 @@ public class SelectRoomByServiceFrame extends AbstractFrame{
 		header.setHorizontalAlignment(SwingConstants.CENTER);
 		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));
 
-		list = new JList<Room>(new BookingRoomControlImp().getAll());
-		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-		list.setVisibleRowCount(-1);
+		try {
+			list = new JList<BookingRoom>(new BookingRoomControlImp().getAll());
+			list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+			list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+			list.setVisibleRowCount(-1);
+		} catch (SQLException e) {
+			mf.addProtocolLine("Fehler bei der Datenbank, rufen sie ihren Administrator");
+			e.printStackTrace();
+		}
+		
 		listScroller = new JScrollPane(list);
 		listScroller.setPreferredSize(new Dimension(250, 80));
 

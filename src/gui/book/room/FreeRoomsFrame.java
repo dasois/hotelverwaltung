@@ -24,12 +24,11 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
-import app.BookingRoomControlImp;
-import app.BookingRoomControlInterface;
 import app.RoomControlImp;
 import app.RoomControlInterface;
 import db.entities.Room;
 
+@SuppressWarnings("serial")
 public class FreeRoomsFrame extends AbstractFrame{
 
 	private JLabel header;

@@ -1,7 +1,6 @@
 package gui.book.service;
 
 import gui.AbstractFrame;
-import gui.DatePicker;
 import gui.FrameSwitcher;
 import gui.VerwaltungMainFrame;
 
@@ -21,6 +20,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import com.toedter.calendar.JDateChooser;
+
 @SuppressWarnings("serial")
 public class SelectTimeFrame extends AbstractFrame{
 
@@ -34,7 +35,7 @@ public class SelectTimeFrame extends AbstractFrame{
 	private JLabel date;
 	private JPanel boxdleftPanel;
 	private JPanel centerPanel;
-	private DatePicker datePicker;
+	private JDateChooser datePicker;
 	private JPanel boxdCenterPanel;
 	private JPanel southPanel;
 	protected JButton search;
@@ -63,14 +64,14 @@ public class SelectTimeFrame extends AbstractFrame{
 		centerPanel = new JPanel();	
 		centerPanel.setLayout(new GridLayout(1,1,10,10));
 
-		datePicker = new DatePicker(true);
+		datePicker = new JDateChooser();
 		boxdCenterPanel = new JPanel();	
 		boxdCenterPanel.setLayout(new BoxLayout(boxdCenterPanel,BoxLayout.PAGE_AXIS));
 
 		southPanel = new JPanel();
 		southPanel.setLayout(new GridLayout(1,2,10,10));
 
-		search = new JButton("Wï¿½hlen");
+		search = new JButton("Wählen");
 		search.setPreferredSize(new Dimension(20, 30));
 		search.setActionCommand("Search");
 
@@ -121,7 +122,7 @@ public class SelectTimeFrame extends AbstractFrame{
 		});
 	}
 	public Date getDate(){
-		return datePicker.getSelections();
+		return new Date(datePicker.getCalendar().getTime().getTime());
 	}
 
 }

@@ -1,7 +1,6 @@
 package gui.book.room;
 
 import gui.AbstractFrame;
-import gui.DatePicker;
 import gui.FrameSwitcher;
 import gui.VerwaltungMainFrame;
 
@@ -21,6 +20,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import com.toedter.calendar.JDateChooser;
+
 
 
 @SuppressWarnings("serial")
@@ -33,8 +34,8 @@ public class SelectTimeIntervallRoomFrame extends AbstractFrame{
 	private JLabel endDate;
 	private JPanel boxdleftPanel;
 	private JPanel centerPanel;
-	private DatePicker startDatePicker;
-	private DatePicker endDatePicker;
+	private JDateChooser startDatePicker;
+	private JDateChooser endDatePicker;
 	private JPanel boxdCenterPanel;
 	private JPanel southPanel;
 	protected JButton search;
@@ -69,8 +70,8 @@ public class SelectTimeIntervallRoomFrame extends AbstractFrame{
 		centerPanel = new JPanel();	
 		centerPanel.setLayout(new GridLayout(2,1,10,10));
 
-		startDatePicker = new DatePicker(true);
-		endDatePicker = new DatePicker(true);
+		startDatePicker = new JDateChooser();
+		endDatePicker = new JDateChooser();
 
 		boxdCenterPanel = new JPanel();	
 		boxdCenterPanel.setLayout(new BoxLayout(boxdCenterPanel,BoxLayout.PAGE_AXIS));
@@ -131,9 +132,9 @@ public class SelectTimeIntervallRoomFrame extends AbstractFrame{
 		});
 	}
 	public Date getStartDate(){
-		return startDatePicker.getSelections();
+		return new Date(startDatePicker.getDate().getTime());
 	}
 	public Date  getEndDate(){
-		return startDatePicker.getSelections();
+		return new Date(endDatePicker.getDate().getTime());
 	}
 }

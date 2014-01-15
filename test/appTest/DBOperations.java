@@ -3,14 +3,14 @@
  */
 package appTest;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Vector;
 
 import junit.framework.Assert;
+
 
 import org.junit.Test;
 
@@ -31,7 +31,7 @@ public class DBOperations {
 	public void test() throws SQLException {
 		try {
 			//Anmelden
-			db.DBIface.loginDB("hm", "init");
+			db.DBIface.loginDB();
 			//Create Room
 			Room room = new Room();
 			room.setDoubleRoom(false);
@@ -107,10 +107,10 @@ public class DBOperations {
 			Assert.assertEquals(servicePrice, rs.getDouble(3));
 			System.out.println("Service("+rs.getInt(1)+", "+rs.getString(2)+", "+rs.getDouble(3)+")");
 			
-			//Create customers
-			Customer customer = new Customer("Hans", "Meier", "Beispielstr. 123, 12345 Hintertupfing", Date.valueOf("1980-12-30"), "Herr");
+			//Create Customer
+			Customer customer = new Customer("Hans", "Meier", "Beispielstr. 123, 12345 Hintertupfing", Date.valueOf("1980-12-30"));
 			customer.create();
-			Customer customer2 = new Customer("Hans", "Meier", "Beispielstr. 123, 12345 Hintertupfing", Date.valueOf("1960-12-30"), "Herr");
+			Customer customer2 = new Customer("Hans", "Meier", "Beispielstr. 123, 12345 Hintertupfing", Date.valueOf("1960-12-30"));
 			customer2.create();
 			
 			//Update customer
@@ -119,17 +119,8 @@ public class DBOperations {
 			customer.setAddress("Lothstr. 1, 80123 München");
 			customer.setBirthdate(Date.valueOf("1900-1-1"));
 			customer.update();
-			
-			//Room.getFree should include both created rooms
-			rs = room.getFree(Date.valueOf("2000-1-1"), Date.valueOf("2020-1-1"));
-			Vector<Integer> roomIds = new Vector<Integer>();
-			while(rs.next()){
-				roomIds.add(rs.getInt(1));
-			}
-			Assert.assertTrue(roomIds.contains(room.getRid()));
-			Assert.assertTrue(roomIds.contains(room2.getRid()));
 
-			//Create booking for room
+			//Create 2 Bookings on Room and 1 Booking on Room2
 			BookingRoom br = new BookingRoom(Date.valueOf("2014-2-1"),room,customer);
 			br.create();
 			System.out.println("BookingRoom with ID "+br.getBrid()+" created.");
@@ -140,15 +131,6 @@ public class DBOperations {
 			Assert.assertEquals(br.getDate(), rs.getDate(2));
 			Assert.assertEquals(br.getRoom().getRid(), rs.getInt(3));
 			Assert.assertEquals(br.getCustomer().getId(), rs.getInt(4));
-			
-			//Room.getFree should only include room2
-			rs = room.getFree(Date.valueOf("2000-1-1"), Date.valueOf("2020-1-1"));
-			roomIds = new Vector<Integer>();
-			while(rs.next()){
-				roomIds.add(rs.getInt(1));
-			}
-			Assert.assertFalse(roomIds.contains(room.getRid()));
-			Assert.assertTrue(roomIds.contains(room2.getRid()));
 			
 			BookingRoom br2 = new BookingRoom(Date.valueOf("2014-2-2"),room,customer2);
 			br2.create();

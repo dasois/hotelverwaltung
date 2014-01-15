@@ -1,7 +1,6 @@
 package gui.create;
 
 import gui.AbstractFrame;
-import gui.DatePicker;
 import gui.FrameSwitcher;
 import gui.VerwaltungMainFrame;
 
@@ -22,11 +21,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import com.toedter.calendar.JDateChooser;
 
 import app.CustomerControlImp;
 import app.CustomerControlInterface;
 import app.entities.Title;
-
 
 
 @SuppressWarnings("serial")
@@ -51,7 +50,7 @@ public class CreateCostumerFrame extends AbstractFrame{
 	private JTextField customerFirstNameInput;
 	private JTextField customerLastNameInput;
 	private JTextField addressInput;
-	private DatePicker birthdayPicker;
+	private JDateChooser birthdayPicker;
 	private JPanel southPanel;
 	private JPanel boxdsouthPanel;
 	private JButton create;
@@ -80,10 +79,11 @@ public class CreateCostumerFrame extends AbstractFrame{
 					CustomerControlInterface tmp = new CustomerControlImp();
 					//TODO sinnvoller exceptionhandler
 					try {
+					
 						int id = tmp.create(customerFirstNameInput.getText(),
-								customerLastNameInput.getText(),addressInput.getText(),birthdayPicker.getSelections(),
+								customerLastNameInput.getText(),addressInput.getText(),new java.sql.Date(birthdayPicker.getCalendar().getTime().getTime()),
 								(Title)titleSelection.getSelectedItem());
-						mf.addProtocolLine("Kunde mit Id:\n"+id+"\nwurde in der Datenbank angelegt\n");
+						mf.addProtocolLine("Kunde mit Id:\n"+id+"\n Namens: "+customerLastNameInput.getText()+" wurde in der Datenbank angelegt\n");
 
 					} catch (SQLException e1) {
 	
@@ -136,7 +136,7 @@ public class CreateCostumerFrame extends AbstractFrame{
 		customerLastNameInput.setFont(header.getFont().deriveFont(Font.BOLD , 20));
 		addressInput =  new JTextField();
 		addressInput.setFont(header.getFont().deriveFont(Font.BOLD , 20));
-		birthdayPicker = new DatePicker(false);
+		birthdayPicker = new JDateChooser();
 		birthdayPicker.setFont(header.getFont().deriveFont(Font.BOLD , 20));
 
 		boxdCenterPanel = new JPanel();	
@@ -189,6 +189,7 @@ public class CreateCostumerFrame extends AbstractFrame{
 
 	private void createWidgetSecondView(){
 		customerFirstNameInput.setEditable(false);
+		customerLastNameInput.setEditable(false);
 		addressInput.setEditable(false);
 		birthdayPicker.setEnabled(false);
 		titleSelection.setEnabled(false);

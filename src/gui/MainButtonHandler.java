@@ -42,7 +42,7 @@ public class MainButtonHandler implements ActionListener {
 					new JDialog(cf);
 										
 				}
-				else if(action =="Lï¿½schen"){
+				else if(action =="Löschen"){
 					gui.setEnabled(false);
 					DeleteFrame<Customer> dcf;
 					//TODO sinnvolle exception

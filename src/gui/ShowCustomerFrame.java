@@ -21,6 +21,7 @@ import javax.swing.SwingConstants;
 import app.CustomerControlImp;
 import db.entities.Customer;
 
+@SuppressWarnings("serial")
 public class ShowCustomerFrame extends AbstractFrame{
 	private VerwaltungMainFrame mf;
 	private JLabel header;
@@ -59,7 +60,7 @@ public class ShowCustomerFrame extends AbstractFrame{
 		southPanel.setLayout(new GridLayout(1,1,10,10));
 
 
-		cancel = new JButton("Zurï¿½ck");
+		cancel = new JButton("Zurück");
 		cancel.setPreferredSize(new Dimension(20, 30));
 		cancel.setActionCommand("Cancel");
 		boxdsouthPanel = new JPanel();	

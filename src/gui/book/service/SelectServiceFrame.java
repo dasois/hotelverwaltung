@@ -49,7 +49,7 @@ public class SelectServiceFrame extends AbstractFrame{
 
 	@Override
 	protected void createWidget() {
-		header = new JLabel("Dienstleistung wï¿½hlen");
+		header = new JLabel("Dienstleistung wählen");
 		header.setPreferredSize(new Dimension(400,40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
@@ -75,7 +75,7 @@ public class SelectServiceFrame extends AbstractFrame{
 		book.setPreferredSize(new Dimension(20, 30));
 		book.setActionCommand("Book");
 
-		stepback = new JButton("Zurï¿½ck");
+		stepback = new JButton("Zurück");
 		stepback.setPreferredSize(new Dimension(20, 30));
 		stepback.setActionCommand("Back");
 		boxdsouthPanel = new JPanel();	

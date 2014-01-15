@@ -134,4 +134,8 @@ public class BookingRoom implements DBBookingRoom{
 	public void setBrid(int brid) {
 		this.brid = brid;
 	}
+	public String toString(){
+		
+		return "brId: " + brid + " Zimmernummer: "+ room.getRid() + " Kundennummer: " + customer.getId();
+	}
 }
