@@ -51,6 +51,11 @@ public class BookingRoom implements DBBookingRoom{
 	}
 	
 	@Override
+	public ResultSet getAllFromCustomer(int CustomerId) throws SQLException {
+		return DBIface.executeQuery("SELECT * from Booking_Room WHERE CID = "+CustomerId);
+		}
+	
+	@Override
 	public int create() throws SQLException {
 		ResultSet rs = DBIface.executeQuery("Insert into Booking_Room values ("+this.getBrid()+",\""+this.getDate().toString()+"\","+this.getRoom().getRid()+","+this.getCustomer().getId()+")");
 		if (rs.next()) {
