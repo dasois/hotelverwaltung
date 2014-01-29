@@ -13,5 +13,5 @@ public interface BookingRoomControlInterface {
 	Vector<BookingRoom> getAll() throws SQLException;
 	boolean delete(int BookingRoomId) throws SQLException;
 	boolean update(BookingRoom br);
-	int create(Date date, int roomId, int customerId) throws SQLException;
+	int create(Date date, int roomId, int serviceId) throws SQLException;
 }

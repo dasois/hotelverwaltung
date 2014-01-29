@@ -59,7 +59,7 @@ public class SelectCostumerByRoomFrame extends AbstractFrame{
 		header.setOpaque(true);
 		header.setHorizontalAlignment(SwingConstants.CENTER);
 		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));
-		//TODO Sinnvolle exception
+
 		try {
 			list = new JList<>(new CustomerControlImp().getAll());
 		} catch (SQLException e) {
@@ -114,25 +114,25 @@ public class SelectCostumerByRoomFrame extends AbstractFrame{
 				Calendar end = Calendar.getInstance();
 				end.setTime(sf.getEndDate());
 				BookingRoomControlInterface controller = new BookingRoomControlImp();
+				double price =0.0;
 				for (Date date = start.getTime(); !start.after(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
-					
-					System.out.println(start.getTime());
-					System.out.println(end.getTime());
-					System.out.println("A");
 					for(Room r:selectedRooms){
-				    	try {
+						try {
+							price = price + r.getPrice();
 							controller.create(new java.sql.Date(date.getTime()),r.getRid(),list.getSelectedValue().getId());
-							mf.addProtocolLine("Buchung von Zimmer: "+r.getRid()+" wurde in der Datenbank angelegt\n");
+							mf.addProtocolLine("Buchung von Zimmer: "+r.getRid()+"am Tag:"+date.toString()+" wurde in der Datenbank angelegt\n");
 						} catch (SQLException e1) {
 							mf.addProtocolLine("Buchung konnte nicht erstellt werden");
 							e1.printStackTrace();
+						}catch (NullPointerException e1) {
+							mf.addProtocolLine("Fehler, Es wurde kein Kunde ausgewählt");
 						}
-				    	
-				    }
+					}
+
 				}
-				
+				mf.addProtocolLine("Die Komplette buchung kostet: "+price);
 				fs2.switchFrame();
-			}	
+			}
 		});
 	}
 }

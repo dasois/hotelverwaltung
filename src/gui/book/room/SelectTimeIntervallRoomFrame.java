@@ -17,6 +17,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -41,7 +42,7 @@ public class SelectTimeIntervallRoomFrame extends AbstractFrame{
 	protected JButton search;
 	protected JButton cancel;
 	private JPanel boxdsouthPanel;
-	
+
 	public SelectTimeIntervallRoomFrame(VerwaltungMainFrame mf) {
 		this.mf = mf;
 	}	
@@ -112,22 +113,29 @@ public class SelectTimeIntervallRoomFrame extends AbstractFrame{
 	}
 	protected void setupInteractions() {
 		final FrameSwitcher fs = new FrameSwitchImpl(this,mf);
-		
+
 		final SelectTimeIntervallRoomFrame srf = this;
-		
+
 		cancel.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
-					fs.switchFrame();
+				fs.switchFrame();
 			}			
 		});
 		search.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				FreeRoomsFrame ff = new FreeRoomsFrame(mf,srf);
-				ff.init();
-				ff.setVisible(false);
-				FrameSwitcher fs2 = new FrameSwitchImpl(srf,ff);
+				if(startDatePicker.getDate()==null)
+					JOptionPane.showMessageDialog(null, "Bitte die Daten eingeben");
+				else if(startDatePicker.getDate().after(endDatePicker.getDate())){
+					JOptionPane.showMessageDialog(null, "Das End-Datum muss nach/gleich dem Anfangsdatum sein");
+				}
+				else{
+					FreeRoomsFrame ff = new FreeRoomsFrame(mf,srf);
+					ff.init();
+					ff.setVisible(false);
+					FrameSwitcher fs2 = new FrameSwitchImpl(srf,ff);
 					fs2.switchFrame();
+				}
 			}
 		});
 	}

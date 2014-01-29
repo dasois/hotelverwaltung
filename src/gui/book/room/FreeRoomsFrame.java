@@ -19,6 +19,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
@@ -41,7 +42,7 @@ public class FreeRoomsFrame extends AbstractFrame{
 	private VerwaltungMainFrame mf;
 	private SelectTimeIntervallRoomFrame sf;
 	private Vector<Room> freeRooms;
-	
+
 	public FreeRoomsFrame(VerwaltungMainFrame mf,SelectTimeIntervallRoomFrame sf) {
 		this.mf = mf;
 		this.sf = sf;
@@ -53,7 +54,7 @@ public class FreeRoomsFrame extends AbstractFrame{
 			e.printStackTrace();
 		}
 	}
-	
+
 
 	protected void createWidget() {
 		header = new JLabel("Freie Zimmer");
@@ -63,15 +64,15 @@ public class FreeRoomsFrame extends AbstractFrame{
 		header.setOpaque(true);
 		header.setHorizontalAlignment(SwingConstants.CENTER);
 		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));
-		
-		
+
+
 		list = new JList<>(freeRooms);
 		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		list.setVisibleRowCount(-1);
 		listScroller = new JScrollPane(list);
 		listScroller.setPreferredSize(new Dimension(250, 80));
-		
+
 		southPanel = new JPanel();
 		southPanel.setLayout(new GridLayout(1,2,10,10));
 
@@ -97,26 +98,31 @@ public class FreeRoomsFrame extends AbstractFrame{
 		boxdsouthPanel.add(Box.createVerticalGlue());
 		getContentPane().add(BorderLayout.SOUTH,boxdsouthPanel);
 	}
-	
+
 	protected void setupInteractions() {
 		final FrameSwitcher fs = new FrameSwitchImpl(this,sf);
 		final FreeRoomsFrame frf = this;
-		
+
 		stepback.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
-					fs.switchFrame();
+				fs.switchFrame();
 			}
 		});
 		book.addActionListener(new ActionListener(){
-			
+
 			public void actionPerformed(ActionEvent e) {
-				Room[] tmp = list.getSelectedValuesList().toArray(new Room[0]);
-				SelectCostumerByRoomFrame scf = new SelectCostumerByRoomFrame(mf,frf,tmp,sf);
-				scf.init();
-				scf.setVisible(false);
-				FrameSwitcher fs2 = new FrameSwitchImpl(frf,scf);
-				fs2.switchFrame();
+				if(list.getSelectedValuesList().isEmpty()){
+					JOptionPane.showMessageDialog(null, "Wähle mindestens ein freies Zimmer");
+				}
+				else{
+					Room[] tmp = list.getSelectedValuesList().toArray(new Room[0]);
+					SelectCostumerByRoomFrame scf = new SelectCostumerByRoomFrame(mf,frf,tmp,sf);
+					scf.init();
+					scf.setVisible(false);
+					FrameSwitcher fs2 = new FrameSwitchImpl(frf,scf);
+					fs2.switchFrame();
+				}
 			}	
 		});
 	}

@@ -24,6 +24,10 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 import app.BookingRoomControlImp;
+import app.BookingServiceControlInterface;
+import app.BookingServiceImp;
+import app.ServiceControlImp;
+import app.ServiceControlInterface;
 import db.entities.BookingRoom;
 
 
@@ -44,6 +48,7 @@ public class SelectRoomByServiceFrame extends AbstractFrame{
 		this.mf = mf;
 		this.ssf = ssf;
 		this.ssf2 = ssf2;
+
 	}
 	protected void createWidget() {
 		header = new JLabel("Zimmer wählen");
@@ -74,7 +79,7 @@ public class SelectRoomByServiceFrame extends AbstractFrame{
 		book.setPreferredSize(new Dimension(20, 30));
 		book.setActionCommand("Book");
 
-		stepback = new JButton("Zurï¿½ck");
+		stepback = new JButton("Zurück");
 		stepback.setPreferredSize(new Dimension(20, 30));
 		stepback.setActionCommand("Back");
 		boxdsouthPanel = new JPanel();	
@@ -104,6 +109,14 @@ public class SelectRoomByServiceFrame extends AbstractFrame{
 		book.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
+				BookingServiceControlInterface controller = new BookingServiceImp();
+				try {
+					controller.create(ssf2.getDate(), list.getSelectedValue().getBrid(), ssf.getServiceSelectionid());
+					mf.addProtocolLine("Buchung von Service: "+ ssf.getServiceName()+" wurde in der Datenbank angelegt\n");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				fs2.switchFrame();
 			}	
 		});

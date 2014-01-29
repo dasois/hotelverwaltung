@@ -17,6 +17,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -116,13 +117,17 @@ public class SelectTimeFrame extends AbstractFrame{
 
 		search.addActionListener(new ActionListener(){
 
-			public void actionPerformed(ActionEvent e) {		
+			public void actionPerformed(ActionEvent e) {
+				if (datePicker.isValid()){
+					JOptionPane.showMessageDialog(null, "Bitte Datum auswählen");
+				}
+				else{	
 					fs2.switchFrame();
+				}
 			}
 		});
 	}
 	public Date getDate(){
 		return new Date(datePicker.getCalendar().getTime().getTime());
 	}
-
 }

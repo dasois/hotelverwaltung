@@ -22,7 +22,10 @@ import db.entities.Room;
 import db.entities.Service;
 
 
-
+/**
+ * Buttonhandler of VerwaltungsMainFrame
+ * @author Tobias
+ */
 
 public class MainButtonHandler implements ActionListener {
 	private VerwaltungMainFrame gui;

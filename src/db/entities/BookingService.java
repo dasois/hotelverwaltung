@@ -33,7 +33,13 @@ public class BookingService implements DBBookingService {
 		this.service = service;
 		this.bookingRoom = bookingRoom;
 	}
-
+	public BookingService(Date date, int serviceId, int broomId) {
+		this.date = date;
+		this.bookingRoom = new BookingRoom(broomId);
+		this.service = new Service(serviceId);
+	}
+	public BookingService(){}
+	public BookingService(int bsid){this.bsid = bsid;}
 	@Override
 	public ResultSet getAll() throws SQLException {
 		return DBIface.executeQuery("SELECT * from Booking_Service");

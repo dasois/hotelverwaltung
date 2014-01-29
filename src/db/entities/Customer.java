@@ -153,7 +153,7 @@ public class Customer implements DBCustomer{
 		this.id = id;
 	}
 	public String toString(){
-		return "CId: "+ id + " Name "+ fName+" "+lName+" Adresse: " +address+ " Geb: "+ birthdate;
+		return "CId: "+ id + " Name "+ fName+" "+lName+" Adresse: " +address+ " Geb: "+ birthdate+"\n";
 	}
 	/**
 	 * @return the title

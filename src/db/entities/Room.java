@@ -118,9 +118,9 @@ public class Room implements DBRoom{
 	}
 	public String toString(){
 		if(isDoubleRoom)
-			return "Zimmer: "+ rid + "Price " +price+ "doppelzimmer? "+"ja";
+			return "Zimmer: "+ rid + " Price " +price+ " Doppelzimmer"+"\n";
 		else{
-			return "Zimmer: "+ rid + "Price " +price+ "doppelzimmer? "+"ja";
+			return "Zimmer: "+ rid + " Price " +price+ " Einzelzimmer"+"\n";
 		}
 	}
 }

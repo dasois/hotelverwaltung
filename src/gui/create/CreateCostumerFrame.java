@@ -27,7 +27,10 @@ import app.CustomerControlImp;
 import app.CustomerControlInterface;
 import app.entities.Title;
 
-
+/**
+ * Frame to register a new customer.
+ * @author Tobias
+ */
 @SuppressWarnings("serial")
 public class CreateCostumerFrame extends AbstractFrame{
 	private VerwaltungMainFrame mf;
@@ -88,7 +91,11 @@ public class CreateCostumerFrame extends AbstractFrame{
 					} catch (SQLException e1) {
 	
 						mf.addProtocolLine("Es konnte kein Kunde erstellt werden, rufen sie ihren Administrator");
+					}catch (NullPointerException e2) {
+	
+						mf.addProtocolLine("Fehlerhafte eingabe, es wurde kein Kunde Angelegt.\nVergewissern sie sich das alle Felder ausgefüllt werden!");
 					}
+					
 					fs.switchFrame();
 				}
 			}	

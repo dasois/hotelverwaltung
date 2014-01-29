@@ -16,7 +16,7 @@ public class BookingRoomControlImp implements BookingRoomControlInterface{
 		ResultSet resultset = new BookingRoom().getAll();
 		Vector<BookingRoom> temp = new Vector<BookingRoom>();
 		while (resultset.next()) {
-			BookingRoom c = new BookingRoom(resultset.getDate(2),resultset.getInt(3),resultset.getInt(4));		
+			BookingRoom c = new BookingRoom(resultset.getInt(1),resultset.getDate(2),resultset.getInt(3),resultset.getInt(4));		
 		    temp.add(c);
 		}		
 		return temp;
@@ -29,8 +29,7 @@ public class BookingRoomControlImp implements BookingRoomControlInterface{
 	}
 
 	@Override
-	public boolean update(BookingRoom br) {
-			
+	public boolean update(BookingRoom br) {	
 		return update(br);
 	}
 

@@ -24,7 +24,10 @@ import javax.swing.SwingConstants;
 
 import app.RoomControlImp;
 import app.RoomControlInterface;
-
+/**
+ * Frame to register a new room.
+ * @author Tobias
+ */
 @SuppressWarnings("serial")
 public class CreateRoomFrame extends AbstractFrame{
 	private JLabel header;
@@ -139,9 +142,12 @@ public class CreateRoomFrame extends AbstractFrame{
 						mf.addProtocolLine("Zimmer: "+roomId+" wurde mit dem Preis: "+Double.parseDouble(price.getText())
 								+"€ in der Datenbank angelegt\n");
 						fs.switchFrame();
-					} catch (NumberFormatException | SQLException e1) {
+					} catch (SQLException e1) {
 						mf.addProtocolLine("Es konnte kein Zimmer erstellt werden, rufen sie ihren Administrator");
-					}						
+					}catch (NumberFormatException e1) {
+						mf.addProtocolLine("Fehlerhafte eingabe, es wurde kein Zimmer Angelegt.\nVergewissern sie sich das alle Felder ausgefüllt werden!");
+					}	
+					fs.switchFrame();
 				}				
 			}	
 		});

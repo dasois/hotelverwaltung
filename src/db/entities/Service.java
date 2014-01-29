@@ -112,7 +112,7 @@ public class Service implements DBService{
 		this.sid = sid;
 	}
 	public String toString(){
-		return "SId: " + sid + " DName: "+ type + " Price: " + price;
+		return "SId: " + sid + " DName: "+ type + " Price: " + price+ "\n";
 	}
 	
 }

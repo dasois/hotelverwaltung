@@ -20,7 +20,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-
+/**
+ * Frame from which all subframes are selected
+ * @author Tobias
+ */
 @SuppressWarnings("serial")
 public class VerwaltungMainFrame extends AbstractFrame{
 
@@ -95,11 +98,6 @@ public class VerwaltungMainFrame extends AbstractFrame{
 		        actions.setModel(model[i]);				
 			}
 		});
-	}
-
-	public static void main(String[] args) {
-		VerwaltungMainFrame li = new VerwaltungMainFrame();
-		li.init();
 	}
 	public void addProtocolLine(String s){
 		protocol.setText(protocol.getText()+"\n"+s);

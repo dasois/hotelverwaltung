@@ -24,7 +24,10 @@ import javax.swing.SwingConstants;
 import app.ServiceControlImp;
 import app.ServiceControlInterface;
 
-
+/**
+ * Frame to register a new service.
+ * @author Tobias
+ */
 @SuppressWarnings("serial")
 public class CreateServiceFrame extends AbstractFrame{
 	private JLabel header;
@@ -48,7 +51,7 @@ public class CreateServiceFrame extends AbstractFrame{
 	}
 
 	protected void createWidget() {
-		header = new JLabel("Dienstleistung hinzufï¿½gen");
+		header = new JLabel("Dienstleistung hinzufügen");
 		header.setPreferredSize(new Dimension(400,40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
@@ -143,7 +146,7 @@ public class CreateServiceFrame extends AbstractFrame{
 						mf.addProtocolLine("Service:\n"+sid+" "+name.getText()+" wurde in der Datenbank angelegt\n");
 
 					} catch (NumberFormatException e1) {
-						mf.addProtocolLine("Der Eingegebene Preis kann nicht als Zahl gespeichert werden");
+						mf.addProtocolLine("Fehlerhafte eingabe, es wurde kein Service Angelegt.\nVergewissern sie sich das alle Felder ausgefüllt werden!");
 					} catch (SQLException e1) {
 						mf.addProtocolLine("Es konnte kein Kunde erstellt werden, rufen sie ihren Administrator");
 					}

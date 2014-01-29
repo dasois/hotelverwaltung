@@ -13,6 +13,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -21,6 +22,10 @@ import javax.swing.SwingConstants;
 import app.LoginControlImp;
 import app.LoginControlInterface;
 
+/**
+ * The login process.
+ * @author Tobias
+ */
 
 @SuppressWarnings("serial")
 public class FrameLogin extends AbstractFrame{
@@ -37,7 +42,7 @@ public class FrameLogin extends AbstractFrame{
 
 	@Override
 	protected void createWidget() {
-		
+
 		//header section
 		header = new JLabel("Login Screen");
 		header.setPreferredSize(new Dimension(400,40));
@@ -50,10 +55,10 @@ public class FrameLogin extends AbstractFrame{
 
 		leftPanel = new JPanel();
 		leftPanel.setLayout(new GridLayout(2,1,10,10));
-		
+
 		user = new JLabel("User ");
 		user.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 20));
-		
+
 		password = new JLabel("Password ");
 		password.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 20));
 
@@ -63,9 +68,9 @@ public class FrameLogin extends AbstractFrame{
 
 		centerPanel = new JPanel();	
 		centerPanel.setLayout(new GridLayout(2,1,10,10));
-		
+
 		userTextField = new JTextField();
-		
+
 		passwordTextField = new JPasswordField();
 		passwordTextField.setFont(header.getFont().deriveFont(Font.BOLD , 20));
 
@@ -73,15 +78,11 @@ public class FrameLogin extends AbstractFrame{
 		boxdCenterPanel.setLayout(new BoxLayout(boxdCenterPanel,BoxLayout.PAGE_AXIS));
 
 
-
-
 		//button
 		btnlogin = new JButton("Login");
 		btnlogin.setPreferredSize(new Dimension(20, 30));
-		btnlogin.setActionCommand("login gedrï¿½ckt");
+		btnlogin.setActionCommand("login gedrückt");
 		//button
-
-
 	}
 
 	@Override
@@ -95,7 +96,6 @@ public class FrameLogin extends AbstractFrame{
 		boxdleftPanel.add(Box.createVerticalGlue());
 		getContentPane().add(BorderLayout.WEST,boxdleftPanel);
 
-		
 		centerPanel.add(userTextField);
 		centerPanel.add(passwordTextField);
 		boxdCenterPanel.add(centerPanel);
@@ -103,33 +103,38 @@ public class FrameLogin extends AbstractFrame{
 		getContentPane().add(BorderLayout.CENTER,boxdCenterPanel);
 
 	}
-	
+	private void login(){
+		String user = userTextField.getText();
+		String passText = new String(passwordTextField.getPassword());
+		LoginControlInterface tmp = new LoginControlImp();
+		try {
+			if(tmp.loginDB(user, passText)){
+				new VerwaltungMainFrame().init();
+				closeFrame();
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "Falsche Benutzer/Passwort kombination.\n Bei wiederholtem Fehlschlag überprüfen sie ob die DatenBank läuft.");
+		}		
+	}
 	@Override
 	protected void setupInteractions() {
-		btnlogin.addActionListener(new ActionListener(){
-			
+		passwordTextField.addActionListener(new ActionListener(){
 
-			@Override
+			public void actionPerformed(ActionEvent arg0) {
+					login();		
+			}	
+		});	
+
+		btnlogin.addActionListener(new ActionListener(){
+
 			public void actionPerformed(ActionEvent e) {
-				if (e.getActionCommand().equals("login gedrï¿½ckt")){
-					String user = userTextField.getText();
-					String passText = new String(passwordTextField.getPassword());
-					LoginControlInterface tmp = new LoginControlImp();
-					try {
-						if(tmp.loginDB(user, passText)){
-							new VerwaltungMainFrame().init();
-							closeFrame();
-						}
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}								
-				}				
+				login();
 			}
 		});	
 	}
-public static void main(String[] args) {
-		
+	
+	public static void main(String[] args) {
 		FrameLogin li = new FrameLogin();
 		li.init();
 	}	

@@ -26,7 +26,11 @@ import javax.swing.SwingConstants;
 import app.DeleteControlImp;
 import app.DeleteControlInterface;
 
-
+/**
+ * Frame to delete an entity from the db. 
+ * @author Tobias
+ * @param <T> entities are room,service and customer
+ */
 @SuppressWarnings("serial")
 public class DeleteFrame<T> extends AbstractFrame{
 	private VerwaltungMainFrame mf;
@@ -111,10 +115,14 @@ public class DeleteFrame<T> extends AbstractFrame{
 					//TODO sinnvolle exception
 					try {
 						controller.deleteEntity(list.getSelectedValue());
+						mf.addProtocolLine("--Löschen--\n"+list.getSelectedValue().toString()+"\nwurde in der Datenbank gelöscht\n");
 					} catch (SQLException e1) {
 						mf.addProtocolLine("Es konnte nicht gelöscht werden, rufen sie ihren Administrator");
 					}
-					mf.addProtocolLine("--Löschen--\n"+list.getSelectedValue().toString()+"\nwurde in der Datenbank gelöscht\n");
+					catch (NullPointerException e1) {
+						mf.addProtocolLine("Es konnte nicht gelöscht werden, da keine Auswahl getroffen wurde.");
+					}
+					
 					fs.switchFrame();
 				}
 			}	

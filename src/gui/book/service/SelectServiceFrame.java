@@ -115,4 +115,10 @@ public class SelectServiceFrame extends AbstractFrame{
 		});
 
 	}
+	public int getServiceSelectionid(){
+		return list.getSelectedValue().getSid();
+	}
+	public String getServiceName(){
+		return list.getSelectedValue().getType();
+	}
 }

@@ -36,6 +36,12 @@ public class BookingRoom implements DBBookingRoom{
 		this.room = new Room(roomId);
 		this.customer = new Customer(customerId);
 	}
+	public BookingRoom(int id,Date date, int roomId, int customerId) {
+		this.brid = id;
+		this.date = date;
+		this.room = new Room(roomId);
+		this.customer = new Customer(customerId);
+	}
 	public BookingRoom(int brid){this.brid = brid;}
 	public BookingRoom(){}
 	
@@ -136,6 +142,6 @@ public class BookingRoom implements DBBookingRoom{
 	}
 	public String toString(){
 		
-		return "brId: " + brid + " Zimmernummer: "+ room.getRid() + " Kundennummer: " + customer.getId();
+		return "brId: " + brid + " Zimmernummer: "+ room.getRid() + " Kundennummer: " + customer.getId()+"Buchungstag: "+ getDate();
 	}
 }
