@@ -56,6 +56,11 @@ public class BookingRoom implements DBBookingRoom{
 		}
 	
 	@Override
+	public ResultSet getRelatedServiceBookings() throws SQLException {
+		return DBIface.executeQuery("SELECT * FROM Booking_Service WHERE BRID="+this.brid);
+	}
+	
+	@Override
 	public int create() throws SQLException {
 		ResultSet rs = DBIface.executeQuery("Insert into Booking_Room values ("+this.getBrid()+",\""+this.getDate().toString()+"\","+this.getRoom().getRid()+","+this.getCustomer().getId()+")");
 		if (rs.next()) {

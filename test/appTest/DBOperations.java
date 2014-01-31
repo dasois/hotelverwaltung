@@ -31,7 +31,7 @@ public class DBOperations {
 	public void test() throws SQLException {
 		try {
 			//Anmelden
-			db.DBIface.loginDB();
+			db.DBIface.loginDB("hm", "init");
 			//Create Room
 			Room room = new Room();
 			room.setDoubleRoom(false);
@@ -108,9 +108,9 @@ public class DBOperations {
 			System.out.println("Service("+rs.getInt(1)+", "+rs.getString(2)+", "+rs.getDouble(3)+")");
 			
 			//Create Customer
-			Customer customer = new Customer("Hans", "Meier", "Beispielstr. 123, 12345 Hintertupfing", Date.valueOf("1980-12-30"));
+			Customer customer = new Customer("Hans", "Meier", "Beispielstr. 123, 12345 Hintertupfing", Date.valueOf("1980-12-30"), "Herr");
 			customer.create();
-			Customer customer2 = new Customer("Hans", "Meier", "Beispielstr. 123, 12345 Hintertupfing", Date.valueOf("1960-12-30"));
+			Customer customer2 = new Customer("Hans", "Meier", "Beispielstr. 123, 12345 Hintertupfing", Date.valueOf("1960-12-30"), "Herr");
 			customer2.create();
 			
 			//Update customer
@@ -176,6 +176,14 @@ public class DBOperations {
 			Assert.assertEquals(bs2.getDate(), rs.getDate(2));
 			Assert.assertEquals(bs2.getService().getSid(), rs.getInt(3));
 			Assert.assertEquals(bs2.getBookingRoom().getBrid(), rs.getInt(4));
+			
+			//Test spezific operations
+			rs = br3.getAllFromCustomer(customer.getId());
+			rs.last();
+			Assert.assertEquals(2, rs.getRow());
+			rs = br3.getRelatedServiceBookings();
+			rs.last();
+			Assert.assertEquals(1, rs.getRow());
 			
 			//Delete Customers
 			customer.delete();

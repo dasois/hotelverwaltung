@@ -40,11 +40,11 @@ public class BookingService implements DBBookingService {
 	}
 	public BookingService(){}
 	public BookingService(int bsid){this.bsid = bsid;}
+	
 	@Override
 	public ResultSet getAll() throws SQLException {
 		return DBIface.executeQuery("SELECT * from Booking_Service");
 	}
-
 
 	@Override
 	public int create() throws SQLException {
