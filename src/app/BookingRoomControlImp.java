@@ -8,6 +8,8 @@ import java.util.Vector;
 import db.DBBookingRoom;
 import db.entities.BookingRoom;
 import db.entities.BookingService;
+import db.entities.Customer;
+import db.entities.Room;
 /** Implementation of BookingRoomControlInterface */
 public class BookingRoomControlImp implements BookingRoomControlInterface{
 
@@ -23,8 +25,8 @@ public class BookingRoomControlImp implements BookingRoomControlInterface{
 	}
 
 	@Override
-	public int create(Date date, int roomId, int customerId) throws SQLException {
-		DBBookingRoom tmp = new BookingRoom(date, roomId, customerId);		
+	public int create(Date date, Room room, Customer customer) throws SQLException {
+		DBBookingRoom tmp = new BookingRoom(date, room, customer);		
 		return tmp.create();
 	}
 

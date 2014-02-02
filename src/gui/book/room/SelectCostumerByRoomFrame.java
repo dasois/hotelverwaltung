@@ -52,7 +52,7 @@ public class SelectCostumerByRoomFrame extends AbstractFrame{
 		this.sf = sf;
 	}
 	protected void createWidget() {
-		header = new JLabel("Kunde wählen");
+		header = new JLabel("Kunde wï¿½hlen");
 		header.setPreferredSize(new Dimension(400,40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
@@ -79,7 +79,7 @@ public class SelectCostumerByRoomFrame extends AbstractFrame{
 		book.setPreferredSize(new Dimension(20, 30));
 		book.setActionCommand("Book");
 
-		stepback = new JButton("Zurück");
+		stepback = new JButton("Zurï¿½ck");
 		stepback.setPreferredSize(new Dimension(20, 30));
 		stepback.setActionCommand("Back");
 		boxdsouthPanel = new JPanel();	
@@ -119,13 +119,13 @@ public class SelectCostumerByRoomFrame extends AbstractFrame{
 					for(Room r:selectedRooms){
 						try {
 							price = price + r.getPrice();
-							controller.create(new java.sql.Date(date.getTime()),r.getRid(),list.getSelectedValue().getId());
+							controller.create(new java.sql.Date(date.getTime()),r,list.getSelectedValue());
 							mf.addProtocolLine("Buchung von Zimmer: "+r.getRid()+"am Tag:"+date.toString()+" wurde in der Datenbank angelegt\n");
 						} catch (SQLException e1) {
 							mf.addProtocolLine("Buchung konnte nicht erstellt werden");
 							e1.printStackTrace();
 						}catch (NullPointerException e1) {
-							mf.addProtocolLine("Fehler, Es wurde kein Kunde ausgewählt");
+							mf.addProtocolLine("Fehler, Es wurde kein Kunde ausgewï¿½hlt");
 						}
 					}
 

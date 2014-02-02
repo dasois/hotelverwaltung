@@ -33,7 +33,8 @@ public class BookingService implements DBBookingService {
 		this.service = service;
 		this.bookingRoom = bookingRoom;
 	}
-	public BookingService(Date date, int serviceId, int broomId) {
+	public BookingService(int bsid, Date date, int serviceId, int broomId) {
+		this.bsid = bsid;
 		this.date = date;
 		this.bookingRoom = new BookingRoom(broomId);
 		this.service = new Service(serviceId);
