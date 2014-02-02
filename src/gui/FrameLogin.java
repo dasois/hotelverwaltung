@@ -18,15 +18,11 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
 import app.LoginControlImp;
 import app.LoginControlInterface;
 
-/**
- * The login process.
- * @author Tobias
- */
-
+/**The login process.
+ * @author Tobias */
 @SuppressWarnings("serial")
 public class FrameLogin extends AbstractFrame{
 	private JLabel header;
@@ -77,7 +73,6 @@ public class FrameLogin extends AbstractFrame{
 		boxdCenterPanel = new JPanel();	
 		boxdCenterPanel.setLayout(new BoxLayout(boxdCenterPanel,BoxLayout.PAGE_AXIS));
 
-
 		//button
 		btnlogin = new JButton("Login");
 		btnlogin.setPreferredSize(new Dimension(20, 30));
@@ -101,7 +96,6 @@ public class FrameLogin extends AbstractFrame{
 		boxdCenterPanel.add(centerPanel);
 		boxdCenterPanel.add(Box.createVerticalGlue());
 		getContentPane().add(BorderLayout.CENTER,boxdCenterPanel);
-
 	}
 	private void login(){
 		String user = userTextField.getText();

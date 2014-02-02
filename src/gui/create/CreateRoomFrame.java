@@ -24,10 +24,8 @@ import javax.swing.SwingConstants;
 
 import app.RoomControlImp;
 import app.RoomControlInterface;
-/**
- * Frame to register a new room.
- * @author Tobias
- */
+/**Frame to register a new room.
+ * @author Tobias */
 @SuppressWarnings("serial")
 public class CreateRoomFrame extends AbstractFrame{
 	private JLabel header;

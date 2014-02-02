@@ -26,11 +26,9 @@ import javax.swing.SwingConstants;
 import app.DeleteControlImp;
 import app.DeleteControlInterface;
 
-/**
- * Frame to delete an entity from the db. 
+/**Frame to delete an entity from the db. 
  * @author Tobias
- * @param <T> entities are room,service and customer
- */
+ * @param <T> entities are room,service and customer */
 @SuppressWarnings("serial")
 public class DeleteFrame<T> extends AbstractFrame{
 	private VerwaltungMainFrame mf;
@@ -76,7 +74,6 @@ public class DeleteFrame<T> extends AbstractFrame{
 		cancel.setActionCommand("Cancel");
 		boxdsouthPanel = new JPanel();	
 		boxdsouthPanel.setLayout(new BoxLayout(boxdsouthPanel,BoxLayout.PAGE_AXIS));
-
 	}
 
 	@Override
@@ -121,8 +118,7 @@ public class DeleteFrame<T> extends AbstractFrame{
 					}
 					catch (NullPointerException e1) {
 						mf.addProtocolLine("Es konnte nicht gelöscht werden, da keine Auswahl getroffen wurde.");
-					}
-					
+					}		
 					fs.switchFrame();
 				}
 			}	

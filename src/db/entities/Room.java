@@ -71,7 +71,6 @@ public class Room implements DBRoom{
 	}
 	@Override
 	public boolean delete() throws SQLException {
-		System.out.println("hier angekommen"+this.rid);
 		DBIface.executeQuery("DELETE from Room where RID = "+this.getRid());
 		ResultSet rs = DBIface.executeQuery("SELECT COUNT(*) from Room where RID = "+this.getRid());
 		rs.next();

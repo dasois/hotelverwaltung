@@ -3,11 +3,9 @@ package app;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
-
 import db.DBService;
 import db.entities.Service;
-
-
+/** Implementation of ServiceControlInterface */
 public class ServiceControlImp implements ServiceControlInterface{
 
 	@Override
@@ -21,7 +19,6 @@ public class ServiceControlImp implements ServiceControlInterface{
 		}
 		return temp;	
 	}
-
 
 	@Override
 	public int create(String type, double price) throws SQLException {

@@ -29,8 +29,7 @@ import app.BookingServiceImp;
 import app.ServiceControlImp;
 import app.ServiceControlInterface;
 import db.entities.BookingRoom;
-
-
+/** Selection of a room wich a service gets booked to*/
 @SuppressWarnings("serial")
 public class SelectRoomByServiceFrame extends AbstractFrame{
 	private JLabel header;
@@ -48,7 +47,6 @@ public class SelectRoomByServiceFrame extends AbstractFrame{
 		this.mf = mf;
 		this.ssf = ssf;
 		this.ssf2 = ssf2;
-
 	}
 	protected void createWidget() {
 		header = new JLabel("Zimmer wählen");
@@ -95,7 +93,6 @@ public class SelectRoomByServiceFrame extends AbstractFrame{
 		boxdsouthPanel.add(southPanel);
 		boxdsouthPanel.add(Box.createVerticalGlue());
 		getContentPane().add(BorderLayout.SOUTH,boxdsouthPanel);
-
 	}
 	protected void setupInteractions() {
 		final FrameSwitcher fs = new FrameSwitchImpl(this,ssf);

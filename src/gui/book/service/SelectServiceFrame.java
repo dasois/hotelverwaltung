@@ -25,7 +25,7 @@ import javax.swing.SwingConstants;
 
 import app.ServiceControlImp;
 import db.entities.Service;
-
+/** Selection of a service wich should get booked*/
 @SuppressWarnings("serial")
 public class SelectServiceFrame extends AbstractFrame{
 
@@ -44,8 +44,6 @@ public class SelectServiceFrame extends AbstractFrame{
 		this.mf = mf;
 		this.ssf = ssf;
 	}
-
-
 
 	@Override
 	protected void createWidget() {
@@ -113,7 +111,6 @@ public class SelectServiceFrame extends AbstractFrame{
 				fs2.switchFrame();
 			}	
 		});
-
 	}
 	public int getServiceSelectionid(){
 		return list.getSelectedValue().getSid();

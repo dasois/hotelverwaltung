@@ -2,11 +2,8 @@ package gui;
 
 import javax.swing.JFrame;
 import javax.swing.UIManager;
-/**
- * Base code for every Frame in this app
- * @author Tobias
- */
-
+/**Base code for every Frame in this app
+ * @author Tobias */
 @SuppressWarnings("serial")
 public abstract class AbstractFrame extends JFrame{
 	public AbstractFrame() {
@@ -17,7 +14,6 @@ public abstract class AbstractFrame extends JFrame{
 		catch(Exception e){
 			e.printStackTrace();
 		}
-		
 		setTitle("Hotelverwaltung");//Titel im Kopf
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//Beendet das Programm
 		setLocationRelativeTo(null);		

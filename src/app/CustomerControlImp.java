@@ -4,11 +4,10 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
-
 import app.entities.Title;
 import db.DBCustomer;
 import db.entities.Customer;
-
+/** Implementation of CustomerControlInterface */
 public class CustomerControlImp implements CustomerControlInterface{
 
 	@Override
@@ -18,8 +17,7 @@ public class CustomerControlImp implements CustomerControlInterface{
 		while (resultset.next()) {
 			Customer c = new Customer(Integer.parseInt(resultset.getString(1)),resultset.getString(2),resultset.getString(3),resultset.getString(4),resultset.getDate(5),resultset.getString(6));		
 		    temp.add(c);
-		}
-		
+		}	
 		return temp;
 	}
 
@@ -38,6 +36,5 @@ public class CustomerControlImp implements CustomerControlInterface{
 	public boolean delete(int customerId) throws SQLException {
 		DBCustomer tmp = new Customer(customerId);
 		return tmp.delete(); 
-	}
-	
+	}	
 }

@@ -1,5 +1,6 @@
 package gui;
 
+import gui.book.SelectCustomerFrame;
 import gui.book.room.SelectTimeIntervallRoomFrame;
 import gui.book.service.SelectTimeFrame;
 import gui.create.CreateCostumerFrame;
@@ -21,12 +22,8 @@ import db.entities.Customer;
 import db.entities.Room;
 import db.entities.Service;
 
-
-/**
- * Buttonhandler of VerwaltungsMainFrame
- * @author Tobias
- */
-
+/**Buttonhandler of VerwaltungsMainFrame
+ * @author Tobias */
 public class MainButtonHandler implements ActionListener {
 	private VerwaltungMainFrame gui;
 	public MainButtonHandler(VerwaltungMainFrame gui){
@@ -42,8 +39,7 @@ public class MainButtonHandler implements ActionListener {
 					gui.setEnabled(false);
 					CreateCostumerFrame cf = new CreateCostumerFrame(gui);
 					cf.init();
-					new JDialog(cf);
-										
+					new JDialog(cf);									
 				}
 				else if(action =="Löschen"){
 					gui.setEnabled(false);
@@ -53,14 +49,19 @@ public class MainButtonHandler implements ActionListener {
 						dcf = new DeleteFrame<Customer>(gui,"Kunde Entfernen",new JList<Customer>(new CustomerControlImp().getAll()));
 						dcf.init();
 						new JDialog(dcf);
-					} catch (SQLException e1) {
-						
+					} catch (SQLException e1) {				
 						e1.printStackTrace();
 					}
 					
-				}else{
+				}else if(action =="Anzeigen"){
 					gui.setEnabled(false);
 					ShowCustomerFrame scf = new ShowCustomerFrame(gui);
+					scf.init();
+					new JDialog(scf);
+				}
+				else{
+					gui.setEnabled(false);
+					SelectCustomerFrame scf = new SelectCustomerFrame(gui);
 					scf.init();
 					new JDialog(scf);
 				}
@@ -70,8 +71,7 @@ public class MainButtonHandler implements ActionListener {
 					gui.setEnabled(false);
 					CreateRoomFrame rf = new CreateRoomFrame(gui);
 					rf.init();
-					new JDialog(rf);
-					
+					new JDialog(rf);			
 				}
 				else if(action =="Buchen"){
 					gui.setEnabled(false);
@@ -89,8 +89,7 @@ public class MainButtonHandler implements ActionListener {
 						new JDialog(drf);
 					} catch (SQLException e1) {	
 						e1.printStackTrace();
-					}
-					
+					}				
 				}
 			}
 			else if(khd=="Leistung"){
@@ -98,8 +97,7 @@ public class MainButtonHandler implements ActionListener {
 					gui.setEnabled(false);
 					CreateServiceFrame sf = new CreateServiceFrame(gui);
 					sf.init();
-					new JDialog(sf);	
-					
+					new JDialog(sf);					
 				}
 				else if(action =="Buchen"){
 					gui.setEnabled(false);

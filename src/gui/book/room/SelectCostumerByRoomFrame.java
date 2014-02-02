@@ -30,7 +30,7 @@ import app.BookingRoomControlInterface;
 import app.CustomerControlImp;
 import db.entities.Customer;
 import db.entities.Room;
-
+/** Selection of the customer wich wants to book a room */
 @SuppressWarnings("serial")
 public class SelectCostumerByRoomFrame extends AbstractFrame{
 

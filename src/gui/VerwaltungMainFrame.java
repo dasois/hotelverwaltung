@@ -20,10 +20,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-/**
- * Frame from which all subframes are selected
- * @author Tobias
- */
+/**Frame from which all subframes are selected
+ * @author Tobias */
 @SuppressWarnings("serial")
 public class VerwaltungMainFrame extends AbstractFrame{
 
@@ -58,10 +56,12 @@ public class VerwaltungMainFrame extends AbstractFrame{
 		khd = new JComboBox<String>(new String[]{"Kunden","Zimmer","Leistung"});
 
 		actions = new JComboBox<String>();
-		model = new ComboBoxModel[2];
+		model = new ComboBoxModel[3];
 		model[0] = new DefaultComboBoxModel<String>(
-				new String[]{"Erstellen", "Löschen","Anzeigen"});
+				new String[]{"Erstellen", "Löschen","Anzeigen","Ausbuchen"});
 		model[1] = new DefaultComboBoxModel<String>(
+				new String[]{"Erstellen", "Löschen","Anzeigen"});
+		model[2] = new DefaultComboBoxModel<String>(
 				new String[]{"Erstellen","Buchen","Löschen"});
 		actions.setModel(model[0]);
 
@@ -93,9 +93,9 @@ public class VerwaltungMainFrame extends AbstractFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int i = khd.getSelectedIndex();
-				if(i==2)
-					i--;
-		        actions.setModel(model[i]);				
+				
+					actions.setModel(model[i]);	
+							
 			}
 		});
 	}

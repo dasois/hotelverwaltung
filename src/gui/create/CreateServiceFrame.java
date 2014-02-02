@@ -24,10 +24,8 @@ import javax.swing.SwingConstants;
 import app.ServiceControlImp;
 import app.ServiceControlInterface;
 
-/**
- * Frame to register a new service.
- * @author Tobias
- */
+/**Frame to register a new service.
+ * @author Tobias */
 @SuppressWarnings("serial")
 public class CreateServiceFrame extends AbstractFrame{
 	private JLabel header;
@@ -92,7 +90,6 @@ public class CreateServiceFrame extends AbstractFrame{
 		cancel.setActionCommand("Cancel");
 		boxdsouthPanel = new JPanel();	
 		boxdsouthPanel.setLayout(new BoxLayout(boxdsouthPanel,BoxLayout.PAGE_AXIS));
-
 	}
 
 	@Override
@@ -119,7 +116,6 @@ public class CreateServiceFrame extends AbstractFrame{
 		boxdsouthPanel.add(southPanel);
 		boxdsouthPanel.add(Box.createVerticalGlue());
 		getContentPane().add(BorderLayout.SOUTH,boxdsouthPanel);
-
 	}
 	protected void setupInteractions() {
 		final FrameSwitcher fs = new FrameSwitchImpl(this,mf);

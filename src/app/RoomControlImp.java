@@ -4,10 +4,9 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
-
 import db.DBRoom;
 import db.entities.Room;
-
+/** Implementation of RoomControlInterface */
 public class RoomControlImp implements RoomControlInterface{
 
 	public Vector<Room> getAll() throws SQLException {	
@@ -18,8 +17,7 @@ public class RoomControlImp implements RoomControlInterface{
 			temp.add(c);
 		    }
 		return temp;	
-	}
-	
+	}	
 
 	@Override
 	public Vector<Room> getFreeRooms(Date startDate, Date endDate) throws SQLException {

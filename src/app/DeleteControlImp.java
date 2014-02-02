@@ -1,11 +1,10 @@
 package app;
 
 import java.sql.SQLException;
-
 import db.entities.Customer;
 import db.entities.Room;
 import db.entities.Service;
-
+/** Implementation of DeleteControlInterface */
 public class DeleteControlImp<T> implements DeleteControlInterface<T>{
 
 	@Override

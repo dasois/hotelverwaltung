@@ -20,9 +20,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-
 import com.toedter.calendar.JDateChooser;
-
+/** Selection of a date on which a service gets booked*/
 @SuppressWarnings("serial")
 public class SelectTimeFrame extends AbstractFrame{
 

@@ -28,7 +28,7 @@ import javax.swing.SwingConstants;
 import app.RoomControlImp;
 import app.RoomControlInterface;
 import db.entities.Room;
-
+/** Selection of the rooms wich should be booked */
 @SuppressWarnings("serial")
 public class FreeRoomsFrame extends AbstractFrame{
 
@@ -54,7 +54,6 @@ public class FreeRoomsFrame extends AbstractFrame{
 			e.printStackTrace();
 		}
 	}
-
 
 	protected void createWidget() {
 		header = new JLabel("Freie Zimmer");

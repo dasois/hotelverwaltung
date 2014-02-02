@@ -27,10 +27,8 @@ import app.CustomerControlImp;
 import app.CustomerControlInterface;
 import app.entities.Title;
 
-/**
- * Frame to register a new customer.
- * @author Tobias
- */
+/**Frame to register a new customer.
+ * @author Tobias */
 @SuppressWarnings("serial")
 public class CreateCostumerFrame extends AbstractFrame{
 	private VerwaltungMainFrame mf;
@@ -77,12 +75,9 @@ public class CreateCostumerFrame extends AbstractFrame{
 				if(e.getActionCommand()=="Create"){
 					createWidgetSecondView();			
 				}
-				else{
-					
+				else{		
 					CustomerControlInterface tmp = new CustomerControlImp();
-					//TODO sinnvoller exceptionhandler
-					try {
-					
+					try {				
 						int id = tmp.create(customerFirstNameInput.getText(),
 								customerLastNameInput.getText(),addressInput.getText(),new java.sql.Date(birthdayPicker.getCalendar().getTime().getTime()),
 								(Title)titleSelection.getSelectedItem());
@@ -94,8 +89,7 @@ public class CreateCostumerFrame extends AbstractFrame{
 					}catch (NullPointerException e2) {
 	
 						mf.addProtocolLine("Fehlerhafte eingabe, es wurde kein Kunde Angelegt.\nVergewissern sie sich das alle Felder ausgefüllt werden!");
-					}
-					
+					}		
 					fs.switchFrame();
 				}
 			}	
@@ -190,8 +184,6 @@ public class CreateCostumerFrame extends AbstractFrame{
 		boxdsouthPanel.add(southPanel);
 		boxdsouthPanel.add(Box.createVerticalGlue());
 		getContentPane().add(BorderLayout.SOUTH,boxdsouthPanel);
-
-
 	}
 
 	private void createWidgetSecondView(){
@@ -215,5 +207,4 @@ public class CreateCostumerFrame extends AbstractFrame{
 		cancel.setText("Abbruch");		
 		cancel.setActionCommand("Cancel");
 	}
-
 }

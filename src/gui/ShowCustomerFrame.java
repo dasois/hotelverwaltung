@@ -7,7 +7,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
+
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -17,10 +17,10 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
-
+import java.sql.SQLException;
 import app.CustomerControlImp;
 import db.entities.Customer;
-
+/** Displays all customers saved in the db */
 @SuppressWarnings("serial")
 public class ShowCustomerFrame extends AbstractFrame{
 	private VerwaltungMainFrame mf;
