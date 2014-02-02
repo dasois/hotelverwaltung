@@ -7,7 +7,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.sql.SQLException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -17,7 +17,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
-import java.sql.SQLException;
+
 import app.CustomerControlImp;
 import db.entities.Customer;
 /** Displays all customers saved in the db */
@@ -54,13 +54,13 @@ public class ShowCustomerFrame extends AbstractFrame{
 		list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		list.setVisibleRowCount(4);
 		listScroller = new JScrollPane(list);
-		listScroller.setPreferredSize(new Dimension(250, 80));
+		listScroller.setPreferredSize(new Dimension(600, 160));
 
 		southPanel = new JPanel();
 		southPanel.setLayout(new GridLayout(1,1,10,10));
 
 
-		cancel = new JButton("Zurück");
+		cancel = new JButton("ZurÃ¼ck");
 		cancel.setPreferredSize(new Dimension(20, 30));
 		cancel.setActionCommand("Cancel");
 		boxdsouthPanel = new JPanel();	

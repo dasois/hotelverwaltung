@@ -2,6 +2,7 @@ package app;
 
 import java.sql.SQLException;
 import java.util.Vector;
+
 import db.entities.Service;
 /** interface for using the db from inside the app-layer
 *	This is for the entity service*/

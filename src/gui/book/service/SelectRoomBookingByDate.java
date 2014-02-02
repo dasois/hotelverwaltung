@@ -24,14 +24,12 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 import app.BookingRoomControlImp;
-import app.BookingServiceControlInterface;
 import app.BookingServiceControlImp;
-import app.ServiceControlImp;
-import app.ServiceControlInterface;
+import app.BookingServiceControlInterface;
 import db.entities.BookingRoom;
 /** Selection of a room wich a service gets booked to*/
 @SuppressWarnings("serial")
-public class SelectRoomByServiceFrame extends AbstractFrame{
+public class SelectRoomBookingByDate extends AbstractFrame{
 	private JLabel header;
 	private JList<BookingRoom> list;
 	private JScrollPane listScroller;
@@ -41,15 +39,15 @@ public class SelectRoomByServiceFrame extends AbstractFrame{
 	private JPanel boxdsouthPanel;
 	private VerwaltungMainFrame mf;
 	private SelectServiceFrame ssf;
-	private SelectTimeFrame ssf2;
-	public SelectRoomByServiceFrame(VerwaltungMainFrame mf,
-			SelectServiceFrame ssf, SelectTimeFrame ssf2) {
+	private SelectTimeFrame stf;
+	public SelectRoomBookingByDate(VerwaltungMainFrame mf,
+			SelectServiceFrame ssf, SelectTimeFrame stf) {
 		this.mf = mf;
 		this.ssf = ssf;
-		this.ssf2 = ssf2;
+		this.stf = stf;
 	}
 	protected void createWidget() {
-		header = new JLabel("Zimmer w�hlen");
+		header = new JLabel("Zimmerbuchung wählen");
 		header.setPreferredSize(new Dimension(400,40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
@@ -58,11 +56,11 @@ public class SelectRoomByServiceFrame extends AbstractFrame{
 		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));
 
 		try {
-			list = new JList<BookingRoom>(new BookingRoomControlImp().getAll());
+			list = new JList<BookingRoom>(new BookingRoomControlImp().getByDate(stf.getDate()));
 			list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 			list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 			list.setVisibleRowCount(-1);
-		} catch (SQLException e) {
+		} catch (Exception e) {//SQLException e) {
 			mf.addProtocolLine("Fehler bei der Datenbank, rufen sie ihren Administrator");
 			e.printStackTrace();
 		}
@@ -77,7 +75,7 @@ public class SelectRoomByServiceFrame extends AbstractFrame{
 		book.setPreferredSize(new Dimension(20, 30));
 		book.setActionCommand("Book");
 
-		stepback = new JButton("Zur�ck");
+		stepback = new JButton("Zurück");
 		stepback.setPreferredSize(new Dimension(20, 30));
 		stepback.setActionCommand("Back");
 		boxdsouthPanel = new JPanel();	
@@ -108,7 +106,7 @@ public class SelectRoomByServiceFrame extends AbstractFrame{
 			public void actionPerformed(ActionEvent e) {
 				BookingServiceControlInterface controller = new BookingServiceControlImp();
 				try {
-					controller.create(ssf2.getDate(), list.getSelectedValue(), ssf.getServiceSelectionid());
+					controller.create(stf.getDate(), list.getSelectedValue(), ssf.getServiceSelectionid());
 					mf.addProtocolLine("Buchung von Service: "+ ssf.getServiceName()+" wurde in der Datenbank angelegt\n");
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block

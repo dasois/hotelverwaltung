@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
 import app.LoginControlImp;
 import app.LoginControlInterface;
 
@@ -76,7 +77,7 @@ public class FrameLogin extends AbstractFrame{
 		//button
 		btnlogin = new JButton("Login");
 		btnlogin.setPreferredSize(new Dimension(20, 30));
-		btnlogin.setActionCommand("login gedrückt");
+		btnlogin.setActionCommand("login gedrÃ¼ckt");
 		//button
 	}
 
@@ -108,7 +109,7 @@ public class FrameLogin extends AbstractFrame{
 			}
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
-			JOptionPane.showMessageDialog(null, "Falsche Benutzer/Passwort kombination.\n Bei wiederholtem Fehlschlag überprüfen sie ob die DatenBank läuft.");
+			JOptionPane.showMessageDialog(null, "Falsche Benutzer/Passwort-Kombination.\n Bei wiederholtem Fehlschlag Ã¼berprÃ¼fen Sie, ob die DatenBank lÃ¤uft.");
 		}		
 	}
 	@Override

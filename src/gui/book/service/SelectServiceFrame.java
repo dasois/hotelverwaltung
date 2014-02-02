@@ -37,17 +37,17 @@ public class SelectServiceFrame extends AbstractFrame{
 	private JButton stepback;
 	private JPanel boxdsouthPanel;
 	private VerwaltungMainFrame mf;
-	private SelectTimeFrame ssf;
+	private SelectTimeFrame stf;
 	
 	public SelectServiceFrame(VerwaltungMainFrame mf,
 			SelectTimeFrame ssf) {
 		this.mf = mf;
-		this.ssf = ssf;
+		this.stf = ssf;
 	}
 
 	@Override
 	protected void createWidget() {
-		header = new JLabel("Dienstleistung wählen");
+		header = new JLabel("Dienstleistung wÃ¤hlen");
 		header.setPreferredSize(new Dimension(400,40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
@@ -73,7 +73,7 @@ public class SelectServiceFrame extends AbstractFrame{
 		book.setPreferredSize(new Dimension(20, 30));
 		book.setActionCommand("Book");
 
-		stepback = new JButton("Zurück");
+		stepback = new JButton("ZurÃ¼ck");
 		stepback.setPreferredSize(new Dimension(20, 30));
 		stepback.setActionCommand("Back");
 		boxdsouthPanel = new JPanel();	
@@ -94,8 +94,8 @@ public class SelectServiceFrame extends AbstractFrame{
 	}
 	@Override
 	protected void setupInteractions() {
-		final FrameSwitcher fs = new FrameSwitchImpl(this,ssf);
-		SelectRoomByServiceFrame scf = new SelectRoomByServiceFrame(mf,this,ssf);
+		final FrameSwitcher fs = new FrameSwitchImpl(this,stf);
+		SelectRoomBookingByDate scf = new SelectRoomBookingByDate(mf,this,stf);
 		scf.init();
 		scf.setVisible(false);
 		final FrameSwitcher fs2 = new FrameSwitchImpl(this,scf);

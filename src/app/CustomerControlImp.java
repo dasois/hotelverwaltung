@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
+
 import app.entities.Title;
 import db.DBCustomer;
 import db.entities.Customer;

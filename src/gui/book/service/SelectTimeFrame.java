@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
 import com.toedter.calendar.JDateChooser;
 /** Selection of a date on which a service gets booked*/
 @SuppressWarnings("serial")
@@ -44,7 +45,7 @@ public class SelectTimeFrame extends AbstractFrame{
 	
 
 	protected void createWidget() {
-		header = new JLabel("Zeitpunkt Buchen");
+		header = new JLabel("Zeitpunkt w√§hlen");
 		header.setPreferredSize(new Dimension(400,40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
@@ -71,7 +72,7 @@ public class SelectTimeFrame extends AbstractFrame{
 		southPanel = new JPanel();
 		southPanel.setLayout(new GridLayout(1,2,10,10));
 
-		search = new JButton("W‰hlen");
+		search = new JButton("W√§hlen");
 		search.setPreferredSize(new Dimension(20, 30));
 		search.setActionCommand("Search");
 
@@ -102,10 +103,8 @@ public class SelectTimeFrame extends AbstractFrame{
 	}
 	protected void setupInteractions() {
 		final FrameSwitcher fs = new FrameSwitchImpl(this,mf);
+		final SelectServiceFrame ssf = new SelectServiceFrame(mf,this);
 		
-		SelectServiceFrame ssf = new SelectServiceFrame(mf,this);
-		ssf.init();
-		ssf.setVisible(false);
 		final FrameSwitcher fs2 = new FrameSwitchImpl(this,ssf);
 		cancel.addActionListener(new ActionListener(){
 
@@ -118,9 +117,11 @@ public class SelectTimeFrame extends AbstractFrame{
 
 			public void actionPerformed(ActionEvent e) {
 				if (datePicker.isValid()){
-					JOptionPane.showMessageDialog(null, "Bitte Datum ausw‰hlen");
+					JOptionPane.showMessageDialog(null, "Bitte Datum ausw√§hlen!");
 				}
-				else{	
+				else{
+					ssf.init();
+					ssf.setVisible(false);
 					fs2.switchFrame();
 				}
 			}

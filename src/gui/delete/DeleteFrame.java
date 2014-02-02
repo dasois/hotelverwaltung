@@ -60,12 +60,12 @@ public class DeleteFrame<T> extends AbstractFrame{
 		list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		list.setVisibleRowCount(-1);
 		listScroller = new JScrollPane(list);
-		listScroller.setPreferredSize(new Dimension(250, 80));
+		listScroller.setPreferredSize(new Dimension(250, 160));
 			
 		southPanel = new JPanel();
 		southPanel.setLayout(new GridLayout(1,2,10,10));
 
-		delete = new JButton("Löschen");
+		delete = new JButton("LÃ¶schen");
 		delete.setPreferredSize(new Dimension(20, 30));
 		delete.setActionCommand("Delete");
 
@@ -112,12 +112,12 @@ public class DeleteFrame<T> extends AbstractFrame{
 					//TODO sinnvolle exception
 					try {
 						controller.deleteEntity(list.getSelectedValue());
-						mf.addProtocolLine("--Löschen--\n"+list.getSelectedValue().toString()+"\nwurde in der Datenbank gelöscht\n");
+						mf.addProtocolLine("--LÃ¶schen--\n"+list.getSelectedValue().toString()+"\nwurde aus der Datenbank gelÃ¶scht.\n");
 					} catch (SQLException e1) {
-						mf.addProtocolLine("Es konnte nicht gelöscht werden, rufen sie ihren Administrator");
+						mf.addProtocolLine("Es konnte nicht gelÃ¶scht werden, kontaktieren Sie Ihren Administrator");
 					}
 					catch (NullPointerException e1) {
-						mf.addProtocolLine("Es konnte nicht gelöscht werden, da keine Auswahl getroffen wurde.");
+						mf.addProtocolLine("Es konnte nicht gelÃ¶scht werden, da keine Auswahl getroffen wurde.");
 					}		
 					fs.switchFrame();
 				}

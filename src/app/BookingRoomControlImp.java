@@ -46,18 +46,31 @@ public class BookingRoomControlImp implements BookingRoomControlInterface{
 		ResultSet resultset = new BookingRoom().getAllFromCustomer(CustomerId);
 		Vector<BookingRoom> temp = new Vector<BookingRoom>();
 		while (resultset.next()) {
-			BookingRoom c = new BookingRoom(resultset.getInt(1),resultset.getDate(2),resultset.getInt(3),resultset.getInt(4));		
+			BookingRoom c = new BookingRoom(resultset.getInt(1),resultset.getDate(2),resultset.getInt(3),resultset.getInt(4));
+			c.getRoom().setPrice(c.getRoomPrice());
 			temp.add(c);
 		}		
 		return temp;
 	}
 
 	@Override
-	public Vector<BookingService> getRelatedServiceBookings(int bookingRoomId)throws SQLException {
+	public Vector<BookingService> getRelatedServiceBookings (int bookingRoomId) throws SQLException {
 		ResultSet resultset = new BookingRoom(bookingRoomId).getRelatedServiceBookings();
 		Vector<BookingService> temp = new Vector<BookingService>();
 		while (resultset.next()) {
-			BookingService c = new BookingService(resultset.getDate(2),resultset.getInt(3),resultset.getInt(4));		
+			BookingService c = new BookingService(resultset.getInt(1), resultset.getDate(2), resultset.getInt(3), resultset.getInt(4));
+			c.getService().setPrice(c.getSericePrice());
+			temp.add(c);
+		}		
+		return temp;
+	}
+	
+	@Override
+	public Vector<BookingRoom> getByDate(Date date) throws SQLException {
+		ResultSet resultset = new BookingRoom().getByDate(date);
+		Vector<BookingRoom> temp = new Vector<BookingRoom>();
+		while (resultset.next()) {
+			BookingRoom c = new BookingRoom(resultset.getInt(1),resultset.getDate(2),resultset.getInt(3),resultset.getInt(4));		
 			temp.add(c);
 		}		
 		return temp;

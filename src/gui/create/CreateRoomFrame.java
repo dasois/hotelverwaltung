@@ -49,7 +49,7 @@ public class CreateRoomFrame extends AbstractFrame{
 
 	@Override
 	protected void createWidget() {
-		header = new JLabel("Zimmer hinzufügen");
+		header = new JLabel("Zimmer hinzufÃ¼gen");
 		header.setPreferredSize(new Dimension(400,40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
@@ -138,12 +138,12 @@ public class CreateRoomFrame extends AbstractFrame{
 					try {
 						int roomId = controller.create(Double.parseDouble(price.getText()),doubleRoomCheck.isSelected());
 						mf.addProtocolLine("Zimmer: "+roomId+" wurde mit dem Preis: "+Double.parseDouble(price.getText())
-								+"€ in der Datenbank angelegt\n");
+								+"â‚¬ in der Datenbank angelegt\n");
 						fs.switchFrame();
 					} catch (SQLException e1) {
-						mf.addProtocolLine("Es konnte kein Zimmer erstellt werden, rufen sie ihren Administrator");
+						mf.addProtocolLine("Es konnte kein Zimmer erstellt werden, kontaktieren Sie Ihren Administrator");
 					}catch (NumberFormatException e1) {
-						mf.addProtocolLine("Fehlerhafte eingabe, es wurde kein Zimmer Angelegt.\nVergewissern sie sich das alle Felder ausgefüllt werden!");
+						mf.addProtocolLine("Fehlerhafte Eingabe, es wurde kein Zimmer angelegt.\nVergewissern Sie sich, dass alle Felder ausgefÃ¼llt werden!");
 					}	
 					fs.switchFrame();
 				}				

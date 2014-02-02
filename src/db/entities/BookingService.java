@@ -139,5 +139,12 @@ public class BookingService implements DBBookingService {
 	public void setBsid(int bsid) {
 		this.bsid = bsid;
 	}
+	
+	@Override
+	public double getSericePrice() throws SQLException {
+		ResultSet rs = DBIface.executeQuery("SELECT Price FROM Service WHERE SID="+this.getService().getSid());
+		rs.next();
+		return rs.getDouble(1);
+	}
 
 }

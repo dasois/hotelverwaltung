@@ -4,11 +4,10 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
+
 import db.DBBookingService;
 import db.entities.BookingRoom;
 import db.entities.BookingService;
-import db.entities.Customer;
-import db.entities.Room;
 import db.entities.Service;
 
 public class BookingServiceControlImp implements BookingServiceControlInterface{
@@ -37,8 +36,8 @@ public class BookingServiceControlImp implements BookingServiceControlInterface{
 	}
 
 	@Override
-	public int create(Date date, BookingRoom br, Service serv) throws SQLException {
-		DBBookingService bs = new BookingService(date, serv, br);
+	public int create(Date date, BookingRoom br, int serviceId) throws SQLException {
+		DBBookingService bs = new BookingService(date, new Service(serviceId), br);
 		return bs.create();
 	}
 

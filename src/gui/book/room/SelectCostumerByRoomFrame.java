@@ -52,7 +52,7 @@ public class SelectCostumerByRoomFrame extends AbstractFrame{
 		this.sf = sf;
 	}
 	protected void createWidget() {
-		header = new JLabel("Kunde w�hlen");
+		header = new JLabel("Kunde wählen");
 		header.setPreferredSize(new Dimension(400,40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
@@ -63,14 +63,14 @@ public class SelectCostumerByRoomFrame extends AbstractFrame{
 		try {
 			list = new JList<>(new CustomerControlImp().getAll());
 		} catch (SQLException e) {
-			mf.addProtocolLine("Es konnte keine verbindung zur Datenbank hergestellt werden, rufen sie ihren Administrator");
+			mf.addProtocolLine("Es konnte keine verbindung zur Datenbank hergestellt werden, kontaktieren Sie ihren Administrator");
 			e.printStackTrace();
 		}
 		list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		list.setVisibleRowCount(-1);
 		listScroller = new JScrollPane(list);
-		listScroller.setPreferredSize(new Dimension(250, 80));
+		listScroller.setPreferredSize(new Dimension(600, 160));
 
 		southPanel = new JPanel();
 		southPanel.setLayout(new GridLayout(1,2,10,10));
@@ -79,7 +79,7 @@ public class SelectCostumerByRoomFrame extends AbstractFrame{
 		book.setPreferredSize(new Dimension(20, 30));
 		book.setActionCommand("Book");
 
-		stepback = new JButton("Zur�ck");
+		stepback = new JButton("Zurück");
 		stepback.setPreferredSize(new Dimension(20, 30));
 		stepback.setActionCommand("Back");
 		boxdsouthPanel = new JPanel();	
@@ -120,17 +120,17 @@ public class SelectCostumerByRoomFrame extends AbstractFrame{
 						try {
 							price = price + r.getPrice();
 							controller.create(new java.sql.Date(date.getTime()),r,list.getSelectedValue());
-							mf.addProtocolLine("Buchung von Zimmer: "+r.getRid()+"am Tag:"+date.toString()+" wurde in der Datenbank angelegt\n");
+							mf.addProtocolLine("Buchung von Zimmer: "+r.getRid()+"am Tag:"+date.toString()+" wurde in der Datenbank angelegt\n.");
 						} catch (SQLException e1) {
-							mf.addProtocolLine("Buchung konnte nicht erstellt werden");
+							mf.addProtocolLine("Buchung konnte nicht erstellt werden.");
 							e1.printStackTrace();
 						}catch (NullPointerException e1) {
-							mf.addProtocolLine("Fehler, Es wurde kein Kunde ausgew�hlt");
+							mf.addProtocolLine("Fehler! Es wurde kein Kunde ausgewählt.");
 						}
 					}
 
 				}
-				mf.addProtocolLine("Die Komplette buchung kostet: "+price);
+				mf.addProtocolLine("Die Komplette buchung kostet: "+price+".");
 				fs2.switchFrame();
 			}
 		});

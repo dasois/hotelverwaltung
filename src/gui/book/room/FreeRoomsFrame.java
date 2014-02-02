@@ -79,7 +79,7 @@ public class FreeRoomsFrame extends AbstractFrame{
 		book.setPreferredSize(new Dimension(20, 30));
 		book.setActionCommand("Book");
 
-		stepback = new JButton("Zurück");
+		stepback = new JButton("ZurÃ¼ck");
 		stepback.setPreferredSize(new Dimension(20, 30));
 		stepback.setActionCommand("Back");
 		boxdsouthPanel = new JPanel();	
@@ -112,7 +112,7 @@ public class FreeRoomsFrame extends AbstractFrame{
 
 			public void actionPerformed(ActionEvent e) {
 				if(list.getSelectedValuesList().isEmpty()){
-					JOptionPane.showMessageDialog(null, "Wähle mindestens ein freies Zimmer");
+					JOptionPane.showMessageDialog(null, "WÃ¤hlen Sie mindestens ein freies Zimmer");
 				}
 				else{
 					Room[] tmp = list.getSelectedValuesList().toArray(new Room[0]);

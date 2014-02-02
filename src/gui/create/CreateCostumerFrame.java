@@ -21,11 +21,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import com.toedter.calendar.JDateChooser;
 
 import app.CustomerControlImp;
 import app.CustomerControlInterface;
 import app.entities.Title;
+
+import com.toedter.calendar.JDateChooser;
 
 /**Frame to register a new customer.
  * @author Tobias */
@@ -81,14 +82,14 @@ public class CreateCostumerFrame extends AbstractFrame{
 						int id = tmp.create(customerFirstNameInput.getText(),
 								customerLastNameInput.getText(),addressInput.getText(),new java.sql.Date(birthdayPicker.getCalendar().getTime().getTime()),
 								(Title)titleSelection.getSelectedItem());
-						mf.addProtocolLine("Kunde mit Id:\n"+id+"\n Namens: "+customerLastNameInput.getText()+" wurde in der Datenbank angelegt\n");
+						mf.addProtocolLine("Kunde mit Id: "+id+"\nund Namen: "+customerFirstNameInput.getText()+" "+customerLastNameInput.getText()+" wurde in der Datenbank angelegt\n");
 
 					} catch (SQLException e1) {
 	
-						mf.addProtocolLine("Es konnte kein Kunde erstellt werden, rufen sie ihren Administrator");
+						mf.addProtocolLine("Es konnte kein Kunde erstellt werden, kontaktieren Sie Ihren Administrator");
 					}catch (NullPointerException e2) {
 	
-						mf.addProtocolLine("Fehlerhafte eingabe, es wurde kein Kunde Angelegt.\nVergewissern sie sich das alle Felder ausgefüllt werden!");
+						mf.addProtocolLine("Fehlerhafte Eingabe, es wurde kein Kunde Angelegt.\nVergewissern Sie sich, dass alle Felder ausgefÃ¼llt werden!");
 					}		
 					fs.switchFrame();
 				}

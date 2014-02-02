@@ -1,6 +1,7 @@
 package app;
 
 import java.sql.SQLException;
+
 import db.DBIface;
 /** Implementation of LoginControlInterface */
 public class LoginControlImp implements LoginControlInterface{

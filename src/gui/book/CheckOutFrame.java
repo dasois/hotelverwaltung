@@ -1,10 +1,16 @@
 package gui.book;
 
+import gui.AbstractFrame;
+import gui.FrameSwitcher;
+import gui.VerwaltungMainFrame;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.Vector;
 
@@ -13,16 +19,13 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import db.entities.BookingRoom;
-import db.entities.BookingService;
 import app.BookingRoomControlImp;
 import app.BookingRoomControlInterface;
-import gui.AbstractFrame;
-import gui.VerwaltungMainFrame;
+import db.entities.BookingRoom;
+import db.entities.BookingService;
 
 @SuppressWarnings("serial")
 public class CheckOutFrame extends AbstractFrame {
@@ -79,8 +82,8 @@ public class CheckOutFrame extends AbstractFrame {
 			tmp = face.getAllFromCustomer(scf.getSelectedCustomer().getId());
 			double priceSum = 0;
 			for(BookingRoom r: tmp){
-				Vector<BookingService> services = face.getRelatedServiceBookings(r.getBrid());
-				for(BookingService s: services){
+				Vector<BookingService> serviceBookings = face.getRelatedServiceBookings(r.getBrid());
+				for(BookingService s: serviceBookings){
 					priceSum = priceSum +s.getService().getPrice();
 				}
 				priceSum = priceSum +r.getRoom().getPrice();
@@ -124,6 +127,14 @@ public class CheckOutFrame extends AbstractFrame {
 	}
 	@Override
 	protected void setupInteractions() {
+		final FrameSwitcher fs = new FrameSwitchImpl(this,mf);
+		
+		btnCheckout.addActionListener(new ActionListener(){
 
+			public void actionPerformed(ActionEvent e) {
+				if(e.getActionCommand()=="checkout")
+					fs.switchFrame();
+			}	
+		});
 	}
 }

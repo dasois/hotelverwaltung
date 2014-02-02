@@ -59,7 +59,7 @@ public class SelectCustomerFrame extends AbstractFrame{
 		list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		list.setVisibleRowCount(4);
 		listScroller = new JScrollPane(list);
-		listScroller.setPreferredSize(new Dimension(250, 80));
+		listScroller.setPreferredSize(new Dimension(600, 160));
 
 		southPanel = new JPanel();
 		southPanel.setLayout(new GridLayout(1,2,10,10));
@@ -67,7 +67,7 @@ public class SelectCustomerFrame extends AbstractFrame{
 		book = new JButton("Ausbuchen");
 		book.setPreferredSize(new Dimension(20, 30));
 		book.setActionCommand("book");
-		cancel = new JButton("Zurück");
+		cancel = new JButton("ZurÃ¼ck");
 		cancel.setPreferredSize(new Dimension(20, 30));
 		cancel.setActionCommand("Cancel");
 		boxdsouthPanel = new JPanel();	

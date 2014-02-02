@@ -49,7 +49,7 @@ public class CreateServiceFrame extends AbstractFrame{
 	}
 
 	protected void createWidget() {
-		header = new JLabel("Dienstleistung hinzufügen");
+		header = new JLabel("Dienstleistung hinzufÃ¼gen");
 		header.setPreferredSize(new Dimension(400,40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
@@ -139,12 +139,12 @@ public class CreateServiceFrame extends AbstractFrame{
 					//TODO
 					try {
 						int sid = controller.create(name.getText(),Double.parseDouble(price.getText()));
-						mf.addProtocolLine("Service:\n"+sid+" "+name.getText()+" wurde in der Datenbank angelegt\n");
+						mf.addProtocolLine("Service: "+sid+" namens "+name.getText()+" wurde in der Datenbank angelegt\n");
 
 					} catch (NumberFormatException e1) {
-						mf.addProtocolLine("Fehlerhafte eingabe, es wurde kein Service Angelegt.\nVergewissern sie sich das alle Felder ausgefüllt werden!");
+						mf.addProtocolLine("Fehlerhafte Eingabe, es wurde kein Service angelegt.\nVergewissern Sie sich, dass alle Felder ausgefÃ¼llt werden!");
 					} catch (SQLException e1) {
-						mf.addProtocolLine("Es konnte kein Kunde erstellt werden, rufen sie ihren Administrator");
+						mf.addProtocolLine("Es konnte kein Kunde erstellt werden, kontaktieren Sie Ihren Administrator");
 					}
 					
 					fs.switchFrame();

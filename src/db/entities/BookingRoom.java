@@ -61,6 +61,11 @@ public class BookingRoom implements DBBookingRoom{
 	}
 	
 	@Override
+	public ResultSet getByDate(Date date) throws SQLException {
+		return DBIface.executeQuery("SELECT * from Booking_Room WHERE Date = \""+date+"\"");
+	}
+	
+	@Override
 	public int create() throws SQLException {
 		ResultSet rs = DBIface.executeQuery("Insert into Booking_Room values ("+this.getBrid()+",\""+this.getDate().toString()+"\","+this.getRoom().getRid()+","+this.getCustomer().getId()+")");
 		if (rs.next()) {
@@ -93,6 +98,13 @@ public class BookingRoom implements DBBookingRoom{
 			return true;
 		}
 		return false;
+	}
+	
+	@Override
+	public double getRoomPrice() throws SQLException {
+		ResultSet rs = DBIface.executeQuery("SELECT Price FROM Room WHERE RID="+this.getRoom().getRid());
+		rs.next();
+		return rs.getDouble(1);
 	}
 
 	/**
@@ -154,4 +166,5 @@ public class BookingRoom implements DBBookingRoom{
 		
 		return "brId: " + brid + " Zimmernummer: "+ room.getRid() + " Kundennummer: " + customer.getId()+"Buchungstag: "+ getDate();
 	}
+
 }
