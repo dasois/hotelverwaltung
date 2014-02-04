@@ -45,34 +45,34 @@ public class CheckOutFrame extends AbstractFrame {
 	public CheckOutFrame(SelectCustomerFrame scf, VerwaltungMainFrame mf) {
 		this.scf = scf;
 		this.mf = mf;
-		
+
 	}
-
-
 
 	@Override
 	protected void createWidget() {
 		header = new JLabel("Kundenbuchung");
-		header.setPreferredSize(new Dimension(400,40));
+		header.setPreferredSize(new Dimension(400, 40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
 		header.setOpaque(true);
 		header.setHorizontalAlignment(SwingConstants.CENTER);
-		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));
-		
+		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC, 30));
+
 		leftPanel = new JPanel();
-		leftPanel.setLayout(new GridLayout(2,1,10,10));
+		leftPanel.setLayout(new GridLayout(2, 1, 10, 10));
 
 		customer = new JLabel("Kunde :");
-		customer.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 20));
+		customer.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC,
+				20));
 
 		price = new JLabel("Gesamtpreis ");
-		price.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 20));
+		price.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC, 20));
 		boxdleftPanel = new JPanel();
-		boxdleftPanel.setLayout(new BoxLayout(boxdleftPanel,BoxLayout.PAGE_AXIS));
+		boxdleftPanel.setLayout(new BoxLayout(boxdleftPanel,
+				BoxLayout.PAGE_AXIS));
 
-		centerPanel = new JPanel();	
-		centerPanel.setLayout(new GridLayout(2,1,10,10));
+		centerPanel = new JPanel();
+		centerPanel.setLayout(new GridLayout(2, 1, 10, 10));
 
 		userTextField = new JTextField(scf.getSelectedCustomer().toString());
 		userTextField.setEnabled(false);
@@ -81,60 +81,64 @@ public class CheckOutFrame extends AbstractFrame {
 		try {
 			tmp = face.getAllFromCustomer(scf.getSelectedCustomer().getId());
 			double priceSum = 0;
-			for(BookingRoom r: tmp){
-				Vector<BookingService> serviceBookings = face.getRelatedServiceBookings(r.getBrid());
-				for(BookingService s: serviceBookings){
-					priceSum = priceSum +s.getService().getPrice();
+			for (BookingRoom r : tmp) {
+				Vector<BookingService> serviceBookings = face
+						.getRelatedServiceBookings(r.getBrid());
+				for (BookingService s : serviceBookings) {
+					priceSum = priceSum + s.getService().getPrice();
 				}
-				priceSum = priceSum +r.getRoom().getPrice();
+				priceSum = priceSum + r.getRoom().getPrice();
 
 			}
-			priceTextField = new JTextField(""+priceSum);
+			priceTextField = new JTextField("" + priceSum);
 			priceTextField.setEnabled(false);
-			priceTextField.setFont(header.getFont().deriveFont(Font.BOLD , 20));
+			priceTextField.setFont(header.getFont().deriveFont(Font.BOLD, 20));
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		boxdCenterPanel = new JPanel();	
-		boxdCenterPanel.setLayout(new BoxLayout(boxdCenterPanel,BoxLayout.PAGE_AXIS));
+		boxdCenterPanel = new JPanel();
+		boxdCenterPanel.setLayout(new BoxLayout(boxdCenterPanel,
+				BoxLayout.PAGE_AXIS));
 		btnCheckout = new JButton("Checkout");
 		btnCheckout.setPreferredSize(new Dimension(20, 30));
 		btnCheckout.setActionCommand("checkout");
-	
+
 	}
 
 	@Override
 	protected void addWidget() {
-		getContentPane().setLayout(new BorderLayout(5,5));
-		getContentPane().add(BorderLayout.NORTH,header);
-		getContentPane().add(BorderLayout.SOUTH,btnCheckout);
+		getContentPane().setLayout(new BorderLayout(5, 5));
+		getContentPane().add(BorderLayout.NORTH, header);
+		getContentPane().add(BorderLayout.SOUTH, btnCheckout);
 		leftPanel.add(customer);
 		leftPanel.add(price);
 		boxdleftPanel.add(leftPanel);
 		boxdleftPanel.add(Box.createVerticalGlue());
-		getContentPane().add(BorderLayout.WEST,boxdleftPanel);
+		getContentPane().add(BorderLayout.WEST, boxdleftPanel);
 
 		centerPanel.add(userTextField);
 		centerPanel.add(priceTextField);
 		boxdCenterPanel.add(centerPanel);
 		boxdCenterPanel.add(Box.createVerticalGlue());
-		getContentPane().add(BorderLayout.CENTER,boxdCenterPanel);
+		getContentPane().add(BorderLayout.CENTER, boxdCenterPanel);
 		System.out.println("happends");
 
 	}
+
 	@Override
 	protected void setupInteractions() {
-		final FrameSwitcher fs = new FrameSwitchImpl(this,mf);
-		
-		btnCheckout.addActionListener(new ActionListener(){
+		final FrameSwitcher fs = new FrameSwitchImpl(this, mf);
 
+		btnCheckout.addActionListener(new ActionListener() {
+
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(e.getActionCommand()=="checkout")
+				if (e.getActionCommand() == "checkout")
 					fs.switchFrame();
-			}	
+			}
 		});
 	}
 }

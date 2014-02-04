@@ -30,9 +30,10 @@ import app.BookingRoomControlInterface;
 import app.CustomerControlImp;
 import db.entities.Customer;
 import db.entities.Room;
+
 /** Selection of the customer wich wants to book a room */
 @SuppressWarnings("serial")
-public class SelectCostumerByRoomFrame extends AbstractFrame{
+public class SelectCostumerByRoomFrame extends AbstractFrame {
 
 	private VerwaltungMainFrame mf;
 	private FreeRoomsFrame frf;
@@ -45,20 +46,25 @@ public class SelectCostumerByRoomFrame extends AbstractFrame{
 	private JPanel boxdsouthPanel;
 	private Room[] selectedRooms;
 	private SelectTimeIntervallRoomFrame sf;
-	public SelectCostumerByRoomFrame(VerwaltungMainFrame mf,FreeRoomsFrame frf, Room[] selectedRooms, SelectTimeIntervallRoomFrame sf) {
+
+	public SelectCostumerByRoomFrame(VerwaltungMainFrame mf,
+			FreeRoomsFrame frf, Room[] selectedRooms,
+			SelectTimeIntervallRoomFrame sf) {
 		this.mf = mf;
 		this.frf = frf;
 		this.selectedRooms = selectedRooms;
 		this.sf = sf;
 	}
+
+	@Override
 	protected void createWidget() {
 		header = new JLabel("Kunde wählen");
-		header.setPreferredSize(new Dimension(400,40));
+		header.setPreferredSize(new Dimension(400, 40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
 		header.setOpaque(true);
 		header.setHorizontalAlignment(SwingConstants.CENTER);
-		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));
+		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC, 30));
 
 		try {
 			list = new JList<>(new CustomerControlImp().getAll());
@@ -73,7 +79,7 @@ public class SelectCostumerByRoomFrame extends AbstractFrame{
 		listScroller.setPreferredSize(new Dimension(600, 160));
 
 		southPanel = new JPanel();
-		southPanel.setLayout(new GridLayout(1,2,10,10));
+		southPanel.setLayout(new GridLayout(1, 2, 10, 10));
 
 		book = new JButton("Buchen");
 		book.setPreferredSize(new Dimension(20, 30));
@@ -82,55 +88,67 @@ public class SelectCostumerByRoomFrame extends AbstractFrame{
 		stepback = new JButton("Zurück");
 		stepback.setPreferredSize(new Dimension(20, 30));
 		stepback.setActionCommand("Back");
-		boxdsouthPanel = new JPanel();	
-		boxdsouthPanel.setLayout(new BoxLayout(boxdsouthPanel,BoxLayout.PAGE_AXIS));
+		boxdsouthPanel = new JPanel();
+		boxdsouthPanel.setLayout(new BoxLayout(boxdsouthPanel,
+				BoxLayout.PAGE_AXIS));
 	}
 
+	@Override
 	protected void addWidget() {
-		getContentPane().setLayout(new BorderLayout(5,5));
-		getContentPane().add(BorderLayout.NORTH,header);
-		getContentPane().add(BorderLayout.CENTER,listScroller);
+		getContentPane().setLayout(new BorderLayout(5, 5));
+		getContentPane().add(BorderLayout.NORTH, header);
+		getContentPane().add(BorderLayout.CENTER, listScroller);
 		southPanel.add(book);
 		southPanel.add(stepback);
 		boxdsouthPanel.add(southPanel);
 		boxdsouthPanel.add(Box.createVerticalGlue());
-		getContentPane().add(BorderLayout.SOUTH,boxdsouthPanel);
+		getContentPane().add(BorderLayout.SOUTH, boxdsouthPanel);
 
 	}
-	protected void setupInteractions() {
-		final FrameSwitcher fs = new FrameSwitchImpl(this,frf);
-		final FrameSwitcher fs2 = new FrameSwitchImpl(this,mf);
-		stepback.addActionListener(new ActionListener(){
 
+	@Override
+	protected void setupInteractions() {
+		final FrameSwitcher fs = new FrameSwitchImpl(this, frf);
+		final FrameSwitcher fs2 = new FrameSwitchImpl(this, mf);
+		stepback.addActionListener(new ActionListener() {
+
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				fs.switchFrame();
 			}
 		});
-		book.addActionListener(new ActionListener(){
+		book.addActionListener(new ActionListener() {
 
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				Calendar start = Calendar.getInstance();
 				start.setTime(sf.getStartDate());
 				Calendar end = Calendar.getInstance();
 				end.setTime(sf.getEndDate());
 				BookingRoomControlInterface controller = new BookingRoomControlImp();
-				double price =0.0;
-				for (Date date = start.getTime(); !start.after(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
-					for(Room r:selectedRooms){
+				double price = 0.0;
+				for (Date date = start.getTime(); !start.after(end); start.add(
+						Calendar.DATE, 1), date = start.getTime()) {
+					for (Room r : selectedRooms) {
 						try {
 							price = price + r.getPrice();
-							controller.create(new java.sql.Date(date.getTime()),r,list.getSelectedValue());
-							mf.addProtocolLine("Buchung von Zimmer: "+r.getRid()+"am Tag:"+date.toString()+" wurde in der Datenbank angelegt\n.");
+							controller.create(
+									new java.sql.Date(date.getTime()), r,
+									list.getSelectedValue());
+							mf.addProtocolLine("Buchung von Zimmer: "
+									+ r.getRid() + "am Tag:" + date.toString()
+									+ " wurde in der Datenbank angelegt\n.");
 						} catch (SQLException e1) {
 							mf.addProtocolLine("Buchung konnte nicht erstellt werden.");
 							e1.printStackTrace();
-						}catch (NullPointerException e1) {
+						} catch (NullPointerException e1) {
 							mf.addProtocolLine("Fehler! Es wurde kein Kunde ausgewählt.");
 						}
 					}
 
 				}
-				mf.addProtocolLine("Die Komplette buchung kostet: "+price+".");
+				mf.addProtocolLine("Die Komplette buchung kostet: " + price
+						+ ".");
 				fs2.switchFrame();
 			}
 		});

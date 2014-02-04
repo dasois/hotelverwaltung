@@ -25,9 +25,10 @@ import javax.swing.SwingConstants;
 
 import app.ServiceControlImp;
 import db.entities.Service;
-/** Selection of a service wich should get booked*/
+
+/** Selection of a service wich should get booked */
 @SuppressWarnings("serial")
-public class SelectServiceFrame extends AbstractFrame{
+public class SelectServiceFrame extends AbstractFrame {
 
 	private JLabel header;
 	private JList<Service> list;
@@ -38,9 +39,8 @@ public class SelectServiceFrame extends AbstractFrame{
 	private JPanel boxdsouthPanel;
 	private VerwaltungMainFrame mf;
 	private SelectTimeFrame stf;
-	
-	public SelectServiceFrame(VerwaltungMainFrame mf,
-			SelectTimeFrame ssf) {
+
+	public SelectServiceFrame(VerwaltungMainFrame mf, SelectTimeFrame ssf) {
 		this.mf = mf;
 		this.stf = ssf;
 	}
@@ -48,13 +48,13 @@ public class SelectServiceFrame extends AbstractFrame{
 	@Override
 	protected void createWidget() {
 		header = new JLabel("Dienstleistung wählen");
-		header.setPreferredSize(new Dimension(400,40));
+		header.setPreferredSize(new Dimension(400, 40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
 		header.setOpaque(true);
 		header.setHorizontalAlignment(SwingConstants.CENTER);
-		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));
-		//TODO sinnvolle excp
+		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC, 30));
+		// TODO sinnvolle excp
 		try {
 			list = new JList<>(new ServiceControlImp().getAll());
 		} catch (SQLException e) {
@@ -67,7 +67,7 @@ public class SelectServiceFrame extends AbstractFrame{
 		listScroller.setPreferredSize(new Dimension(250, 80));
 
 		southPanel = new JPanel();
-		southPanel.setLayout(new GridLayout(1,2,10,10));
+		southPanel.setLayout(new GridLayout(1, 2, 10, 10));
 
 		book = new JButton("Buchen");
 		book.setPreferredSize(new Dimension(20, 30));
@@ -76,46 +76,52 @@ public class SelectServiceFrame extends AbstractFrame{
 		stepback = new JButton("Zurück");
 		stepback.setPreferredSize(new Dimension(20, 30));
 		stepback.setActionCommand("Back");
-		boxdsouthPanel = new JPanel();	
-		boxdsouthPanel.setLayout(new BoxLayout(boxdsouthPanel,BoxLayout.PAGE_AXIS));
+		boxdsouthPanel = new JPanel();
+		boxdsouthPanel.setLayout(new BoxLayout(boxdsouthPanel,
+				BoxLayout.PAGE_AXIS));
 	}
 
 	@Override
 	protected void addWidget() {
-		getContentPane().setLayout(new BorderLayout(5,5));
-		getContentPane().add(BorderLayout.NORTH,header);
-		getContentPane().add(BorderLayout.CENTER,listScroller);
+		getContentPane().setLayout(new BorderLayout(5, 5));
+		getContentPane().add(BorderLayout.NORTH, header);
+		getContentPane().add(BorderLayout.CENTER, listScroller);
 		southPanel.add(book);
 		southPanel.add(stepback);
 		boxdsouthPanel.add(southPanel);
 		boxdsouthPanel.add(Box.createVerticalGlue());
-		getContentPane().add(BorderLayout.SOUTH,boxdsouthPanel);
+		getContentPane().add(BorderLayout.SOUTH, boxdsouthPanel);
 
 	}
+
 	@Override
 	protected void setupInteractions() {
-		final FrameSwitcher fs = new FrameSwitchImpl(this,stf);
-		SelectRoomBookingByDate scf = new SelectRoomBookingByDate(mf,this,stf);
+		final FrameSwitcher fs = new FrameSwitchImpl(this, stf);
+		SelectRoomBookingByDate scf = new SelectRoomBookingByDate(mf, this, stf);
 		scf.init();
 		scf.setVisible(false);
-		final FrameSwitcher fs2 = new FrameSwitchImpl(this,scf);
-		stepback.addActionListener(new ActionListener(){
+		final FrameSwitcher fs2 = new FrameSwitchImpl(this, scf);
+		stepback.addActionListener(new ActionListener() {
 
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				fs.switchFrame();
 			}
 		});
-		book.addActionListener(new ActionListener(){
+		book.addActionListener(new ActionListener() {
 
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				fs2.switchFrame();
-			}	
+			}
 		});
 	}
-	public int getServiceSelectionid(){
+
+	public int getServiceSelectionid() {
 		return list.getSelectedValue().getSid();
 	}
-	public String getServiceName(){
+
+	public String getServiceName() {
 		return list.getSelectedValue().getType();
 	}
 }

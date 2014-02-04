@@ -20,9 +20,10 @@ import javax.swing.SwingConstants;
 
 import app.CustomerControlImp;
 import db.entities.Customer;
+
 /** Displays all customers saved in the db */
 @SuppressWarnings("serial")
-public class ShowCustomerFrame extends AbstractFrame{
+public class ShowCustomerFrame extends AbstractFrame {
 	private VerwaltungMainFrame mf;
 	private JLabel header;
 	private JPanel southPanel;
@@ -31,62 +32,66 @@ public class ShowCustomerFrame extends AbstractFrame{
 	private JList<Customer> list;
 	private JScrollPane listScroller;
 
-	public ShowCustomerFrame(VerwaltungMainFrame mf){
+	public ShowCustomerFrame(VerwaltungMainFrame mf) {
 		this.mf = mf;
 	}
 
+	@Override
 	protected void createWidget() {
 		header = new JLabel("Kundenliste");
-		header.setPreferredSize(new Dimension(400,40));
+		header.setPreferredSize(new Dimension(400, 40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
 		header.setOpaque(true);
 		header.setHorizontalAlignment(SwingConstants.CENTER);
-		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));
-		//TODO sinnvolle exception
+		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC, 30));
+		// TODO sinnvolle exception
 		try {
 			list = new JList<Customer>(new CustomerControlImp().getAll());
 		} catch (SQLException e) {
 			System.out.println("Exception bei Jlist<Customer>");
 			e.printStackTrace();
 		}
-		list.setEnabled(false);	
+		list.setEnabled(false);
 		list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		list.setVisibleRowCount(4);
 		listScroller = new JScrollPane(list);
 		listScroller.setPreferredSize(new Dimension(600, 160));
 
 		southPanel = new JPanel();
-		southPanel.setLayout(new GridLayout(1,1,10,10));
-
+		southPanel.setLayout(new GridLayout(1, 1, 10, 10));
 
 		cancel = new JButton("Zurück");
 		cancel.setPreferredSize(new Dimension(20, 30));
 		cancel.setActionCommand("Cancel");
-		boxdsouthPanel = new JPanel();	
-		boxdsouthPanel.setLayout(new BoxLayout(boxdsouthPanel,BoxLayout.PAGE_AXIS));
+		boxdsouthPanel = new JPanel();
+		boxdsouthPanel.setLayout(new BoxLayout(boxdsouthPanel,
+				BoxLayout.PAGE_AXIS));
 
 	}
 
 	@Override
 	protected void addWidget() {
-		getContentPane().setLayout(new BorderLayout(5,5));
-		getContentPane().add(BorderLayout.NORTH,header);
-		getContentPane().add(BorderLayout.CENTER,listScroller);
-		list.repaint();	
+		getContentPane().setLayout(new BorderLayout(5, 5));
+		getContentPane().add(BorderLayout.NORTH, header);
+		getContentPane().add(BorderLayout.CENTER, listScroller);
+		list.repaint();
 		southPanel.add(cancel);
 		boxdsouthPanel.add(southPanel);
 		boxdsouthPanel.add(Box.createVerticalGlue());
-		getContentPane().add(BorderLayout.SOUTH,boxdsouthPanel);
+		getContentPane().add(BorderLayout.SOUTH, boxdsouthPanel);
 	}
-	protected void setupInteractions() {
-		final FrameSwitcher fs = new FrameSwitchImpl(this,mf);
-		cancel.addActionListener(new ActionListener(){
 
+	@Override
+	protected void setupInteractions() {
+		final FrameSwitcher fs = new FrameSwitchImpl(this, mf);
+		cancel.addActionListener(new ActionListener() {
+
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(e.getActionCommand()=="Cancel")
+				if (e.getActionCommand() == "Cancel")
 					fs.switchFrame();
-			}	
+			}
 		});
 	}
 }

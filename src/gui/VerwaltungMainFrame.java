@@ -20,10 +20,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-/**Frame from which all subframes are selected
- * @author Tobias */
+
+/**
+ * Frame from which all subframes are selected
+ * 
+ * @author Tobias
+ */
 @SuppressWarnings("serial")
-public class VerwaltungMainFrame extends AbstractFrame{
+public class VerwaltungMainFrame extends AbstractFrame {
 
 	private JLabel header;
 	private JPanel leftPanel;
@@ -35,44 +39,47 @@ public class VerwaltungMainFrame extends AbstractFrame{
 	private JScrollPane scrollTable;
 	private JPanel boxdleftPanel;
 
+	@Override
 	protected void createWidget() {
 		header = new JLabel("Hausverwaltung");
-		header.setPreferredSize(new Dimension(400,40));
+		header.setPreferredSize(new Dimension(400, 40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
 		header.setOpaque(true);
 		header.setHorizontalAlignment(SwingConstants.CENTER);
-		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));	
-		
+		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC, 30));
+
 		leftPanel = new JPanel();
-		leftPanel.setLayout(new GridLayout(3,1,10,10));
+		leftPanel.setLayout(new GridLayout(3, 1, 10, 10));
 		action = new JButton("Aktion");
 		action.setActionCommand("action");
-		
+
 		protocol = new JTextArea(15, 60);
 		protocol.setEditable(false);
 		protocol.setText("Login erfolgreich");
 		scrollTable = new JScrollPane(protocol);
-		khd = new JComboBox<String>(new String[]{"Kunden","Zimmer","Leistung"});
+		khd = new JComboBox<String>(new String[] { "Kunden", "Zimmer",
+				"Leistung" });
 
 		actions = new JComboBox<String>();
 		model = new ComboBoxModel[3];
-		model[0] = new DefaultComboBoxModel<String>(
-				new String[]{"Erstellen", "Löschen", "Anzeigen", "Ausbuchen"});
-		model[1] = new DefaultComboBoxModel<String>(
-				new String[]{"Erstellen", "Löschen", "Buchen"});
-		model[2] = new DefaultComboBoxModel<String>(
-				new String[]{"Erstellen", "Löschen", "Buchen"});
+		model[0] = new DefaultComboBoxModel<String>(new String[] { "Erstellen",
+				"Löschen", "Anzeigen", "Ausbuchen" });
+		model[1] = new DefaultComboBoxModel<String>(new String[] { "Erstellen",
+				"Löschen", "Buchen" });
+		model[2] = new DefaultComboBoxModel<String>(new String[] { "Erstellen",
+				"Löschen", "Buchen" });
 		actions.setModel(model[0]);
 
-		boxdleftPanel = new JPanel();	
-		boxdleftPanel.setLayout(new BoxLayout(boxdleftPanel,BoxLayout.PAGE_AXIS));	
+		boxdleftPanel = new JPanel();
+		boxdleftPanel.setLayout(new BoxLayout(boxdleftPanel,
+				BoxLayout.PAGE_AXIS));
 	}
 
 	@Override
 	protected void addWidget() {
-		getContentPane().setLayout(new BorderLayout(2,2));
-		getContentPane().add(BorderLayout.NORTH,header);
+		getContentPane().setLayout(new BorderLayout(2, 2));
+		getContentPane().add(BorderLayout.NORTH, header);
 		leftPanel.add(khd);
 		leftPanel.add(actions);
 		leftPanel.add(action);
@@ -80,26 +87,27 @@ public class VerwaltungMainFrame extends AbstractFrame{
 		leftPanel.setBorder(BorderFactory.createEmptyBorder(10, 2, 10, 2));
 		boxdleftPanel.add(leftPanel);
 		boxdleftPanel.add(Box.createVerticalGlue());
-		getContentPane().add(BorderLayout.WEST,boxdleftPanel);
-		getContentPane().add(BorderLayout.CENTER,scrollTable);
+		getContentPane().add(BorderLayout.WEST, boxdleftPanel);
+		getContentPane().add(BorderLayout.CENTER, scrollTable);
 
 	}
 
 	@Override
 	protected void setupInteractions() {
 		action.addActionListener(new MainButtonHandler(this));
-		khd.addActionListener(new ActionListener(){
-			
+		khd.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int i = khd.getSelectedIndex();
-				
-					actions.setModel(model[i]);	
-							
+
+				actions.setModel(model[i]);
+
 			}
 		});
 	}
-	public void addProtocolLine(String s){
-		protocol.setText(protocol.getText()+"\n"+s);
+
+	public void addProtocolLine(String s) {
+		protocol.setText(protocol.getText() + "\n" + s);
 	}
 }

@@ -26,11 +26,15 @@ import javax.swing.SwingConstants;
 import app.DeleteControlImp;
 import app.DeleteControlInterface;
 
-/**Frame to delete an entity from the db. 
+/**
+ * Frame to delete an entity from the db.
+ * 
  * @author Tobias
- * @param <T> entities are room,service and customer */
+ * @param <T>
+ *            entities are room,service and customer
+ */
 @SuppressWarnings("serial")
-public class DeleteFrame<T> extends AbstractFrame{
+public class DeleteFrame<T> extends AbstractFrame {
 	private VerwaltungMainFrame mf;
 	private JLabel header;
 	private JPanel southPanel;
@@ -40,30 +44,31 @@ public class DeleteFrame<T> extends AbstractFrame{
 	private JList<T> list;
 	private JScrollPane listScroller;
 	private String label;
-	public DeleteFrame(VerwaltungMainFrame mf,String label,JList<T> list) {
+
+	public DeleteFrame(VerwaltungMainFrame mf, String label, JList<T> list) {
 		this.mf = mf;
 		this.label = label;
 		this.list = list;
 	}
-	
+
 	@Override
 	protected void createWidget() {
 		header = new JLabel(label);
-		header.setPreferredSize(new Dimension(400,40));
+		header.setPreferredSize(new Dimension(400, 40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
 		header.setOpaque(true);
 		header.setHorizontalAlignment(SwingConstants.CENTER);
-		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));
-		
+		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC, 30));
+
 		list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		list.setVisibleRowCount(-1);
 		listScroller = new JScrollPane(list);
 		listScroller.setPreferredSize(new Dimension(250, 160));
-			
+
 		southPanel = new JPanel();
-		southPanel.setLayout(new GridLayout(1,2,10,10));
+		southPanel.setLayout(new GridLayout(1, 2, 10, 10));
 
 		delete = new JButton("Löschen");
 		delete.setPreferredSize(new Dimension(20, 30));
@@ -72,70 +77,76 @@ public class DeleteFrame<T> extends AbstractFrame{
 		cancel = new JButton("Abbruch");
 		cancel.setPreferredSize(new Dimension(20, 30));
 		cancel.setActionCommand("Cancel");
-		boxdsouthPanel = new JPanel();	
-		boxdsouthPanel.setLayout(new BoxLayout(boxdsouthPanel,BoxLayout.PAGE_AXIS));
+		boxdsouthPanel = new JPanel();
+		boxdsouthPanel.setLayout(new BoxLayout(boxdsouthPanel,
+				BoxLayout.PAGE_AXIS));
 	}
 
 	@Override
 	protected void addWidget() {
-		getContentPane().setLayout(new BorderLayout(5,5));
-		getContentPane().add(BorderLayout.NORTH,header);
-		getContentPane().add(BorderLayout.CENTER,listScroller);
+		getContentPane().setLayout(new BorderLayout(5, 5));
+		getContentPane().add(BorderLayout.NORTH, header);
+		getContentPane().add(BorderLayout.CENTER, listScroller);
 
 		southPanel.add(delete);
 		southPanel.add(cancel);
 		boxdsouthPanel.add(southPanel);
 		boxdsouthPanel.add(Box.createVerticalGlue());
-		getContentPane().add(BorderLayout.SOUTH,boxdsouthPanel);
+		getContentPane().add(BorderLayout.SOUTH, boxdsouthPanel);
 	}
-	
-	protected void setupInteractions() {
-		final FrameSwitcher fs = new FrameSwitchImpl(this,mf);
-		cancel.addActionListener(new ActionListener(){
 
+	@Override
+	protected void setupInteractions() {
+		final FrameSwitcher fs = new FrameSwitchImpl(this, mf);
+		cancel.addActionListener(new ActionListener() {
+
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(e.getActionCommand()=="Cancel")
+				if (e.getActionCommand() == "Cancel")
 					fs.switchFrame();
-				else{
+				else {
 					createWidgetFirstView();
 				}
-			}	
+			}
 		});
-		delete.addActionListener(new ActionListener(){
+		delete.addActionListener(new ActionListener() {
 
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(e.getActionCommand()=="Delete"){
+				if (e.getActionCommand() == "Delete") {
 					createWidgetSecondView();
-				}
-				else{
-					DeleteControlInterface<T> controller = new DeleteControlImp<>();	
-					//TODO sinnvolle exception
+				} else {
+					DeleteControlInterface<T> controller = new DeleteControlImp<>();
+					// TODO sinnvolle exception
 					try {
 						controller.deleteEntity(list.getSelectedValue());
-						mf.addProtocolLine("--Löschen--\n"+list.getSelectedValue().toString()+"\nwurde aus der Datenbank gelöscht.\n");
+						mf.addProtocolLine("--Löschen--\n"
+								+ list.getSelectedValue().toString()
+								+ "\nwurde aus der Datenbank gelöscht.\n");
 					} catch (SQLException e1) {
 						mf.addProtocolLine("Es konnte nicht gelöscht werden, kontaktieren Sie Ihren Administrator");
-					}
-					catch (NullPointerException e1) {
+					} catch (NullPointerException e1) {
 						mf.addProtocolLine("Es konnte nicht gelöscht werden, da keine Auswahl getroffen wurde.");
-					}		
+					}
 					fs.switchFrame();
 				}
-			}	
+			}
 		});
 	}
-	private void createWidgetSecondView(){
-		list.setEnabled(false);		
-		delete.setText("Korrekt");		
+
+	private void createWidgetSecondView() {
+		list.setEnabled(false);
+		delete.setText("Korrekt");
 		delete.setActionCommand("accept");
-		cancel.setText("Fehler");		
+		cancel.setText("Fehler");
 		cancel.setActionCommand("Revise");
 	}
-	private void createWidgetFirstView(){
-		list.setEnabled(true);	
-		delete.setText("Anlegen");		
+
+	private void createWidgetFirstView() {
+		list.setEnabled(true);
+		delete.setText("Anlegen");
 		delete.setActionCommand("Create");
-		cancel.setText("Abbruch");		
+		cancel.setText("Abbruch");
 		cancel.setActionCommand("Cancel");
 	}
 }

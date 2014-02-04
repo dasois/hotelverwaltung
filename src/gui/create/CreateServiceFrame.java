@@ -24,10 +24,13 @@ import javax.swing.SwingConstants;
 import app.ServiceControlImp;
 import app.ServiceControlInterface;
 
-/**Frame to register a new service.
- * @author Tobias */
+/**
+ * Frame to register a new service.
+ * 
+ * @author Tobias
+ */
 @SuppressWarnings("serial")
-public class CreateServiceFrame extends AbstractFrame{
+public class CreateServiceFrame extends AbstractFrame {
 	private JLabel header;
 	private JPanel leftPanel;
 	private JPanel boxdleftPanel;
@@ -39,7 +42,7 @@ public class CreateServiceFrame extends AbstractFrame{
 	private JTextField name;
 	private JTextField price;
 	private JButton create;
-	private JButton cancel;		
+	private JButton cancel;
 	private JPanel southPanel;
 	private JPanel boxdsouthPanel;
 	private VerwaltungMainFrame mf;
@@ -48,38 +51,43 @@ public class CreateServiceFrame extends AbstractFrame{
 		this.mf = mf;
 	}
 
+	@Override
 	protected void createWidget() {
 		header = new JLabel("Dienstleistung hinzufügen");
-		header.setPreferredSize(new Dimension(400,40));
+		header.setPreferredSize(new Dimension(400, 40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
 		header.setOpaque(true);
 		header.setHorizontalAlignment(SwingConstants.CENTER);
-		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));
+		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC, 30));
 
 		leftPanel = new JPanel();
-		leftPanel.setLayout(new GridLayout(2,1,10,10));
+		leftPanel.setLayout(new GridLayout(2, 1, 10, 10));
 
 		serviceName = new JLabel("Name ");
-		serviceName.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 20));
+		serviceName.setFont(header.getFont().deriveFont(
+				Font.BOLD + Font.ITALIC, 20));
 
 		servicePrice = new JLabel("Preis ");
-		servicePrice.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 20));
+		servicePrice.setFont(header.getFont().deriveFont(
+				Font.BOLD + Font.ITALIC, 20));
 
 		boxdleftPanel = new JPanel();
-		boxdleftPanel.setLayout(new BoxLayout(boxdleftPanel,BoxLayout.PAGE_AXIS));	
+		boxdleftPanel.setLayout(new BoxLayout(boxdleftPanel,
+				BoxLayout.PAGE_AXIS));
 
-		centerPanel = new JPanel();	
-		centerPanel.setLayout(new GridLayout(2,1,10,10));
+		centerPanel = new JPanel();
+		centerPanel.setLayout(new GridLayout(2, 1, 10, 10));
 
 		name = new JTextField();
 		price = new JTextField();
 
-		boxdCenterPanel = new JPanel();	
-		boxdCenterPanel.setLayout(new BoxLayout(boxdCenterPanel,BoxLayout.PAGE_AXIS));
+		boxdCenterPanel = new JPanel();
+		boxdCenterPanel.setLayout(new BoxLayout(boxdCenterPanel,
+				BoxLayout.PAGE_AXIS));
 
 		southPanel = new JPanel();
-		southPanel.setLayout(new GridLayout(1,2,10,10));
+		southPanel.setLayout(new GridLayout(1, 2, 10, 10));
 
 		create = new JButton("Anlegen");
 		create.setPreferredSize(new Dimension(20, 30));
@@ -88,84 +96,94 @@ public class CreateServiceFrame extends AbstractFrame{
 		cancel = new JButton("Abbruch");
 		cancel.setPreferredSize(new Dimension(20, 30));
 		cancel.setActionCommand("Cancel");
-		boxdsouthPanel = new JPanel();	
-		boxdsouthPanel.setLayout(new BoxLayout(boxdsouthPanel,BoxLayout.PAGE_AXIS));
+		boxdsouthPanel = new JPanel();
+		boxdsouthPanel.setLayout(new BoxLayout(boxdsouthPanel,
+				BoxLayout.PAGE_AXIS));
 	}
 
 	@Override
 	protected void addWidget() {
-		getContentPane().setLayout(new BorderLayout(5,5));
-		getContentPane().add(BorderLayout.NORTH,header);
+		getContentPane().setLayout(new BorderLayout(5, 5));
+		getContentPane().add(BorderLayout.NORTH, header);
 		leftPanel.add(serviceName);
 		leftPanel.add(servicePrice);
 		leftPanel.setPreferredSize(leftPanel.getPreferredSize());
 		boxdleftPanel.add(leftPanel);
 		boxdleftPanel.add(Box.createVerticalGlue());
-		getContentPane().add(BorderLayout.WEST,boxdleftPanel);
+		getContentPane().add(BorderLayout.WEST, boxdleftPanel);
 		centerPanel.add(name);
 		centerPanel.add(price);
 		boxdCenterPanel.add(centerPanel);
 		boxdCenterPanel.add(Box.createVerticalGlue());
-		getContentPane().add(BorderLayout.CENTER,boxdCenterPanel);
+		getContentPane().add(BorderLayout.CENTER, boxdCenterPanel);
 
 		southPanel = new JPanel();
-		southPanel.setLayout(new GridLayout(1,2,10,10));
+		southPanel.setLayout(new GridLayout(1, 2, 10, 10));
 
 		southPanel.add(create);
 		southPanel.add(cancel);
 		boxdsouthPanel.add(southPanel);
 		boxdsouthPanel.add(Box.createVerticalGlue());
-		getContentPane().add(BorderLayout.SOUTH,boxdsouthPanel);
+		getContentPane().add(BorderLayout.SOUTH, boxdsouthPanel);
 	}
+
+	@Override
 	protected void setupInteractions() {
-		final FrameSwitcher fs = new FrameSwitchImpl(this,mf);
-		cancel.addActionListener(new ActionListener(){
+		final FrameSwitcher fs = new FrameSwitchImpl(this, mf);
+		cancel.addActionListener(new ActionListener() {
 
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(e.getActionCommand()=="Revise")
+				if (e.getActionCommand() == "Revise")
 					createWidgetFirstView();
-				else{
+				else {
 					fs.switchFrame();
-				}				
-			}	
+				}
+			}
 		});
-		create.addActionListener(new ActionListener(){
+		create.addActionListener(new ActionListener() {
 
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(e.getActionCommand()=="Create")
+				if (e.getActionCommand() == "Create")
 					createWidgetSecondView();
-				else{
+				else {
 					ServiceControlInterface controller = new ServiceControlImp();
-					//TODO
+					// TODO
 					try {
-						int sid = controller.create(name.getText(),Double.parseDouble(price.getText()));
-						mf.addProtocolLine("Service: "+sid+" namens "+name.getText()+" wurde in der Datenbank angelegt\n");
+						int sid = controller.create(name.getText(),
+								Double.parseDouble(price.getText()));
+						mf.addProtocolLine("Service: " + sid + " namens "
+								+ name.getText()
+								+ " wurde in der Datenbank angelegt\n");
 
 					} catch (NumberFormatException e1) {
 						mf.addProtocolLine("Fehlerhafte Eingabe, es wurde kein Service angelegt.\nVergewissern Sie sich, dass alle Felder ausgefüllt werden!");
 					} catch (SQLException e1) {
 						mf.addProtocolLine("Es konnte kein Kunde erstellt werden, kontaktieren Sie Ihren Administrator");
 					}
-					
+
 					fs.switchFrame();
-				}			
-			}	
+				}
+			}
 		});
 	}
-	private void createWidgetSecondView(){
+
+	private void createWidgetSecondView() {
 		name.setEditable(false);
 		price.setEditable(false);
-		create.setText("Korrekt");		
+		create.setText("Korrekt");
 		create.setActionCommand("accept");
-		cancel.setText("Fehler");		
+		cancel.setText("Fehler");
 		cancel.setActionCommand("Revise");
 	}
-	private void createWidgetFirstView(){
+
+	private void createWidgetFirstView() {
 		name.setEditable(true);
 		price.setEditable(true);
-		create.setText("Anlegen");		
+		create.setText("Anlegen");
 		create.setActionCommand("Create");
-		cancel.setText("Abbruch");		
+		cancel.setText("Abbruch");
 		cancel.setActionCommand("Cancel");
 	}
 }

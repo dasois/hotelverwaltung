@@ -10,19 +10,20 @@ import db.entities.BookingRoom;
 import db.entities.BookingService;
 import db.entities.Service;
 
-public class BookingServiceControlImp implements BookingServiceControlInterface{
+public class BookingServiceControlImp implements BookingServiceControlInterface {
 
 	@Override
 	public Vector<BookingService> getAll() throws SQLException {
 		ResultSet resultset = new BookingService().getAll();
 		Vector<BookingService> temp = new Vector<BookingService>();
 		while (resultset.next()) {
-			BookingService c = new BookingService(resultset.getInt(1), resultset.getDate(2),resultset.getInt(3),resultset.getInt(4));		
-		    temp.add(c);
-		}		
+			BookingService c = new BookingService(resultset.getInt(1),
+					resultset.getDate(2), resultset.getInt(3),
+					resultset.getInt(4));
+			temp.add(c);
+		}
 		return temp;
 	}
-	
 
 	@Override
 	public boolean delete(int bookingServiceId) throws SQLException {
@@ -36,8 +37,10 @@ public class BookingServiceControlImp implements BookingServiceControlInterface{
 	}
 
 	@Override
-	public int create(Date date, BookingRoom br, int serviceId) throws SQLException {
-		DBBookingService bs = new BookingService(date, new Service(serviceId), br);
+	public int create(Date date, BookingRoom br, int serviceId)
+			throws SQLException {
+		DBBookingService bs = new BookingService(date, new Service(serviceId),
+				br);
 		return bs.create();
 	}
 
