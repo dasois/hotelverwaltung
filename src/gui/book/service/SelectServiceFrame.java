@@ -97,8 +97,7 @@ public class SelectServiceFrame extends AbstractFrame {
 	@Override
 	protected void setupInteractions() {
 		final FrameSwitcher fs = new FrameSwitchImpl(this, stf);
-		SelectRoomBookingByDate scf = new SelectRoomBookingByDate(mf, this, stf);
-		scf.init();
+		final SelectRoomBookingByDate scf = new SelectRoomBookingByDate(mf, this, stf);
 		scf.setVisible(false);
 		final FrameSwitcher fs2 = new FrameSwitchImpl(this, scf);
 		stepback.addActionListener(new ActionListener() {
@@ -112,6 +111,7 @@ public class SelectServiceFrame extends AbstractFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				scf.init();
 				fs2.switchFrame();
 			}
 		});
