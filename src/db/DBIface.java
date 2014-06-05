@@ -22,21 +22,19 @@ public class DBIface {
 
 	/*
 	 * Login to Database
-	 * 
+	 *
 	 * @param user: user name
-	 * 
+	 *
 	 * @param pwd: password
 	 */
 	public static boolean loginDB(String user, String pwd) throws SQLException {
 		try {
 			Class.forName(sDbDriver);
-			if (user != "" && pwd != "") {
-				DBIface.sUsr = user;
-				DBIface.sPwd = pwd;
+			if (user!=""&&pwd!="") {
+				DBIface.sUsr = user; DBIface.sPwd = pwd;
 			}
-			DriverManager.getConnection(DBIface.sDbUrl, DBIface.sUsr,
-					DBIface.sPwd);
-			// System.out.println(cn.toString());
+			DriverManager.getConnection(DBIface.sDbUrl, DBIface.sUsr, DBIface.sPwd);
+			//System.out.println(cn.toString());
 			return true;
 		} catch (ClassNotFoundException ex) {
 			System.out.println("Class not found: " + ex.getMessage());
@@ -50,7 +48,7 @@ public class DBIface {
 			DBIface.loginDB();
 			Class.forName(sDbDriver);
 			Connection cn = DriverManager.getConnection(sDbUrl, sUsr, sPwd);
-			// System.out.println(cn.toString());
+			//System.out.println(cn.toString());
 			Statement st = cn.createStatement();
 			if (st.execute(SQLQuery, Statement.RETURN_GENERATED_KEYS))
 				rs = st.getResultSet();

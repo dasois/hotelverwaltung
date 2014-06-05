@@ -12,7 +12,7 @@ import db.DBIface;
 
 /**
  * @author david
- * 
+ *
  */
 public class BookingService implements DBBookingService {
 	private int bsid;
@@ -20,38 +20,26 @@ public class BookingService implements DBBookingService {
 	private Service service;
 	private BookingRoom bookingRoom;
 
-	/**
-	 * Constructor for BookingService object
-	 * 
-	 * @param bsid
-	 *            : Id of the service-booking. Leave NULL if you want to use
-	 *            auto_increment!
-	 * @param date
-	 *            : Date for which the service is being booked
-	 * @param service
-	 *            : Service which is being booked
-	 * @param bookingRoom
-	 *            : Corresponding room-booking
+	/**Constructor for BookingService object
+	 *
+	 * @param bsid: Id of the service-booking. Leave NULL if you want to use auto_increment!
+	 * @param date: Date for which the service is being booked
+	 * @param service: Service which is being booked
+	 * @param bookingRoom: Corresponding room-booking
 	 */
-	public BookingService(Date date, Service service, BookingRoom bookingRoom) {
+	public BookingService(Date date, Service service,
+			BookingRoom bookingRoom) {
 		this.date = date;
 		this.service = service;
 		this.bookingRoom = bookingRoom;
 	}
-
-	public BookingService(int bsid, Date date, int serviceId, int broomId) {
-		this.bsid = bsid;
+	public BookingService(Date date, int serviceId, int broomId) {
 		this.date = date;
 		this.bookingRoom = new BookingRoom(broomId);
 		this.service = new Service(serviceId);
 	}
-
-	public BookingService() {
-	}
-
-	public BookingService(int bsid) {
-		this.bsid = bsid;
-	}
+	public BookingService(){}
+	public BookingService(int bsid){this.bsid = bsid;}
 
 	@Override
 	public ResultSet getAll() throws SQLException {
@@ -60,11 +48,7 @@ public class BookingService implements DBBookingService {
 
 	@Override
 	public int create() throws SQLException {
-		ResultSet rs = DBIface
-				.executeQuery("Insert into Booking_Service values ("
-						+ this.getBsid() + ",\"" + this.getDate() + "\","
-						+ this.getService().getSid() + ","
-						+ this.getBookingRoom().getBrid() + ")");
+		ResultSet rs = DBIface.executeQuery("Insert into Booking_Service values ("+this.getBsid()+",\""+this.getDate()+"\","+this.getService().getSid()+","+this.getBookingRoom().getBrid()+")");
 		if (rs.last()) {
 			this.bsid = rs.getInt(1);
 		}
@@ -73,29 +57,27 @@ public class BookingService implements DBBookingService {
 
 	@Override
 	public boolean update() throws SQLException {
-		DBIface.executeQuery("Update Booking_Service set " + "Date = "
-				+ this.getDate() + ",SID = " + this.getService().getSid()
-				+ ",BRID = " + this.getBookingRoom().getBrid()
-				+ " Where BSID = " + this.getBsid());
-		ResultSet rs = DBIface
-				.executeQuery("SELECT COUNT(*) from Booking_Service where BSID = "
-						+ this.getBsid());
+		DBIface.executeQuery(
+				"Update Booking_Service set "+
+						"Date = "+this.getDate()+
+						",SID = "+this.getService().getSid()+
+						",BRID = "+this.getBookingRoom().getBrid()+
+						" Where BSID = "+this.getBsid()
+			);
+		ResultSet rs = DBIface.executeQuery("SELECT COUNT(*) from Booking_Service where BSID = "+this.getBsid());
 		rs.next();
-		if (rs.getInt(1) == 1) {
-			return true;
-		}
-		return false;
+			if (rs.getInt(1)==1){
+				return true;
+			}
+			return false;
 	}
 
 	@Override
 	public boolean delete() throws SQLException {
-		DBIface.executeQuery("DELETE from Booking_Service where BSID = "
-				+ this.getBsid());
-		ResultSet rs = DBIface
-				.executeQuery("SELECT COUNT(*) from Booking_Service where BSID = "
-						+ this.getBsid());
+		DBIface.executeQuery("DELETE from Booking_Service where BSID = "+this.getBsid());
+		ResultSet rs = DBIface.executeQuery("SELECT COUNT(*) from Booking_Service where BSID = "+this.getBsid());
 		rs.next();
-		if (rs.getInt(1) == 0) {
+		if (rs.getInt(1)==0){
 			return true;
 		}
 		return false;
@@ -116,8 +98,7 @@ public class BookingService implements DBBookingService {
 	}
 
 	/**
-	 * @param date
-	 *            the date to set
+	 * @param date the date to set
 	 */
 	public void setDate(Date date) {
 		this.date = date;
@@ -131,8 +112,7 @@ public class BookingService implements DBBookingService {
 	}
 
 	/**
-	 * @param service
-	 *            the service to set
+	 * @param service the service to set
 	 */
 	public void setService(Service service) {
 		this.service = service;
@@ -146,28 +126,17 @@ public class BookingService implements DBBookingService {
 	}
 
 	/**
-	 * @param bookingRoom
-	 *            the bookingRoom to set
+	 * @param bookingRoom the bookingRoom to set
 	 */
 	public void setBookingRoom(BookingRoom bookingRoom) {
 		this.bookingRoom = bookingRoom;
 	}
 
 	/**
-	 * @param bsid
-	 *            the bsid to set
+	 * @param bsid the bsid to set
 	 */
 	public void setBsid(int bsid) {
 		this.bsid = bsid;
-	}
-
-	@Override
-	public double getSericePrice() throws SQLException {
-		ResultSet rs = DBIface
-				.executeQuery("SELECT Price FROM Service WHERE SID="
-						+ this.getService().getSid());
-		rs.next();
-		return rs.getDouble(1);
 	}
 
 }
