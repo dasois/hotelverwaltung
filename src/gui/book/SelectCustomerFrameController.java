@@ -1,12 +1,14 @@
 package gui.book;
 
+import gui.AbstractFrame;
+import gui.IController;
 import gui.FrameSwitcher;
 import gui.MainFrame.VerwaltungMainFrameView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SelectCustomerFrameController implements ActionListener{
+public class SelectCustomerFrameController implements IController{
 	private VerwaltungMainFrameView mf;
 	private SelectCustomerFrameView cf;
 
@@ -14,7 +16,9 @@ public class SelectCustomerFrameController implements ActionListener{
 		this.mf = mf;
 		this.cf = cf;
 	}
-
+	public SelectCustomerFrameController(VerwaltungMainFrameView mf){
+		this.mf = mf;
+	}
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand()=="book"){
@@ -27,5 +31,9 @@ public class SelectCustomerFrameController implements ActionListener{
 			final FrameSwitcher fs = new gui.FrameSwitchImpl(cf,mf);
 			fs.switchFrame();
 		}
+	}
+	@Override
+	public void setConnectedView(AbstractFrame f) {
+		this.cf = (SelectCustomerFrameView) f;
 	}
 }

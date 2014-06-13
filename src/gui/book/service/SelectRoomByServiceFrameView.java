@@ -1,6 +1,7 @@
 package gui.book.service;
 
 import gui.AbstractFrame;
+import gui.IController;
 import gui.FrameSwitcher;
 import gui.MainFrame.VerwaltungMainFrameView;
 
@@ -43,12 +44,14 @@ public class SelectRoomByServiceFrameView extends AbstractFrame{
 	private SelectServiceFrameView ssf;
 	SelectTimeFrameView ssf2;
 	private SelectRoomByServiceFrameModel m;
-	public SelectRoomByServiceFrameView(VerwaltungMainFrameView mf,
-			SelectServiceFrameView ssf, SelectTimeFrameView ssf2) {
+	private IController c;
+	public SelectRoomByServiceFrameView(VerwaltungMainFrameView mf,IController c,
+			SelectServiceFrameView ssf, SelectTimeFrameView ssf2,SelectRoomByServiceFrameModel m) {
 		this.mf = mf;
+		this.c = c;
 		this.ssf = ssf;
 		this.ssf2 = ssf2;
-		m = new SelectRoomByServiceFrameModel();
+		this.m = m;
 	}
 	protected void createWidget() {
 		header = new JLabel("Zimmer wählen");
@@ -97,7 +100,7 @@ public class SelectRoomByServiceFrameView extends AbstractFrame{
 		getContentPane().add(BorderLayout.SOUTH,boxdsouthPanel);
 	}
 	protected void setupInteractions() {
-		SelectRoomByServiceFrameController c = new SelectRoomByServiceFrameController(this, mf, ssf,m);
+//		SelectRoomByServiceFrameController c = new SelectRoomByServiceFrameController(this, mf, ssf,m);
 		stepback.addActionListener(c);
 		book.addActionListener(c);
 	}

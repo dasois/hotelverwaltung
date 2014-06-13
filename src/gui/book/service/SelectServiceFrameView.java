@@ -1,6 +1,7 @@
 package gui.book.service;
 
 import gui.AbstractFrame;
+import gui.IController;
 import gui.FrameSwitcher;
 import gui.MainFrame.VerwaltungMainFrameView;
 
@@ -38,11 +39,11 @@ public class SelectServiceFrameView extends AbstractFrame{
 	private JPanel boxdsouthPanel;
 	private VerwaltungMainFrameView mf;
 	private SelectTimeFrameView ssf;
-	
-	public SelectServiceFrameView(VerwaltungMainFrameView mf,
-			SelectTimeFrameView ssf) {
+	private IController c;
+	public SelectServiceFrameView(VerwaltungMainFrameView mf,IController c,SelectTimeFrameView ssf) {
 		this.mf = mf;
 		this.ssf = ssf;
+		this.c = c;
 	}
 
 	@Override
@@ -94,7 +95,7 @@ public class SelectServiceFrameView extends AbstractFrame{
 	}
 	@Override
 	protected void setupInteractions() {
-		SelectServiceFrameController c = new SelectServiceFrameController(this, mf, ssf);
+//		SelectServiceFrameController c = new SelectServiceFrameController(this, mf, ssf);
 		stepback.addActionListener(c);
 		book.addActionListener(c);
 	}

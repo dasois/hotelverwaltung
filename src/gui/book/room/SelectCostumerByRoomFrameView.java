@@ -1,6 +1,7 @@
 package gui.book.room;
 
 import gui.AbstractFrame;
+import gui.IController;
 import gui.FrameSwitcher;
 import gui.MainFrame.VerwaltungMainFrameView;
 
@@ -45,8 +46,10 @@ public class SelectCostumerByRoomFrameView extends AbstractFrame{
 	private JPanel boxdsouthPanel;
 	private SelectTimeIntervallRoomFrame sf;
 	private SelectCostumerByRoomFrameModel m;
-	public SelectCostumerByRoomFrameView(VerwaltungMainFrameView mf,FreeRoomsFrameView frf, Room[] selectedRooms, SelectTimeIntervallRoomFrame sf) {
+	private IController c;
+	public SelectCostumerByRoomFrameView(VerwaltungMainFrameView mf,IController c,FreeRoomsFrameView frf, Room[] selectedRooms, SelectTimeIntervallRoomFrame sf) {
 		this.mf = mf;
+		this.c = c;
 		this.setFrf(frf);
 		m = new SelectCostumerByRoomFrameModel();
 		m.setSelectedRooms(selectedRooms);
@@ -99,7 +102,7 @@ public class SelectCostumerByRoomFrameView extends AbstractFrame{
 
 	}
 	protected void setupInteractions() {
-		SelectCostumerByRoomFrameController c = new SelectCostumerByRoomFrameController(this, mf,m);
+		
 		stepback.addActionListener(c);
 		book.addActionListener(c);
 	}

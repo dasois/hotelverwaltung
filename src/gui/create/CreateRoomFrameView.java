@@ -1,6 +1,7 @@
 package gui.create;
 
 import gui.AbstractFrame;
+import gui.IController;
 import gui.FrameSwitcher;
 import gui.MainFrame.VerwaltungMainFrameView;
 
@@ -42,9 +43,11 @@ public class CreateRoomFrameView extends AbstractFrame{
 	private JPanel boxdsouthPanel;
 	VerwaltungMainFrameView mf;
 	private CreateRoomFrameModel m;
-	public CreateRoomFrameView(VerwaltungMainFrameView mf) {
+	private IController c;
+	public CreateRoomFrameView(VerwaltungMainFrameView mf,IController c,CreateRoomFrameModel m) {
 		this.mf = mf;
-		m = new CreateRoomFrameModel();
+		this.c = c;
+		this.m = m;
 	}
 
 	@Override
@@ -116,7 +119,7 @@ public class CreateRoomFrameView extends AbstractFrame{
 		getContentPane().add(BorderLayout.SOUTH,boxdsouthPanel);
 	}
 	protected void setupInteractions() {
-		CreateRoomFrameController c = new CreateRoomFrameController(this, mf,m);
+//		CreateRoomFrameController c = new CreateRoomFrameController(this, mf,m);
 		cancel.addActionListener(c);
 		create.addActionListener(c);
 	}

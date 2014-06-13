@@ -1,5 +1,7 @@
 package gui.create;
 
+import gui.AbstractFrame;
+import gui.IController;
 import gui.FrameSwitcher;
 import gui.MainFrame.VerwaltungMainFrameView;
 
@@ -11,12 +13,16 @@ import app.CustomerControlImp;
 import app.CustomerControlInterface;
 import app.entities.Title;
 
-public class CreateCostumerFrameController implements ActionListener{
+public class CreateCostumerFrameController implements IController{
 	private CreateCostumerFrameView ccf;
 	private VerwaltungMainFrameView vmf;
 	private CreateCostumerFrameModel m;
 	public CreateCostumerFrameController(CreateCostumerFrameView ccf,VerwaltungMainFrameView vmf,CreateCostumerFrameModel m){
 		this.ccf = ccf;
+		this.vmf = vmf;
+		this.m = m;
+	}
+	public CreateCostumerFrameController(VerwaltungMainFrameView vmf,CreateCostumerFrameModel m){
 		this.vmf = vmf;
 		this.m = m;
 	}
@@ -46,5 +52,10 @@ public class CreateCostumerFrameController implements ActionListener{
 			}
 			fs.switchFrame();
 		}
+	}
+	@Override
+	public void setConnectedView(AbstractFrame f) {
+		this.ccf = (CreateCostumerFrameView) f;
+		
 	}
 }

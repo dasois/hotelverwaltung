@@ -1,6 +1,7 @@
 package gui.book;
 
 import gui.AbstractFrame;
+import gui.IController;
 import gui.FrameSwitcher;
 import gui.MainFrame.VerwaltungMainFrameView;
 
@@ -36,9 +37,11 @@ public class SelectCustomerFrameView extends AbstractFrame{
 	private JScrollPane listScroller;
 	private JButton book;
 	private SelectCustomerFrameModel m;
-	public SelectCustomerFrameView(VerwaltungMainFrameView mf){
+	private IController c;
+	public SelectCustomerFrameView(VerwaltungMainFrameView mf,IController c){
 		this.mf = mf;
 		m = new SelectCustomerFrameModel();
+		this.c = c;
 	}
 
 	protected void createWidget() {
@@ -89,9 +92,9 @@ public class SelectCustomerFrameView extends AbstractFrame{
 		getContentPane().add(BorderLayout.SOUTH,boxdsouthPanel);
 	}
 	protected void setupInteractions() {
-		SelectCustomerFrameController cfc = new SelectCustomerFrameController(this, mf);
-		book.addActionListener(cfc);
-		cancel.addActionListener(cfc);
+		
+		book.addActionListener(c);
+		cancel.addActionListener(c);
 	}
 	public Customer getSelectedCustomer(){
 		m.setC(list.getSelectedValue());

@@ -1,5 +1,7 @@
 package gui.create;
 
+import gui.AbstractFrame;
+import gui.IController;
 import gui.FrameSwitchImpl;
 import gui.FrameSwitcher;
 import gui.MainFrame.VerwaltungMainFrameView;
@@ -11,7 +13,7 @@ import java.sql.SQLException;
 import app.RoomControlImp;
 import app.RoomControlInterface;
 
-public class CreateRoomFrameController implements ActionListener{
+public class CreateRoomFrameController implements IController{
 	private CreateRoomFrameView crf;
 	private VerwaltungMainFrameView mf;
 	private CreateRoomFrameModel m;
@@ -20,13 +22,16 @@ public class CreateRoomFrameController implements ActionListener{
 		this.mf = mf;
 		this.m = m;
 	}
-
+	public CreateRoomFrameController(VerwaltungMainFrameView mf,CreateRoomFrameModel m){
+		this.mf = mf;
+		this.m = m;
+	}
 
 	public void actionPerformed(ActionEvent e) {
 		final FrameSwitcher fs = new FrameSwitchImpl(crf,mf);
 		if(e.getActionCommand()=="Revise"){
 			crf.createWidgetFirstView();
-		}else if(e.getActionCommand()=="accept"){
+		}else if(e.getActionCommand()=="Cancel"){
 			fs.switchFrame();
 		}else if(e.getActionCommand()=="Create"){
 			crf.createWidgetSecondView();
@@ -45,5 +50,10 @@ public class CreateRoomFrameController implements ActionListener{
 			}
 			fs.switchFrame();
 		}
+	}
+
+	@Override
+	public void setConnectedView(AbstractFrame f) {
+		this.crf = (CreateRoomFrameView) f;	
 	}
 }

@@ -1,5 +1,7 @@
 package gui.book.service;
 
+import gui.AbstractFrame;
+import gui.IController;
 import gui.FrameSwitchImpl;
 import gui.FrameSwitcher;
 import gui.MainFrame.VerwaltungMainFrameView;
@@ -11,7 +13,7 @@ import java.sql.SQLException;
 import app.BookingServiceControlInterface;
 import app.BookingServiceImp;
 
-public class SelectRoomByServiceFrameController implements ActionListener{
+public class SelectRoomByServiceFrameController implements IController{
 	private SelectRoomByServiceFrameView sf;
 	private VerwaltungMainFrameView mf;
 	private SelectServiceFrameView ssf;
@@ -22,7 +24,11 @@ public class SelectRoomByServiceFrameController implements ActionListener{
 		this.ssf = ssf;
 		this.m = m;
 	}
-
+	public SelectRoomByServiceFrameController(VerwaltungMainFrameView mf,SelectServiceFrameView ssf,SelectRoomByServiceFrameModel m){
+		this.mf = mf;
+		this.ssf = ssf;
+		this.m = m;
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		final FrameSwitcher fs = new FrameSwitchImpl(sf,ssf);
@@ -40,5 +46,10 @@ public class SelectRoomByServiceFrameController implements ActionListener{
 			}
 			fs2.switchFrame();
 		}
+	}
+
+	@Override
+	public void setConnectedView(AbstractFrame f) {
+		this.sf = (SelectRoomByServiceFrameView) f;	
 	}
 }

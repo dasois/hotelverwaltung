@@ -1,6 +1,7 @@
 package gui.create;
 
 import gui.AbstractFrame;
+import gui.IController;
 import gui.FrameSwitcher;
 import gui.MainFrame.VerwaltungMainFrameView;
 
@@ -34,9 +35,11 @@ import app.entities.Title;
 public class CreateCostumerFrameView extends AbstractFrame{
 	private VerwaltungMainFrameView mf;
 	private CreateCostumerFrameModel m;
-	public CreateCostumerFrameView(VerwaltungMainFrameView mf) {
+	private IController c;
+	public CreateCostumerFrameView(VerwaltungMainFrameView mf,IController c, CreateCostumerFrameModel m) {
 		this.mf = mf;
-		m = new CreateCostumerFrameModel();
+		this.c = c;
+		this.m = m;
 	}
 	private JLabel header;
 
@@ -55,9 +58,9 @@ public class CreateCostumerFrameView extends AbstractFrame{
 	private JButton cancel;
 
 	protected void setupInteractions() {
-		CreateCostumerFrameController ccfc = new CreateCostumerFrameController(this, mf,m);
-		cancel.addActionListener(ccfc);
-		create.addActionListener(ccfc);
+//		CreateCostumerFrameController ccfc = new CreateCostumerFrameController(this, mf,m);
+		cancel.addActionListener(c);
+		create.addActionListener(c);
 	}
 
 	protected void createWidget() {

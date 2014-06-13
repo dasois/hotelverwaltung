@@ -6,11 +6,13 @@ import java.sql.SQLException;
 
 import app.ServiceControlImp;
 import app.ServiceControlInterface;
+import gui.AbstractFrame;
+import gui.IController;
 import gui.FrameSwitchImpl;
 import gui.FrameSwitcher;
 import gui.MainFrame.VerwaltungMainFrameView;
 
-public class CreateServiceFrameController implements ActionListener {
+public class CreateServiceFrameController implements IController {
 	private CreateServiceFrameView csf;
 	private VerwaltungMainFrameView mf;
 	private CreateServiceFrameModel m;
@@ -19,12 +21,15 @@ public class CreateServiceFrameController implements ActionListener {
 		this.mf = mf;
 		this.m = m;
 	}
-
+	public CreateServiceFrameController(VerwaltungMainFrameView mf,CreateServiceFrameModel m){
+		this.mf = mf;
+		this.m = m;
+	}
 	public void actionPerformed(ActionEvent e) {
 		final FrameSwitcher fs = new FrameSwitchImpl(csf,mf);
 		if(e.getActionCommand()=="Revise"){
 			csf.createWidgetFirstView();
-		}else if (e.getActionCommand()=="accept"){
+		}else if (e.getActionCommand()=="cancel"){
 			fs.switchFrame();
 		}else if(e.getActionCommand()=="Create"){
 			csf.createWidgetSecondView();
@@ -38,10 +43,15 @@ public class CreateServiceFrameController implements ActionListener {
 			} catch (NumberFormatException e1) {
 				mf.addProtocolLine("Fehlerhafte eingabe, es wurde kein Service Angelegt.\nVergewissern sie sich das alle Felder ausgefüllt werden!");
 			} catch (SQLException e1) {
-				mf.addProtocolLine("Es konnte kein Kunde erstellt werden, rufen sie ihren Administrator");
+				mf.addProtocolLine("Es konnte kein Service erstellt werden, rufen sie ihren Administrator");
 			}
 			
 			fs.switchFrame();
 		}
+	}
+
+	@Override
+	public void setConnectedView(AbstractFrame f) {
+		this.csf = (CreateServiceFrameView) f;
 	}
 }

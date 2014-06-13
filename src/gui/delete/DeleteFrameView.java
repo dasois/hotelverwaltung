@@ -1,6 +1,7 @@
 package gui.delete;
 
 import gui.AbstractFrame;
+import gui.IController;
 import gui.FrameSwitcher;
 import gui.MainFrame.VerwaltungMainFrameView;
 
@@ -40,10 +41,12 @@ public class DeleteFrameView<T> extends AbstractFrame{
 	JList<T> list;
 	private JScrollPane listScroller;
 	private String label;
-	public DeleteFrameView(VerwaltungMainFrameView mf,String label,JList<T> list) {
+	private IController c;
+	public DeleteFrameView(VerwaltungMainFrameView mf,IController c,String label,JList<T> list) {
 		this.mf = mf;
 		this.label = label;
 		this.list = list;
+		this.c = c;
 	}
 
 	@Override
@@ -90,9 +93,9 @@ public class DeleteFrameView<T> extends AbstractFrame{
 	}
 	
 	protected void setupInteractions() {
-		DeleteFrameController dfc = new DeleteFrameController(this,mf);
-		cancel.addActionListener(dfc);
-		delete.addActionListener(dfc);
+//		DeleteFrameController dfc = new DeleteFrameController(this,mf);
+		cancel.addActionListener(c);
+		delete.addActionListener(c);
 	}
 	void createWidgetSecondView(){
 		list.setEnabled(false);

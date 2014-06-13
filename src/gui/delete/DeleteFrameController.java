@@ -1,5 +1,7 @@
 package gui.delete;
 
+import gui.AbstractFrame;
+import gui.IController;
 import gui.FrameSwitcher;
 import gui.MainFrame.VerwaltungMainFrameView;
 
@@ -10,22 +12,24 @@ import java.sql.SQLException;
 import app.DeleteControlImp;
 import app.DeleteControlInterface;
 
-public class DeleteFrameController<T> implements ActionListener{
+public class DeleteFrameController<T> implements IController{
 	private VerwaltungMainFrameView mf;
-	private DeleteFrameView df;
+	private DeleteFrameView<T> df;
 	
-	public DeleteFrameController(DeleteFrameView df,VerwaltungMainFrameView mf){
+	public DeleteFrameController(DeleteFrameView<T> df,VerwaltungMainFrameView mf){
 		this.mf = mf;
 		this.df = df;
 	}
-
+	public DeleteFrameController(VerwaltungMainFrameView mf){
+		this.mf = mf;
+	}
 	public void actionPerformed(ActionEvent e) {
 		final FrameSwitcher fs = new gui.FrameSwitchImpl(df,mf);
 		
 		if(e.getActionCommand()=="Cancel"){
 			fs.switchFrame();
 		}
-		else if(e.getActionCommand()=="Create"){
+		else if(e.getActionCommand()=="Delete"){
 			df.createWidgetSecondView();
 		}else if(e.getActionCommand()=="Revise"){
 			df.createWidgetFirstView();
@@ -47,5 +51,10 @@ public class DeleteFrameController<T> implements ActionListener{
 			fs.switchFrame();
 		}
 
+	}
+
+	@Override
+	public void setConnectedView(AbstractFrame f) {
+		this.df = (DeleteFrameView<T>) f;
 	}
 }

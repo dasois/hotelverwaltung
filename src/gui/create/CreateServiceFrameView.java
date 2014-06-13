@@ -1,6 +1,7 @@
 package gui.create;
 
 import gui.AbstractFrame;
+import gui.IController;
 import gui.FrameSwitcher;
 import gui.MainFrame.VerwaltungMainFrameView;
 
@@ -43,10 +44,11 @@ public class CreateServiceFrameView extends AbstractFrame{
 	private JPanel boxdsouthPanel;
 	private VerwaltungMainFrameView mf;
 	private CreateServiceFrameModel m;
-
-	public CreateServiceFrameView(VerwaltungMainFrameView mf) {
+	private IController c;
+	public CreateServiceFrameView(VerwaltungMainFrameView mf,IController c, CreateServiceFrameModel m) {
 		this.mf = mf;
-		m = new CreateServiceFrameModel();
+		this.c = c;
+		this.m = m;
 	}
 
 	protected void createWidget() {
@@ -119,7 +121,7 @@ public class CreateServiceFrameView extends AbstractFrame{
 		getContentPane().add(BorderLayout.SOUTH,boxdsouthPanel);
 	}
 	protected void setupInteractions() {
-		CreateServiceFrameController c = new CreateServiceFrameController(this, mf,m);
+//		CreateServiceFrameController c = new CreateServiceFrameController(this, mf,m);
 		cancel.addActionListener(c);
 		create.addActionListener(c);
 	}

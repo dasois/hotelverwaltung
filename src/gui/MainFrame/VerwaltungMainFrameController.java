@@ -1,12 +1,24 @@
 package gui.MainFrame;
 
+import gui.AbstractFrame;
+import gui.IController;
 import gui.ShowCustomer.ShowCustomerFrameView;
+import gui.book.SelectCustomerFrameController;
 import gui.book.SelectCustomerFrameView;
+
 import gui.book.room.SelectTimeIntervallRoomFrame;
+import gui.book.room.SelectTimeIntervallRoomModel;
 import gui.book.service.SelectTimeFrameView;
+import gui.create.CreateCostumerFrameController;
+import gui.create.CreateCostumerFrameModel;
 import gui.create.CreateCostumerFrameView;
+import gui.create.CreateRoomFrameController;
+import gui.create.CreateRoomFrameModel;
 import gui.create.CreateRoomFrameView;
+import gui.create.CreateServiceFrameController;
+import gui.create.CreateServiceFrameModel;
 import gui.create.CreateServiceFrameView;
+import gui.delete.DeleteFrameController;
 import gui.delete.DeleteFrameView;
 
 import java.awt.event.ActionEvent;
@@ -25,10 +37,12 @@ import db.entities.Service;
 
 /**Buttonhandler of VerwaltungsMainFrame
  * @author Tobias */
-public class VerwaltungMainFrameController implements ActionListener {
+public class VerwaltungMainFrameController implements IController {
 	private VerwaltungMainFrameView gui;
 	public VerwaltungMainFrameController(VerwaltungMainFrameView gui){
 		this.gui = gui;
+	}
+	public VerwaltungMainFrameController(){
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -38,31 +52,47 @@ public class VerwaltungMainFrameController implements ActionListener {
 			if(khd=="Kunden"){
 				if(action == "Erstellen"){
 					gui.setEnabled(false);
-					CreateCostumerFrameView cf = new CreateCostumerFrameView(gui);
+					CreateCostumerFrameModel m = new CreateCostumerFrameModel();
+					CreateCostumerFrameController c = new CreateCostumerFrameController(gui,m);
+					CreateCostumerFrameView cf = new CreateCostumerFrameView(gui,c,m);
+					c.setConnectedView(cf);
 					cf.init();
 					new JDialog(cf);
 				}
 				else if(action =="Löschen"){
 					gui.setEnabled(false);
+					DeleteFrameController<Customer> c = new DeleteFrameController<Customer>(gui);
 					DeleteFrameView<Customer> dcf;
 					//TODO sinnvolle exception
 					try {
-						dcf = new DeleteFrameView<Customer>(gui,"Kunde Entfernen",new JList<Customer>(new CustomerControlImp().getAll()));
+						dcf = new DeleteFrameView<Customer>(gui,c,"Kunde Entfernen",new JList<Customer>(new CustomerControlImp().getAll()));
+						c.setConnectedView(dcf);
 						dcf.init();
 						new JDialog(dcf);
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
-					
+
 				}else if(action =="Anzeigen"){
 					gui.setEnabled(false);
 					ShowCustomerFrameView scf = new ShowCustomerFrameView(gui);
 					scf.init();
 					new JDialog(scf);
 				}
+				else if(action =="Einbuchen"){
+					gui.setEnabled(false);
+					SelectTimeIntervallRoomModel m = new SelectTimeIntervallRoomModel();
+					IController c = new gui.combinedbooking.SelectTimeIntervallRoomFrameController(gui, m);
+					SelectTimeIntervallRoomFrame scf = new SelectTimeIntervallRoomFrame(gui,c,m);
+					c.setConnectedView(scf);
+					scf.init();
+					new JDialog(scf);
+				}
 				else{
 					gui.setEnabled(false);
-					SelectCustomerFrameView scf = new SelectCustomerFrameView(gui);
+					IController c = new SelectCustomerFrameController(gui);
+					SelectCustomerFrameView scf = new SelectCustomerFrameView(gui,c);
+					c.setConnectedView(scf);
 					scf.init();
 					new JDialog(scf);
 				}
@@ -70,22 +100,30 @@ public class VerwaltungMainFrameController implements ActionListener {
 			else if(khd=="Zimmer"){
 				if(action == "Erstellen"){
 					gui.setEnabled(false);
-					CreateRoomFrameView rf = new CreateRoomFrameView(gui);
+					CreateRoomFrameModel m = new CreateRoomFrameModel();
+					CreateRoomFrameController c = new CreateRoomFrameController(gui, m);
+					CreateRoomFrameView rf = new CreateRoomFrameView(gui,c,m);
+					c.setConnectedView(rf);
 					rf.init();
 					new JDialog(rf);
 				}
 				else if(action =="Buchen"){
 					gui.setEnabled(false);
-					SelectTimeIntervallRoomFrame rf = new SelectTimeIntervallRoomFrame(gui);
+					SelectTimeIntervallRoomModel m = new SelectTimeIntervallRoomModel();
+					IController c = new gui.book.room.SelectTimeIntervallRoomFrameController(gui, m);
+					SelectTimeIntervallRoomFrame rf = new SelectTimeIntervallRoomFrame(gui,c,m);
+					c.setConnectedView(rf);
 					rf.init();
 					new JDialog(rf);
 				}
 				else{
 					gui.setEnabled(false);
+					DeleteFrameController<Room> c= new DeleteFrameController<>(gui);
 					DeleteFrameView<Room> drf;
 					//TODO sinnvolle Exception
 					try {
-						drf = new DeleteFrameView<Room>(gui,"Zimmer Entfernen",new JList<Room>(new RoomControlImp().getAll()));
+						drf = new DeleteFrameView<Room>(gui,c,"Zimmer Entfernen",new JList<Room>(new RoomControlImp().getAll()));
+						c.setConnectedView(drf);
 						drf.init();
 						new JDialog(drf);
 					} catch (SQLException e1) {
@@ -96,7 +134,10 @@ public class VerwaltungMainFrameController implements ActionListener {
 			else if(khd=="Leistung"){
 				if(action == "Erstellen"){
 					gui.setEnabled(false);
-					CreateServiceFrameView sf = new CreateServiceFrameView(gui);
+					CreateServiceFrameModel m = new CreateServiceFrameModel();
+					CreateServiceFrameController c = new CreateServiceFrameController(gui, m);
+					CreateServiceFrameView sf = new CreateServiceFrameView(gui,c,m);
+					c.setConnectedView(sf);
 					sf.init();
 					new JDialog(sf);
 				}
@@ -108,10 +149,12 @@ public class VerwaltungMainFrameController implements ActionListener {
 				}
 				else{
 					gui.setEnabled(false);
+					DeleteFrameController<Service> c = new DeleteFrameController<>(gui);
 					DeleteFrameView<Service> dsf;
 					//TODO sinnvolle Exception
 					try {
-						dsf = new DeleteFrameView<Service>(gui,"Service Entfernen",new JList<Service>(new ServiceControlImp().getAll()));
+						dsf = new DeleteFrameView<Service>(gui,c,"Service Entfernen",new JList<Service>(new ServiceControlImp().getAll()));
+						c.setConnectedView(dsf);
 						dsf.init();
 						new JDialog(dsf);
 					} catch (SQLException e1) {
@@ -120,5 +163,9 @@ public class VerwaltungMainFrameController implements ActionListener {
 				}
 			}
 		}
+	}
+	@Override
+	public void setConnectedView(AbstractFrame f) {
+		this.gui = (VerwaltungMainFrameView) f;
 	}
 }

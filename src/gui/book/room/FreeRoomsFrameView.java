@@ -1,7 +1,7 @@
 package gui.book.room;
 
 import gui.AbstractFrame;
-import gui.FrameSwitcher;
+import gui.IController;
 import gui.MainFrame.VerwaltungMainFrameView;
 
 import java.awt.BorderLayout;
@@ -9,8 +9,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.Vector;
 
@@ -19,7 +17,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
@@ -33,19 +31,20 @@ import db.entities.Room;
 public class FreeRoomsFrameView extends AbstractFrame{
 
 	private JLabel header;
-	JList<Room> list;
+	public JList<Room> list;
 	private JScrollPane listScroller;
 	private JPanel southPanel;
 	private JButton book;
 	private JButton stepback;
 	private JPanel boxdsouthPanel;
 	private VerwaltungMainFrameView mf;
-	SelectTimeIntervallRoomFrame sf;
+	public SelectTimeIntervallRoomFrame sf;
 	private Vector<Room> freeRooms;
-
-	public FreeRoomsFrameView(VerwaltungMainFrameView mf,SelectTimeIntervallRoomFrame sf) {
+	private IController c;
+	public FreeRoomsFrameView(VerwaltungMainFrameView mf,SelectTimeIntervallRoomFrame sf,IController c) {
 		this.mf = mf;
 		this.sf = sf;
+		this.c = c;
 		RoomControlInterface tmp = new RoomControlImp();
 		//TODO sinnvolle exception
 		try {
@@ -99,7 +98,6 @@ public class FreeRoomsFrameView extends AbstractFrame{
 	}
 
 	protected void setupInteractions() {
-		FreeRoomsFrameController c = new FreeRoomsFrameController(this, mf);
 		stepback.addActionListener(c);
 		book.addActionListener(c);
 	}

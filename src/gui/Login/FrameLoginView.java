@@ -1,6 +1,7 @@
 package gui.Login;
 
 import gui.AbstractFrame;
+import gui.IController;
 import gui.MainFrame.VerwaltungMainFrameView;
 
 import java.awt.BorderLayout;
@@ -39,7 +40,10 @@ public class FrameLoginView extends AbstractFrame{
 	protected JPasswordField passwordTextField;
 	private JPanel boxdleftPanel;
 	private JButton btnlogin;
-
+	private IController c;
+	public FrameLoginView(IController c) {
+		this.c = c;
+	}
 	@Override
 	protected void createWidget() {
 
@@ -117,8 +121,8 @@ public class FrameLoginView extends AbstractFrame{
 	}
 	@Override
 	protected void setupInteractions() {
-		FrameLoginController flc = new FrameLoginController(this);
-		passwordTextField.addActionListener(flc);
-		btnlogin.addActionListener(flc);
+//		FrameLoginController flc = new FrameLoginController(this);
+		passwordTextField.addActionListener(c);
+		btnlogin.addActionListener(c);
 	}
 }

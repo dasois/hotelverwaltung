@@ -1,5 +1,7 @@
 package gui.book.room;
 
+import gui.AbstractFrame;
+import gui.IController;
 import gui.FrameSwitchImpl;
 import gui.FrameSwitcher;
 import gui.MainFrame.VerwaltungMainFrameView;
@@ -14,7 +16,7 @@ import app.BookingRoomControlImp;
 import app.BookingRoomControlInterface;
 import db.entities.Room;
 
-public class SelectCostumerByRoomFrameController implements ActionListener{
+public class SelectCostumerByRoomFrameController implements IController{
 	private SelectCostumerByRoomFrameView f;
 	private VerwaltungMainFrameView mf;
 	private SelectCostumerByRoomFrameModel m;
@@ -23,7 +25,10 @@ public class SelectCostumerByRoomFrameController implements ActionListener{
 		this.mf = mf;
 		this.m = m;
 	}
-
+	public SelectCostumerByRoomFrameController(VerwaltungMainFrameView mf, SelectCostumerByRoomFrameModel m){
+		this.mf = mf;
+		this.m = m;
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		final FrameSwitcher fs = new FrameSwitchImpl(f,f.getFrf());
@@ -55,5 +60,10 @@ public class SelectCostumerByRoomFrameController implements ActionListener{
 			mf.addProtocolLine("Die Komplette buchung kostet: "+price);
 			fs2.switchFrame();
 		}
+	}
+
+	@Override
+	public void setConnectedView(AbstractFrame f) {
+		this.f = (SelectCostumerByRoomFrameView) f;
 	}
 }

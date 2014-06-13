@@ -2,6 +2,7 @@ package gui.book.room;
 
 import gui.AbstractFrame;
 import gui.FrameSwitcher;
+import gui.IController;
 import gui.MainFrame.VerwaltungMainFrameView;
 
 import java.awt.BorderLayout;
@@ -39,9 +40,11 @@ public class SelectTimeIntervallRoomFrame extends AbstractFrame{
 	protected JButton cancel;
 	private JPanel boxdsouthPanel;
 	private SelectTimeIntervallRoomModel m;
-	public SelectTimeIntervallRoomFrame(VerwaltungMainFrameView mf) {
+	private IController c;
+	public SelectTimeIntervallRoomFrame(VerwaltungMainFrameView mf,IController c,SelectTimeIntervallRoomModel m) {
+		this.c = c;
 		this.mf = mf;
-		m = new SelectTimeIntervallRoomModel();
+		this.m = m;
 	}
 
 	protected void createWidget() {
@@ -109,7 +112,6 @@ public class SelectTimeIntervallRoomFrame extends AbstractFrame{
 		getContentPane().add(BorderLayout.SOUTH,boxdsouthPanel);
 	}
 	protected void setupInteractions() {
-		SelectTimeIntervallRoomFrameController c = new SelectTimeIntervallRoomFrameController(this, mf,m);
 		cancel.addActionListener(c);
 		search.addActionListener(c);
 	}
