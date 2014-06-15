@@ -2,20 +2,21 @@
  * 
  */
 package db.entities;
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import db.DBCustomer;
 import db.DBIface;
+
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * @author david
  *
  */
 public class Customer implements DBCustomer{
-	private int id;
-	private String fName;
+    private int cid;
+    private String fName;
 	private String lName;
 	private String address;
 	private Date birthdate;
@@ -23,31 +24,35 @@ public class Customer implements DBCustomer{
 
 
 	/**
-	 * @param id: Id of the Customer. Leave NULL if you want to use auto_increment!
-	 * @param fName: First name
+     * @param cid: Id of the Customer. Leave NULL if you want to use auto_increment!
+     * @param fName: First name
 	 * @param lName: Last name
 	 * @param address: Customer's address, use syntax like: "Lothstr. xy, 80abc München"
 	 * @param birthdate: Customer's date of birth
 	 */
 	public Customer(String fName, String lName, String address,
-			Date date, String title) {
-		this.fName = fName;
+                    Date birthdate, String title) {
+        this.fName = fName;
 		this.lName = lName;
 		this.address = address;
-		this.birthdate = date;
-		this.title = title;
+        this.birthdate = birthdate;
+        this.title = title;
 	}
-	public Customer(int id, String fName, String lName, String address,
-			Date birthdate, String title) {
-		this.id = id;
-		this.fName = fName;
+
+    public Customer(int cid, String fName, String lName, String address,
+                    Date birthdate, String title) {
+        this.cid = cid;
+        this.fName = fName;
 		this.lName = lName;
 		this.address = address;
 		this.birthdate = birthdate;
 		this.title = title;
 	}
 	public Customer(){}
-	public Customer(int id){this.id = id;}
+
+    public Customer(int cid) {
+        this.cid = cid;
+    }
 
 	@Override
 	public ResultSet getAll() throws SQLException {
@@ -55,12 +60,12 @@ public class Customer implements DBCustomer{
 	}
 	@Override
 	public int create() throws SQLException {
-		ResultSet rs = DBIface.executeQuery("Insert into Customer values ("+this.getId()+",\""+this.getfName()+"\",\""+this.getlName()+"\",\""+this.getAddress()+"\",\""+this.getBirthdate().toString()+"\",\""+this.getTitle()+"\")");
-		if (rs.next()) {
-			this.id = rs.getInt(1);
-		}
-		return this.getId();
-	}
+        ResultSet rs = DBIface.executeQuery("Insert into Customer values (" + this.getCid() + ",\"" + this.getfName() + "\",\"" + this.getlName() + "\",\"" + this.getAddress() + "\",\"" + this.getBirthdate().toString() + "\",\"" + this.getTitle() + "\")");
+        if (rs.next()) {
+            this.cid = rs.getInt(1);
+        }
+        return this.getCid();
+    }
 	@Override
 	public boolean update() throws SQLException {
 		DBIface.executeQuery(
@@ -70,10 +75,10 @@ public class Customer implements DBCustomer{
 					"\",Address = \""+this.getAddress()+
 					"\",BDate = \""+this.getBirthdate().toString()+
 					"\",Title = \""+this.getTitle()+
-					"\" Where ID = "+this.getId()
-		);
-		ResultSet rs = DBIface.executeQuery("SELECT COUNT(*) from Customer where id = "+this.getId());
-		rs.next();
+                    "\" Where CID = " + this.getCid()
+        );
+        ResultSet rs = DBIface.executeQuery("SELECT COUNT(*) from Customer where cid = " + this.getCid());
+        rs.next();
 		if (rs.getInt(1)==1){
 			return true;
 		}
@@ -82,9 +87,9 @@ public class Customer implements DBCustomer{
 
 	@Override
 	public boolean delete() throws SQLException {
-		DBIface.executeQuery("DELETE from Customer where id = "+this.getId());
-		ResultSet rs = DBIface.executeQuery("SELECT COUNT(*) from Customer where id = "+this.getId());
-		rs.next();
+        DBIface.executeQuery("DELETE from Customer where cid = " + this.getCid());
+        ResultSet rs = DBIface.executeQuery("SELECT COUNT(*) from Customer where cid = " + this.getCid());
+        rs.next();
 		if (rs.getInt(1)==0){
 			return true;
 		}
@@ -92,11 +97,11 @@ public class Customer implements DBCustomer{
 	}
 
 	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
+     * @return the cid
+     */
+    public int getCid() {
+        return cid;
+    }
 	/**
 	 * @return the fName
 	 */
@@ -147,14 +152,14 @@ public class Customer implements DBCustomer{
 	}
 
 	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
+     * @param cid the cid to set
+     */
+    public void setCid(int cid) {
+        this.cid = cid;
+    }
 	public String toString(){
-		return "CId: "+ id + " Name "+ fName+" "+lName+" Adresse: " +address+ " Geb: "+ birthdate+"\n";
-	}
+        return "CId: " + cid + " Name " + fName + " " + lName + " Adresse: " + address + " Geb: " + birthdate + "\n";
+    }
 	/**
 	 * @return the title
 	 */

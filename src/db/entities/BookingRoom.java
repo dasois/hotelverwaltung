@@ -2,12 +2,13 @@
  * 
  */
 package db.entities;
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import db.DBBookingRoom;
 import db.DBIface;
+
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * @author david
@@ -17,31 +18,32 @@ public class BookingRoom implements DBBookingRoom{
 	private int brid;
 	private Date date;
 	private Room room;
-	private Customer customer;
+    private Booking booking;
 
 	/**Constructor for BookingRoom object
 	 * 
 	 * @param brid: Id of the room-booking. Leave NULL if you want to use auto_increment!
 	 * @param date: Date for which the room is being booked
 	 * @param bookedRoom: Room which is being booked
-	 * @param customer: Customer who is booking the room
 	 */
-	public BookingRoom(Date date, Room room, Customer customer) {
-		this.date = date;
+    public BookingRoom(Date date, Room room, Booking booking) {
+        this.date = date;
 		this.room = room;
-		this.customer = customer;
-	}
-	public BookingRoom(Date date, int roomId, int customerId) {
+        this.booking = booking;
+    }
+
+    public BookingRoom(Date date, int roomId, Booking booking) {
+        this.date = date;
+		this.room = new Room(roomId);
+        this.booking = booking;
+    }
+
+    public BookingRoom(int id, Date date, int roomId, Booking booking) {
+        this.brid = id;
 		this.date = date;
 		this.room = new Room(roomId);
-		this.customer = new Customer(customerId);
-	}
-	public BookingRoom(int id,Date date, int roomId, int customerId) {
-		this.brid = id;
-		this.date = date;
-		this.room = new Room(roomId);
-		this.customer = new Customer(customerId);
-	}
+        this.booking = booking;
+    }
 	public BookingRoom(int brid){this.brid = brid;}
 	public BookingRoom(){}
 
@@ -50,20 +52,16 @@ public class BookingRoom implements DBBookingRoom{
 		return DBIface.executeQuery("SELECT * from Booking_Room");
 	}
 
-	@Override
-	public ResultSet getAllFromCustomer(int CustomerId) throws SQLException {
-		return DBIface.executeQuery("SELECT * from Booking_Room WHERE CID = "+CustomerId);
-		}
+    @Override
+    public ResultSet getByDate(Date date) throws SQLException {
+        return DBIface.executeQuery("SELECT * from Booking_Room where Date = \"" + this.getDate().toString() + "\"");
+    }
 
-	@Override
-	public ResultSet getRelatedServiceBookings() throws SQLException {
-		return DBIface.executeQuery("SELECT * FROM Booking_Service WHERE BRID="+this.brid);
-	}
 
-	@Override
-	public int create() throws SQLException {
-		ResultSet rs = DBIface.executeQuery("Insert into Booking_Room values ("+this.getBrid()+",\""+this.getDate().toString()+"\","+this.getRoom().getRid()+","+this.getCustomer().getId()+")");
-		if (rs.next()) {
+    @Override
+    public int create() throws SQLException {
+        ResultSet rs = DBIface.executeQuery("Insert into Booking_Room values (" + this.getBrid() + ",\"" + this.getDate().toString() + "\"," + this.getRoom().getRid() + "," + this.getBooking().getBid() + ")");
+        if (rs.next()) {
 			this.brid = rs.getInt(1); }
 		return this.getBrid();
 	}
@@ -74,11 +72,11 @@ public class BookingRoom implements DBBookingRoom{
 			"Update Booking_Room set "+
 					"Date = \""+this.getDate()+
 					"\",RID = "+this.getRoom().getRid()+
-					",CID = "+this.getCustomer().getId()+
-					" Where BRID = "+this.getBrid()
+                    "BID = " + this.getBooking().getBid() +
+                    " Where BRID = "+this.getBrid()
 		);
-		ResultSet rs = DBIface.executeQuery("SELECT COUNT(*) from Booking_Room where id = "+this.getBrid());
-		rs.next();
+        ResultSet rs = DBIface.executeQuery("SELECT COUNT(*) from Booking_Room where BRID = " + this.getBrid());
+        rs.next();
 		if (rs.getInt(1)==1){
 			return true;
 		}
@@ -130,28 +128,22 @@ public class BookingRoom implements DBBookingRoom{
 		this.room = room;
 	}
 
-	/**
-	 * @return the customer
-	 */
-	public Customer getCustomer() {
-		return customer;
-	}
+    public Booking getBooking() {
+        return booking;
+    }
 
-	/**
-	 * @param customer the customer to set
-	 */
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
+    public void setBooking(Booking booking) {
+        this.booking = booking;
+    }
 
-	/**
-	 * @param brid the brid to set
+    /**
+     * @param brid the brid to set
 	 */
 	public void setBrid(int brid) {
 		this.brid = brid;
 	}
 	public String toString(){
 
-		return "brId: " + brid + " Zimmernummer: "+ room.getRid() + " Kundennummer: " + customer.getId()+"Buchungstag: "+ getDate();
-	}
+        return "brId: " + brid + " Zimmernummer: " + room.getRid() + " Buchungstag: " + getDate();
+    }
 }

@@ -3,22 +3,16 @@
  */
 package appTest;
 
-import static org.junit.Assert.fail;
+import db.DBIface;
+import db.entities.*;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import junit.framework.Assert;
-
-import org.junit.Test;
-
-import db.DBIface;
-import db.entities.BookingRoom;
-import db.entities.BookingService;
-import db.entities.Customer;
-import db.entities.Room;
-import db.entities.Service;
+import static org.junit.Assert.fail;
 
 /**
  * @author david
@@ -27,12 +21,26 @@ import db.entities.Service;
 public class DBOperations {
 
 	@Test
-	public void test() throws SQLException {
+    /**
+     * WARNING: THIS TEST WILL DELETE ALL DATA IN THE DATABASE!!
+     */
+    public void test() throws SQLException {
 		try {
 			// Anmelden
 			db.DBIface.loginDB("hm", "init");
-			// Create Room
-			Room room = new Room();
+
+            // Deleting all Data
+            // This is necessary for using rowcounts in statements below, but could actually be replaced later
+            DBIface.executeQuery("Delete from Booking_Room");
+            DBIface.executeQuery("Delete from Booking_Service");
+            DBIface.executeQuery("Delete from Booking");
+            DBIface.executeQuery("Delete from Room");
+            DBIface.executeQuery("Delete from Service");
+            DBIface.executeQuery("Delete from Customer");
+
+
+            // Create Room
+            Room room = new Room();
 			room.setDoubleRoom(false);
 			room.setPrice(35.52);
 			int roomId = room.create();
@@ -69,8 +77,8 @@ public class DBOperations {
 			rs.last();
 			Assert.assertEquals(1, rs.getRow());
 			Assert.assertEquals(roomId, rs.getInt(1));
-			Assert.assertEquals(price, rs.getDouble(2));
-			Assert.assertEquals(true, rs.getBoolean(3));
+            Assert.assertEquals(price, rs.getDouble(2), 0.009);
+            Assert.assertEquals(true, rs.getBoolean(3));
 			System.out.println("Room(" + rs.getInt(1) + ", " + rs.getDouble(2)
 					+ ", " + rs.getBoolean(3) + ")");
 
@@ -114,8 +122,8 @@ public class DBOperations {
 			Assert.assertEquals(1, rs.getRow());
 			Assert.assertEquals(serviceId, rs.getInt(1));
 			Assert.assertEquals(serviceType, rs.getString(2));
-			Assert.assertEquals(servicePrice, rs.getDouble(3));
-			System.out.println("Service(" + rs.getInt(1) + ", "
+            Assert.assertEquals(servicePrice, rs.getDouble(3), 0.009);
+            System.out.println("Service(" + rs.getInt(1) + ", "
 					+ rs.getString(2) + ", " + rs.getDouble(3) + ")");
 
 			// Create Customer
@@ -136,9 +144,16 @@ public class DBOperations {
 			customer.update();
 
 			// Create 2 Bookings on Room and 1 Booking on Room2
-			BookingRoom br = new BookingRoom(Date.valueOf("2014-2-1"), room,
-					customer);
-			br.create();
+            Booking b = new Booking(customer, Date.valueOf("2014-1-15"));
+            b.create();
+            rs = DBIface.executeQuery("SELECT * from Booking where BID=" + b.getBid());
+            rs.last();
+            Assert.assertEquals(1, rs.getRow());
+            Assert.assertEquals(b.getBid(), rs.getInt(1));
+            Assert.assertEquals(b.getCreatedOn(), rs.getDate(2));
+            Assert.assertEquals(b.getCustomer().getCid(), rs.getInt(3));
+            BookingRoom br = new BookingRoom(Date.valueOf("2014-2-1"), room, b);
+            br.create();
 			System.out.println("BookingRoom with ID " + br.getBrid()
 					+ " created.");
 			rs = DBIface.executeQuery("SELECT * from Booking_Room where BRID="
@@ -148,11 +163,10 @@ public class DBOperations {
 			Assert.assertEquals(br.getBrid(), rs.getInt(1));
 			Assert.assertEquals(br.getDate(), rs.getDate(2));
 			Assert.assertEquals(br.getRoom().getRid(), rs.getInt(3));
-			Assert.assertEquals(br.getCustomer().getId(), rs.getInt(4));
+            Assert.assertEquals(br.getBooking().getBid(), rs.getInt(4));
 
-			BookingRoom br2 = new BookingRoom(Date.valueOf("2014-2-2"), room,
-					customer2);
-			br2.create();
+            BookingRoom br2 = new BookingRoom(Date.valueOf("2014-2-2"), room, b);
+            br2.create();
 			System.out.println("BookingRoom with ID " + br2.getBrid()
 					+ " created.");
 			rs = DBIface.executeQuery("SELECT * from Booking_Room where BRID="
@@ -162,11 +176,10 @@ public class DBOperations {
 			Assert.assertEquals(br2.getBrid(), rs.getInt(1));
 			Assert.assertEquals(br2.getDate(), rs.getDate(2));
 			Assert.assertEquals(br2.getRoom().getRid(), rs.getInt(3));
-			Assert.assertEquals(br2.getCustomer().getId(), rs.getInt(4));
+            Assert.assertEquals(br2.getBooking().getBid(), rs.getInt(4));
 
-			BookingRoom br3 = new BookingRoom(Date.valueOf("2015-10-30"),
-					room2, customer);
-			br3.create();
+            BookingRoom br3 = new BookingRoom(Date.valueOf("2015-10-30"), room2, b);
+            br3.create();
 			System.out.println("BookingRoom with ID " + br3.getBrid()
 					+ " created.");
 			rs = DBIface.executeQuery("SELECT * from Booking_Room where BRID="
@@ -176,12 +189,11 @@ public class DBOperations {
 			Assert.assertEquals(br3.getBrid(), rs.getInt(1));
 			Assert.assertEquals(br3.getDate(), rs.getDate(2));
 			Assert.assertEquals(br3.getRoom().getRid(), rs.getInt(3));
-			Assert.assertEquals(br3.getCustomer().getId(), rs.getInt(4));
+            Assert.assertEquals(br3.getBooking().getBid(), rs.getInt(4));
 
 			// Create 2 Service Bookings
-			BookingService bs = new BookingService(Date.valueOf("2015-10-30"),
-					service, br3);
-			bs.create();
+            BookingService bs = new BookingService(Date.valueOf("2015-10-30"), service, b);
+            bs.create();
 			System.out.println("BookingService with ID " + bs.getBsid()
 					+ " created.");
 			rs = DBIface
@@ -192,11 +204,10 @@ public class DBOperations {
 			Assert.assertEquals(bs.getBsid(), rs.getInt(1));
 			Assert.assertEquals(bs.getDate(), rs.getDate(2));
 			Assert.assertEquals(bs.getService().getSid(), rs.getInt(3));
-			Assert.assertEquals(bs.getBookingRoom().getBrid(), rs.getInt(4));
+            Assert.assertEquals(bs.getBooking().getBid(), rs.getInt(4));
 
-			BookingService bs2 = new BookingService(Date.valueOf("2014-2-2"),
-					service2, br2);
-			bs2.create();
+            BookingService bs2 = new BookingService(Date.valueOf("2014-2-2"), service2, b);
+            bs2.create();
 			System.out.println("BookingService with ID " + bs2.getBsid()
 					+ " created.");
 			rs = DBIface
@@ -207,49 +218,37 @@ public class DBOperations {
 			Assert.assertEquals(bs2.getBsid(), rs.getInt(1));
 			Assert.assertEquals(bs2.getDate(), rs.getDate(2));
 			Assert.assertEquals(bs2.getService().getSid(), rs.getInt(3));
-			Assert.assertEquals(bs2.getBookingRoom().getBrid(), rs.getInt(4));
+            Assert.assertEquals(bs2.getBooking().getBid(), rs.getInt(4));
 
 			// Test spezific operations
-			// getAllFromCustomer should return all Roombookings of a specific
-			// customer
-			rs = br3.getAllFromCustomer(customer.getId());
-			rs.last();
-			Assert.assertEquals(2, rs.getRow());
-			// getRelatedServiceBookings sould return all Servicebookings of
-			// specified Roombooking
-			rs = br3.getRelatedServiceBookings();
-			rs.last();
-			Assert.assertEquals(1, rs.getRow());
-			// getByDate should return all Roombookings for specific Date
-			// Attention! This could fail with a non-empty DB
+            // getAllByCustomer should return all Bookings of a specific
+            // customer
+            rs = b.getAllByCustomer(customer.getCid());
+            rs.last();
+            Assert.assertEquals(1, rs.getRow());
+            // getRelatedServiceBookings sould return all Servicebookings of
+            // specified Booking
+            rs = b.getRelatedServiceBookings();
+            rs.last();
+            Assert.assertEquals(2, rs.getRow());
+            // getByDate should return all Roombookings for specific Date
 			rs = br3.getByDate(Date.valueOf("2015-10-30"));
 			rs.last();
 			Assert.assertEquals(1, rs.getRow());
 			rs = br3.getByDate(Date.valueOf("2000-1-1"));
-			rs.last();
-			Assert.assertEquals(0, rs.getRow());
+            //Assert.assertEquals(false, rs.last());
+            Assert.assertEquals(0, rs.getRow());
 
-			// Delete Customers
-			customer.delete();
-			customer2.delete();
-			rs = DBIface.executeQuery("SELECT * from Customer where ID="
-					+ customer.getId() + " OR ID=" + customer2.getId());
-			rs.last();
-			Assert.assertEquals(0, rs.getRow());
-			System.out.println("Customer " + customer.getId() + " deleted.");
-			System.out.println("Customer " + customer.getId() + " deleted.");
 
 			// Delete Services
 			service.delete();
-			rs = DBIface.executeQuery("SELECT * from Service where SID="
-					+ serviceId);
-			rs.last();
+            rs = DBIface.executeQuery("SELECT * from Service where SID=" + serviceId);
+            rs.last();
 			Assert.assertEquals(0, rs.getRow());
 			System.out.println("Service " + serviceId + " deleted.");
 			service2.delete();
-			rs = DBIface.executeQuery("SELECT * from Service where SID="
-					+ serviceId2);
-			rs.last();
+            rs = DBIface.executeQuery("SELECT * from Service where SID=" + serviceId2);
+            rs.last();
 			Assert.assertEquals(0, rs.getRow());
 			System.out.println("Service " + serviceId2 + " deleted.");
 
@@ -279,6 +278,16 @@ public class DBOperations {
 			rs.last();
 			Assert.assertEquals(0, rs.getRow());
 			System.out.println("BookingServices deleted.");
+
+            // Delete Customers
+            customer.delete();
+            customer2.delete();
+            rs = DBIface.executeQuery("SELECT * from Customer where CID="
+                    + customer.getCid() + " OR CID=" + customer2.getCid());
+            rs.last();
+            Assert.assertEquals(0, rs.getRow());
+            System.out.println("Customer " + customer.getCid() + " deleted.");
+            System.out.println("Customer " + customer.getCid() + " deleted.");
 
 		} catch (Exception e) {
 			e.printStackTrace();
