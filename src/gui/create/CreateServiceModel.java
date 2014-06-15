@@ -2,7 +2,7 @@ package gui.create;
 
 import javax.swing.JTextField;
 
-public class CreateServiceFrameModel {
+public class CreateServiceModel {
 	private JTextField price;
 	private JTextField name;
 

@@ -17,14 +17,14 @@ public class SelectRoomByServiceFrameController implements IController{
 	private SelectRoomByServiceFrameView sf;
 	private VerwaltungMainFrameView mf;
 	private SelectServiceFrameView ssf;
-	private SelectRoomByServiceFrameModel m;
-	public SelectRoomByServiceFrameController(SelectRoomByServiceFrameView sf,VerwaltungMainFrameView mf,SelectServiceFrameView ssf,SelectRoomByServiceFrameModel m){
+	private ServiceModel m;
+	public SelectRoomByServiceFrameController(SelectRoomByServiceFrameView sf,VerwaltungMainFrameView mf,SelectServiceFrameView ssf,ServiceModel m){
 		this.sf = sf;
 		this.mf = mf;
 		this.ssf = ssf;
 		this.m = m;
 	}
-	public SelectRoomByServiceFrameController(VerwaltungMainFrameView mf,SelectServiceFrameView ssf,SelectRoomByServiceFrameModel m){
+	public SelectRoomByServiceFrameController(VerwaltungMainFrameView mf,SelectServiceFrameView ssf,ServiceModel m){
 		this.mf = mf;
 		this.ssf = ssf;
 		this.m = m;

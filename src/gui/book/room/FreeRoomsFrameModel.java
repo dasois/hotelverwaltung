@@ -12,4 +12,13 @@ public class FreeRoomsFrameModel {
 	public void setTmp(Room[] tmp) {
 		this.tmp = tmp;
 	}
+	private  Room[] selectedRooms;
+
+	public Room[] getSelectedRooms() {
+		return selectedRooms;
+	}
+
+	public void setSelectedRooms(Room[] selectedRooms) {
+		this.selectedRooms = selectedRooms;
+	}
 }

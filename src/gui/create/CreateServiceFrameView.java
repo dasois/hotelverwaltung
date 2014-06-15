@@ -43,16 +43,16 @@ public class CreateServiceFrameView extends AbstractFrame{
 	private JPanel southPanel;
 	private JPanel boxdsouthPanel;
 	private VerwaltungMainFrameView mf;
-	private CreateServiceFrameModel m;
+	private CreateServiceModel m;
 	private IController c;
-	public CreateServiceFrameView(VerwaltungMainFrameView mf,IController c, CreateServiceFrameModel m) {
+	public CreateServiceFrameView(VerwaltungMainFrameView mf,IController c, CreateServiceModel m) {
 		this.mf = mf;
 		this.c = c;
 		this.m = m;
 	}
 
 	protected void createWidget() {
-		header = new JLabel("Dienstleistung hinzufügen");
+		header = new JLabel("Dienstleistung hinzufï¿½gen");
 		header.setPreferredSize(new Dimension(400,40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);

@@ -42,9 +42,9 @@ public class CreateRoomFrameView extends AbstractFrame{
 	private JPanel southPanel;
 	private JPanel boxdsouthPanel;
 	VerwaltungMainFrameView mf;
-	private CreateRoomFrameModel m;
+	private CreateRoomModel m;
 	private IController c;
-	public CreateRoomFrameView(VerwaltungMainFrameView mf,IController c,CreateRoomFrameModel m) {
+	public CreateRoomFrameView(VerwaltungMainFrameView mf,IController c,CreateRoomModel m) {
 		this.mf = mf;
 		this.c = c;
 		this.m = m;
@@ -52,7 +52,7 @@ public class CreateRoomFrameView extends AbstractFrame{
 
 	@Override
 	protected void createWidget() {
-		header = new JLabel("Zimmer hinzufügen");
+		header = new JLabel("Zimmer hinzufï¿½gen");
 		header.setPreferredSize(new Dimension(400,40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);

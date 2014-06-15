@@ -39,9 +39,9 @@ public class SelectTimeIntervallRoomFrame extends AbstractFrame{
 	protected JButton search;
 	protected JButton cancel;
 	private JPanel boxdsouthPanel;
-	private SelectTimeIntervallRoomModel m;
+	private RoomModel m;
 	private IController c;
-	public SelectTimeIntervallRoomFrame(VerwaltungMainFrameView mf,IController c,SelectTimeIntervallRoomModel m) {
+	public SelectTimeIntervallRoomFrame(VerwaltungMainFrameView mf,IController c,RoomModel m) {
 		this.c = c;
 		this.mf = mf;
 		this.m = m;

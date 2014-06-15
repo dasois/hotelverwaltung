@@ -26,7 +26,7 @@ public class SelectServiceFrameController implements IController{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		final FrameSwitcher fs = new FrameSwitchImpl(sf,ssf);
-		SelectRoomByServiceFrameModel m = new SelectRoomByServiceFrameModel();
+		ServiceModel m = new ServiceModel();
 		SelectRoomByServiceFrameController c = new SelectRoomByServiceFrameController(mf,sf,m);
 		SelectRoomByServiceFrameView scf = new SelectRoomByServiceFrameView(mf,c,sf,ssf,m);
 		scf.init();

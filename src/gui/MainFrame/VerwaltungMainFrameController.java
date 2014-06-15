@@ -6,17 +6,17 @@ import gui.ShowCustomer.ShowCustomerFrameView;
 import gui.book.SelectCustomerFrameController;
 import gui.book.SelectCustomerFrameView;
 
+import gui.book.room.RoomModel;
 import gui.book.room.SelectTimeIntervallRoomFrame;
-import gui.book.room.SelectTimeIntervallRoomModel;
 import gui.book.service.SelectTimeFrameView;
 import gui.create.CreateCostumerFrameController;
-import gui.create.CreateCostumerFrameModel;
+import gui.create.CreateCustomerModel;
 import gui.create.CreateCostumerFrameView;
 import gui.create.CreateRoomFrameController;
-import gui.create.CreateRoomFrameModel;
+import gui.create.CreateRoomModel;
 import gui.create.CreateRoomFrameView;
 import gui.create.CreateServiceFrameController;
-import gui.create.CreateServiceFrameModel;
+import gui.create.CreateServiceModel;
 import gui.create.CreateServiceFrameView;
 import gui.delete.DeleteFrameController;
 import gui.delete.DeleteFrameView;
@@ -52,14 +52,14 @@ public class VerwaltungMainFrameController implements IController {
 			if(khd=="Kunden"){
 				if(action == "Erstellen"){
 					gui.setEnabled(false);
-					CreateCostumerFrameModel m = new CreateCostumerFrameModel();
+					CreateCustomerModel m = new CreateCustomerModel();
 					CreateCostumerFrameController c = new CreateCostumerFrameController(gui,m);
 					CreateCostumerFrameView cf = new CreateCostumerFrameView(gui,c,m);
 					c.setConnectedView(cf);
 					cf.init();
 					new JDialog(cf);
 				}
-				else if(action =="Löschen"){
+				else if(action =="Lï¿½schen"){
 					gui.setEnabled(false);
 					DeleteFrameController<Customer> c = new DeleteFrameController<Customer>(gui);
 					DeleteFrameView<Customer> dcf;
@@ -81,7 +81,7 @@ public class VerwaltungMainFrameController implements IController {
 				}
 				else if(action =="Einbuchen"){
 					gui.setEnabled(false);
-					SelectTimeIntervallRoomModel m = new SelectTimeIntervallRoomModel();
+					RoomModel m = new RoomModel();
 					IController c = new gui.combinedbooking.SelectTimeIntervallRoomFrameController(gui, m);
 					SelectTimeIntervallRoomFrame scf = new SelectTimeIntervallRoomFrame(gui,c,m);
 					c.setConnectedView(scf);
@@ -100,7 +100,7 @@ public class VerwaltungMainFrameController implements IController {
 			else if(khd=="Zimmer"){
 				if(action == "Erstellen"){
 					gui.setEnabled(false);
-					CreateRoomFrameModel m = new CreateRoomFrameModel();
+					CreateRoomModel m = new CreateRoomModel();
 					CreateRoomFrameController c = new CreateRoomFrameController(gui, m);
 					CreateRoomFrameView rf = new CreateRoomFrameView(gui,c,m);
 					c.setConnectedView(rf);
@@ -109,7 +109,7 @@ public class VerwaltungMainFrameController implements IController {
 				}
 				else if(action =="Buchen"){
 					gui.setEnabled(false);
-					SelectTimeIntervallRoomModel m = new SelectTimeIntervallRoomModel();
+					RoomModel m = new RoomModel();
 					IController c = new gui.book.room.SelectTimeIntervallRoomFrameController(gui, m);
 					SelectTimeIntervallRoomFrame rf = new SelectTimeIntervallRoomFrame(gui,c,m);
 					c.setConnectedView(rf);
@@ -134,7 +134,7 @@ public class VerwaltungMainFrameController implements IController {
 			else if(khd=="Leistung"){
 				if(action == "Erstellen"){
 					gui.setEnabled(false);
-					CreateServiceFrameModel m = new CreateServiceFrameModel();
+					CreateServiceModel m = new CreateServiceModel();
 					CreateServiceFrameController c = new CreateServiceFrameController(gui, m);
 					CreateServiceFrameView sf = new CreateServiceFrameView(gui,c,m);
 					c.setConnectedView(sf);

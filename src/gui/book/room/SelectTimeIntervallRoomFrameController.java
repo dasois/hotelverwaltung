@@ -14,13 +14,13 @@ import javax.swing.JOptionPane;
 public class SelectTimeIntervallRoomFrameController implements IController{
 	private SelectTimeIntervallRoomFrame f;
 	private VerwaltungMainFrameView mf;
-	private SelectTimeIntervallRoomModel m;
-	public SelectTimeIntervallRoomFrameController(SelectTimeIntervallRoomFrame f, VerwaltungMainFrameView mf,SelectTimeIntervallRoomModel m){
+	private RoomModel m;
+	public SelectTimeIntervallRoomFrameController(SelectTimeIntervallRoomFrame f, VerwaltungMainFrameView mf,RoomModel m){
 		this.f = f;
 		this.mf = mf;
 		this.m = m;
 	}
-	public SelectTimeIntervallRoomFrameController(VerwaltungMainFrameView mf,SelectTimeIntervallRoomModel m){
+	public SelectTimeIntervallRoomFrameController(VerwaltungMainFrameView mf,RoomModel m){
 		this.mf = mf;
 		this.m = m;
 	}

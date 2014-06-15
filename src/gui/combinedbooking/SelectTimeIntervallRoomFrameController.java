@@ -6,8 +6,8 @@ import gui.FrameSwitchImpl;
 import gui.FrameSwitcher;
 import gui.MainFrame.VerwaltungMainFrameView;
 import gui.book.room.FreeRoomsFrameView;
+import gui.book.room.RoomModel;
 import gui.book.room.SelectTimeIntervallRoomFrame;
-import gui.book.room.SelectTimeIntervallRoomModel;
 
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
@@ -15,13 +15,13 @@ import javax.swing.JOptionPane;
 public class SelectTimeIntervallRoomFrameController implements IController{
 	private SelectTimeIntervallRoomFrame f;
 	private VerwaltungMainFrameView mf;
-	private SelectTimeIntervallRoomModel m;
-	public SelectTimeIntervallRoomFrameController(SelectTimeIntervallRoomFrame f, VerwaltungMainFrameView mf,SelectTimeIntervallRoomModel m){
+	private RoomModel m;
+	public SelectTimeIntervallRoomFrameController(SelectTimeIntervallRoomFrame f, VerwaltungMainFrameView mf,RoomModel m){
 		this.f = f;
 		this.mf = mf;
 		this.m = m;
 	}
-	public SelectTimeIntervallRoomFrameController(VerwaltungMainFrameView mf,SelectTimeIntervallRoomModel m){
+	public SelectTimeIntervallRoomFrameController(VerwaltungMainFrameView mf,RoomModel m){
 		this.mf = mf;
 		this.m = m;
 	}

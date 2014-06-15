@@ -7,7 +7,7 @@ import com.toedter.calendar.JDateChooser;
 
 import app.entities.Title;
 
-public class CreateCostumerFrameModel {
+public class CreateCustomerModel {
 	private JComboBox<Title> titleSelection;
 	private JTextField customerFirstNameInput;
 	private JTextField customerLastNameInput;
