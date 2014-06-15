@@ -43,10 +43,10 @@ public class SelectRoomByServiceFrameView extends AbstractFrame{
 	private VerwaltungMainFrameView mf;
 	private SelectServiceFrameView ssf;
 	SelectTimeFrameView ssf2;
-	private SelectRoomByServiceFrameModel m;
+	private ServiceModel m;
 	private IController c;
 	public SelectRoomByServiceFrameView(VerwaltungMainFrameView mf,IController c,
-			SelectServiceFrameView ssf, SelectTimeFrameView ssf2,SelectRoomByServiceFrameModel m) {
+			SelectServiceFrameView ssf, SelectTimeFrameView ssf2,ServiceModel m) {
 		this.mf = mf;
 		this.c = c;
 		this.ssf = ssf;
@@ -54,7 +54,7 @@ public class SelectRoomByServiceFrameView extends AbstractFrame{
 		this.m = m;
 	}
 	protected void createWidget() {
-		header = new JLabel("Zimmer wählen");
+		header = new JLabel("Zimmer wï¿½hlen");
 		header.setPreferredSize(new Dimension(400,40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
@@ -82,7 +82,7 @@ public class SelectRoomByServiceFrameView extends AbstractFrame{
 		book.setPreferredSize(new Dimension(20, 30));
 		book.setActionCommand("Book");
 
-		stepback = new JButton("Zurück");
+		stepback = new JButton("Zurï¿½ck");
 		stepback.setPreferredSize(new Dimension(20, 30));
 		stepback.setActionCommand("Back");
 		boxdsouthPanel = new JPanel();

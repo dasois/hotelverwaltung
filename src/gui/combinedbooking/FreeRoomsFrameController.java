@@ -9,7 +9,7 @@ import gui.FrameSwitcher;
 import gui.MainFrame.VerwaltungMainFrameView;
 import gui.book.room.FreeRoomsFrameModel;
 import gui.book.room.FreeRoomsFrameView;
-import gui.book.room.SelectCostumerByRoomFrameModel;
+import gui.book.room.RoomModel;
 import gui.book.room.SelectCostumerByRoomFrameView;
 
 import java.awt.event.ActionEvent;
@@ -39,13 +39,13 @@ public class FreeRoomsFrameController implements IController{
 		if(e.getActionCommand()=="Back"){
 			fs.switchFrame();
 		}else if(f.list.getSelectedValuesList().isEmpty()){
-			JOptionPane.showMessageDialog(null, "Wähle mindestens ein freies Zimmer");
+			JOptionPane.showMessageDialog(null, "Wï¿½hle mindestens ein freies Zimmer");
 		}else{
 			m.setTmp(f.list.getSelectedValuesList().toArray(new Room[0]));
-			SelectCostumerByRoomFrameModel m2 = new SelectCostumerByRoomFrameModel();
+			RoomModel m2 = new RoomModel();
 			m2.setSelectedRooms(m.getTmp());
 			SelectCostumerByRoomFrameController c = new SelectCostumerByRoomFrameController(mf,m2);
-			SelectCostumerByRoomFrameView scf = new SelectCostumerByRoomFrameView(mf,c,frf,m.getTmp(),f.sf);
+			SelectCostumerByRoomFrameView scf = new SelectCostumerByRoomFrameView(mf,c,m2,frf,f.sf);
 			c.setConnectedView(scf);
 			scf.init();
 			scf.setVisible(false);

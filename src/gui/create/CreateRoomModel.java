@@ -3,7 +3,7 @@ package gui.create;
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
 
-public class CreateRoomFrameModel {
+public class CreateRoomModel {
 	private JCheckBox doubleRoomCheck;
 	private JTextField price;
 

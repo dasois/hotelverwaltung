@@ -5,11 +5,10 @@ import gui.IController;
 import gui.FrameSwitchImpl;
 import gui.FrameSwitcher;
 import gui.MainFrame.VerwaltungMainFrameView;
-import gui.book.room.SelectCostumerByRoomFrameModel;
+import gui.book.room.RoomModel;
 import gui.book.room.SelectCostumerByRoomFrameView;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
@@ -21,14 +20,14 @@ import db.entities.Room;
 public class SelectCostumerByRoomFrameController implements IController{
 	private SelectCostumerByRoomFrameView f;
 	private VerwaltungMainFrameView mf;
-	private SelectCostumerByRoomFrameModel m;
+	private RoomModel m;
 	
-	public SelectCostumerByRoomFrameController(SelectCostumerByRoomFrameView f, VerwaltungMainFrameView mf, SelectCostumerByRoomFrameModel m){
+	public SelectCostumerByRoomFrameController(SelectCostumerByRoomFrameView f, VerwaltungMainFrameView mf,RoomModel m){
 		this.f = f;
 		this.mf = mf;
 		this.m = m;
 	}
-	public SelectCostumerByRoomFrameController(VerwaltungMainFrameView mf, SelectCostumerByRoomFrameModel m){
+	public SelectCostumerByRoomFrameController(VerwaltungMainFrameView mf, RoomModel m){
 		this.mf = mf;
 		this.m = m;
 	}
@@ -59,7 +58,7 @@ public class SelectCostumerByRoomFrameController implements IController{
 						mf.addProtocolLine("Buchung konnte nicht erstellt werden");
 						e1.printStackTrace();
 					}catch (NullPointerException e1) {
-						mf.addProtocolLine("Fehler, Es wurde kein Kunde ausgewählt");
+						mf.addProtocolLine("Fehler, Es wurde kein Kunde ausgewï¿½hlt");
 					}
 				}
 

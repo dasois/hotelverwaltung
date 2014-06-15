@@ -16,13 +16,13 @@ import app.RoomControlInterface;
 public class CreateRoomFrameController implements IController{
 	private CreateRoomFrameView crf;
 	private VerwaltungMainFrameView mf;
-	private CreateRoomFrameModel m;
-	public CreateRoomFrameController(CreateRoomFrameView crf,VerwaltungMainFrameView mf,CreateRoomFrameModel m){
+	private CreateRoomModel m;
+	public CreateRoomFrameController(CreateRoomFrameView crf,VerwaltungMainFrameView mf,CreateRoomModel m){
 		this.crf = crf;
 		this.mf = mf;
 		this.m = m;
 	}
-	public CreateRoomFrameController(VerwaltungMainFrameView mf,CreateRoomFrameModel m){
+	public CreateRoomFrameController(VerwaltungMainFrameView mf,CreateRoomModel m){
 		this.mf = mf;
 		this.m = m;
 	}
@@ -41,12 +41,12 @@ public class CreateRoomFrameController implements IController{
 			try {
 				int roomId = controller.create(Double.parseDouble(m.getPrice().getText()),m.getDoubleRoomCheck().isSelected());
 				mf.addProtocolLine("Zimmer: "+roomId+" wurde mit dem Preis: "+Double.parseDouble(m.getPrice().getText())
-						+"€ in der Datenbank angelegt\n");
+						+"ï¿½ in der Datenbank angelegt\n");
 				fs.switchFrame();
 			} catch (SQLException e1) {
 				mf.addProtocolLine("Es konnte kein Zimmer erstellt werden, rufen sie ihren Administrator");
 			}catch (NumberFormatException e1) {
-				mf.addProtocolLine("Fehlerhafte eingabe, es wurde kein Zimmer Angelegt.\nVergewissern sie sich das alle Felder ausgefüllt werden!");
+				mf.addProtocolLine("Fehlerhafte eingabe, es wurde kein Zimmer Angelegt.\nVergewissern sie sich das alle Felder ausgefï¿½llt werden!");
 			}
 			fs.switchFrame();
 		}

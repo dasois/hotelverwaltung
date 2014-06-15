@@ -36,6 +36,7 @@ CREATE  TABLE IF NOT EXISTS `hotelverwaltung`.`Customer` (
   `LName` VARCHAR(45) NOT NULL ,
   `Address` VARCHAR(150) NOT NULL ,
   `BDate` DATE NOT NULL ,
+  `Title` VarChar(45) NOT NULL ,
   PRIMARY KEY (`ID`) )
 ENGINE = InnoDB;
 

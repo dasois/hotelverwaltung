@@ -3,6 +3,7 @@ package gui.book.room;
 import gui.AbstractFrame;
 import gui.IController;
 import gui.FrameSwitcher;
+import gui.IModel;
 import gui.MainFrame.VerwaltungMainFrameView;
 
 import java.awt.BorderLayout;
@@ -45,18 +46,17 @@ public class SelectCostumerByRoomFrameView extends AbstractFrame{
 	protected JButton stepback;
 	private JPanel boxdsouthPanel;
 	private SelectTimeIntervallRoomFrame sf;
-	private SelectCostumerByRoomFrameModel m;
+	private RoomModel m;
 	private IController c;
-	public SelectCostumerByRoomFrameView(VerwaltungMainFrameView mf,IController c,FreeRoomsFrameView frf, Room[] selectedRooms, SelectTimeIntervallRoomFrame sf) {
+	public SelectCostumerByRoomFrameView(VerwaltungMainFrameView mf,IController c, RoomModel m,FreeRoomsFrameView frf, SelectTimeIntervallRoomFrame sf) {
 		this.mf = mf;
 		this.c = c;
-		this.setFrf(frf);
-		m = new SelectCostumerByRoomFrameModel();
-		m.setSelectedRooms(selectedRooms);
+		this.setFrf(frf);	
 		this.setSf(sf);
+		this.m = m;
 	}
 	protected void createWidget() {
-		header = new JLabel("Kunde wählen");
+		header = new JLabel("Kunde wï¿½hlen");
 		header.setPreferredSize(new Dimension(400,40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
@@ -83,7 +83,7 @@ public class SelectCostumerByRoomFrameView extends AbstractFrame{
 		book.setPreferredSize(new Dimension(20, 30));
 		book.setActionCommand("Book");
 
-		stepback = new JButton("Zurück");
+		stepback = new JButton("Zurï¿½ck");
 		stepback.setPreferredSize(new Dimension(20, 30));
 		stepback.setActionCommand("Back");
 		boxdsouthPanel = new JPanel();	

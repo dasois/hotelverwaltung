@@ -34,9 +34,9 @@ import app.entities.Title;
 @SuppressWarnings("serial")
 public class CreateCostumerFrameView extends AbstractFrame{
 	private VerwaltungMainFrameView mf;
-	private CreateCostumerFrameModel m;
+	private CreateCustomerModel m;
 	private IController c;
-	public CreateCostumerFrameView(VerwaltungMainFrameView mf,IController c, CreateCostumerFrameModel m) {
+	public CreateCostumerFrameView(VerwaltungMainFrameView mf,IController c, CreateCustomerModel m) {
 		this.mf = mf;
 		this.c = c;
 		this.m = m;

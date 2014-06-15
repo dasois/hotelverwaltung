@@ -14,18 +14,19 @@ import java.util.Date;
 
 import app.BookingRoomControlImp;
 import app.BookingRoomControlInterface;
+import db.entities.Customer;
 import db.entities.Room;
 
 public class SelectCostumerByRoomFrameController implements IController{
 	private SelectCostumerByRoomFrameView f;
 	private VerwaltungMainFrameView mf;
-	private SelectCostumerByRoomFrameModel m;
-	public SelectCostumerByRoomFrameController(SelectCostumerByRoomFrameView f, VerwaltungMainFrameView mf, SelectCostumerByRoomFrameModel m){
+	private RoomModel m;
+	public SelectCostumerByRoomFrameController(SelectCostumerByRoomFrameView f, VerwaltungMainFrameView mf, RoomModel m){
 		this.f = f;
 		this.mf = mf;
 		this.m = m;
 	}
-	public SelectCostumerByRoomFrameController(VerwaltungMainFrameView mf, SelectCostumerByRoomFrameModel m){
+	public SelectCostumerByRoomFrameController(VerwaltungMainFrameView mf, RoomModel m){
 		this.mf = mf;
 		this.m = m;
 	}
@@ -46,13 +47,14 @@ public class SelectCostumerByRoomFrameController implements IController{
 				for(Room r:m.getSelectedRooms()){
 					try {
 						price = price + r.getPrice();
+						m.setCustomer(new Customer(f.getList().getSelectedValue().getId()));
 						controller.create(new java.sql.Date(date.getTime()),r.getRid(),f.getList().getSelectedValue().getId());
 						mf.addProtocolLine("Buchung von Zimmer: "+r.getRid()+"am Tag:"+date.toString()+" wurde in der Datenbank angelegt\n");
 					} catch (SQLException e1) {
 						mf.addProtocolLine("Buchung konnte nicht erstellt werden");
 						e1.printStackTrace();
 					}catch (NullPointerException e1) {
-						mf.addProtocolLine("Fehler, Es wurde kein Kunde ausgewählt");
+						mf.addProtocolLine("Fehler, Es wurde kein Kunde ausgewï¿½hlt");
 					}
 				}
 
