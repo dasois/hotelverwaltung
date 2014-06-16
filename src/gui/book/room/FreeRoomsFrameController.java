@@ -38,8 +38,8 @@ public class FreeRoomsFrameController implements IController{
 			m.setTmp(f.list.getSelectedValuesList().toArray(new Room[0]));
 			RoomModel m2 = new RoomModel();
 			m2.setSelectedRooms(m.getTmp());
-			SelectCostumerByRoomFrameController c = new SelectCostumerByRoomFrameController(mf,m2);
-			SelectCostumerByRoomFrameView scf = new SelectCostumerByRoomFrameView(mf,c,m2,frf,f.sf);
+			SelectCostumerByRoomFrameController c = new SelectCostumerByRoomFrameController(mf,m2,f);
+			SelectCostumerByRoomFrameView scf = new SelectCostumerByRoomFrameView(mf,c,m2);
 			c.setConnectedView(scf);
 			scf.init();
 			scf.setVisible(false);

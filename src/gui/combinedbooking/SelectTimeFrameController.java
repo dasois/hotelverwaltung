@@ -1,30 +1,35 @@
-package gui.book.service;
+package gui.combinedbooking;
 
 import gui.AbstractFrame;
-import gui.IController;
 import gui.FrameSwitchImpl;
 import gui.FrameSwitcher;
+import gui.IController;
 import gui.MainFrame.VerwaltungMainFrameView;
+import gui.book.service.SelectServiceFrameView;
+import gui.book.service.SelectTimeFrameView;
+import gui.book.service.ServiceModel;
+
 import java.awt.event.ActionEvent;
+
 import javax.swing.JOptionPane;
 
 public class SelectTimeFrameController implements IController{
-	private VerwaltungMainFrameView mf;
+	private WishOfServiceFrame mf;
 	private SelectTimeFrameView stf;
 	ServiceModel m;
-	public SelectTimeFrameController(SelectTimeFrameView stf,VerwaltungMainFrameView mf,ServiceModel m){
+	public SelectTimeFrameController(SelectTimeFrameView stf,WishOfServiceFrame mf,ServiceModel m){
 		this.mf = mf;
 		this.stf = stf;
 		this.m = m;
 	}
-	public SelectTimeFrameController(VerwaltungMainFrameView mf,ServiceModel m){
+	public SelectTimeFrameController(WishOfServiceFrame mf,ServiceModel m){
 		this.mf = mf;
 		this.m = m;
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		final FrameSwitcher fs = new FrameSwitchImpl(stf,mf);
-		SelectServiceFrameController c = new SelectServiceFrameController(mf,stf,m);
+		SelectServiceFrameController c = new SelectServiceFrameController(mf, stf, m);
 		SelectServiceFrameView ssf = new SelectServiceFrameView(c,stf,m);
 		c.setConnectedView(ssf);
 		ssf.init();

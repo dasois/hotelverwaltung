@@ -1,7 +1,7 @@
 package gui.book.service;
 
 import gui.AbstractFrame;
-import gui.FrameSwitcher;
+import gui.IController;
 import gui.MainFrame.VerwaltungMainFrameView;
 
 import java.awt.BorderLayout;
@@ -9,15 +9,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.Date;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -25,24 +20,24 @@ import com.toedter.calendar.JDateChooser;
 /** Selection of a date on which a service gets booked*/
 @SuppressWarnings("serial")
 public class SelectTimeFrameView extends AbstractFrame{
-
-	private VerwaltungMainFrameView mf;
-
-	public SelectTimeFrameView(VerwaltungMainFrameView mf) {
-		this.mf = mf;
-	}
+	private IController c;
+	private ServiceModel m;
 	private JLabel header;
 	private JPanel leftPanel;
 	private JLabel date;
 	private JPanel boxdleftPanel;
 	private JPanel centerPanel;
-	JDateChooser datePicker;
+	private JDateChooser datePicker;
 	private JPanel boxdCenterPanel;
 	private JPanel southPanel;
 	protected JButton search;
 	protected JButton cancel;
 	private JPanel boxdsouthPanel;
 	
+	public SelectTimeFrameView(IController c,ServiceModel m) {
+		this.c = c;
+		this.m = m;
+	}
 
 	protected void createWidget() {
 		header = new JLabel("Zeitpunkt Buchen");
@@ -66,6 +61,7 @@ public class SelectTimeFrameView extends AbstractFrame{
 		centerPanel.setLayout(new GridLayout(1,1,10,10));
 
 		datePicker = new JDateChooser();
+		m.setDatePicker(datePicker);
 		boxdCenterPanel = new JPanel();
 		boxdCenterPanel.setLayout(new BoxLayout(boxdCenterPanel,BoxLayout.PAGE_AXIS));
 
@@ -102,12 +98,7 @@ public class SelectTimeFrameView extends AbstractFrame{
 		getContentPane().add(BorderLayout.SOUTH,boxdsouthPanel);
 	}
 	protected void setupInteractions() {
-		SelectTimeFrameController c = new SelectTimeFrameController(this, mf);
 		cancel.addActionListener(c);
 		search.addActionListener(c);
-	}
-
-	public Date getDate(){
-		return new Date(datePicker.getCalendar().getTime().getTime());
 	}
 }

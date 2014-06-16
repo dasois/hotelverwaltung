@@ -2,18 +2,12 @@ package gui.book.service;
 
 import gui.AbstractFrame;
 import gui.IController;
-import gui.FrameSwitcher;
-import gui.MainFrame.VerwaltungMainFrameView;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -23,38 +17,26 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
-
 import app.BookingRoomControlImp;
-import app.BookingServiceControlInterface;
-import app.BookingServiceImp;
-import app.ServiceControlImp;
-import app.ServiceControlInterface;
+
 import db.entities.BookingRoom;
 /** Selection of a room wich a service gets booked to*/
 @SuppressWarnings("serial")
 public class SelectRoomByServiceFrameView extends AbstractFrame{
 	private JLabel header;
-	private JList<BookingRoom> list;
 	private JScrollPane listScroller;
 	private JPanel southPanel;
 	private JButton book;
 	private JButton stepback;
 	private JPanel boxdsouthPanel;
-	private VerwaltungMainFrameView mf;
-	private SelectServiceFrameView ssf;
-	SelectTimeFrameView ssf2;
 	private ServiceModel m;
 	private IController c;
-	public SelectRoomByServiceFrameView(VerwaltungMainFrameView mf,IController c,
-			SelectServiceFrameView ssf, SelectTimeFrameView ssf2,ServiceModel m) {
-		this.mf = mf;
+	public SelectRoomByServiceFrameView(IController c,ServiceModel m) {
 		this.c = c;
-		this.ssf = ssf;
-		this.ssf2 = ssf2;
 		this.m = m;
 	}
 	protected void createWidget() {
-		header = new JLabel("Zimmer wï¿½hlen");
+		header = new JLabel("Zimmer wählen");
 		header.setPreferredSize(new Dimension(400,40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
@@ -68,7 +50,6 @@ public class SelectRoomByServiceFrameView extends AbstractFrame{
 			m.getList().setLayoutOrientation(JList.HORIZONTAL_WRAP);
 			m.getList().setVisibleRowCount(-1);
 		} catch (SQLException e) {
-			mf.addProtocolLine("Fehler bei der Datenbank, rufen sie ihren Administrator");
 			e.printStackTrace();
 		}
 		
@@ -82,7 +63,7 @@ public class SelectRoomByServiceFrameView extends AbstractFrame{
 		book.setPreferredSize(new Dimension(20, 30));
 		book.setActionCommand("Book");
 
-		stepback = new JButton("Zurï¿½ck");
+		stepback = new JButton("Zurück");
 		stepback.setPreferredSize(new Dimension(20, 30));
 		stepback.setActionCommand("Back");
 		boxdsouthPanel = new JPanel();
@@ -100,7 +81,6 @@ public class SelectRoomByServiceFrameView extends AbstractFrame{
 		getContentPane().add(BorderLayout.SOUTH,boxdsouthPanel);
 	}
 	protected void setupInteractions() {
-//		SelectRoomByServiceFrameController c = new SelectRoomByServiceFrameController(this, mf, ssf,m);
 		stepback.addActionListener(c);
 		book.addActionListener(c);
 	}

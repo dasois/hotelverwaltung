@@ -5,10 +5,7 @@ import gui.IController;
 import gui.FrameSwitchImpl;
 import gui.FrameSwitcher;
 import gui.MainFrame.VerwaltungMainFrameView;
-
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JOptionPane;
 
 public class SelectTimeIntervallRoomFrameController implements IController{

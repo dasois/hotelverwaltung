@@ -37,13 +37,13 @@ public class SelectServiceFrameView extends AbstractFrame{
 	private JButton book;
 	private JButton stepback;
 	private JPanel boxdsouthPanel;
-	private VerwaltungMainFrameView mf;
 	private SelectTimeFrameView ssf;
 	private IController c;
-	public SelectServiceFrameView(VerwaltungMainFrameView mf,IController c,SelectTimeFrameView ssf) {
-		this.mf = mf;
+	private ServiceModel m;
+	public SelectServiceFrameView(IController c,SelectTimeFrameView ssf,ServiceModel m) {
 		this.ssf = ssf;
 		this.c = c;
+		this.m = m;
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class SelectServiceFrameView extends AbstractFrame{
 		list.setVisibleRowCount(-1);
 		listScroller = new JScrollPane(list);
 		listScroller.setPreferredSize(new Dimension(250, 80));
-
+		m.setServiceList(list);
 		southPanel = new JPanel();
 		southPanel.setLayout(new GridLayout(1,2,10,10));
 
@@ -95,14 +95,7 @@ public class SelectServiceFrameView extends AbstractFrame{
 	}
 	@Override
 	protected void setupInteractions() {
-//		SelectServiceFrameController c = new SelectServiceFrameController(this, mf, ssf);
 		stepback.addActionListener(c);
 		book.addActionListener(c);
-	}
-	public int getServiceSelectionid(){
-		return list.getSelectedValue().getSid();
-	}
-	public String getServiceName(){
-		return list.getSelectedValue().getType();
 	}
 }

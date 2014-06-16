@@ -38,7 +38,7 @@ public class WishOfServiceFrame extends AbstractFrame{
 	@Override
 	protected void createWidget() {
 		//header section
-		header = new JLabel("Login Screen");
+		header = new JLabel("Service Wunsch");
 		header.setPreferredSize(new Dimension(400,40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);

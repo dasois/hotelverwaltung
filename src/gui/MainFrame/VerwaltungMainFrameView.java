@@ -62,7 +62,7 @@ public class VerwaltungMainFrameView extends AbstractFrame{
 		model[0] = new DefaultComboBoxModel<String>(
 				new String[]{"Erstellen", "Löschen","Anzeigen","Ausbuchen","Einbuchen"});
 		model[1] = new DefaultComboBoxModel<String>(
-				new String[]{"Erstellen", "Buchen","Anzeigen"});
+				new String[]{"Erstellen", "Buchen","Löschen"});
 		model[2] = new DefaultComboBoxModel<String>(
 				new String[]{"Erstellen","Buchen","Löschen"});
 		actions.setModel(model[0]);

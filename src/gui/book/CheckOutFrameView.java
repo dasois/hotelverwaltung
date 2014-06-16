@@ -5,6 +5,7 @@ import app.BookingRoomControlInterface;
 import db.entities.BookingRoom;
 import db.entities.BookingService;
 import gui.AbstractFrame;
+import gui.IController;
 import gui.MainFrame.VerwaltungMainFrameView;
 
 import javax.swing.*;

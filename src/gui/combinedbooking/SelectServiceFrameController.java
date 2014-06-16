@@ -1,34 +1,40 @@
-package gui.book.service;
+package gui.combinedbooking;
 
 import gui.AbstractFrame;
-import gui.IController;
 import gui.FrameSwitchImpl;
 import gui.FrameSwitcher;
+import gui.IController;
 import gui.MainFrame.VerwaltungMainFrameView;
 
+import gui.book.service.SelectRoomByServiceFrameView;
+import gui.book.service.SelectServiceFrameView;
+import gui.book.service.SelectTimeFrameView;
+import gui.book.service.ServiceModel;
+
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class SelectServiceFrameController implements IController{
-	private VerwaltungMainFrameView mf;
+	private WishOfServiceFrame wf;
 	private SelectServiceFrameView sf;
 	private SelectTimeFrameView ssf;
 	private ServiceModel m;
-	public SelectServiceFrameController(SelectServiceFrameView sf,VerwaltungMainFrameView mf,SelectTimeFrameView ssf,ServiceModel m){
-		this.mf = mf;
+	public SelectServiceFrameController(SelectServiceFrameView sf,WishOfServiceFrame wf,SelectTimeFrameView ssf,ServiceModel m){
+		this.wf = wf;
 		this.sf = sf;
 		this.ssf = ssf;
 		this.m = m;
 	}
-	public SelectServiceFrameController(VerwaltungMainFrameView mf,SelectTimeFrameView ssf,ServiceModel m){
-		this.mf = mf;
+	public SelectServiceFrameController(WishOfServiceFrame wf,SelectTimeFrameView ssf,ServiceModel m){
+		this.wf = wf;
 		this.ssf = ssf;
 		this.m = m;
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		final FrameSwitcher fs = new FrameSwitchImpl(sf,ssf);
-		SelectRoomByServiceFrameController c = new SelectRoomByServiceFrameController(mf,sf,m);
+		ServiceModel m = new ServiceModel();
+		SelectRoomByServiceFrameController c = new SelectRoomByServiceFrameController(wf,sf,m);
 		SelectRoomByServiceFrameView scf = new SelectRoomByServiceFrameView(c,m);
 		c.setConnectedView(scf);
 		scf.init();

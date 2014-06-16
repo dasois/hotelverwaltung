@@ -1,5 +1,7 @@
 package gui.book.room;
 
+import javax.swing.JList;
+
 import com.toedter.calendar.JDateChooser;
 
 import db.entities.Customer;
@@ -10,8 +12,10 @@ import gui.IModel;
 public class RoomModel implements IModel{
 	private JDateChooser startDatePicker;
 	private JDateChooser endDatePicker;
+	private double totalPrice;
 	private Customer customer;
 	private  Room[] selectedRooms;
+	private JList<Customer> list;
 	public boolean checkCorrespondingState(State s) {
 		return State.Zimmer==s;
 	}
@@ -35,9 +39,22 @@ public class RoomModel implements IModel{
 		this.selectedRooms = selectedRooms;
 	}
 	public Customer getCustomer() {
-		return customer;
+		return list.getSelectedValue();
 	}
 	public void setCustomer(Customer c) {
 		this.customer = c;
+	
+	}
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	public JList<Customer> getList() {
+		return list;
+	}
+	public void setList(JList<Customer> list) {
+		this.list = list;
 	}
 }

@@ -5,10 +5,11 @@ import gui.IController;
 import gui.ShowCustomer.ShowCustomerFrameView;
 import gui.book.SelectCustomerFrameController;
 import gui.book.SelectCustomerFrameView;
-
 import gui.book.room.RoomModel;
 import gui.book.room.SelectTimeIntervallRoomFrame;
+import gui.book.service.SelectTimeFrameController;
 import gui.book.service.SelectTimeFrameView;
+import gui.book.service.ServiceModel;
 import gui.create.CreateCostumerFrameController;
 import gui.create.CreateCustomerModel;
 import gui.create.CreateCostumerFrameView;
@@ -59,7 +60,7 @@ public class VerwaltungMainFrameController implements IController {
 					cf.init();
 					new JDialog(cf);
 				}
-				else if(action =="Lï¿½schen"){
+				else if(action =="Löschen"){
 					gui.setEnabled(false);
 					DeleteFrameController<Customer> c = new DeleteFrameController<Customer>(gui);
 					DeleteFrameView<Customer> dcf;
@@ -136,14 +137,17 @@ public class VerwaltungMainFrameController implements IController {
 					gui.setEnabled(false);
 					CreateServiceModel m = new CreateServiceModel();
 					CreateServiceFrameController c = new CreateServiceFrameController(gui, m);
-					CreateServiceFrameView sf = new CreateServiceFrameView(gui,c,m);
+					CreateServiceFrameView sf = new CreateServiceFrameView(c,m);
 					c.setConnectedView(sf);
 					sf.init();
 					new JDialog(sf);
 				}
 				else if(action =="Buchen"){
 					gui.setEnabled(false);
-					SelectTimeFrameView rf = new SelectTimeFrameView(gui);
+					ServiceModel m = new ServiceModel();
+					SelectTimeFrameController c = new SelectTimeFrameController(gui, m);
+					SelectTimeFrameView rf = new SelectTimeFrameView(c,m);
+					c.setConnectedView(rf);
 					rf.init();
 					new JDialog(rf);
 				}

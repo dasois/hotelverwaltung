@@ -13,20 +13,18 @@ import gui.book.room.RoomModel;
 import gui.book.room.SelectCostumerByRoomFrameView;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JOptionPane;
-
 import db.entities.Room;
 
 public class FreeRoomsFrameController implements IController{
 	private FreeRoomsFrameView f;
 	private VerwaltungMainFrameView mf;
 	private FreeRoomsFrameModel m;
-	public FreeRoomsFrameController(FreeRoomsFrameView f, VerwaltungMainFrameView mf){
-		this.f = f;
+	private RoomModel m2;
+	public FreeRoomsFrameController(VerwaltungMainFrameView mf,RoomModel m2){
 		this.mf = mf;
 		m = new FreeRoomsFrameModel();
+		this.m2 = m2;
 	}
 	public FreeRoomsFrameController(VerwaltungMainFrameView mf){
 		this.mf = mf;
@@ -35,21 +33,19 @@ public class FreeRoomsFrameController implements IController{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		final FrameSwitcher fs = new FrameSwitchImpl(f,f.sf);
-		final FreeRoomsFrameView frf = f;
 		if(e.getActionCommand()=="Back"){
 			fs.switchFrame();
 		}else if(f.list.getSelectedValuesList().isEmpty()){
-			JOptionPane.showMessageDialog(null, "Wï¿½hle mindestens ein freies Zimmer");
+			JOptionPane.showMessageDialog(null, "Wähle mindestens ein freies Zimmer");
 		}else{
 			m.setTmp(f.list.getSelectedValuesList().toArray(new Room[0]));
-			RoomModel m2 = new RoomModel();
 			m2.setSelectedRooms(m.getTmp());
-			SelectCostumerByRoomFrameController c = new SelectCostumerByRoomFrameController(mf,m2);
-			SelectCostumerByRoomFrameView scf = new SelectCostumerByRoomFrameView(mf,c,m2,frf,f.sf);
+			SelectCostumerByRoomFrameController c = new SelectCostumerByRoomFrameController(mf,m2,f);
+			SelectCostumerByRoomFrameView scf = new SelectCostumerByRoomFrameView(mf,c,m2);
 			c.setConnectedView(scf);
 			scf.init();
 			scf.setVisible(false);
-			FrameSwitcher fs2 = new FrameSwitchImpl(frf,scf);
+			FrameSwitcher fs2 = new FrameSwitchImpl(f,scf);
 			fs2.switchFrame();
 		}
 	}

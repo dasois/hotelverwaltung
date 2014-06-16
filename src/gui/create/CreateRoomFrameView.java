@@ -52,7 +52,7 @@ public class CreateRoomFrameView extends AbstractFrame{
 
 	@Override
 	protected void createWidget() {
-		header = new JLabel("Zimmer hinzufï¿½gen");
+		header = new JLabel("Zimmer hinzufügen");
 		header.setPreferredSize(new Dimension(400,40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);

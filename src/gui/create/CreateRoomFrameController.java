@@ -41,7 +41,7 @@ public class CreateRoomFrameController implements IController{
 			try {
 				int roomId = controller.create(Double.parseDouble(m.getPrice().getText()),m.getDoubleRoomCheck().isSelected());
 				mf.addProtocolLine("Zimmer: "+roomId+" wurde mit dem Preis: "+Double.parseDouble(m.getPrice().getText())
-						+"ï¿½ in der Datenbank angelegt\n");
+						+"€ in der Datenbank angelegt\n");
 				fs.switchFrame();
 			} catch (SQLException e1) {
 				mf.addProtocolLine("Es konnte kein Zimmer erstellt werden, rufen sie ihren Administrator");

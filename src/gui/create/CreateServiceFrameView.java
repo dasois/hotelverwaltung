@@ -42,17 +42,16 @@ public class CreateServiceFrameView extends AbstractFrame{
 	private JButton cancel;		
 	private JPanel southPanel;
 	private JPanel boxdsouthPanel;
-	private VerwaltungMainFrameView mf;
+
 	private CreateServiceModel m;
 	private IController c;
-	public CreateServiceFrameView(VerwaltungMainFrameView mf,IController c, CreateServiceModel m) {
-		this.mf = mf;
+	public CreateServiceFrameView(IController c, CreateServiceModel m) {
 		this.c = c;
 		this.m = m;
 	}
 
 	protected void createWidget() {
-		header = new JLabel("Dienstleistung hinzufï¿½gen");
+		header = new JLabel("Dienstleistung hinzufügen");
 		header.setPreferredSize(new Dimension(400,40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
@@ -121,7 +120,6 @@ public class CreateServiceFrameView extends AbstractFrame{
 		getContentPane().add(BorderLayout.SOUTH,boxdsouthPanel);
 	}
 	protected void setupInteractions() {
-//		CreateServiceFrameController c = new CreateServiceFrameController(this, mf,m);
 		cancel.addActionListener(c);
 		create.addActionListener(c);
 	}
@@ -140,9 +138,5 @@ public class CreateServiceFrameView extends AbstractFrame{
 		create.setActionCommand("Create");
 		cancel.setText("Abbruch");
 		cancel.setActionCommand("Cancel");
-	}
-
-	public String getName() {
-		return m.getName().getText();
 	}
 }
