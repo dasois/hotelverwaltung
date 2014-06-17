@@ -1,7 +1,10 @@
 package gui.book;
 
+import app.BookingControlImp;
+import app.BookingInterface;
 import app.BookingRoomControlImp;
 import app.BookingRoomControlInterface;
+import db.entities.Booking;
 import db.entities.BookingRoom;
 import db.entities.BookingService;
 import gui.AbstractFrame;
@@ -9,12 +12,13 @@ import gui.IController;
 import gui.MainFrame.VerwaltungMainFrameView;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.sql.SQLException;
 import java.util.Vector;
 
 @SuppressWarnings("serial")
-public class CheckOutFrame extends AbstractFrame {
+public class CheckOutFrameView extends AbstractFrame {
     private SelectCustomerFrameView scf;
     private VerwaltungMainFrameView mf;
     private JLabel header;
@@ -28,7 +32,7 @@ public class CheckOutFrame extends AbstractFrame {
     private JPanel boxdCenterPanel;
     private JButton btnCheckout;
 
-    public CheckOutFrame(SelectCustomerFrameView scf, VerwaltungMainFrameView mf) {
+    public CheckOutFrameView(SelectCustomerFrameView scf, VerwaltungMainFrameView mf) {
         this.scf = scf;
         this.mf = mf;
 
@@ -60,27 +64,14 @@ public class CheckOutFrame extends AbstractFrame {
 
         userTextField = new JTextField(scf.getSelectedCustomer().toString());
         userTextField.setEnabled(false);
-        BookingRoomControlInterface face = new BookingRoomControlImp();
+        BookingInterface face = new BookingControlImp();
         Vector<BookingRoom> tmp;
-        try {
-            tmp = face.getAllFromCustomer(scf.getSelectedCustomer().getCid());
-            double priceSum = 0;
-            for (BookingRoom r : tmp) {
-                Vector<BookingService> services = face.getRelatedServiceBookings(r.getBrid());
-                for (BookingService s : services) {
-                    priceSum = priceSum + s.getService().getPrice();
-                }
-                priceSum = priceSum + r.getRoom().getPrice();
-
-            }
-            priceTextField = new JTextField("" + priceSum);
+       
+            priceTextField = new JTextField("");
             priceTextField.setEnabled(false);
             priceTextField.setFont(header.getFont().deriveFont(Font.BOLD, 20));
 
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+      
 
         boxdCenterPanel = new JPanel();
         boxdCenterPanel.setLayout(new BoxLayout(boxdCenterPanel, BoxLayout.PAGE_AXIS));

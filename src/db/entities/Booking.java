@@ -19,13 +19,18 @@ public class Booking implements db.DBBooking {
         this.customer = customer;
         CreatedOn = createdOn;
     }
-
+    public Booking(int bid,Customer customer, Date createdOn) {
+        this.customer = customer;
+        CreatedOn = createdOn;
+        this.bid = bid;
+    }
     public Booking(int bid) {
         this.setBid(bid);
     }
 
+    public Booking() {}
 
-    @Override
+	@Override
     public ResultSet getAll() throws SQLException {
         return DBIface.executeQuery("SELECT * from Booking");
     }

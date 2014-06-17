@@ -11,9 +11,7 @@ import db.entities.BookingService;
 *	This is for the entity bookingroom*/
 public interface BookingRoomControlInterface {
 	Vector<BookingRoom> getAll() throws SQLException;
-	Vector<BookingRoom> getAllFromCustomer(int CustomerId) throws SQLException;
 	boolean delete(int BookingRoomId) throws SQLException;
 	boolean update(BookingRoom br);
 	int create(Date date, int roomId, int serviceId) throws SQLException;
-	Vector<BookingService> getRelatedServiceBookings(int bookingRoomId)	throws SQLException;
 }

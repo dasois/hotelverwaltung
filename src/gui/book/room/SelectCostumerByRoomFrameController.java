@@ -53,7 +53,7 @@ public class SelectCostumerByRoomFrameController implements IController{
 					try {
 						price = price + r.getPrice();
 						m.setCustomer(m.getList().getSelectedValue());
-						controller.create(new java.sql.Date(date.getTime()),r.getRid(),m.getList().getSelectedValue().getId());
+						controller.create(new java.sql.Date(date.getTime()),r.getRid(),m.getList().getSelectedValue().getCid());
 						mf.addProtocolLine("Buchung von Zimmer: "+r.getRid()+"am Tag:"+date.toString()+" wurde in der Datenbank angelegt\n");
 					} catch (SQLException e1) {
 						mf.addProtocolLine("Buchung konnte nicht erstellt werden");

@@ -23,7 +23,7 @@ public class SelectCustomerFrameController implements IController{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand()=="book"){
 			CheckOutFrameController c = new CheckOutFrameController(mf);
-			CheckOutFrameView cof = new CheckOutFrameView(cf,mf,c);
+			CheckOutFrameView cof = new CheckOutFrameView(cf,mf);
 			c.setConnectedView(cof);
 			cof.init();
 			cof.setVisible(false);
