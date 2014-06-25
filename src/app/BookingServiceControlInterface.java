@@ -6,7 +6,7 @@ import java.util.Vector;
 import db.entities.BookingService;
 
 
-public interface BookingServiceControlInterface {
+public interface BookingServiceControlInterface extends TransactionInterface {
 	Vector<BookingService> getAll() throws SQLException;
 	boolean delete(int BookingRoomId) throws SQLException;
 	boolean update(BookingService br);

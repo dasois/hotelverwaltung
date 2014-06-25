@@ -9,6 +9,14 @@ import gui.book.room.FreeRoomsFrameView;
 import gui.book.room.RoomModel;
 import gui.book.room.SelectCostumerByRoomFrameView;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
+
+import app.BookingRoomControlImp;
+import app.BookingRoomControlInterface;
+import db.entities.BookingRoom;
+import db.entities.Room;
 
 public class SelectCostumerByRoomFrameController implements IController{
 	private SelectCostumerByRoomFrameView f;
@@ -38,8 +46,24 @@ public class SelectCostumerByRoomFrameController implements IController{
 		if(e.getActionCommand()=="Back"){
 			fs.switchFrame();
 		}else if(e.getActionCommand()=="Book"){
-			
-			//TODO daten im model speichern
+			Calendar start = Calendar.getInstance();
+			start.setTime(m.getStartDatePicker().getDate());
+			Calendar end = Calendar.getInstance();
+			end.setTime(m.getEndDatePicker().getDate());
+			BookingRoomControlInterface controller = new BookingRoomControlImp();
+			for (Date date = start.getTime(); !start.after(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
+				for(Room r:m.getSelectedRooms()){
+					try {			
+						m.setList(m.getList());
+						m.addBookingRoom(new BookingRoom(controller.create(new java.sql.Date(date.getTime()),r.getRid(),m.getList().getSelectedValue().getCid())));
+					} catch (SQLException e1) {
+						mf.addProtocolLine("Buchung konnte nicht erstellt werden");
+						e1.printStackTrace();
+					}catch (NullPointerException e1) {
+						mf.addProtocolLine("Fehler, Es wurde kein Kunde ausgewählt");
+					}
+				}
+			}
 			wf.init();
 			wf.setVisible(false);
 			fs2.switchFrame();

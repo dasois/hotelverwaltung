@@ -17,6 +17,7 @@ public class CreateCostumerFrameController implements IController{
 	private CreateCostumerFrameView ccf;
 	private VerwaltungMainFrameView vmf;
 	private CreateCustomerModel m;
+	private CustomerControlInterface tmp = null;
 	public CreateCostumerFrameController(CreateCostumerFrameView ccf,VerwaltungMainFrameView vmf,CreateCustomerModel m){
 		this.ccf = ccf;
 		this.vmf = vmf;
@@ -32,11 +33,14 @@ public class CreateCostumerFrameController implements IController{
 		if(e.getActionCommand()=="Cancel"){
 			fs.switchFrame();
 		}else if(e.getActionCommand()=="Revise"){
+			try {
+				tmp.discardChanges();
+			} catch (SQLException e1) {
+				vmf.addProtocolLine("Es konnte kein Kunde erstellt werden, rufen sie ihren Administrator");
+			}
 			ccf.createWidgetFirstView();
 		}else if(e.getActionCommand()=="Create"){
-			ccf.createWidgetSecondView();
-		}else{
-			CustomerControlInterface tmp = new CustomerControlImp();
+			tmp = new CustomerControlImp();
 			try {
 				Calendar bday = Calendar.getInstance();
 				bday.setTime(m.getBirthdayPicker().getDate());
@@ -45,8 +49,6 @@ public class CreateCostumerFrameController implements IController{
 						(Title)m.getTitleSelection().getSelectedItem());
 				vmf.addProtocolLine("Kunde mit Id:\n"+id
 						+"\n Namens: "+m.getCustomerLastNameInput().getText()+" wurde in der Datenbank angelegt\n");
-
-
 			} catch (SQLException e1) {
 
 				vmf.addProtocolLine("Es konnte kein Kunde erstellt werden, rufen sie ihren Administrator");
@@ -54,12 +56,18 @@ public class CreateCostumerFrameController implements IController{
 
 				vmf.addProtocolLine("Fehlerhafte eingabe, es wurde kein Kunde Angelegt.\nVergewissern sie sich das alle Felder ausgef�llt werden!");
 			}
+			ccf.createWidgetSecondView();
+		}else{
+			try {
+				tmp.saveChanges();
+			} catch (SQLException e1) {
+				vmf.addProtocolLine("Es konnte kein Kunde erstellt werden, rufen sie ihren Administrator");
+			}
 			fs.switchFrame();
 		}
 	}
 	@Override
 	public void setConnectedView(AbstractFrame f) {
-		this.ccf = (CreateCostumerFrameView) f;
-		
+		this.ccf = (CreateCostumerFrameView) f;	
 	}
 }

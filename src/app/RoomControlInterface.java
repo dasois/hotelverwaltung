@@ -6,7 +6,7 @@ import java.util.Vector;
 import db.entities.Room;
 /** interface for using the db from inside the app-layer
 *	This is for the entity room*/
-public interface RoomControlInterface {
+public interface RoomControlInterface extends TransactionInterface {
 	Vector<Room> getAll() throws SQLException;
 	Vector<Room> getFreeRooms(Date startDate, Date endDate) throws SQLException;
 	int create(double price, boolean isDoubleRoom ) throws SQLException;

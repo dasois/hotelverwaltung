@@ -153,6 +153,7 @@ public class CreateCostumerFrameView extends AbstractFrame{
 		m.getAddressInput().setEditable(true);
 		m.getBirthdayPicker().setEnabled(true);
 		m.getTitleSelection().setEnabled(true);
+		m.getCustomerLastNameInput().setEditable(true);
 		create.setText("Anlegen");
 		create.setActionCommand("Create");
 		cancel.setText("Abbruch");

@@ -9,7 +9,7 @@ import java.sql.SQLException;
 /**
  * Implementation of DeleteControlInterface
  */
-public class DeleteControlImp<T> implements DeleteControlInterface<T> {
+public class DeleteControlImp<T> extends AbstractTransactionController implements DeleteControlInterface<T> {
 
     @Override
     public boolean deleteEntity(T entity) throws SQLException {

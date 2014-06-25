@@ -4,23 +4,16 @@ import javax.swing.JList;
 import com.toedter.calendar.JDateChooser;
 import db.entities.BookingRoom;
 import db.entities.Service;
+
+import java.util.ArrayList;
 import java.util.Date;
 public class ServiceModel{
-	private JList<BookingRoom> bookedRoomList;
+	private ArrayList<BookingRoom> bookedRoomList;
 	private JList<Service> serviceList;
 	private JDateChooser datePicker;
 	private boolean dateLimit;
 	private Date minDate;
 	private Date maxDate;
-
-
-	public JList<BookingRoom> getList() {
-		return bookedRoomList;
-	}
-
-	public void setList(JList<BookingRoom> list) {
-		this.bookedRoomList = list;
-	}
 
 	public JList<Service> getServiceList() {
 		return serviceList;
@@ -54,5 +47,13 @@ public class ServiceModel{
 	}
 	public void setMaxDate(Date max){
 		maxDate = max;
+	}
+
+	public ArrayList<BookingRoom> getBookedRoomList() {
+		return bookedRoomList;
+	}
+
+	public void setBookedRoomList(ArrayList<BookingRoom> bookedRoomList) {
+		this.bookedRoomList = bookedRoomList;
 	}
 }

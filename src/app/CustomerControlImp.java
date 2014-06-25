@@ -6,9 +6,10 @@ import java.sql.SQLException;
 import java.util.Vector;
 import app.entities.Title;
 import db.DBCustomer;
+import db.DBIface;
 import db.entities.Customer;
 /** Implementation of CustomerControlInterface */
-public class CustomerControlImp implements CustomerControlInterface{
+public class CustomerControlImp extends AbstractTransactionController implements CustomerControlInterface{
 	DBCustomer c;
 	@Override
 	public Vector<Customer> getAll() throws SQLException {
@@ -21,10 +22,9 @@ public class CustomerControlImp implements CustomerControlInterface{
 		return temp;
 	}
 
-	public int create(String fName, String lName, String address,
-			Date date,Title title) throws SQLException {
+	public int create(String fName, String lName, String address,Date date,Title title) throws SQLException {
 		c = new Customer(fName,lName,address,date,title.toString());
-		return c.create();
+		return c.create();	
 	}
 
 	@Override

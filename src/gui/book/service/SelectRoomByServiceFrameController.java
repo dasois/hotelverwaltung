@@ -16,6 +16,7 @@ public class SelectRoomByServiceFrameController implements IController{
 	private VerwaltungMainFrameView mf;
 	private SelectServiceFrameView ssf;
 	private ServiceModel m;
+	private BookingServiceControlInterface controller = new BookingServiceImp();
 	public SelectRoomByServiceFrameController(SelectRoomByServiceFrameView sf,VerwaltungMainFrameView mf,SelectServiceFrameView ssf,ServiceModel m){
 		this.sf = sf;
 		this.mf = mf;
@@ -34,13 +35,12 @@ public class SelectRoomByServiceFrameController implements IController{
 		final FrameSwitcher fs2 = new FrameSwitchImpl(sf,mf);
 		if(e.getActionCommand()=="Back"){
 			fs.switchFrame();
-		}else if(e.getActionCommand()=="Book"){
-			BookingServiceControlInterface controller = new BookingServiceImp();
+		}else if(e.getActionCommand()=="Book"){	
 			try {
 				controller.create(new Date(m.getDatePicker().getCalendar().getTime().getTime()), m.getList().getSelectedValue().getBrid(), m.getServiceList().getSelectedValue().getSid());
 				mf.addProtocolLine("Buchung von Service: "+ m.getServiceList().getSelectedValue().getType()+" wurde in der Datenbank angelegt\n");
+				controller.saveChanges();
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			fs2.switchFrame();

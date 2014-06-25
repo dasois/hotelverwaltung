@@ -6,7 +6,7 @@ import java.util.Vector;
 import db.DBService;
 import db.entities.Service;
 /** Implementation of ServiceControlInterface */
-public class ServiceControlImp implements ServiceControlInterface{
+public class ServiceControlImp extends AbstractTransactionController implements ServiceControlInterface{
 
 	@Override
 	public Vector<Service> getAll() throws SQLException {

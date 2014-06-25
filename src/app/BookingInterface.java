@@ -9,7 +9,7 @@ import db.entities.BookingRoom;
 import db.entities.BookingService;
 import db.entities.Customer;
 
-public interface BookingInterface {
+public interface BookingInterface extends TransactionInterface {
 	Vector<Booking>  getAll() throws SQLException;
 
 	Vector<Booking> getAllByCustomer(int CustomerId) throws SQLException;

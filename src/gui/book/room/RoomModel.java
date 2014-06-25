@@ -1,7 +1,11 @@
 package gui.book.room;
 
+import java.util.ArrayList;
+
 import javax.swing.JList;
 import com.toedter.calendar.JDateChooser;
+
+import db.entities.BookingRoom;
 import db.entities.Customer;
 import db.entities.Room;
 
@@ -10,8 +14,10 @@ public class RoomModel{
 	private JDateChooser endDatePicker;
 	private double totalPrice;
 	private  Room[] selectedRooms;
+	private ArrayList<BookingRoom> bookingRoomList = new ArrayList<>();
 	private JList<Customer> list;
 
+	
 	public JDateChooser getStartDatePicker() {
 		return startDatePicker;
 	}
@@ -53,5 +59,14 @@ public class RoomModel{
 
 	public void setTmp(Room[] tmp) {
 		this.tmp = tmp;
+	}
+	public ArrayList<BookingRoom> getBookingRoomList() {
+		return bookingRoomList;
+	}
+	public void setBookingRoomList(ArrayList<BookingRoom> bookingRoomList) {
+		this.bookingRoomList = bookingRoomList;
+	}
+	public void addBookingRoom(BookingRoom b){
+		bookingRoomList.add(b);
 	}
 }

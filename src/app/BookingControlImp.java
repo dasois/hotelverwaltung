@@ -11,7 +11,7 @@ import db.entities.BookingRoom;
 import db.entities.BookingService;
 import db.entities.Customer;
 
-public class BookingControlImp implements BookingInterface{
+public class BookingControlImp extends AbstractTransactionController implements BookingInterface{
 
 	@Override
 	public Vector<Booking> getAll() throws SQLException {

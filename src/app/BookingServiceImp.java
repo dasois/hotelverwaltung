@@ -7,7 +7,7 @@ import java.util.Vector;
 import db.DBBookingService;
 import db.entities.BookingService;
 
-public class BookingServiceImp implements BookingServiceControlInterface{
+public class BookingServiceImp extends AbstractTransactionController implements BookingServiceControlInterface{
 
 	@Override
 	public Vector<BookingService> getAll() throws SQLException {
@@ -24,7 +24,7 @@ public class BookingServiceImp implements BookingServiceControlInterface{
 	@Override
 	public boolean delete(int bookingServiceId) throws SQLException {
 		DBBookingService tmp = new BookingService(bookingServiceId);
-		return false;
+		return tmp.delete();
 	}
 
 	@Override

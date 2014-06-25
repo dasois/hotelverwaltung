@@ -47,11 +47,8 @@ public class DBIface {
 		try {
 			DBIface.loginDB();
 			Class.forName(sDbDriver);
-			cn = DriverManager.getConnection(sDbUrl, sUsr, sPwd);
-			//System.out.println(cn.toString());
-//			cn.setAutoCommit (false);
-			cn.setTransactionIsolation(1);
-			Statement st = cn.createStatement();
+			Connection localConnection = getConnection();
+			Statement st = localConnection.createStatement();
 			if (st.execute(SQLQuery, Statement.RETURN_GENERATED_KEYS))
 				rs = st.getResultSet();
 			else
@@ -61,4 +58,24 @@ public class DBIface {
 		}
 		return rs;
 	}
+	
+	
+	private static Connection getConnection() throws SQLException {
+		if (cn == null) {
+			cn = DriverManager.getConnection(sDbUrl, sUsr, sPwd);
+			cn.setAutoCommit (false);
+			cn.setTransactionIsolation(1);
+		}
+		
+		return cn;
+	}
+	
+	public static void commitChanges() throws SQLException {
+		cn.commit();
+	}
+	
+	public static void rollbackChanges() throws SQLException {
+		cn.rollback();
+	}
+	
 }

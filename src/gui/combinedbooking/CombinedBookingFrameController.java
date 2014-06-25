@@ -1,7 +1,11 @@
 package gui.combinedbooking;
 
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import app.BookingControlImp;
+import app.BookingInterface;
 
 import gui.AbstractFrame;
 import gui.FrameSwitchImpl;
@@ -13,22 +17,29 @@ import gui.book.service.ServiceModel;
 
 public class CombinedBookingFrameController implements IController{
 	private CombinedBookingFrameView f;
-	private RoomModel rm;
-	private ArrayList<ServiceModel> sm;
 	private VerwaltungMainFrameView mf;
-	private WishOfServiceFrame wf;
-	public CombinedBookingFrameController(VerwaltungMainFrameView mf,RoomModel rm,ArrayList<ServiceModel> sm){
+//	private WishOfServiceFrame wf;
+	private BookingInterface controller = new BookingControlImp();
+	public CombinedBookingFrameController(VerwaltungMainFrameView mf){
 		this.mf = mf;
-		this.rm = rm;
-		this.sm = sm;
 	}
 	public void actionPerformed(ActionEvent e) {
 		final FrameSwitcher fs = new FrameSwitchImpl(f,mf);
 		if(e.getActionCommand()=="abort"){
+			try {
+				controller.discardChanges();
+				mf.addProtocolLine("Buchung wurde nicht angelegt");
+			} catch (SQLException e1) {
+				mf.addProtocolLine("Buchung hatte einen Fehler");
+			}
 			fs.switchFrame();
-			//rollback
 		}else{
-			//buchen
+			try {
+				controller.saveChanges();
+				mf.addProtocolLine("Buchung wurde komplett angelegt");
+			} catch (SQLException e1) {
+				mf.addProtocolLine("Buchung hatte einen Fehler");
+			}
 			fs.switchFrame();	
 		}
 	}

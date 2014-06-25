@@ -7,7 +7,7 @@ import java.util.Vector;
 import db.entities.BookingRoom;
 /** interface for using the db from inside the app-layer
 *	This is for the entity bookingroom*/
-public interface BookingRoomControlInterface {
+public interface BookingRoomControlInterface extends TransactionInterface{
 	Vector<BookingRoom> getAll() throws SQLException;
 	boolean delete(int BookingRoomId) throws SQLException;
 	boolean update(BookingRoom br);

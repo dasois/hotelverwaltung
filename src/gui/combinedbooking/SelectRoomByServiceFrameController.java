@@ -38,7 +38,7 @@ public class SelectRoomByServiceFrameController implements IController{
 		}else if(e.getActionCommand()=="Book"){
 			BookingServiceControlInterface controller = new BookingServiceImp();
 			try {
-				controller.create(new Date(m.getDatePicker().getCalendar().getTime().getTime()), m.getList().getSelectedValue().getBrid(), m.getServiceList().getSelectedValue().getSid());
+				controller.create(new Date(m.getDatePicker().getCalendar().getTime().getTime()), m.getServiceList().getSelectedValue().getSid());
 				 
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block

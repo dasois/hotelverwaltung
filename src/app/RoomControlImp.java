@@ -7,7 +7,7 @@ import java.util.Vector;
 import db.DBRoom;
 import db.entities.Room;
 /** Implementation of RoomControlInterface */
-public class RoomControlImp implements RoomControlInterface{
+public class RoomControlImp extends AbstractTransactionController implements RoomControlInterface{
 
 	public Vector<Room> getAll() throws SQLException {	
 		ResultSet resultset = new Room().getAll();

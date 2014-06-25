@@ -3,6 +3,11 @@ package gui.combinedbooking;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
+import javax.swing.JList;
+import javax.swing.ListModel;
+
+import db.entities.BookingRoom;
+
 import gui.AbstractFrame;
 import gui.FrameSwitchImpl;
 import gui.FrameSwitcher;
@@ -25,7 +30,7 @@ public class WishOfServiceController implements IController{
 	}
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand()=="no"){
-			CombinedBookingFrameController c = new CombinedBookingFrameController(mf, rm, sm);
+			CombinedBookingFrameController c = new CombinedBookingFrameController(mf);
 			CombinedBookingFrameView view = new CombinedBookingFrameView(c, rm, sm);
 			c.setConnectedView(view);
 			view.init();
@@ -35,6 +40,7 @@ public class WishOfServiceController implements IController{
 		}
 		else{
 			ServiceModel m = new ServiceModel();
+			m.setBookedRoomList(rm.getBookingRoomList());
 			m.setDateLimit(true);
 			m.setMinDate(rm.getStartDatePicker().getDate());
 			m.setMaxDate(rm.getEndDatePicker().getDate());

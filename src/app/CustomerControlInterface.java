@@ -7,7 +7,7 @@ import app.entities.Title;
 import db.entities.Customer;
 /** interface for using the db from inside the app-layer
 *	This is for the entity customer*/
-public interface CustomerControlInterface {
+public interface CustomerControlInterface extends TransactionInterface{
 	Vector<Customer> getAll() throws SQLException;
 	boolean update(Customer cust);
 	boolean delete(int customerId) throws SQLException;
