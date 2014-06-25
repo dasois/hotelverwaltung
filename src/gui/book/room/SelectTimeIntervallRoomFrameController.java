@@ -34,8 +34,8 @@ public class SelectTimeIntervallRoomFrameController implements IController{
 				JOptionPane.showMessageDialog(null, "Das End-Datum muss nach/gleich dem Anfangsdatum sein");
 			}
 			else{
-				FreeRoomsFrameController c = new FreeRoomsFrameController(mf);
-				FreeRoomsFrameView ff = new FreeRoomsFrameView(mf,srf,c);
+				FreeRoomsFrameController c = new FreeRoomsFrameController(mf,m);
+				FreeRoomsFrameView ff = new FreeRoomsFrameView(srf,c);
 				c.setConnectedView(ff);
 				ff.init();
 				ff.setVisible(false);

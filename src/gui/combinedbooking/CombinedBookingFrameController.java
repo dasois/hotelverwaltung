@@ -29,6 +29,7 @@ public class CombinedBookingFrameController implements IController{
 			//rollback
 		}else{
 			//buchen
+			fs.switchFrame();	
 		}
 	}
 

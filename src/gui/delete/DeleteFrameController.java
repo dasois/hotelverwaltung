@@ -1,12 +1,11 @@
 package gui.delete;
 
 import gui.AbstractFrame;
-import gui.IController;
 import gui.FrameSwitcher;
+import gui.IController;
 import gui.MainFrame.VerwaltungMainFrameView;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 import app.DeleteControlImp;
@@ -50,11 +49,12 @@ public class DeleteFrameController<T> implements IController{
 			}
 			fs.switchFrame();
 		}
-
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void setConnectedView(AbstractFrame f) {
+		
 		this.df = (DeleteFrameView<T>) f;
 	}
 }

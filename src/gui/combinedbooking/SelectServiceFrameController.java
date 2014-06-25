@@ -4,9 +4,6 @@ import gui.AbstractFrame;
 import gui.FrameSwitchImpl;
 import gui.FrameSwitcher;
 import gui.IController;
-import gui.MainFrame.VerwaltungMainFrameView;
-
-import gui.book.service.SelectRoomByServiceFrameView;
 import gui.book.service.SelectServiceFrameView;
 import gui.book.service.SelectTimeFrameView;
 import gui.book.service.ServiceModel;
@@ -33,17 +30,11 @@ public class SelectServiceFrameController implements IController{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		final FrameSwitcher fs = new FrameSwitchImpl(sf,ssf);
-		ServiceModel m = new ServiceModel();
-		SelectRoomByServiceFrameController c = new SelectRoomByServiceFrameController(wf,sf,m);
-		SelectRoomByServiceFrameView scf = new SelectRoomByServiceFrameView(c,m);
-		c.setConnectedView(scf);
-		scf.init();
-		scf.setVisible(false);
-		final FrameSwitcher fs2 = new FrameSwitchImpl(sf,scf);
-		
+		final FrameSwitcher fs2 = new FrameSwitchImpl(sf,wf);
 		if(e.getActionCommand()=="Back"){
 			fs.switchFrame();
 		}else if(e.getActionCommand()=="Book"){
+			//TODO buchung ins model übernehmen
 			fs2.switchFrame();
 		}
 	}

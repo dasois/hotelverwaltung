@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
+import db.DBBooking;
 import db.entities.Booking;
 import db.entities.BookingRoom;
 import db.entities.BookingService;
@@ -59,19 +60,18 @@ public class BookingControlImp implements BookingInterface{
 
 	@Override
 	public int create(Customer customer, Date createdOn) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		DBBooking tmp = new Booking(customer,createdOn);
+		return tmp.create();
 	}
 
 	@Override
-	public boolean update(Booking b) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean update(Booking b) throws SQLException {	
+		return update(b);
 	}
 
 	@Override
 	public boolean delete(int bookingID) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+		DBBooking tmp = new Booking(bookingID);		
+		return tmp.delete();
 	}
 }

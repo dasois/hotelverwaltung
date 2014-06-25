@@ -1,12 +1,13 @@
 package gui.book;
 
 import gui.AbstractFrame;
-import gui.IController;
 import gui.FrameSwitcher;
+import gui.IController;
 import gui.MainFrame.VerwaltungMainFrameView;
+import gui.combinedbooking.CombinedBookingFrameController;
+import gui.combinedbooking.CombinedBookingFrameView;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class SelectCustomerFrameController implements IController{
 	private VerwaltungMainFrameView mf;
@@ -22,13 +23,11 @@ public class SelectCustomerFrameController implements IController{
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand()=="book"){
-			CheckOutFrameController c = new CheckOutFrameController(mf);
-			CheckOutFrameView cof = new CheckOutFrameView(cf,mf);
-			c.setConnectedView(cof);
-			cof.init();
-			cof.setVisible(false);
-			final FrameSwitcher fs2 = new gui.FrameSwitchImpl(cf,cof);
-			fs2.switchFrame();
+			
+			//COmbined BOOking
+//			
+//			final FrameSwitcher fs2 = new gui.FrameSwitchImpl(cf,cof);
+//			fs2.switchFrame();
 		}else if(e.getActionCommand()=="Cancel"){
 			final FrameSwitcher fs = new gui.FrameSwitchImpl(cf,mf);
 			fs.switchFrame();

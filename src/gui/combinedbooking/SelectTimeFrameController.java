@@ -4,7 +4,6 @@ import gui.AbstractFrame;
 import gui.FrameSwitchImpl;
 import gui.FrameSwitcher;
 import gui.IController;
-import gui.MainFrame.VerwaltungMainFrameView;
 import gui.book.service.SelectServiceFrameView;
 import gui.book.service.SelectTimeFrameView;
 import gui.book.service.ServiceModel;
@@ -30,7 +29,7 @@ public class SelectTimeFrameController implements IController{
 	public void actionPerformed(ActionEvent e) {
 		final FrameSwitcher fs = new FrameSwitchImpl(stf,mf);
 		SelectServiceFrameController c = new SelectServiceFrameController(mf, stf, m);
-		SelectServiceFrameView ssf = new SelectServiceFrameView(c,stf,m);
+		SelectServiceFrameView ssf = new SelectServiceFrameView(c,m);
 		c.setConnectedView(ssf);
 		ssf.init();
 		ssf.setVisible(false);

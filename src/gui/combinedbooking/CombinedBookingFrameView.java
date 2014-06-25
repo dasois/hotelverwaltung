@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.Box;
@@ -84,7 +85,8 @@ public class CombinedBookingFrameView extends AbstractFrame{
 		Room[] r = roomModel.getSelectedRooms();
 		String roomNumbers="";
 		for(int i = 0;i<r.length;i++){
-			roomNumbers = roomNumbers + r[i].getRid() + ", ";	
+			roomNumbers = roomNumbers + r[i].getRid() + ". ";
+			roomModel.setTotalPrice(r[i].getPrice()+roomModel.getTotalPrice());
 		}
 		roomsIn = new JTextField(roomNumbers);
 		roomsIn.setEditable(false);
@@ -96,7 +98,10 @@ public class CombinedBookingFrameView extends AbstractFrame{
 		servicesIn = new JTextField(serviceNames);
 		servicesIn.setEditable(false);
 		priceMath = priceMath + roomModel.getTotalPrice();
-		timeIntervalIn = new JTextField(roomModel.getStartDatePicker().getDate().toString() +" bis "+ roomModel.getEndDatePicker().getDate().toString());
+		
+		String dateString1 = String.format("%1$td-%1$tm-%1$tY", roomModel.getStartDatePicker().getDate());
+		String dateString2 = String.format("%1$td-%1$tm-%1$tY", roomModel.getEndDatePicker().getDate());
+		timeIntervalIn = new JTextField(dateString1 +" bis "+ dateString2);
 		timeIntervalIn.setEditable(false);
 		priceIn = new JTextField(""+priceMath);
 		priceIn.setEditable(false);
@@ -136,7 +141,7 @@ public class CombinedBookingFrameView extends AbstractFrame{
 		rightPanel.add(customerIn);
 		rightPanel.add(roomsIn);
 		rightPanel.add(servicesIn);
-		rightPanel.add(timeInterval);
+		rightPanel.add(timeIntervalIn);
 		rightPanel.add(priceIn);
 		boxdrightPanel.add(rightPanel);
 		boxdrightPanel.add(Box.createVerticalGlue());

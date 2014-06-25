@@ -1,12 +1,10 @@
 package gui.ShowCustomer;
 
 import gui.AbstractFrame;
-import gui.IController;
 import gui.FrameSwitcher;
+import gui.IController;
 import gui.MainFrame.VerwaltungMainFrameView;
-
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ShowCustomerFrameController implements IController{
 	private VerwaltungMainFrameView mf;

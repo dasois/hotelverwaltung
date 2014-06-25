@@ -2,7 +2,6 @@ package gui.book.room;
 
 import gui.AbstractFrame;
 import gui.IController;
-import gui.MainFrame.VerwaltungMainFrameView;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -17,7 +16,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
-
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
@@ -37,12 +35,10 @@ public class FreeRoomsFrameView extends AbstractFrame{
 	private JButton book;
 	private JButton stepback;
 	private JPanel boxdsouthPanel;
-	private VerwaltungMainFrameView mf;
 	public SelectTimeIntervallRoomFrame sf;
 	private Vector<Room> freeRooms;
 	private IController c;
-	public FreeRoomsFrameView(VerwaltungMainFrameView mf,SelectTimeIntervallRoomFrame sf,IController c) {
-		this.mf = mf;
+	public FreeRoomsFrameView(SelectTimeIntervallRoomFrame sf,IController c) {
 		this.sf = sf;
 		this.c = c;
 		RoomControlInterface tmp = new RoomControlImp();

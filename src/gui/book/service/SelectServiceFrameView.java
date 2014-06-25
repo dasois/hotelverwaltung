@@ -2,16 +2,12 @@ package gui.book.service;
 
 import gui.AbstractFrame;
 import gui.IController;
-import gui.FrameSwitcher;
-import gui.MainFrame.VerwaltungMainFrameView;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 import javax.swing.Box;
@@ -37,15 +33,13 @@ public class SelectServiceFrameView extends AbstractFrame{
 	private JButton book;
 	private JButton stepback;
 	private JPanel boxdsouthPanel;
-	private SelectTimeFrameView ssf;
 	private IController c;
 	private ServiceModel m;
-	public SelectServiceFrameView(IController c,SelectTimeFrameView ssf,ServiceModel m) {
-		this.ssf = ssf;
+	
+	public SelectServiceFrameView(IController c,ServiceModel m) {
 		this.c = c;
 		this.m = m;
 	}
-
 	@Override
 	protected void createWidget() {
 		header = new JLabel("Dienstleistung wählen");

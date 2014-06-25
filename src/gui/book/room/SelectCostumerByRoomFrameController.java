@@ -1,22 +1,18 @@
 package gui.book.room;
 
 import gui.AbstractFrame;
-import gui.IController;
 import gui.FrameSwitchImpl;
 import gui.FrameSwitcher;
+import gui.IController;
 import gui.MainFrame.VerwaltungMainFrameView;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 
 import app.BookingRoomControlImp;
 import app.BookingRoomControlInterface;
-import app.CustomerControlImp;
-import app.CustomerControlInterface;
-import db.entities.Customer;
 import db.entities.Room;
 
 public class SelectCostumerByRoomFrameController implements IController{
@@ -52,7 +48,7 @@ public class SelectCostumerByRoomFrameController implements IController{
 				for(Room r:m.getSelectedRooms()){
 					try {
 						price = price + r.getPrice();
-						m.setCustomer(m.getList().getSelectedValue());
+						m.setList(m.getList());
 						controller.create(new java.sql.Date(date.getTime()),r.getRid(),m.getList().getSelectedValue().getCid());
 						mf.addProtocolLine("Buchung von Zimmer: "+r.getRid()+"am Tag:"+date.toString()+" wurde in der Datenbank angelegt\n");
 					} catch (SQLException e1) {

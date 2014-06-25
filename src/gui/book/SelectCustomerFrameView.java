@@ -2,16 +2,12 @@ package gui.book;
 
 import gui.AbstractFrame;
 import gui.IController;
-import gui.FrameSwitcher;
-import gui.MainFrame.VerwaltungMainFrameView;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 import javax.swing.Box;
@@ -28,7 +24,6 @@ import db.entities.Customer;
 
 @SuppressWarnings("serial")
 public class SelectCustomerFrameView extends AbstractFrame{
-	private VerwaltungMainFrameView mf;
 	private JLabel header;
 	private JPanel southPanel;
 	private JButton cancel;
@@ -38,8 +33,7 @@ public class SelectCustomerFrameView extends AbstractFrame{
 	private JButton book;
 	private SelectCustomerFrameModel m;
 	private IController c;
-	public SelectCustomerFrameView(VerwaltungMainFrameView mf,IController c){
-		this.mf = mf;
+	public SelectCustomerFrameView(IController c){
 		m = new SelectCustomerFrameModel();
 		this.c = c;
 	}

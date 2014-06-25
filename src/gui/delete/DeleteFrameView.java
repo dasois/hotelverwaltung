@@ -2,17 +2,12 @@ package gui.delete;
 
 import gui.AbstractFrame;
 import gui.IController;
-import gui.FrameSwitcher;
-import gui.MainFrame.VerwaltungMainFrameView;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -24,15 +19,11 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
-import app.DeleteControlImp;
-import app.DeleteControlInterface;
-
 /**Frame to delete an entity from the db.
  * @author Tobias
  * @param <T> entities are room,service and customer */
 @SuppressWarnings("serial")
 public class DeleteFrameView<T> extends AbstractFrame{
-	private VerwaltungMainFrameView mf;
 	private JLabel header;
 	private JPanel southPanel;
 	private JButton delete;
@@ -42,8 +33,7 @@ public class DeleteFrameView<T> extends AbstractFrame{
 	private JScrollPane listScroller;
 	private String label;
 	private IController c;
-	public DeleteFrameView(VerwaltungMainFrameView mf,IController c,String label,JList<T> list) {
-		this.mf = mf;
+	public DeleteFrameView(IController c,String label,JList<T> list) {
 		this.label = label;
 		this.list = list;
 		this.c = c;

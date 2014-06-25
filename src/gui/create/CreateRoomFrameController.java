@@ -1,15 +1,12 @@
 package gui.create;
 
 import gui.AbstractFrame;
-import gui.IController;
 import gui.FrameSwitchImpl;
 import gui.FrameSwitcher;
+import gui.IController;
 import gui.MainFrame.VerwaltungMainFrameView;
-
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
-
 import app.RoomControlImp;
 import app.RoomControlInterface;
 
@@ -51,7 +48,6 @@ public class CreateRoomFrameController implements IController{
 			fs.switchFrame();
 		}
 	}
-
 	@Override
 	public void setConnectedView(AbstractFrame f) {
 		this.crf = (CreateRoomFrameView) f;	

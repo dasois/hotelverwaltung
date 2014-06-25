@@ -2,17 +2,12 @@ package gui.create;
 
 import gui.AbstractFrame;
 import gui.IController;
-import gui.FrameSwitcher;
-import gui.MainFrame.VerwaltungMainFrameView;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -23,26 +18,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import com.toedter.calendar.JDateChooser;
-
-import app.CustomerControlImp;
-import app.CustomerControlInterface;
 import app.entities.Title;
+
+import com.toedter.calendar.JDateChooser;
 
 /**Frame to register a new customer.
  * @author Tobias */
 @SuppressWarnings("serial")
 public class CreateCostumerFrameView extends AbstractFrame{
-	private VerwaltungMainFrameView mf;
 	private CreateCustomerModel m;
 	private IController c;
-	public CreateCostumerFrameView(VerwaltungMainFrameView mf,IController c, CreateCustomerModel m) {
-		this.mf = mf;
-		this.c = c;
-		this.m = m;
-	}
 	private JLabel header;
-
 	private JPanel leftPanel;
 	private JPanel boxdleftPanel;
 	private JLabel title;
@@ -56,11 +42,9 @@ public class CreateCostumerFrameView extends AbstractFrame{
 	private JPanel boxdsouthPanel;
 	private JButton create;
 	private JButton cancel;
-
-	protected void setupInteractions() {
-//		CreateCostumerFrameController ccfc = new CreateCostumerFrameController(this, mf,m);
-		cancel.addActionListener(c);
-		create.addActionListener(c);
+	public CreateCostumerFrameView(IController c, CreateCustomerModel m) {
+		this.c = c;
+		this.m = m;
 	}
 
 	protected void createWidget() {
@@ -149,7 +133,10 @@ public class CreateCostumerFrameView extends AbstractFrame{
 		boxdsouthPanel.add(Box.createVerticalGlue());
 		getContentPane().add(BorderLayout.SOUTH,boxdsouthPanel);
 	}
-
+	protected void setupInteractions() {
+		cancel.addActionListener(c);
+		create.addActionListener(c);
+	}
 	void createWidgetSecondView(){
 		m.getCustomerFirstNameInput().setEditable(false);
 		m.getCustomerLastNameInput().setEditable(false);

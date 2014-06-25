@@ -21,6 +21,7 @@ public class WishOfServiceController implements IController{
 		this.mf = mf;	
 		this.rm = rm;
 		sm = new ArrayList<ServiceModel>();
+		
 	}
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand()=="no"){
@@ -34,6 +35,9 @@ public class WishOfServiceController implements IController{
 		}
 		else{
 			ServiceModel m = new ServiceModel();
+			m.setDateLimit(true);
+			m.setMinDate(rm.getStartDatePicker().getDate());
+			m.setMaxDate(rm.getEndDatePicker().getDate());
 			sm.add(m);
 			SelectTimeFrameController c = new SelectTimeFrameController(f,m);
 			SelectTimeFrameView sf = new SelectTimeFrameView(c, m);

@@ -2,29 +2,21 @@ package gui.Login;
 
 import gui.AbstractFrame;
 import gui.IController;
-import gui.MainFrame.VerwaltungMainFrameView;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
-import app.LoginControlImp;
-import app.LoginControlInterface;
 
 /**The login process.
  * @author Tobias */
@@ -87,7 +79,6 @@ public class FrameLoginView extends AbstractFrame{
 		btnlogin.setActionCommand("login gedrückt");
 		//button
 	}
-
 	@Override
 	protected void addWidget() {
 		getContentPane().setLayout(new BorderLayout(5,5));
@@ -105,23 +96,8 @@ public class FrameLoginView extends AbstractFrame{
 		boxdCenterPanel.add(Box.createVerticalGlue());
 		getContentPane().add(BorderLayout.CENTER,boxdCenterPanel);
 	}
-	private void login(){
-		String user = userTextField.getText();
-		String passText = new String(passwordTextField.getPassword());
-		LoginControlInterface tmp = new LoginControlImp();
-		try {
-			if(tmp.loginDB(user, passText)){
-				new VerwaltungMainFrameView().init();
-				closeFrame();
-			}
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			JOptionPane.showMessageDialog(null, "Falsche Benutzer/Passwort kombination.\n Bei wiederholtem Fehlschlag überprüfen sie ob die DatenBank läuft.");
-		}
-	}
 	@Override
 	protected void setupInteractions() {
-//		FrameLoginController flc = new FrameLoginController(this);
 		passwordTextField.addActionListener(c);
 		btnlogin.addActionListener(c);
 	}

@@ -2,17 +2,12 @@ package gui.create;
 
 import gui.AbstractFrame;
 import gui.IController;
-import gui.FrameSwitcher;
-import gui.MainFrame.VerwaltungMainFrameView;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -21,9 +16,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
-import app.ServiceControlImp;
-import app.ServiceControlInterface;
 
 /**Frame to register a new service.
  * @author Tobias */
@@ -34,17 +26,16 @@ public class CreateServiceFrameView extends AbstractFrame{
 	private JPanel boxdleftPanel;
 	private JLabel serviceName;
 	private JLabel servicePrice;
-
 	private JPanel centerPanel;
 	private JPanel boxdCenterPanel;
-
 	private JButton create;
 	private JButton cancel;		
 	private JPanel southPanel;
 	private JPanel boxdsouthPanel;
-
 	private CreateServiceModel m;
 	private IController c;
+	private JTextField inputName;
+	private JTextField inputPrice;
 	public CreateServiceFrameView(IController c, CreateServiceModel m) {
 		this.c = c;
 		this.m = m;
@@ -73,9 +64,10 @@ public class CreateServiceFrameView extends AbstractFrame{
 
 		centerPanel = new JPanel();	
 		centerPanel.setLayout(new GridLayout(2,1,10,10));
-
-		m.setName(new JTextField());
-		m.setPrice(new JTextField());
+		inputName = new JTextField();
+		inputPrice = new JTextField();
+		m.setName(inputName);
+		m.setPrice(inputPrice);
 
 		boxdCenterPanel = new JPanel();	
 		boxdCenterPanel.setLayout(new BoxLayout(boxdCenterPanel,BoxLayout.PAGE_AXIS));

@@ -39,7 +39,7 @@ public class SelectTimeIntervallRoomFrameController implements IController{
 			}
 			else{
 				FreeRoomsFrameController c = new FreeRoomsFrameController(mf,m);
-				FreeRoomsFrameView ff = new FreeRoomsFrameView(mf,srf,c);
+				FreeRoomsFrameView ff = new FreeRoomsFrameView(srf,c);
 				c.setConnectedView(ff);
 				ff.init();
 				ff.setVisible(false);

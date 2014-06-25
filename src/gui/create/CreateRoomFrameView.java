@@ -2,7 +2,6 @@ package gui.create;
 
 import gui.AbstractFrame;
 import gui.IController;
-import gui.FrameSwitcher;
 import gui.MainFrame.VerwaltungMainFrameView;
 
 import java.awt.BorderLayout;
@@ -10,9 +9,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -22,9 +18,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
-import app.RoomControlImp;
-import app.RoomControlInterface;
 /**Frame to register a new room.
  * @author Tobias */
 @SuppressWarnings("serial")
@@ -36,7 +29,6 @@ public class CreateRoomFrameView extends AbstractFrame{
 	private JPanel boxdCenterPanel;
 	private JLabel roomPrice;
 	private JLabel doubleRoom;
-
 	private JButton create;
 	private JButton cancel;
 	private JPanel southPanel;
@@ -44,12 +36,12 @@ public class CreateRoomFrameView extends AbstractFrame{
 	VerwaltungMainFrameView mf;
 	private CreateRoomModel m;
 	private IController c;
+	
 	public CreateRoomFrameView(VerwaltungMainFrameView mf,IController c,CreateRoomModel m) {
 		this.mf = mf;
 		this.c = c;
 		this.m = m;
 	}
-
 	@Override
 	protected void createWidget() {
 		header = new JLabel("Zimmer hinzufügen");
@@ -92,7 +84,6 @@ public class CreateRoomFrameView extends AbstractFrame{
 		boxdsouthPanel = new JPanel();
 		boxdsouthPanel.setLayout(new BoxLayout(boxdsouthPanel,BoxLayout.PAGE_AXIS));
 	}
-
 	@Override
 	protected void addWidget() {
 		getContentPane().setLayout(new BorderLayout(5,5));
@@ -118,8 +109,8 @@ public class CreateRoomFrameView extends AbstractFrame{
 		boxdsouthPanel.add(Box.createVerticalGlue());
 		getContentPane().add(BorderLayout.SOUTH,boxdsouthPanel);
 	}
+	
 	protected void setupInteractions() {
-//		CreateRoomFrameController c = new CreateRoomFrameController(this, mf,m);
 		cancel.addActionListener(c);
 		create.addActionListener(c);
 	}

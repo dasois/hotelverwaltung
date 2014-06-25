@@ -9,7 +9,7 @@ import db.DBCustomer;
 import db.entities.Customer;
 /** Implementation of CustomerControlInterface */
 public class CustomerControlImp implements CustomerControlInterface{
-
+	DBCustomer c;
 	@Override
 	public Vector<Customer> getAll() throws SQLException {
 		ResultSet resultset = new Customer().getAll();
@@ -23,7 +23,7 @@ public class CustomerControlImp implements CustomerControlInterface{
 
 	public int create(String fName, String lName, String address,
 			Date date,Title title) throws SQLException {
-		DBCustomer c = new Customer(fName,lName,address,date,title.toString());
+		c = new Customer(fName,lName,address,date,title.toString());
 		return c.create();
 	}
 

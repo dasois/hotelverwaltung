@@ -1,5 +1,8 @@
 package gui.combinedbooking;
 
+import gui.AbstractFrame;
+import gui.IController;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -13,9 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import gui.AbstractFrame;
-import gui.IController;
-
+@SuppressWarnings("serial")
 public class WishOfServiceFrame extends AbstractFrame{
 	private JButton btnyes;
 	private JButton btnNo;
@@ -24,7 +25,6 @@ public class WishOfServiceFrame extends AbstractFrame{
 	private JLabel text;
 	private JPanel southPanel;
 	private JPanel boxdsouthPanel;
-	private JPanel centerPanel;
 	
 	public WishOfServiceFrame(IController c) {
 		this.c = c;

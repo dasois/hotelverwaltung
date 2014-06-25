@@ -1,16 +1,16 @@
 package gui.create;
 
+import gui.AbstractFrame;
+import gui.FrameSwitchImpl;
+import gui.FrameSwitcher;
+import gui.IController;
+import gui.MainFrame.VerwaltungMainFrameView;
+
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 import app.ServiceControlImp;
 import app.ServiceControlInterface;
-import gui.AbstractFrame;
-import gui.IController;
-import gui.FrameSwitchImpl;
-import gui.FrameSwitcher;
-import gui.MainFrame.VerwaltungMainFrameView;
 
 public class CreateServiceFrameController implements IController {
 	private CreateServiceFrameView csf;
@@ -37,8 +37,8 @@ public class CreateServiceFrameController implements IController {
 			ServiceControlInterface controller = new ServiceControlImp();
 			//TODO
 			try {
-				int sid = controller.create(csf.getName(),Double.parseDouble(m.getPrice().getText()));
-				mf.addProtocolLine("Service:\n"+sid+" "+csf.getName()+" wurde in der Datenbank angelegt\n");
+				int sid = controller.create(m.getName().getText(),Double.parseDouble(m.getPrice().getText()));
+				mf.addProtocolLine("Service:\n"+sid+" "+m.getName().getText()+" wurde in der Datenbank angelegt\n");
 
 			} catch (NumberFormatException e1) {
 				mf.addProtocolLine("Fehlerhafte eingabe, es wurde kein Service Angelegt.\nVergewissern sie sich das alle Felder ausgef�llt werden!");

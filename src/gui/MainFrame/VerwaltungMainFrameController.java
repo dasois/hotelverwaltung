@@ -11,19 +11,18 @@ import gui.book.service.SelectTimeFrameController;
 import gui.book.service.SelectTimeFrameView;
 import gui.book.service.ServiceModel;
 import gui.create.CreateCostumerFrameController;
-import gui.create.CreateCustomerModel;
 import gui.create.CreateCostumerFrameView;
+import gui.create.CreateCustomerModel;
 import gui.create.CreateRoomFrameController;
-import gui.create.CreateRoomModel;
 import gui.create.CreateRoomFrameView;
+import gui.create.CreateRoomModel;
 import gui.create.CreateServiceFrameController;
-import gui.create.CreateServiceModel;
 import gui.create.CreateServiceFrameView;
+import gui.create.CreateServiceModel;
 import gui.delete.DeleteFrameController;
 import gui.delete.DeleteFrameView;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 import javax.swing.JDialog;
@@ -55,7 +54,7 @@ public class VerwaltungMainFrameController implements IController {
 					gui.setEnabled(false);
 					CreateCustomerModel m = new CreateCustomerModel();
 					CreateCostumerFrameController c = new CreateCostumerFrameController(gui,m);
-					CreateCostumerFrameView cf = new CreateCostumerFrameView(gui,c,m);
+					CreateCostumerFrameView cf = new CreateCostumerFrameView(c,m);
 					c.setConnectedView(cf);
 					cf.init();
 					new JDialog(cf);
@@ -66,7 +65,7 @@ public class VerwaltungMainFrameController implements IController {
 					DeleteFrameView<Customer> dcf;
 					//TODO sinnvolle exception
 					try {
-						dcf = new DeleteFrameView<Customer>(gui,c,"Kunde Entfernen",new JList<Customer>(new CustomerControlImp().getAll()));
+						dcf = new DeleteFrameView<Customer>(c,"Kunde Entfernen",new JList<Customer>(new CustomerControlImp().getAll()));
 						c.setConnectedView(dcf);
 						dcf.init();
 						new JDialog(dcf);
@@ -84,7 +83,7 @@ public class VerwaltungMainFrameController implements IController {
 					gui.setEnabled(false);
 					RoomModel m = new RoomModel();
 					IController c = new gui.combinedbooking.SelectTimeIntervallRoomFrameController(gui, m);
-					SelectTimeIntervallRoomFrame scf = new SelectTimeIntervallRoomFrame(gui,c,m);
+					SelectTimeIntervallRoomFrame scf = new SelectTimeIntervallRoomFrame(c,m);
 					c.setConnectedView(scf);
 					scf.init();
 					new JDialog(scf);
@@ -92,7 +91,7 @@ public class VerwaltungMainFrameController implements IController {
 				else{
 					gui.setEnabled(false);
 					IController c = new SelectCustomerFrameController(gui);
-					SelectCustomerFrameView scf = new SelectCustomerFrameView(gui,c);
+					SelectCustomerFrameView scf = new SelectCustomerFrameView(c);
 					c.setConnectedView(scf);
 					scf.init();
 					new JDialog(scf);
@@ -112,7 +111,7 @@ public class VerwaltungMainFrameController implements IController {
 					gui.setEnabled(false);
 					RoomModel m = new RoomModel();
 					IController c = new gui.book.room.SelectTimeIntervallRoomFrameController(gui, m);
-					SelectTimeIntervallRoomFrame rf = new SelectTimeIntervallRoomFrame(gui,c,m);
+					SelectTimeIntervallRoomFrame rf = new SelectTimeIntervallRoomFrame(c,m);
 					c.setConnectedView(rf);
 					rf.init();
 					new JDialog(rf);
@@ -123,7 +122,7 @@ public class VerwaltungMainFrameController implements IController {
 					DeleteFrameView<Room> drf;
 					//TODO sinnvolle Exception
 					try {
-						drf = new DeleteFrameView<Room>(gui,c,"Zimmer Entfernen",new JList<Room>(new RoomControlImp().getAll()));
+						drf = new DeleteFrameView<Room>(c,"Zimmer Entfernen",new JList<Room>(new RoomControlImp().getAll()));
 						c.setConnectedView(drf);
 						drf.init();
 						new JDialog(drf);
@@ -157,7 +156,7 @@ public class VerwaltungMainFrameController implements IController {
 					DeleteFrameView<Service> dsf;
 					//TODO sinnvolle Exception
 					try {
-						dsf = new DeleteFrameView<Service>(gui,c,"Service Entfernen",new JList<Service>(new ServiceControlImp().getAll()));
+						dsf = new DeleteFrameView<Service>(c,"Service Entfernen",new JList<Service>(new ServiceControlImp().getAll()));
 						c.setConnectedView(dsf);
 						dsf.init();
 						new JDialog(dsf);

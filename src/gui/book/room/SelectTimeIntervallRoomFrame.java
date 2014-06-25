@@ -1,24 +1,19 @@
 package gui.book.room;
 
 import gui.AbstractFrame;
-import gui.FrameSwitcher;
 import gui.IController;
-import gui.MainFrame.VerwaltungMainFrameView;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.Date;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -26,8 +21,6 @@ import com.toedter.calendar.JDateChooser;
 /** Selection of the time one or more rooms get booked */
 @SuppressWarnings("serial")
 public class SelectTimeIntervallRoomFrame extends AbstractFrame{
-
-	private VerwaltungMainFrameView mf;
 	private JLabel header;
 	private JPanel leftPanel;
 	private JLabel startDate;
@@ -41,9 +34,8 @@ public class SelectTimeIntervallRoomFrame extends AbstractFrame{
 	private JPanel boxdsouthPanel;
 	private RoomModel m;
 	private IController c;
-	public SelectTimeIntervallRoomFrame(VerwaltungMainFrameView mf,IController c,RoomModel m) {
+	public SelectTimeIntervallRoomFrame(IController c,RoomModel m) {
 		this.c = c;
-		this.mf = mf;
 		this.m = m;
 	}
 

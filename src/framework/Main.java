@@ -3,7 +3,6 @@ package framework;
 import gui.Login.FrameLoginController;
 import gui.Login.FrameLoginView;
 
-
 public class Main {
     public static void main(String[] args) {
         FrameLoginController c = new FrameLoginController();

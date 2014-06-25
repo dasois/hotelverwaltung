@@ -12,7 +12,7 @@ public class DBIface {
 	private static String sDbUrl = "jdbc:mysql://localhost:3306/hotelverwaltung";
 	private static String sUsr = "root";
 	private static String sPwd = "init";
-
+	private static Connection cn;
 	/*
 	 * Login to Database using the Default Connection Parameters
 	 */
@@ -47,8 +47,10 @@ public class DBIface {
 		try {
 			DBIface.loginDB();
 			Class.forName(sDbDriver);
-			Connection cn = DriverManager.getConnection(sDbUrl, sUsr, sPwd);
+			cn = DriverManager.getConnection(sDbUrl, sUsr, sPwd);
 			//System.out.println(cn.toString());
+//			cn.setAutoCommit (false);
+			cn.setTransactionIsolation(1);
 			Statement st = cn.createStatement();
 			if (st.execute(SQLQuery, Statement.RETURN_GENERATED_KEYS))
 				rs = st.getResultSet();

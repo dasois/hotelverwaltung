@@ -22,16 +22,13 @@ import app.CustomerControlImp;
 /** Selection of the customer wich wants to book a room */
 @SuppressWarnings("serial")
 public class SelectCostumerByRoomFrameView extends AbstractFrame{
-
 	private VerwaltungMainFrameView mf;
-	private FreeRoomsFrameView frf;
 	private JLabel header;
 	private JScrollPane listScroller;
 	private JPanel southPanel;
 	protected JButton book;
 	protected JButton stepback;
 	private JPanel boxdsouthPanel;
-	private SelectTimeIntervallRoomFrame sf;
 	private IController c;
 	private RoomModel m;
 	public SelectCostumerByRoomFrameView(VerwaltungMainFrameView mf,IController c,RoomModel m) {

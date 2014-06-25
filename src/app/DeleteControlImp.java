@@ -27,6 +27,7 @@ public class DeleteControlImp<T> implements DeleteControlInterface<T> {
             Service tmp = (Service) entity;
             return controller.delete(tmp.getSid());
         } else
+        	System.out.println("hier");
             return false;
     }
 }

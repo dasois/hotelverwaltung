@@ -1,12 +1,10 @@
 package app;
 
 import java.sql.Date;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
 import db.entities.BookingRoom;
-import db.entities.BookingService;
 /** interface for using the db from inside the app-layer
 *	This is for the entity bookingroom*/
 public interface BookingRoomControlInterface {

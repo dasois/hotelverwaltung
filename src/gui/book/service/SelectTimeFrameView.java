@@ -2,8 +2,6 @@ package gui.book.service;
 
 import gui.AbstractFrame;
 import gui.IController;
-import gui.MainFrame.VerwaltungMainFrameView;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -61,6 +59,10 @@ public class SelectTimeFrameView extends AbstractFrame{
 		centerPanel.setLayout(new GridLayout(1,1,10,10));
 
 		datePicker = new JDateChooser();
+		if(m.getDateLimit()){
+			datePicker.setMinSelectableDate(m.getminDate());
+			datePicker.setMaxSelectableDate(m.getmaxDate());
+		}
 		m.setDatePicker(datePicker);
 		boxdCenterPanel = new JPanel();
 		boxdCenterPanel.setLayout(new BoxLayout(boxdCenterPanel,BoxLayout.PAGE_AXIS));

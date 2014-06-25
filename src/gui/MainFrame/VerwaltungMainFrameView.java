@@ -37,6 +37,7 @@ public class VerwaltungMainFrameView extends AbstractFrame{
 	private JScrollPane scrollTable;
 	private JPanel boxdleftPanel;
 
+	@SuppressWarnings("unchecked")
 	protected void createWidget() {
 		header = new JLabel("Hausverwaltung");
 		header.setPreferredSize(new Dimension(400,40));

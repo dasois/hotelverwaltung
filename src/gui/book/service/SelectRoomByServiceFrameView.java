@@ -80,6 +80,7 @@ public class SelectRoomByServiceFrameView extends AbstractFrame{
 		boxdsouthPanel.add(Box.createVerticalGlue());
 		getContentPane().add(BorderLayout.SOUTH,boxdsouthPanel);
 	}
+	
 	protected void setupInteractions() {
 		stepback.addActionListener(c);
 		book.addActionListener(c);
