@@ -23,10 +23,8 @@ public class BookingRoomControlImp extends AbstractTransactionController impleme
 	}
 
 	@Override
-	public int create(Date date, int roomId, int customerId) throws SQLException {
-		BookingInterface c = new BookingControlImp();
-		int bid = c.create(new Customer(customerId), new Date(System.currentTimeMillis()));
-		DBBookingRoom tmp = new BookingRoom(date, roomId,bid);		
+	public int create(Date date, int roomId,int bookingId) throws SQLException {
+		DBBookingRoom tmp = new BookingRoom(date,roomId,bookingId);		
 		return tmp.create();
 	}
 

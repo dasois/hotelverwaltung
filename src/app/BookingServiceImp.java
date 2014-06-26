@@ -20,7 +20,6 @@ public class BookingServiceImp extends AbstractTransactionController implements 
 		return temp;
 	}
 
-
 	@Override
 	public boolean delete(int bookingServiceId) throws SQLException {
 		DBBookingService tmp = new BookingService(bookingServiceId);
@@ -33,10 +32,8 @@ public class BookingServiceImp extends AbstractTransactionController implements 
 	}
 
 	@Override
-	public int create(Date date, int roomId, int serviceId)
-			throws SQLException {
-		DBBookingService tmp = new BookingService(date, serviceId, roomId);
+	public int create(Date date, int serviceId, int bookingId)throws SQLException {
+		DBBookingService tmp = new BookingService(date, serviceId,bookingId);
 		return tmp.create();
 	}
-
 }

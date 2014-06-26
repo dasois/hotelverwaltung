@@ -16,7 +16,7 @@ public class RoomModel{
 	private  Room[] selectedRooms;
 	private ArrayList<BookingRoom> bookingRoomList = new ArrayList<>();
 	private JList<Customer> list;
-
+	private int actualbookingID;
 	
 	public JDateChooser getStartDatePicker() {
 		return startDatePicker;
@@ -68,5 +68,11 @@ public class RoomModel{
 	}
 	public void addBookingRoom(BookingRoom b){
 		bookingRoomList.add(b);
+	}
+	public int getActualbookingID() {
+		return actualbookingID;
+	}
+	public void setActualbookingID(int actualbookingID) {
+		this.actualbookingID = actualbookingID;
 	}
 }

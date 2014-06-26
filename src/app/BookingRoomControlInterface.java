@@ -11,5 +11,5 @@ public interface BookingRoomControlInterface extends TransactionInterface{
 	Vector<BookingRoom> getAll() throws SQLException;
 	boolean delete(int BookingRoomId) throws SQLException;
 	boolean update(BookingRoom br);
-	int create(Date date, int roomId, int serviceId) throws SQLException;
+	int create(Date date, int roomId,int bookingId) throws SQLException;
 }

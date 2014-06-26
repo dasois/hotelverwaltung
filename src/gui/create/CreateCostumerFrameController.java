@@ -17,7 +17,7 @@ public class CreateCostumerFrameController implements IController{
 	private CreateCostumerFrameView ccf;
 	private VerwaltungMainFrameView vmf;
 	private CreateCustomerModel m;
-	private CustomerControlInterface tmp = null;
+	private CustomerControlInterface tmp = new CustomerControlImp();
 	public CreateCostumerFrameController(CreateCostumerFrameView ccf,VerwaltungMainFrameView vmf,CreateCustomerModel m){
 		this.ccf = ccf;
 		this.vmf = vmf;
@@ -31,16 +31,15 @@ public class CreateCostumerFrameController implements IController{
 	public void actionPerformed(ActionEvent e) {
 		final FrameSwitcher fs = new gui.FrameSwitchImpl(ccf,vmf);
 		if(e.getActionCommand()=="Cancel"){
-			fs.switchFrame();
-		}else if(e.getActionCommand()=="Revise"){
 			try {
 				tmp.discardChanges();
-			} catch (SQLException e1) {
+			} catch (SQLException e1){
 				vmf.addProtocolLine("Es konnte kein Kunde erstellt werden, rufen sie ihren Administrator");
 			}
+			fs.switchFrame();
+		}else if(e.getActionCommand()=="Revise"){
 			ccf.createWidgetFirstView();
 		}else if(e.getActionCommand()=="Create"){
-			tmp = new CustomerControlImp();
 			try {
 				Calendar bday = Calendar.getInstance();
 				bday.setTime(m.getBirthdayPicker().getDate());
@@ -50,10 +49,8 @@ public class CreateCostumerFrameController implements IController{
 				vmf.addProtocolLine("Kunde mit Id:\n"+id
 						+"\n Namens: "+m.getCustomerLastNameInput().getText()+" wurde in der Datenbank angelegt\n");
 			} catch (SQLException e1) {
-
 				vmf.addProtocolLine("Es konnte kein Kunde erstellt werden, rufen sie ihren Administrator");
 			}catch (NullPointerException e2) {
-
 				vmf.addProtocolLine("Fehlerhafte eingabe, es wurde kein Kunde Angelegt.\nVergewissern sie sich das alle Felder ausgef�llt werden!");
 			}
 			ccf.createWidgetSecondView();

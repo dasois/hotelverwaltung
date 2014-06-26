@@ -10,7 +10,6 @@ import java.sql.SQLException;
  * Created by david on 14.06.14.
  */
 public class Booking implements db.DBBooking {
-
     private int bid;
     private Customer customer;
     private Date CreatedOn;
@@ -27,14 +26,11 @@ public class Booking implements db.DBBooking {
     public Booking(int bid) {
         this.setBid(bid);
     }
-
-    public Booking() {}
-
+    public Booking(){}
 	@Override
     public ResultSet getAll() throws SQLException {
         return DBIface.executeQuery("SELECT * from Booking");
     }
-
     @Override
     public ResultSet getAllByCustomer(int CustomerId) throws SQLException {
         return DBIface.executeQuery("SELECT * from Booking WHERE CID = " + CustomerId);
@@ -49,7 +45,6 @@ public class Booking implements db.DBBooking {
     public ResultSet getRelatedRoomBookings() throws SQLException {
         return DBIface.executeQuery("SELECT * FROM Booking_Room WHERE BID=" + this.bid);
     }
-
     @Override
     public int create() throws SQLException {
         ResultSet rs = DBIface.executeQuery("Insert into Booking values (" + this.getBid() + ",\"" + this.getCreatedOn().toString() + "\"," + this.getCustomer().getCid() + ")");
@@ -58,7 +53,6 @@ public class Booking implements db.DBBooking {
         }
         return this.getBid();
     }
-
     @Override
     public boolean update() throws SQLException {
         DBIface.executeQuery(
@@ -74,7 +68,6 @@ public class Booking implements db.DBBooking {
         }
         return false;
     }
-
     @Override
     public boolean delete() throws SQLException {
         DBIface.executeQuery("DELETE from Booking_Room where BID = " + this.getBid());

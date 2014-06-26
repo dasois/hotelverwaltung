@@ -1,7 +1,10 @@
 package gui.book.service;
 
 import javax.swing.JList;
+import javax.swing.ListSelectionModel;
+
 import com.toedter.calendar.JDateChooser;
+
 import db.entities.BookingRoom;
 import db.entities.Service;
 
@@ -14,7 +17,8 @@ public class ServiceModel{
 	private boolean dateLimit;
 	private Date minDate;
 	private Date maxDate;
-
+	private int actualBookingId;
+	private JList<BookingRoom> jList;
 	public JList<Service> getServiceList() {
 		return serviceList;
 	}
@@ -55,5 +59,21 @@ public class ServiceModel{
 
 	public void setBookedRoomList(ArrayList<BookingRoom> bookedRoomList) {
 		this.bookedRoomList = bookedRoomList;
+	}
+
+	public int getActualBookingId() {
+		return actualBookingId;
+	}
+
+	public void setActualBookingId(int actualBookingId) {
+		this.actualBookingId = actualBookingId;
+	}
+
+	public JList<BookingRoom> getjList() {
+		return jList;
+	}
+
+	public void setjList(JList<BookingRoom> jList) {
+		this.jList = jList;
 	}
 }

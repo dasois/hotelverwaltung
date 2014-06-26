@@ -38,21 +38,21 @@ public class DeleteFrameController<T> implements IController{
 				mf.addProtocolLine("Es konnte nicht gelöscht werden, rufen sie ihren Administrator");
 			}
 			catch (NullPointerException e1) {
-				mf.addProtocolLine("Es konnte nicht gelöscht werden, da keine Auswahl getroffen wurde.");
+				mf.addProtocolLine("1 Es konnte nicht gelöscht werden, da keine Auswahl getroffen wurde.");
 			}
 			df.createWidgetSecondView();
 		}else if(e.getActionCommand()=="Revise"){
 			try {
 				controller.discardChanges();
 			} catch (SQLException e1) {
-				mf.addProtocolLine("Es konnte nicht gelöscht werden, rufen sie ihren Administrator");
+				mf.addProtocolLine("2 Es konnte nicht gelöscht werden, rufen sie ihren Administrator");
 			}
 			df.createWidgetFirstView();
 		}else if(e.getActionCommand()=="accept"){
 			try {
 				controller.saveChanges();
 			} catch (SQLException e1) {
-				mf.addProtocolLine("Es konnte nicht gelöscht werden, rufen sie ihren Administrator");
+				mf.addProtocolLine("3 Es konnte nicht gelöscht werden, rufen sie ihren Administrator");
 			}
 			fs.switchFrame();
 		}

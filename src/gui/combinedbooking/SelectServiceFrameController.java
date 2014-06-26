@@ -32,7 +32,6 @@ public class SelectServiceFrameController implements IController{
 		this.ssf = ssf;
 		this.m = m;
 	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		final FrameSwitcher fs = new FrameSwitchImpl(sf,ssf);
@@ -41,7 +40,7 @@ public class SelectServiceFrameController implements IController{
 			fs.switchFrame();
 		}else if(e.getActionCommand()=="Book"){
 			try {
-				controller.create(new Date(m.getDatePicker().getCalendar().getTime().getTime()), m.getServiceList().getSelectedValue().getBrid(), m.getServiceList().getSelectedValue().getSid());
+				controller.create(new Date(m.getDatePicker().getCalendar().getTime().getTime()), m.getServiceList().getSelectedValue().getSid(), m.getActualBookingId());
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

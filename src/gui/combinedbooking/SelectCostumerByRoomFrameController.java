@@ -8,11 +8,14 @@ import gui.MainFrame.VerwaltungMainFrameView;
 import gui.book.room.FreeRoomsFrameView;
 import gui.book.room.RoomModel;
 import gui.book.room.SelectCostumerByRoomFrameView;
+
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 
+import app.BookingControlImp;
+import app.BookingInterface;
 import app.BookingRoomControlImp;
 import app.BookingRoomControlInterface;
 import db.entities.BookingRoom;
@@ -50,15 +53,19 @@ public class SelectCostumerByRoomFrameController implements IController{
 			start.setTime(m.getStartDatePicker().getDate());
 			Calendar end = Calendar.getInstance();
 			end.setTime(m.getEndDatePicker().getDate());
+			BookingInterface b = new BookingControlImp();
+			try {
+				m.setActualbookingID(b.create(m.getList().getSelectedValue(), new java.sql.Date(System.currentTimeMillis())));
+			} catch (SQLException e2) {
+				mf.addProtocolLine("Buchung konnte nicht erstellt werden");
+			}
 			BookingRoomControlInterface controller = new BookingRoomControlImp();
 			for (Date date = start.getTime(); !start.after(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
 				for(Room r:m.getSelectedRooms()){
 					try {			
-						m.setList(m.getList());
-						m.addBookingRoom(new BookingRoom(controller.create(new java.sql.Date(date.getTime()),r.getRid(),m.getList().getSelectedValue().getCid())));
+						m.addBookingRoom(new BookingRoom(controller.create(new java.sql.Date(date.getTime()),r.getRid(),m.getActualbookingID())));
 					} catch (SQLException e1) {
 						mf.addProtocolLine("Buchung konnte nicht erstellt werden");
-						e1.printStackTrace();
 					}catch (NullPointerException e1) {
 						mf.addProtocolLine("Fehler, Es wurde kein Kunde ausgewählt");
 					}
@@ -69,7 +76,6 @@ public class SelectCostumerByRoomFrameController implements IController{
 			fs2.switchFrame();
 		}
 	}
-
 	@Override
 	public void setConnectedView(AbstractFrame f) {
 		this.f = (SelectCostumerByRoomFrameView) f;

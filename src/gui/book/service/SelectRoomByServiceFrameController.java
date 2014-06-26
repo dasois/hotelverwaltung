@@ -37,7 +37,7 @@ public class SelectRoomByServiceFrameController implements IController{
 			fs.switchFrame();
 		}else if(e.getActionCommand()=="Book"){	
 			try {
-				controller.create(new Date(m.getDatePicker().getCalendar().getTime().getTime()), m.getList().getSelectedValue().getBrid(), m.getServiceList().getSelectedValue().getSid());
+				controller.create(new Date(m.getDatePicker().getCalendar().getTime().getTime()), m.getServiceList().getSelectedValue().getSid(), m.getActualBookingId());
 				mf.addProtocolLine("Buchung von Service: "+ m.getServiceList().getSelectedValue().getType()+" wurde in der Datenbank angelegt\n");
 				controller.saveChanges();
 			} catch (SQLException e1) {

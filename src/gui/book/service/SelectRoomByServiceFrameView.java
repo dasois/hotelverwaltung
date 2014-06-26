@@ -45,15 +45,15 @@ public class SelectRoomByServiceFrameView extends AbstractFrame{
 		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));
 
 		try {
-			m.setList((new JList<BookingRoom>(new BookingRoomControlImp().getAll())));
-			m.getList().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-			m.getList().setLayoutOrientation(JList.HORIZONTAL_WRAP);
-			m.getList().setVisibleRowCount(-1);
+			m.setjList((new JList<BookingRoom>(new BookingRoomControlImp().getAll())));
+			m.getjList().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+			m.getjList().setLayoutOrientation(JList.HORIZONTAL_WRAP);
+			m.getjList().setVisibleRowCount(-1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		listScroller = new JScrollPane(m.getList());
+		listScroller = new JScrollPane(m.getjList());
 		listScroller.setPreferredSize(new Dimension(250, 80));
 
 		southPanel = new JPanel();

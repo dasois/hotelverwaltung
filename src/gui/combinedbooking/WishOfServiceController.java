@@ -40,6 +40,7 @@ public class WishOfServiceController implements IController{
 		}
 		else{
 			ServiceModel m = new ServiceModel();
+			m.setActualBookingId(rm.getActualbookingID());
 			m.setBookedRoomList(rm.getBookingRoomList());
 			m.setDateLimit(true);
 			m.setMinDate(rm.getStartDatePicker().getDate());
