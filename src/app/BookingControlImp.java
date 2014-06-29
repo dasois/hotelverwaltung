@@ -57,7 +57,6 @@ public class BookingControlImp extends AbstractTransactionController implements 
 		return temp;
 	}
 
-
 	@Override
 	public int create(Customer customer, Date createdOn) throws SQLException {
 		DBBooking tmp = new Booking(customer,createdOn);

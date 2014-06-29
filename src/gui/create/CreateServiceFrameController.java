@@ -17,6 +17,7 @@ public class CreateServiceFrameController implements IController {
 	private VerwaltungMainFrameView mf;
 	private CreateServiceModel m;
 	private ServiceControlInterface controller = new ServiceControlImp();
+	private int sid;
 	public CreateServiceFrameController(CreateServiceFrameView csf, VerwaltungMainFrameView mf,CreateServiceModel m){
 		this.csf = csf;
 		this.mf = mf;
@@ -39,8 +40,8 @@ public class CreateServiceFrameController implements IController {
 			fs.switchFrame();
 		}else if(e.getActionCommand()=="Create"){
 			try {
-				int sid = controller.create(m.getName().getText(),Double.parseDouble(m.getPrice().getText()));
-				mf.addProtocolLine("Service:\n"+sid+" "+m.getName().getText()+" wurde in der Datenbank angelegt\n");
+				sid = controller.create(m.getName().getText(),Double.parseDouble(m.getPrice().getText()));
+				
 
 			} catch (NumberFormatException e1) {
 				mf.addProtocolLine("Fehlerhafte eingabe, es wurde kein Service Angelegt.\nVergewissern sie sich das alle Felder ausgef�llt werden!");
@@ -50,6 +51,7 @@ public class CreateServiceFrameController implements IController {
 			csf.createWidgetSecondView();
 		}else{
 			try {
+				mf.addProtocolLine("Service:\n"+sid+" "+m.getName().getText()+" wurde in der Datenbank angelegt\n");
 				controller.saveChanges();
 			} catch (SQLException e1) {
 				mf.addProtocolLine("Es konnte kein Service erstellt werden, rufen sie ihren Administrator");

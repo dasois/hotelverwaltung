@@ -1,24 +1,19 @@
 package gui.combinedbooking;
 
-import java.awt.event.ActionEvent;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-import app.BookingControlImp;
-import app.BookingInterface;
-
 import gui.AbstractFrame;
 import gui.FrameSwitchImpl;
 import gui.FrameSwitcher;
 import gui.IController;
 import gui.MainFrame.VerwaltungMainFrameView;
-import gui.book.room.RoomModel;
-import gui.book.service.ServiceModel;
+import java.awt.event.ActionEvent;
+import java.sql.SQLException;
+import app.BookingControlImp;
+import app.BookingInterface;
 
 public class CombinedBookingFrameController implements IController{
 	private CombinedBookingFrameView f;
 	private VerwaltungMainFrameView mf;
-//	private WishOfServiceFrame wf;
+
 	private BookingInterface controller = new BookingControlImp();
 	public CombinedBookingFrameController(VerwaltungMainFrameView mf){
 		this.mf = mf;

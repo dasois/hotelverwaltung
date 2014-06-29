@@ -15,6 +15,7 @@ public class CreateRoomFrameController implements IController{
 	private VerwaltungMainFrameView mf;
 	private CreateRoomModel m;
 	private RoomControlInterface controller = null;
+	private int roomId;
 	public CreateRoomFrameController(CreateRoomFrameView crf,VerwaltungMainFrameView mf,CreateRoomModel m){
 		this.crf = crf;
 		this.mf = mf;
@@ -28,22 +29,20 @@ public class CreateRoomFrameController implements IController{
 	public void actionPerformed(ActionEvent e) {
 		final FrameSwitcher fs = new FrameSwitchImpl(crf,mf);
 		if(e.getActionCommand()=="Revise"){
+			crf.createWidgetFirstView();
+		}else if(e.getActionCommand()=="Cancel"){
 			try {
 				controller.discardChanges();
 			} catch (SQLException e1) {
 				mf.addProtocolLine("Es konnte kein Zimmer erstellt werden, rufen sie ihren Administrator");
 			}
-			crf.createWidgetFirstView();
-		}else if(e.getActionCommand()=="Cancel"){
 			fs.switchFrame();
 		}else if(e.getActionCommand()=="Create"){
 			controller = new RoomControlImp();
 			//TODO sinnvolle exception
 			try {
-				int roomId = controller.create(Double.parseDouble(m.getPrice().getText()),m.getDoubleRoomCheck().isSelected());
-				mf.addProtocolLine("Zimmer: "+roomId+" wurde mit dem Preis: "+Double.parseDouble(m.getPrice().getText())
-						+"€ in der Datenbank angelegt\n");
-				fs.switchFrame();
+				roomId = controller.create(Double.parseDouble(m.getPrice().getText()),m.getDoubleRoomCheck().isSelected());
+				
 			} catch (SQLException e1) {
 				mf.addProtocolLine("Es konnte kein Zimmer erstellt werden, rufen sie ihren Administrator");
 			}catch (NumberFormatException e1) {
@@ -52,7 +51,11 @@ public class CreateRoomFrameController implements IController{
 			crf.createWidgetSecondView();
 		}else{
 			try {
+				mf.addProtocolLine("Zimmer: "+roomId+" wurde mit dem Preis: "+Double.parseDouble(m.getPrice().getText())
+						+"€ in der Datenbank angelegt\n");
+			
 				controller.saveChanges();
+				fs.switchFrame();
 			} catch (SQLException e1) {
 				mf.addProtocolLine("Es konnte kein Zimmer erstellt werden, rufen sie ihren Administrator");
 			}

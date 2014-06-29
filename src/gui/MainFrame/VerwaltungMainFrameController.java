@@ -21,6 +21,7 @@ import gui.create.CreateServiceFrameView;
 import gui.create.CreateServiceModel;
 import gui.delete.DeleteFrameController;
 import gui.delete.DeleteFrameView;
+import gui.paybooking.SelectCustomerController;
 
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
@@ -90,7 +91,7 @@ public class VerwaltungMainFrameController implements IController {
 				}
 				else{
 					gui.setEnabled(false);
-					IController c = new SelectCustomerFrameController(gui);
+					IController c = new SelectCustomerController(gui);
 					SelectCustomerFrameView scf = new SelectCustomerFrameView(c);
 					c.setConnectedView(scf);
 					scf.init();

@@ -18,6 +18,7 @@ public class CreateCostumerFrameController implements IController{
 	private VerwaltungMainFrameView vmf;
 	private CreateCustomerModel m;
 	private CustomerControlInterface tmp = new CustomerControlImp();
+	private int id;
 	public CreateCostumerFrameController(CreateCostumerFrameView ccf,VerwaltungMainFrameView vmf,CreateCustomerModel m){
 		this.ccf = ccf;
 		this.vmf = vmf;
@@ -43,11 +44,10 @@ public class CreateCostumerFrameController implements IController{
 			try {
 				Calendar bday = Calendar.getInstance();
 				bday.setTime(m.getBirthdayPicker().getDate());
-				int id = tmp.create(m.getCustomerFirstNameInput().getText(),
+				id = tmp.create(m.getCustomerFirstNameInput().getText(),
 						m.getCustomerLastNameInput().getText(),m.getAddressInput().getText(),new java.sql.Date(bday.getTime().getTime()),
 						(Title)m.getTitleSelection().getSelectedItem());
-				vmf.addProtocolLine("Kunde mit Id:\n"+id
-						+"\n Namens: "+m.getCustomerLastNameInput().getText()+" wurde in der Datenbank angelegt\n");
+				
 			} catch (SQLException e1) {
 				vmf.addProtocolLine("Es konnte kein Kunde erstellt werden, rufen sie ihren Administrator");
 			}catch (NullPointerException e2) {
@@ -56,6 +56,8 @@ public class CreateCostumerFrameController implements IController{
 			ccf.createWidgetSecondView();
 		}else{
 			try {
+				vmf.addProtocolLine("Kunde mit Id: "+id
+						+"\n Namens: "+m.getCustomerLastNameInput().getText()+" wurde in der Datenbank angelegt\n");
 				tmp.saveChanges();
 			} catch (SQLException e1) {
 				vmf.addProtocolLine("Es konnte kein Kunde erstellt werden, rufen sie ihren Administrator");

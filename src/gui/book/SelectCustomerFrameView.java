@@ -85,8 +85,7 @@ public class SelectCustomerFrameView extends AbstractFrame{
 		boxdsouthPanel.add(Box.createVerticalGlue());
 		getContentPane().add(BorderLayout.SOUTH,boxdsouthPanel);
 	}
-	protected void setupInteractions() {
-		
+	protected void setupInteractions() {	
 		book.addActionListener(c);
 		cancel.addActionListener(c);
 	}

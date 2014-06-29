@@ -8,7 +8,6 @@ public class SelectCustomerFrameModel {
 	public Customer getC() {
 		return c;
 	}
-
 	public void setC(Customer c) {
 		this.c = c;
 	}

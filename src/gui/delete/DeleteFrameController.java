@@ -32,7 +32,7 @@ public class DeleteFrameController<T> implements IController{
 			try {
 				controller.deleteEntity((T)df.list.getSelectedValue());
 
-				mf.addProtocolLine("--Löschen--\n"+df.list.getSelectedValue().toString()+"\nwurde in der Datenbank gelöscht\n");
+				
 
 			} catch (SQLException e1) {
 				mf.addProtocolLine("Es konnte nicht gelöscht werden, rufen sie ihren Administrator");
@@ -50,6 +50,7 @@ public class DeleteFrameController<T> implements IController{
 			df.createWidgetFirstView();
 		}else if(e.getActionCommand()=="accept"){
 			try {
+				mf.addProtocolLine("--Löschen--\n"+df.list.getSelectedValue().toString()+"\nwurde in der Datenbank gelöscht\n");
 				controller.saveChanges();
 			} catch (SQLException e1) {
 				mf.addProtocolLine("3 Es konnte nicht gelöscht werden, rufen sie ihren Administrator");
