@@ -20,9 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 import app.BookingControlImp;
-import app.CustomerControlImp;
 import db.entities.Booking;
-import db.entities.Customer;
 
 public class SelectBookingFrameView extends AbstractFrame{
 	private JLabel header;

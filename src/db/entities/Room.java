@@ -122,4 +122,14 @@ public class Room implements DBRoom{
 			return "Zimmer: "+ rid + " Price " +price+ " Einzelzimmer"+"\n";
 		}
 	}
+	 public boolean equals(Object obj){
+		 if(obj==null)
+			 return false;
+		 if(!(obj instanceof Room)){
+			 return false;
+		 }else{
+			 Room r = (Room)obj;
+			 return r.getRid()==this.getRid();
+		 }
+	 }
 }

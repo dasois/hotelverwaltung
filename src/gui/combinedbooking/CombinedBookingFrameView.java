@@ -34,7 +34,7 @@ public class CombinedBookingFrameView extends AbstractFrame{
 	private JLabel services;
 	private JLabel timeInterval;
 	private JLabel price;
-	
+
 	private JTextField customerIn;
 	private JTextField roomsIn;
 	private JTextField servicesIn;	
@@ -92,13 +92,15 @@ public class CombinedBookingFrameView extends AbstractFrame{
 		roomsIn.setEditable(false);
 		String serviceNames = "";
 		for(int i = 0;i<serviceModels.size();i++){
-			serviceNames = serviceNames + serviceModels.get(i).getServiceList().getSelectedValue().getType()+", ";
-			priceMath = priceMath + serviceModels.get(i).getServiceList().getSelectedValue().getPrice();
+			if(serviceModels!=null){
+				serviceNames = serviceNames + serviceModels.get(i).getServiceList().getSelectedValue().getType()+", ";
+				priceMath = priceMath + serviceModels.get(i).getServiceList().getSelectedValue().getPrice();
+			}
 		}
 		servicesIn = new JTextField(serviceNames);
 		servicesIn.setEditable(false);
 		priceMath = priceMath + roomModel.getTotalPrice();
-		
+
 		String dateString1 = String.format("%1$td-%1$tm-%1$tY", roomModel.getStartDatePicker().getDate());
 		String dateString2 = String.format("%1$td-%1$tm-%1$tY", roomModel.getEndDatePicker().getDate());
 		timeIntervalIn = new JTextField(dateString1 +" bis "+ dateString2);
@@ -118,7 +120,7 @@ public class CombinedBookingFrameView extends AbstractFrame{
 		btnabort = new JButton("Abbruch");
 		btnabort.setPreferredSize(new Dimension(20, 30));
 		btnabort.setActionCommand("abort");
-	
+
 		//button
 		southPanel = new JPanel();
 		southPanel.setLayout(new GridLayout(1,2,10,10));
@@ -136,7 +138,7 @@ public class CombinedBookingFrameView extends AbstractFrame{
 		leftPanel.add(price);
 		boxdleftPanel.add(leftPanel);
 		boxdleftPanel.add(Box.createVerticalGlue());
-		
+
 		getContentPane().add(BorderLayout.WEST,boxdleftPanel);
 		rightPanel.add(customerIn);
 		rightPanel.add(roomsIn);
