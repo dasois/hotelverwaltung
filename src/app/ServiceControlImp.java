@@ -21,12 +21,14 @@ public class ServiceControlImp extends AbstractTransactionController implements 
 	}
 
 	@Override
+    //TODO: Throw IllegalArgumentException, if price is negative (business logic), so that ServiceControlImpTest passes
 	public int create(String type, double price) throws SQLException {
 		Service s = new Service (type,price);
 		return s.create();
 	}
 
 	@Override
+    //TODO: Throw IllegalArgumentException, if price is negative (business logic), so that ServiceControlImpTest passes
 	public boolean update(Service srv) throws SQLException {
 
 		return srv.update();
