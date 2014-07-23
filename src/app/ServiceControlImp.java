@@ -3,6 +3,7 @@ package app;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
+
 import db.DBService;
 import db.entities.Service;
 /** Implementation of ServiceControlInterface */
@@ -24,13 +25,16 @@ public class ServiceControlImp extends AbstractTransactionController implements 
     //TODO: Throw IllegalArgumentException, if price is negative (business logic), so that ServiceControlImpTest passes
 	public int create(String type, double price) throws SQLException {
 		Service s = new Service (type,price);
+		if(s.getPrice()<0)
+			throw new IllegalArgumentException();
 		return s.create();
 	}
 
 	@Override
     //TODO: Throw IllegalArgumentException, if price is negative (business logic), so that ServiceControlImpTest passes
 	public boolean update(Service srv) throws SQLException {
-
+		if(srv.getPrice()<0)
+			throw new IllegalArgumentException();
 		return srv.update();
 	}
 
