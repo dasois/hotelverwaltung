@@ -5,8 +5,16 @@ import gui.IController;
 import gui.FrameSwitchImpl;
 import gui.FrameSwitcher;
 import gui.MainFrame.VerwaltungMainFrameView;
+
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
+
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+
+import db.entities.BookingRoom;
+import app.BookingControlImp;
+import app.BookingRoomControlImp;
 
 public class SelectTimeFrameController implements IController{
 	private VerwaltungMainFrameView mf;
@@ -34,9 +42,15 @@ public class SelectTimeFrameController implements IController{
 			fs.switchFrame();
 		}else if(e.getActionCommand()=="Search"){
 			if (m.getDatePicker().isValid()){
-				JOptionPane.showMessageDialog(null, "Bitte Datum auswählen");
+				JOptionPane.showMessageDialog(null, "Bitte Datum auswï¿½hlen");
 			}
 			else{
+				try {
+					m.setjList(new JList<BookingRoom>(new BookingRoomControlImp().getByDate(new java.sql.Date(m.getDatePicker().getDate().getTime()))));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				fs2.switchFrame();
 			}
 		}

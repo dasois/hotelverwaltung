@@ -15,15 +15,17 @@ import javax.swing.JOptionPane;
 public class SelectTimeFrameController implements IController{
 	private WishOfServiceFrame mf;
 	private SelectTimeFrameView stf;
+	WishOfServiceController cc;
 	ServiceModel m;
 	public SelectTimeFrameController(SelectTimeFrameView stf,WishOfServiceFrame mf,ServiceModel m){
 		this.mf = mf;
 		this.stf = stf;
 		this.m = m;
 	}
-	public SelectTimeFrameController(WishOfServiceFrame mf,ServiceModel m){
+	public SelectTimeFrameController(WishOfServiceFrame mf,ServiceModel m,WishOfServiceController cc){
 		this.mf = mf;
 		this.m = m;
+		this.cc = cc;
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -35,10 +37,11 @@ public class SelectTimeFrameController implements IController{
 		ssf.setVisible(false);
 		final FrameSwitcher fs2 = new FrameSwitchImpl(stf,ssf);
 		if(e.getActionCommand()=="Cancel"){
+			cc.removeLastServiceModel();
 			fs.switchFrame();
 		}else if(e.getActionCommand()=="Search"){
 			if (m.getDatePicker().isValid()){
-				JOptionPane.showMessageDialog(null, "Bitte Datum auswählen");
+				JOptionPane.showMessageDialog(null, "Bitte Datum auswï¿½hlen");
 			}
 			else{
 				fs2.switchFrame();

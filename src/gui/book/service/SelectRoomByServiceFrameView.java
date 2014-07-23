@@ -36,7 +36,7 @@ public class SelectRoomByServiceFrameView extends AbstractFrame{
 		this.m = m;
 	}
 	protected void createWidget() {
-		header = new JLabel("Zimmer wählen");
+		header = new JLabel("Zimmer wï¿½hlen");
 		header.setPreferredSize(new Dimension(400,40));
 		header.setForeground(Color.WHITE);
 		header.setBackground(Color.BLACK);
@@ -44,14 +44,15 @@ public class SelectRoomByServiceFrameView extends AbstractFrame{
 		header.setHorizontalAlignment(SwingConstants.CENTER);
 		header.setFont(header.getFont().deriveFont(Font.BOLD + Font.ITALIC , 30));
 
-		try {
-			m.setjList((new JList<BookingRoom>(new BookingRoomControlImp().getAll())));
-			m.getjList().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-			m.getjList().setLayoutOrientation(JList.HORIZONTAL_WRAP);
-			m.getjList().setVisibleRowCount(-1);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+					try {
+						m.setjList((new JList<BookingRoom>(new BookingRoomControlImp().getAll())));
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					m.getjList().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+					m.getjList().setLayoutOrientation(JList.HORIZONTAL_WRAP);
+					m.getjList().setVisibleRowCount(-1);
 		
 		listScroller = new JScrollPane(m.getjList());
 		listScroller.setPreferredSize(new Dimension(250, 80));
@@ -63,7 +64,7 @@ public class SelectRoomByServiceFrameView extends AbstractFrame{
 		book.setPreferredSize(new Dimension(20, 30));
 		book.setActionCommand("Book");
 
-		stepback = new JButton("Zurück");
+		stepback = new JButton("Zurï¿½ck");
 		stepback.setPreferredSize(new Dimension(20, 30));
 		stepback.setActionCommand("Back");
 		boxdsouthPanel = new JPanel();

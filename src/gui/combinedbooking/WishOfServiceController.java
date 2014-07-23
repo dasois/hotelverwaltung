@@ -46,7 +46,7 @@ public class WishOfServiceController implements IController{
 			m.setMinDate(rm.getStartDatePicker().getDate());
 			m.setMaxDate(rm.getEndDatePicker().getDate());
 			sm.add(m);
-			SelectTimeFrameController c = new SelectTimeFrameController(f,m);
+			SelectTimeFrameController c = new SelectTimeFrameController(f,m,this);
 			SelectTimeFrameView sf = new SelectTimeFrameView(c, m);
 			c.setConnectedView(sf);
 			sf.init();
@@ -58,5 +58,8 @@ public class WishOfServiceController implements IController{
 
 	public void setConnectedView(AbstractFrame f) {
 		this.f = (WishOfServiceFrame) f;
+	}
+	public void removeLastServiceModel(){
+		sm.remove(sm.size()-1);
 	}
 }

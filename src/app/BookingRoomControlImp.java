@@ -21,7 +21,15 @@ public class BookingRoomControlImp extends AbstractTransactionController impleme
 		}
 		return temp;
 	}
-
+	public Vector<BookingRoom> getByDate(Date date)throws SQLException {
+		ResultSet resultset = new BookingRoom().getByDate(date);
+		Vector<BookingRoom> temp = new Vector<BookingRoom>();
+		while (resultset.next()) {
+			BookingRoom c = new BookingRoom(resultset.getInt(1),resultset.getDate(2),resultset.getInt(3),resultset.getInt(4));
+			temp.add(c);
+		}
+		return temp;
+	}
 	@Override
 	public int create(Date date, int roomId,int bookingId) throws SQLException {
 		DBBookingRoom tmp = new BookingRoom(date,roomId,bookingId);		
