@@ -42,10 +42,9 @@ public class SelectServiceFrameController implements IController{
 			try {
 				controller.create(new Date(m.getDatePicker().getCalendar().getTime().getTime()), m.getServiceList().getSelectedValue().getSid(), m.getActualBookingId());
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
+			
 				e1.printStackTrace();
 			}
-			//TODO buchung ins model übernehmen
 			fs2.switchFrame();
 		}
 	}
