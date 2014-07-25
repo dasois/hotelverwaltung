@@ -28,7 +28,7 @@ public class ServiceControlImpTest {
 
     @After
     public void tearDown() throws Exception {
-        DBIface.rollbackChanges();
+        //DBIface.rollbackChanges();
     }
 
     @Test
@@ -74,7 +74,7 @@ public class ServiceControlImpTest {
     }
 
     @Test(expected=IllegalArgumentException.class)
-    public void testCreateWithNegativePrice() throws Exception {
+    public void testCreateWithNegativePrice() throws Exception{
         serviceControl.create("Test Negative Price", -01.00);
     }
 
@@ -107,12 +107,12 @@ public class ServiceControlImpTest {
             Assert.assertEquals(1, newService.getRow());
             Assert.assertEquals("Test Service 1&$", newService.getString(2));
             Assert.assertEquals(10.00, newService.getDouble(3), 0.009);
-            serviceControl.update(new Service(service2Id, "Updated Name", 100.00));
+            serviceControl.update(new Service(service2Id, "Updated Name", -100.00));
             newService = DBIface.executeQuery("SELECT * FROM Service WHERE SID="+service2Id);
             newService.last();
             Assert.assertEquals(1, newService.getRow());
             Assert.assertEquals("Updated Name", newService.getString(2));
-            Assert.assertEquals(100.00, newService.getDouble(3), 0.009);
+            Assert.assertEquals(-100.00, newService.getDouble(3), 0.009);
         } catch (IllegalArgumentException e) {
             throw e;
         } finally {

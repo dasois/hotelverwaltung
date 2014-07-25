@@ -10,7 +10,7 @@ public class DBIface {
 
 	private static String sDbDriver = "com.mysql.jdbc.Driver";
 	private static String sDbUrl = "jdbc:mysql://localhost:3306/hotelverwaltung";
-	private static String sUsr = "root";
+	private static String sUsr = "hm";
 	private static String sPwd = "init";
 	private static Connection cn;
 	/*
